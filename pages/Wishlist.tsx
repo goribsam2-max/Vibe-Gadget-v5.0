@@ -94,20 +94,20 @@ const Wishlist: React.FC = () => {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.8 }}
                 onClick={() => navigate(`/product/${item.productId}`)}
-                className="group cursor-pointer relative hover-tilt bg-white dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800 p-2 rounded-[1.5rem] md:rounded-[2rem] mb-2 shadow-sm hover:shadow-md transition-shadow"
+                className="group cursor-pointer relative hover-tilt bg-zinc-100/50 dark:bg-zinc-800/40 border border-zinc-200/50 dark:border-zinc-700/50 p-2 md:p-3 rounded-3xl mb-2 hover:bg-zinc-100 dark:hover:bg-zinc-800/80 hover:border-zinc-300 dark:hover:border-zinc-600 transition-all hover:shadow-lg"
               >
-                <div className="aspect-[4/5] flex items-center justify-center bg-zinc-50 dark:bg-zinc-800/30 rounded-xl md:rounded-2xl mb-4 overflow-hidden relative shadow-sm border border-zinc-100 dark:border-zinc-800/50 transition-all duration-300">
-                  <img src={item.image} className="w-full h-full object-cover transition-transform group-hover:scale-105 duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] mix-blend-multiply dark:mix-blend-normal" alt={item.name} />
+                <div className="aspect-[4/5] flex items-center justify-center bg-white dark:bg-zinc-900 rounded-[1.5rem] mb-4 overflow-hidden relative shadow-sm border border-zinc-100 dark:border-zinc-800 transition-all duration-300">
+                  <img src={item.image} className="w-full h-full object-cover transition-transform group-hover:scale-110 duration-700 ease-[cubic-bezier(0.23,1,0.32,1)] mix-blend-multiply dark:mix-blend-normal" alt={item.name} />
                   <button 
                     onClick={(e) => removeFromWishlist(item.id, e)}
-                    className="absolute top-2 right-2 md:top-3 md:right-3 w-10 h-10 flex items-center justify-center bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md text-red-500 rounded-full shadow-sm border border-red-100 dark:border-red-900/30 hover:bg-red-500 hover:text-white active:scale-90 transition-all z-10"
+                    className="absolute top-3 right-3 w-10 h-10 flex items-center justify-center bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md text-red-500 rounded-full shadow-lg border border-red-100 dark:border-red-900/30 hover:bg-red-500 hover:text-white active:scale-90 transition-all z-10 opacity-0 group-hover:opacity-100 -translate-y-2 group-hover:translate-y-0"
                   >
                     <Icon name="trash-alt" className="text-xs" />
                   </button>
                 </div>
                 <div className="px-2 pb-2">
-                  <h4 className="font-bold text-xs md:text-sm truncate mb-1 tracking-tight group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">{item.name}</h4>
-                  <p className="text-[9px] font-black text-emerald-700 dark:text-emerald-400 tracking-widest bg-emerald-50 dark:bg-emerald-900/10 border border-emerald-100 dark:border-emerald-900/30 px-3 py-1.5 inline-block rounded-full uppercase">৳ {item.price}</p>
+                  <h4 className="font-bold text-xs md:text-sm truncate mb-1 tracking-tight group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">{item.name}</h4>
+                  <p className="text-sm font-black text-zinc-900 dark:text-zinc-100 tracking-tight">৳ {item.price}</p>
                 </div>
               </motion.div>
             ))}

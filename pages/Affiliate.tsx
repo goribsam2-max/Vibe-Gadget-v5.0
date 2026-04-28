@@ -7,6 +7,7 @@ import Icon from '../components/Icon';
 import { useNotify } from '../components/Notifications';
 import { sendAffiliateRequestToTelegram } from '../services/telegram';
 import { motion } from 'framer-motion';
+import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
 const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData }) => {
   const navigate = useNavigate();
@@ -117,11 +118,27 @@ const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData })
             <h1 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">Partner Program</h1>
           </div>
 
-          <div className="mb-8">
-            <p className="text-zinc-500 dark:text-zinc-400 text-sm font-medium leading-relaxed">Join our exclusive network. Share your custom promo code to give your audience 5% OFF, and earn up to <span className="font-semibold text-zinc-900 dark:text-white">৳200</span> for every successful sale directly to your wallet based on your tier!</p>
+          <div className="mb-10 text-center md:text-left">
+            <h2 className="text-3xl font-black text-zinc-900 dark:text-white tracking-tight mb-2">Partner & Earn</h2>
+            <p className="text-zinc-500 dark:text-zinc-400 text-sm font-medium leading-relaxed max-w-xl">Join our exclusive network. Share your custom promo code to give your audience 5% OFF, and earn up to <span className="font-bold text-emerald-600 dark:text-emerald-400">৳200 commission</span> for every successful sale directly to your wallet based on your tier!</p>
           </div>
           
-          <form onSubmit={handleApplyAffiliate} className="bg-white dark:bg-zinc-900 p-8 rounded-3xl shadow-sm border border-zinc-200 dark:border-zinc-800 space-y-6">
+          <div className="mb-10 grid grid-cols-1 md:grid-cols-2 gap-4">
+             <div className="bg-emerald-50 dark:bg-emerald-900/10 p-6 flex items-start gap-4 rounded-3xl border border-emerald-100 dark:border-emerald-800/30">
+                <div>
+                   <h3 className="font-bold text-zinc-900 dark:text-zinc-100 mb-1 tracking-tight">5% Flat Discount</h3>
+                   <p className="text-xs text-emerald-700/80 dark:text-emerald-200/60 font-medium leading-relaxed">Your audience gets a flat discount on every purchase using your code.</p>
+                </div>
+             </div>
+             <div className="bg-blue-50 dark:bg-blue-900/10 p-6 flex items-start gap-4 rounded-3xl border border-blue-100 dark:border-blue-800/30">
+                <div>
+                   <h3 className="font-bold text-zinc-900 dark:text-zinc-100 mb-1 tracking-tight">Tiered Commission</h3>
+                   <p className="text-xs text-blue-700/80 dark:text-blue-200/60 font-medium leading-relaxed">The more you sell, the more you earn. Reach higher tiers for up to ৳200 per sale.</p>
+                </div>
+             </div>
+          </div>
+          
+          <form onSubmit={handleApplyAffiliate} className="bg-white dark:bg-zinc-900/50 p-8 rounded-3xl shadow-sm border border-zinc-200 dark:border-zinc-800 space-y-5">
              <div>
                <label className="text-xs font-semibold text-zinc-700 dark:text-zinc-300 tracking-wide mb-2 block">Full Legal Name</label>
                <input 
@@ -156,7 +173,7 @@ const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData })
                />
              </div>
              
-             <button disabled={submitting} type="submit" className="w-full mt-4 py-4 bg-zinc-900 dark:bg-white text-white dark:text-black rounded-xl font-bold text-xs uppercase tracking-widest shadow-md hover:bg-black dark:hover:bg-zinc-200 disabled:opacity-50 active:scale-95 transition-all flex items-center justify-center">
+             <button disabled={submitting} type="submit" className="w-full py-4 mt-6 bg-zinc-900 dark:bg-emerald-500 text-white rounded-2xl font-bold text-sm shadow-xl shadow-zinc-900/10 hover:shadow-zinc-900/20 active:scale-95 transition-all outline-none flex items-center justify-center disabled:opacity-50">
                 {submitting ? <Icon name="spinner" className="animate-spin mr-2" /> : null}
                 {submitting ? "Submitting..." : "Apply Now"}
              </button>
@@ -228,12 +245,14 @@ const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData })
   };
 
   const handleSaveCode = async () => {
-     const code = tempCode.trim().toUpperCase();
-     if (!code || code.length < 3) return notify("Code must be at least 3 characters", "error");
-     if (!/^[A-Z0-9_-]+$/.test(code)) return notify("Only letters, numbers, hyphens and underscores allowed", "error");
-     
+     let userCode = tempCode.trim().toUpperCase();
+     if (!userCode || userCode.length < 3) return notify("Code must be at least 3 characters", "error");
+     if (!/^[A-Z0-9_-]+$/.test(userCode)) return notify("Only letters, numbers, hyphens and underscores allowed", "error");
+
+     const code = userCode;
+
      const reservedWords = ['TEST', 'USER', 'ADMIN', 'SYSTEM', 'DEFAULT', 'PROMO', 'DISCOUNT'];
-     if (reservedWords.includes(code) && userData.role !== 'admin') {
+     if (reservedWords.includes(userCode) && userData.role !== 'admin') {
          return notify("This promo code name is reserved. Choose another name.", "error");
      }
 
@@ -277,6 +296,34 @@ const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData })
      setSavingCode(false);
   };
 
+   // Compute chart data
+   const getChartData = () => {
+      const last12Months = Array.from({length: 6}).map((_, i) => {
+         const d = new Date();
+         d.setMonth(d.getMonth() - i);
+         return {
+            month: d.toLocaleString('default', { month: 'short' }),
+            year: d.getFullYear(),
+            earned: 0,
+            sales: 0
+         };
+      }).reverse();
+
+      logs.forEach((log: any) => {
+         const d = new Date(log.createdAt);
+         const month = d.toLocaleString('default', { month: 'short' });
+         const year = d.getFullYear();
+         const match = last12Months.find(m => m.month === month && m.year === year);
+         if (match) {
+            match.earned += (log.commission || 0);
+            match.sales += 1;
+         }
+      });
+      return last12Months;
+   };
+
+   const chartData = getChartData();
+
   return (
      <div className="max-w-4xl mx-auto px-6 py-10 min-h-screen font-inter pb-32">
        <div className="flex items-center space-x-4 mb-8">
@@ -286,157 +333,241 @@ const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData })
          <h1 className="text-2xl font-black tracking-tight uppercase text-zinc-900 dark:text-zinc-100">Affiliate Portal</h1>
        </div>
 
-       <div className="grid grid-cols-1 md:grid-cols-12 gap-6 mb-8">
-          <div className="md:col-span-7 bg-gradient-to-br from-[#06331e] to-emerald-900 text-white p-8 md:p-10 rounded-[2rem] relative overflow-hidden shadow-lg shadow-emerald-900/20 flex flex-col justify-between">
-             <div className="absolute right-0 bottom-0 opacity-10 translate-x-1/4 translate-y-1/4 pointer-events-none">
-               <Icon name="chart-line" className="text-[12rem]" />
+       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
+          <div className="lg:col-span-8 bg-gradient-to-br from-[#06331e] to-emerald-900 text-white p-8 md:p-10 rounded-[2.5rem] relative overflow-hidden shadow-2xl flex flex-col justify-between group">
+             <div className="absolute right-0 bottom-0 opacity-10 translate-x-1/4 translate-y-1/4 pointer-events-none group-hover:scale-110 transition-transform duration-700">
+               <Icon name="chart-line" className="text-[16rem]" />
              </div>
              
-             <div>
-               <div className="flex items-center space-x-2 text-emerald-300 mb-2">
-                 <Icon name="wallet" className="text-sm" />
-                 <p className="text-[10px] font-bold uppercase tracking-widest">Available Balance</p>
+             <div className="relative z-10 flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
+               <div>
+                 <div className="flex items-center space-x-2 text-emerald-300 mb-3 bg-white/10 w-max px-3 py-1.5 rounded-full border border-white/10 backdrop-blur-md">
+                   <Icon name="wallet" className="text-sm" />
+                   <p className="text-[10px] font-bold uppercase tracking-widest">Available Balance</p>
+                 </div>
+                 <h2 className="text-5xl md:text-7xl font-black tracking-tighter truncate drop-shadow-lg">৳{userData.walletBalance || 0}</h2>
                </div>
-               <h2 className="text-5xl md:text-6xl font-black mb-8 tracking-tighter truncate">৳{userData.walletBalance || 0}</h2>
+               
+               <div className="flex flex-col gap-2 shrink-0">
+                  <div className="text-right">
+                     <p className="text-[10px] uppercase font-bold text-emerald-300/80 tracking-widest mb-1">Total Lifetime</p>
+                     <p className="text-xl font-black">৳{(userData.walletBalance || 0) + (logs.reduce((acc: any, log: any) => acc + (log.commission || 0), 0) || 0)}</p>
+                  </div>
+               </div>
              </div>
              
-             <div className="flex gap-3 relative z-10 w-full sm:w-auto">
+             <div className="flex flex-col sm:flex-row gap-4 relative z-10 w-full">
                 <button 
                   onClick={() => navigate('/withdraw')} 
-                  className="bg-white text-[#06331e] px-6 py-3.5 rounded-xl font-bold uppercase tracking-widest hover:bg-zinc-100 transition-colors shadow-xl w-full sm:w-auto flex items-center justify-center space-x-2 text-xs"
+                  className="bg-white text-[#06331e] px-8 py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-zinc-100 transition-all shadow-xl shadow-black/20 flex-1 flex items-center justify-center space-x-2 text-xs hover:-translate-y-1 active:scale-95"
                 >
+                  <Icon name="money-bill" className="text-sm" />
                   <span>Withdraw Funds</span>
-                  <Icon name="arrow-right" className="text-[10px]" />
                 </button>
+                <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 flex-1 flex items-center justify-between">
+                   <div>
+                     <p className="text-[10px] uppercase font-bold text-emerald-200 tracking-widest mb-1">Current Tier</p>
+                     <p className="font-black text-sm uppercase">Level {currentTier}</p>
+                   </div>
+                   <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                     <Icon name="medal" className="text-xl text-yellow-400 drop-shadow-md" />
+                   </div>
+                </div>
              </div>
           </div>
 
-          <div className="md:col-span-5 flex flex-col gap-6">
-            <div className="bg-white dark:bg-zinc-900 p-6 rounded-[2rem] border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col justify-between h-full relative overflow-hidden">
+          <div className="lg:col-span-4 flex flex-col gap-6">
+            <div className="bg-white dark:bg-zinc-900 p-8 rounded-[2.5rem] border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col justify-between h-full relative overflow-hidden group">
                <div className="z-10 relative">
-                  <div className="flex items-center justify-between mb-3">
-                     <h2 className="text-xs font-bold uppercase tracking-widest text-zinc-500">Tier Levels</h2>
-                     <span className="bg-emerald-50 dark:bg-emerald-900/10 text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/30 px-2.5 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest">Lvl {currentTier}</span>
+                  <div className="flex items-center justify-between mb-4">
+                     <h2 className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Next Goal</h2>
+                     <span className="bg-emerald-50 dark:bg-emerald-900/10 text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/30 px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest">+ {nextCommission}৳ / Sale</span>
                   </div>
-                  <h3 className="text-3xl font-black tracking-tight text-zinc-900 dark:text-zinc-100 mb-1">
-                    Progress
-                  </h3>
-                  <div className="flex justify-between items-center mb-1.5 mt-2">
-                     <span className="text-[10px] uppercase font-bold text-zinc-400">{salesCount} Sales</span>
-                     <span className="text-[10px] uppercase font-bold text-emerald-500">{currentCommission}৳ / Sale</span>
+                  
+                  <div className="flex items-end gap-2 mb-4">
+                     <h3 className="text-4xl font-black tracking-tighter text-zinc-900 dark:text-zinc-100">{salesCount}</h3>
+                     <p className="text-[10px] uppercase font-bold text-zinc-500 tracking-widest mb-2">/ {currentTarget} Sales</p>
                   </div>
-                  <div className="h-3 w-full bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden relative border border-black/5 dark:border-white/5">
-                      <motion.div initial={{ width: 0 }} animate={{ width: `${progressPercent}%` }} transition={{ duration: 1, ease: 'easeOut' }} className="absolute h-full left-0 top-0 bg-gradient-to-r from-emerald-400 to-emerald-600 rounded-full shadow-[0_0_10px_rgba(16,185,129,0.5)]"></motion.div>
+
+                  <div className="h-4 w-full bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden relative border border-black/5 dark:border-white/5 mb-4 shadow-inner">
+                      <motion.div initial={{ width: 0 }} animate={{ width: `${progressPercent}%` }} transition={{ duration: 1, ease: 'easeOut' }} className="absolute h-full left-0 top-0 bg-gradient-to-r from-emerald-400 via-teal-500 to-emerald-600 rounded-full shadow-[0_0_15px_rgba(16,185,129,0.5)]"></motion.div>
                   </div>
-                  <p className="text-[9px] uppercase font-bold text-zinc-400 text-right mt-1.5">
-                     {currentTier === 4 && salesCount >= t4Limit ? 'Max Tier Reached' : `${currentTarget - salesCount} more for ${nextCommission}৳/sale`}
-                  </p>
+                  
+                  {currentTier === 4 && salesCount >= t4Limit ? (
+                     <p className="text-[10px] uppercase font-black text-emerald-500 flex items-center"><Icon name="check-circle" className="mr-1" /> Max Tier Reached</p>
+                  ) : (
+                     <p className="text-[10px] uppercase font-bold text-zinc-500 leading-relaxed">
+                        <span className="text-zinc-900 dark:text-zinc-100">{currentTarget - salesCount} more sales</span> needed to activate Level {currentTier + 1} commission rate.
+                     </p>
+                  )}
                </div>
-               <div className="absolute right-0 bottom-0 opacity-5 translate-x-1/4 translate-y-1/4 pointer-events-none">
-                 <Icon name="rocket" className="text-[10rem]" />
+               <div className="absolute right-0 bottom-0 opacity-5 translate-x-1/4 translate-y-1/4 pointer-events-none group-hover:rotate-12 transition-transform duration-700">
+                 <Icon name="rocket" className="text-[12rem]" />
                </div>
-            </div>
-            
-            <div className="bg-white dark:bg-zinc-900 p-6 rounded-[2rem] border border-zinc-200 dark:border-zinc-800 shadow-sm">
-               <div className="flex items-center space-x-3 text-zinc-900 dark:text-zinc-100 font-black tracking-tight mb-2">
-                 <Icon name="bolt" className="text-amber-500 text-lg" />
-                 <span>How it Works</span>
-               </div>
-               <p className="text-xs text-zinc-500 font-medium leading-relaxed">
-                 Share your Custom Promo Code everywhere. When customers check out using your code, they get immediate discounts, and your account credits automatically after order completion.
-               </p>
             </div>
           </div>
        </div>
 
-       <div className="bg-white dark:bg-zinc-900 p-6 md:p-8 rounded-[2rem] border border-zinc-200 dark:border-zinc-800 shadow-sm mb-8">
-          <div className="flex items-center justify-between mb-4">
-             <div>
-               <h2 className="text-sm font-black uppercase tracking-tight text-zinc-800 dark:text-zinc-200 mb-1">Your Custom Promo Code</h2>
-               <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest">5% OFF for customers • {currentCommission}৳ for you</p>
+       <div className="bg-white dark:bg-zinc-900 p-8 rounded-[2.5rem] border border-zinc-200 dark:border-zinc-800 shadow-sm mb-8 overflow-hidden relative hidden md:block">
+          <div className="flex justify-between items-center mb-6 z-10 relative">
+             <h2 className="text-lg font-black tracking-tight text-zinc-900 dark:text-zinc-100">Performance Over Time</h2>
+             <div className="flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-zinc-400">
+                <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-emerald-500"></span> Sales</div>
              </div>
-             <span className="bg-emerald-100 text-emerald-700 px-3 py-1 rounded-full text-[9px] font-black uppercase tracking-widest shadow-sm border border-emerald-200">Active</span>
+          </div>
+          <div className="h-56 w-full relative z-10 -ml-2">
+            <ResponsiveContainer width="100%" height="100%">
+               <AreaChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                  <defs>
+                    <linearGradient id="colorSales" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="5%" stopColor="#10b981" stopOpacity={0.3}/>
+                      <stop offset="95%" stopColor="#10b981" stopOpacity={0}/>
+                    </linearGradient>
+                  </defs>
+                  <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#71717a' }} dy={10} />
+                  <YAxis axisLine={false} tickLine={false} tick={{ fontSize: 10, fill: '#71717a' }} allowDecimals={false} />
+                  <Tooltip 
+                     cursor={{ stroke: '#ecfdf5', strokeWidth: 2, strokeDasharray: '4 4' }}
+                     contentStyle={{ backgroundColor: 'white', borderRadius: '1.5rem', border: '1px solid #f4f4f5', boxShadow: '0 10px 25px -5px rgb(0 0 0 / 0.1)', padding: '12px 16px' }} 
+                     itemStyle={{ fontSize: '14px', fontWeight: '900', color: '#10b981' }}
+                     labelStyle={{ fontSize: '10px', color: '#a1a1aa', textTransform: 'uppercase', letterSpacing: '0.1em', fontWeight: '700', marginBottom: '4px' }}
+                  />
+                  <Area type="monotone" dataKey="sales" name="Total Sales" stroke="#10b981" strokeWidth={4} fillOpacity={1} fill="url(#colorSales)" />
+               </AreaChart>
+            </ResponsiveContainer>
+          </div>
+       </div>
+
+       <div className="bg-white dark:bg-zinc-900 p-8 rounded-[2.5rem] border border-zinc-200 dark:border-zinc-800 shadow-sm mb-8 overflow-hidden relative">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-500/5 blur-3xl rounded-full -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+          
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8 relative z-10">
+             <div>
+               <h2 className="text-xl font-black tracking-tight text-zinc-900 dark:text-zinc-100 mb-2">Your Promotion Hub</h2>
+               <p className="text-xs text-zinc-500 font-medium max-w-md leading-relaxed">Share your code everywhere. Customers get <span className="font-bold text-emerald-600 dark:text-emerald-400">5% OFF</span> instantly, and you earn <span className="font-bold text-emerald-600 dark:text-emerald-400">{currentCommission}৳</span> immediately upon delivery.</p>
+             </div>
+             
+             <div className="bg-emerald-50 dark:bg-emerald-900/10 border border-emerald-100 dark:border-emerald-900/30 px-4 py-2 rounded-2xl flex items-center space-x-3 w-full md:w-auto">
+                <div className="w-10 h-10 bg-emerald-100 dark:bg-emerald-800/50 rounded-xl flex items-center justify-center text-emerald-600 dark:text-emerald-400"><Icon name="tag" /></div>
+                <div>
+                   <p className="text-[9px] uppercase font-bold text-emerald-600/70 dark:text-emerald-400/70 tracking-widest mb-0.5">Your Rate</p>
+                   <p className="text-sm font-black text-emerald-700 dark:text-emerald-300">{currentCommission}৳ / Sale</p>
+                </div>
+             </div>
           </div>
           
-          <div className="flex flex-col gap-3 mt-6">
-            {isEditingCode ? (
-               <div className="flex bg-zinc-50 dark:bg-zinc-800/50 border-2 border-emerald-500 p-1.5 rounded-2xl transition-all h-14">
-                 <input type="text" value={tempCode} onChange={e => setTempCode(e.target.value.toUpperCase())} className="flex-1 bg-transparent px-3 text-sm font-black text-zinc-800 dark:text-zinc-200 outline-none uppercase tracking-widest min-w-0" placeholder="e.g. VIBEGADGET" />
-                 <div className="flex gap-1.5 shrink-0">
-                   <button onClick={handleSaveCode} disabled={savingCode} className="h-full w-12 flex items-center justify-center bg-[#06331e] text-white rounded-xl shadow-md">
-                     {savingCode ? <Icon name="spinner-third" className="animate-spin text-sm" /> : <Icon name="check" className="text-sm" />}
-                   </button>
-                   <button onClick={() => { setIsEditingCode(false); setTempCode(userData.affiliateCode || ''); }} className="h-full w-12 flex items-center justify-center bg-zinc-200 dark:bg-zinc-700 text-zinc-600 dark:text-zinc-300 rounded-xl hover:bg-zinc-300 dark:hover:bg-zinc-600 transition-colors">
-                     <Icon name="times" className="text-sm" />
-                   </button>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
+             <div className="bg-zinc-50 dark:bg-zinc-800/50 p-6 rounded-[2rem] border border-zinc-200 dark:border-zinc-700/50">
+               <label className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-3 block">Custom Promo Code</label>
+               {isEditingCode ? (
+                  <div className="flex bg-white dark:bg-zinc-900 border-2 border-emerald-500 p-1.5 rounded-2xl transition-all h-14 shadow-sm">
+                    <input type="text" value={tempCode} onChange={e => setTempCode(e.target.value.toUpperCase())} className="flex-1 bg-transparent px-4 text-sm font-black text-zinc-800 dark:text-zinc-200 outline-none uppercase tracking-widest min-w-0" placeholder="e.g. VIBEGADGET" />
+                    <div className="flex gap-1.5 shrink-0">
+                      <button onClick={handleSaveCode} disabled={savingCode} className="h-full w-12 flex items-center justify-center bg-[#06331e] text-white rounded-xl shadow-md hover:bg-zinc-900 transition-colors">
+                        {savingCode ? <Icon name="spinner-third" className="animate-spin text-sm" /> : <Icon name="check" className="text-sm" />}
+                      </button>
+                      <button onClick={() => { setIsEditingCode(false); setTempCode(userData.affiliateCode || ''); }} className="h-full w-12 flex items-center justify-center bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 rounded-xl hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors">
+                        <Icon name="times" className="text-sm" />
+                      </button>
+                    </div>
+                  </div>
+               ) : (
+                  <div className="flex bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 p-1.5 rounded-2xl transition-all h-14 shadow-sm group">
+                    <input type="text" readOnly value={affiliateCode} className="flex-1 bg-transparent px-4 text-base font-black text-emerald-600 dark:text-emerald-400 outline-none uppercase tracking-[0.15em] min-w-0" />
+                    <div className="flex gap-1.5 shrink-0">
+                      <button onClick={() => setIsEditingCode(true)} className="h-full px-4 flex items-center justify-center bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 rounded-xl hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors text-[10px] font-bold uppercase tracking-widest">
+                        Edit
+                      </button>
+                      <button onClick={() => copyToClipboard(affiliateCode)} className="h-full px-5 flex items-center justify-center bg-[#06331e] text-white rounded-xl hover:bg-zinc-900 transition-colors text-[10px] font-bold uppercase tracking-widest shadow-md">
+                        {isCopying ? 'Copied!' : 'Copy Code'}
+                      </button>
+                    </div>
+                  </div>
+               )}
+             </div>
+
+             <div className="bg-zinc-50 dark:bg-zinc-800/50 p-6 rounded-[2rem] border border-zinc-200 dark:border-zinc-700/50">
+               <label className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-3 block transform-gpu">Direct Referral Link</label>
+               <div className="flex bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 p-1.5 rounded-2xl transition-all h-14 shadow-sm group">
+                 <div className="flex items-center justify-center w-10 text-zinc-300 dark:text-zinc-600">
+                    <Icon name="link" />
                  </div>
+                 <input type="text" readOnly value={shareLink} className="flex-1 bg-transparent pr-4 text-xs font-semibold text-zinc-500 dark:text-zinc-400 outline-none min-w-0 truncate" />
+                 <button onClick={() => copyToClipboard(shareLink)} className="h-full px-5 flex items-center justify-center bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 rounded-xl hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors text-[10px] font-bold uppercase tracking-widest">
+                   {isCopying ? <Icon name="check" /> : 'Copy'}
+                 </button>
                </div>
-            ) : (
-               <div className="flex items-center justify-between bg-emerald-50 dark:bg-emerald-900/10 border border-emerald-500/20 p-2 rounded-2xl group relative overflow-hidden h-14 shadow-inner">
-                 <div className="absolute inset-0 bg-gradient-to-r from-transparent via-emerald-500/10 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
-                 <input type="text" readOnly value={affiliateCode} className="bg-transparent px-3 text-sm md:text-base font-black text-emerald-700 dark:text-emerald-400 outline-none uppercase tracking-[0.2em] relative z-10 flex-1 min-w-0 truncate" />
-                 <div className="flex items-center gap-1.5 shrink-0 z-10 h-full">
-                   <button onClick={() => setIsEditingCode(true)} className="h-full px-4 flex items-center justify-center bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 rounded-xl font-bold text-[10px] uppercase tracking-widest hover:bg-emerald-200 dark:hover:bg-emerald-900/50 transition-colors">
-                     <Icon name="edit" className="md:mr-2 text-[10px]" /> <span className="hidden md:inline">Edit</span>
-                   </button>
-                   <button 
-                     onClick={() => copyToClipboard(affiliateCode)}
-                     className="h-full px-4 flex items-center justify-center bg-emerald-600 outline-none text-white rounded-xl font-bold text-[10px] uppercase tracking-widest shadow-md hover:bg-emerald-700 transition-colors"
-                   >
-                     {isCopying ? <><Icon name="check" className="md:mr-2 text-[10px]" /> <span className="hidden md:inline">Copied</span></> : <><Icon name="copy" className="md:mr-2 text-[10px]" /> <span className="hidden md:inline">Copy</span></>}
-                   </button>
-                 </div>
-               </div>
-            )}
-            
-            <div className="flex items-center bg-zinc-50 dark:bg-zinc-800/30 border border-zinc-200 dark:border-zinc-800 p-2 rounded-2xl group relative overflow-hidden h-14 mt-2">
-               <div className="px-3 shrink-0 text-zinc-400">
-                 <Icon name="link" className="text-xs" />
-               </div>
-               <input type="text" readOnly value={shareLink} className="flex-1 bg-transparent pr-3 text-[11px] font-semibold text-zinc-600 dark:text-zinc-400 outline-none truncate relative z-10" />
-               <button 
-                 onClick={() => copyToClipboard(shareLink)}
-                 className="h-full px-4 flex items-center justify-center bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-200 rounded-xl hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors shrink-0 shadow-sm active:scale-95 text-[10px] font-bold uppercase tracking-widest relative z-10"
-               >
-                 {isCopying ? <Icon name="check" className="text-[10px]" /> : 'Copy Link'}
-               </button>
-            </div>
+             </div>
           </div>
        </div>
 
-       <div>
-         <div className="flex items-center justify-between mb-4 px-2">
-           <h3 className="text-sm font-black uppercase tracking-widest text-zinc-900 dark:text-zinc-100">Successful Referrals</h3>
-           <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">{logs.length} total</span>
+       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+         <div className="lg:col-span-2">
+           <div className="flex items-center justify-between mb-6 px-2">
+             <h3 className="text-lg font-black tracking-tight text-zinc-900 dark:text-zinc-100">Transaction History</h3>
+             <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest bg-zinc-100 dark:bg-zinc-800 px-3 py-1.5 rounded-full">{logs.length} Sales</span>
+           </div>
+           
+           {logs.length === 0 ? (
+              <div className="text-center py-20 bg-white dark:bg-zinc-900 rounded-[2.5rem] border border-dashed border-zinc-200 dark:border-zinc-800 shadow-sm">
+                 <div className="w-20 h-20 bg-zinc-50 dark:bg-zinc-800 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Icon name="receipt" className="text-3xl text-zinc-300 dark:text-zinc-600" />
+                 </div>
+                 <h4 className="text-sm font-bold text-zinc-900 dark:text-zinc-100 mb-1">No transactions yet</h4>
+                 <p className="text-[11px] font-medium text-zinc-500 max-w-xs mx-auto leading-relaxed">Your earnings will appear here once customers receive their orders using your code.</p>
+              </div>
+           ) : (
+              <div className="bg-white dark:bg-zinc-900 p-3 rounded-[2.5rem] border border-zinc-200 dark:border-zinc-800 shadow-sm overflow-hidden flex flex-col gap-2">
+                 {logs.map(log => (
+                    <div key={log.id} className="flex items-center justify-between py-4 px-5 bg-zinc-50 dark:bg-zinc-800/30 rounded-3xl hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors group">
+                       <div className="flex items-center overflow-hidden pr-4">
+                          <div className="w-12 h-12 rounded-2xl bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 mr-4 shadow-inner group-hover:scale-105 transition-transform">
+                             <Icon name="arrow-down-left" className="text-sm" />
+                          </div>
+                          <div className="truncate">
+                             <p className="text-sm font-black text-zinc-900 dark:text-zinc-100 truncate mb-1">Sale Commission</p>
+                             <p className="text-[10px] font-bold text-zinc-500 flex items-center gap-2">
+                               <span>{new Date(log.createdAt).toLocaleDateString()}</span>
+                               <span className="w-1 h-1 rounded-full bg-zinc-300 dark:bg-zinc-700"></span>
+                               <span className="truncate max-w-[100px] sm:max-w-[150px]">{log.customerName || 'Customer'}</span>
+                             </p>
+                          </div>
+                       </div>
+                       <div className="shrink-0 text-right">
+                          <p className="font-black text-emerald-600 dark:text-emerald-400 text-lg">+৳{log.commission}</p>
+                          <p className="text-[9px] font-bold text-emerald-600/50 uppercase tracking-widest mt-0.5">Added to Wallet</p>
+                       </div>
+                    </div>
+                 ))}
+              </div>
+           )}
          </div>
-         
-         {logs.length === 0 ? (
-            <div className="text-center py-16 bg-white dark:bg-zinc-900 rounded-[2rem] border border-dashed border-zinc-200 dark:border-zinc-800">
-               <Icon name="users-slash" className="text-3xl text-zinc-300 dark:text-zinc-700 mb-4" />
-               <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">No earnings yet. Start sharing!</p>
-            </div>
-         ) : (
-            <div className="bg-white dark:bg-zinc-900 p-2 rounded-[2rem] border border-zinc-200 dark:border-zinc-800 shadow-sm overflow-hidden flex flex-col gap-1.5">
-               {logs.map(log => (
-                  <div key={log.id} className="flex items-center justify-between py-2 px-3 bg-zinc-50 dark:bg-zinc-800/30 rounded-2xl hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors">
-                     <div className="flex items-center overflow-hidden pr-3">
-                        <div className="w-8 h-8 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0 mr-3 hidden sm:flex">
-                           <Icon name="check-circle" className="text-xs" />
-                        </div>
-                        <div className="truncate">
-                           <p className="text-[11px] font-bold text-zinc-900 dark:text-zinc-100 truncate pb-0.5">Order from {log.customerName || 'Customer'}</p>
-                           <p className="text-[9px] uppercase font-bold text-zinc-400 tracking-widest">{new Date(log.createdAt).toLocaleDateString()}</p>
-                        </div>
-                     </div>
-                     <div className="shrink-0">
-                        <div className="bg-white dark:bg-zinc-900 border border-emerald-200 dark:border-emerald-900 shadow-sm text-emerald-600 dark:text-emerald-400 px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest">
-                          +৳ {log.commission}
-                        </div>
-                     </div>
+
+         <div className="lg:col-span-1">
+            <div className="bg-zinc-900 dark:bg-zinc-50 p-8 rounded-[2.5rem] text-white dark:text-zinc-900 shadow-xl overflow-hidden relative group">
+               <div className="absolute top-0 right-0 w-32 h-32 bg-blue-500/20 blur-2xl rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+               <div className="relative z-10">
+                  <div className="w-12 h-12 bg-white/10 dark:bg-black/5 rounded-2xl flex items-center justify-center mb-6 backdrop-blur-md">
+                     <Icon name="bullhorn" className="text-xl" />
                   </div>
-               ))}
+                  <h3 className="text-xl font-black tracking-tight mb-3">Marketing Tips</h3>
+                  <ul className="space-y-4 mb-8">
+                     <li className="flex items-start gap-3">
+                        <Icon name="check-circle" className="text-emerald-400 dark:text-emerald-600 mt-0.5 text-sm shrink-0" />
+                        <p className="text-xs font-medium text-zinc-400 dark:text-zinc-600 leading-relaxed">Add your code to your Instagram & TikTok bios.</p>
+                     </li>
+                     <li className="flex items-start gap-3">
+                        <Icon name="check-circle" className="text-emerald-400 dark:text-emerald-600 mt-0.5 text-sm shrink-0" />
+                        <p className="text-xs font-medium text-zinc-400 dark:text-zinc-600 leading-relaxed">Share our daily offers and mention your code gives extra 5% off.</p>
+                     </li>
+                     <li className="flex items-start gap-3">
+                        <Icon name="check-circle" className="text-emerald-400 dark:text-emerald-600 mt-0.5 text-sm shrink-0" />
+                        <p className="text-xs font-medium text-zinc-400 dark:text-zinc-600 leading-relaxed">Unbox products and vocally remind viewers to use your code.</p>
+                     </li>
+                  </ul>
+               </div>
             </div>
-         )}
+         </div>
        </div>
        <div className="h-20" />
      </div>

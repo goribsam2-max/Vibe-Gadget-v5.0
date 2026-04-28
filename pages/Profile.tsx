@@ -43,10 +43,10 @@ const Profile: React.FC<{ userData: UserProfile | null }> = ({ userData: initial
     { label: 'Account Settings', icon: 'user-cog', path: '/settings', desc: 'Manage your profile and security' },
     { label: 'Help Center', icon: 'headset', path: '/help-center', desc: 'Contact customer support' },
     { label: 'Privacy Policy', icon: 'user-shield', path: '/privacy', desc: 'Read our privacy policy' },
-    { label: 'Terms & Conditions', icon: 'file-contract', path: '/terms', desc: 'Read our terms and conditions' },
+    { label: 'Terms & Conditions', icon: 'shield-check', path: '/terms', desc: 'Read our terms and conditions' },
     { label: 'About Us', icon: 'info-circle', path: '/about', desc: 'Learn more about VibeGadget' },
     { label: 'Contact Us', icon: 'envelope', path: '/contact', desc: 'Get in touch with us' },
-    { label: 'Site Map', icon: 'sitemap', path: '/sitemap-page', desc: 'View all pages' }
+    { label: 'Site Map', icon: 'share-alt', path: '/sitemap-page', desc: 'View all pages' }
   ];
 
   const isAdmin = localUserData?.role === 'admin' || 
@@ -160,45 +160,54 @@ const Profile: React.FC<{ userData: UserProfile | null }> = ({ userData: initial
                </div>
             )}
 
+            {/* Vibe Rewards Section Removed */}
+
             <div className="space-y-3">
-               <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 mb-4 ml-4">Dashboard</h3>
+                <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 mb-4 ml-4">Dashboard</h3>
                {isAdmin && (
-                 <Link to="/admin" className="flex items-center justify-between p-5 px-6 bg-zinc-900 rounded-2xl hover:bg-zinc-900 shadow-md shadow-zinc-200 transition-all group overflow-hidden mb-6">
-                    <div className="flex items-center space-x-4">
-                       <div className="w-10 h-10 bg-zinc-50 dark:bg-zinc-900/10 text-white rounded-full flex items-center justify-center">
-                           <Icon name="shield-alt" className="text-sm" />
+                 <Link to="/admin" className="flex items-center justify-between p-5 px-6 bg-emerald-900 dark:bg-emerald-800 rounded-[2rem] hover:bg-emerald-950 dark:hover:bg-emerald-700 shadow-xl shadow-emerald-900/10 transition-all group overflow-hidden mb-6 relative hover-tilt">
+                    <div className="absolute right-[-10%] top-[-20%] text-emerald-500/20 group-hover:scale-110 transition-transform pointer-events-none">
+                       <Icon name="cog" className="text-9xl animate-[spin_10s_linear_infinite]" />
+                    </div>
+                    <div className="flex items-center space-x-5 z-10">
+                       <div className="w-12 h-12 bg-white/10 backdrop-blur-md text-white rounded-[1.2rem] flex items-center justify-center border border-white/10 group-hover:bg-white/20 transition-colors">
+                           <Icon name="shield-alt" className="text-lg drop-shadow-sm" />
                        </div>
                        <div>
-                           <div className="font-bold text-base text-white">Admin Panel</div>
-                           <div className="text-[10px] font-medium text-white/50 uppercase tracking-widest">Manage store & configuration</div>
+                           <div className="font-black tracking-tight text-lg text-white">Admin Portal</div>
+                           <div className="text-[10px] font-bold text-emerald-300 uppercase tracking-widest mt-0.5">Manage Configuration</div>
                        </div>
                     </div>
-                    <Icon name="arrow-right" className="text-xs text-white opacity-50 group-hover:opacity-100 group-hover:translate-x-1 transition-all" />
+                    <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white z-10 group-hover:bg-white transition-colors group-hover:text-emerald-900">
+                        <Icon name="arrow-right" className="text-sm group-hover:translate-x-0.5 transition-transform" />
+                    </div>
                  </Link>
                )}
                
-               <div className="h-px w-full bg-zinc-100 dark:bg-zinc-800 my-8"></div>
+               <div className="h-px w-full bg-zinc-200 dark:bg-zinc-800 my-8"></div>
                
                <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 mb-4 ml-4">Your Account</h3>
+               <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                {menuItems.map((item, idx) => (
-                 <Link key={idx} to={item.path} className="flex items-center justify-between p-4 px-6 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 hover:border-black rounded-2xl hover:shadow-lg hover:shadow-black/5 transition-all group">
+                 <Link key={idx} to={item.path} className="flex items-center justify-between p-5 px-6 bg-zinc-100/50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-700/50 hover:bg-zinc-100 hover:border-zinc-300 dark:hover:bg-zinc-800/80 dark:hover:border-zinc-600 rounded-3xl transition-all group">
                     <div className="flex items-center space-x-5">
-                       <div className="w-12 h-12 rounded-full bg-zinc-50 dark:bg-zinc-800 flex items-center justify-center group-hover:bg-zinc-900 transition-colors">
-                          <Icon name={item.icon} className="text-zinc-400 group-hover:text-white transition-colors text-sm" />
+                       <div className="w-12 h-12 rounded-[1.2rem] bg-white dark:bg-zinc-900 flex items-center justify-center shadow-sm border border-zinc-100 dark:border-zinc-800 group-hover:scale-110 group-hover:rotate-3 transition-transform text-zinc-600 dark:text-zinc-300">
+                          <Icon name={item.icon} className="text-lg" />
                        </div>
                        <div>
-                           <div className="font-bold text-base text-zinc-900 dark:text-zinc-100">{item.label}</div>
-                           <div className="text-[11px] font-medium text-zinc-500 mt-1">{item.desc}</div>
+                           <div className="font-bold text-sm tracking-tight text-zinc-900 dark:text-zinc-100 mb-0.5">{item.label}</div>
+                           <div className="text-[10px] font-semibold text-zinc-500 line-clamp-1">{item.desc}</div>
                        </div>
                     </div>
-                    <Icon name="chevron-right" className="text-xs text-zinc-300 group-hover:text-black dark:text-white transition-colors group-hover:translate-x-1" />
+                    <Icon name="chevron-right" className="text-xs text-zinc-300 group-hover:text-emerald-500 transition-colors group-hover:translate-x-1" />
                  </Link>
                ))}
+               </div>
 
-               <div className="pt-6 space-y-4">
-                   <button onClick={handleLogout} className="w-full flex items-center justify-center p-5 bg-zinc-50 dark:bg-zinc-800 border border-red-200 text-red-500 rounded-2xl hover:bg-red-50 transition-all font-bold group shadow-sm active:scale-95 space-x-3">
-                      <Icon name="sign-out-alt" />
-                      <span>Log Out</span>
+                <div className="pt-8">
+                   <button onClick={handleLogout} className="w-full flex items-center justify-center py-5 bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30 text-red-600 dark:text-red-400 rounded-2xl hover:bg-red-100 dark:hover:bg-red-900/20 transition-colors font-bold text-xs uppercase tracking-widest active:scale-95 space-x-2 shadow-sm">
+                      <Icon name="sign-out-alt" className="text-sm" />
+                      <span>Log Out Securely</span>
                    </button>
                </div>
             </div>

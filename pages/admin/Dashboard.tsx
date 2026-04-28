@@ -44,7 +44,7 @@ const AdminDashboard: React.FC = () => {
         <div className="flex items-center space-x-6">
           <button onClick={() => navigate('/')} className="w-12 h-12 flex items-center justify-center bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-[#06331e] rounded-full shadow-sm hover:bg-[#06331e] hover:text-white transition-all active:scale-95"><Icon name="arrow-left" className="text-xs" /></button>
           <div>
-            <h1 className="text-2xl md:text-4xl font-black tracking-tight text-zinc-900 dark:text-zinc-100 mb-1">
+           <h1 className="text-xl md:text-2xl font-black tracking-tight text-zinc-900 dark:text-zinc-100 mb-1">
                {new Date().getHours() < 12 ? 'Good Morning' : new Date().getHours() < 18 ? 'Good Afternoon' : 'Good Evening'}, Admin
             </h1>
             <p className="text-zinc-500 text-[10px] md:text-xs font-bold tracking-widest uppercase flex items-center">
@@ -55,22 +55,24 @@ const AdminDashboard: React.FC = () => {
         </div>
         
          {/* Quick Actions Row */}
-        <div className="flex flex-wrap gap-3 animate-fade-in relative z-10">
-           <button onClick={() => navigate('products')} className="px-5 py-2.5 bg-zinc-900 dark:bg-zinc-50 dark:text-black text-white rounded-full text-[10px] font-black uppercase tracking-widest shadow-xl hover:shadow-2xl hover:-translate-y-0.5 transition-all flex items-center gap-2 group hover-tilt relative overflow-hidden">
+         <div className="flex flex-wrap gap-3 animate-fade-in relative z-10">
+           <button onClick={() => navigate('products')} className="px-6 py-3 bg-zinc-900 dark:bg-emerald-500 dark:text-white text-white rounded-2xl text-xs font-bold shadow-xl hover:shadow-zinc-900/20 dark:shadow-emerald-500/10 dark:hover:shadow-emerald-500/20 hover:-translate-y-0.5 transition-all flex items-center gap-2 group relative overflow-hidden">
               <span className="relative z-10 flex items-center gap-2"><Icon name="plus" className="group-hover:rotate-90 transition-transform duration-500" /> Add Product</span>
-              <div className="absolute inset-0 bg-emerald-600 translate-y-[100%] group-hover:translate-y-0 transition-transform duration-300"></div>
            </button>
-           <button onClick={() => navigate('orders')} className="px-5 py-2.5 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 rounded-full text-[10px] font-black uppercase tracking-widest shadow-sm hover:border-zinc-300 hover:text-black dark:text-white hover:-translate-y-0.5 hover:shadow-md transition-all flex items-center gap-2 hover-tilt group">
+           <button onClick={() => navigate('orders')} className="px-6 py-3 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 rounded-2xl text-xs font-bold shadow-sm hover:border-zinc-300 hover:text-black dark:text-white hover:-translate-y-0.5 hover:shadow-md transition-all flex items-center gap-2 group">
               <span className="group-hover:-translate-y-0.5 transition-transform"><Icon name="shopping-cart" /></span> View Orders
+           </button>
+           <button onClick={() => navigate('reviews')} className="px-6 py-3 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 rounded-2xl text-xs font-bold shadow-sm hover:border-zinc-300 hover:text-black dark:text-white hover:-translate-y-0.5 hover:shadow-md transition-all flex items-center gap-2 group">
+              <span className="group-hover:-translate-y-0.5 transition-transform"><Icon name="star" /></span> Manage Reviews
            </button>
         </div>
       </div>
 
       <div className="relative z-10 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-10 animate-stagger-1">
         <StatCard title="Total Products" value={stats.products} icon="boxes" gradient="from-zinc-100 to-zinc-50" iconColor="text-zinc-800 dark:text-zinc-200" trend="+12% this week" />
-        <StatCard title="Registered Users" value={stats.users} icon="users" gradient="from-blue-50 to-white" iconColor="text-blue-600" trend="+34 new" />
-        <StatCard title="Total Orders" value={stats.orders} icon="shopping-bag" gradient="from-emerald-50 to-white" iconColor="text-emerald-600" trend="All time" />
-        <StatCard title="Pending Tickets" value="0" icon="ticket-alt" gradient="from-orange-50 to-white" iconColor="text-orange-600" trend="Clear queue" />
+        <StatCard title="Registered Users" value={stats.users} icon="users" gradient="from-emerald-50/50 to-emerald-50/10" iconColor="text-emerald-600 dark:text-emerald-400" trend="+34 new" />
+        <StatCard title="Total Orders" value={stats.orders} icon="shopping-bag" gradient="from-blue-50/50 to-blue-50/10" iconColor="text-blue-600 dark:text-blue-400" trend="All time" />
+        <StatCard title="Pending Tickets" value="0" icon="ticket-alt" gradient="from-indigo-50/50 to-indigo-50/10" iconColor="text-indigo-600 dark:text-indigo-400" trend="Clear queue" />
       </div>
 
       <div className="relative z-10 grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
@@ -158,7 +160,7 @@ const AdminDashboard: React.FC = () => {
          <AdminBentoLink to="products" title="Inventory Catalog" subtitle="Add, edit, or remove store products." icon="cubes" />
          <AdminBentoLink to="users" title="Customer Database" subtitle="Manage registered users and accounts." icon="users-cog" />
          <AdminBentoLink to="orders" title="Order Fulfillment" subtitle="Process and updates active orders." icon="truck-fast" />
-         <AdminBentoLink to="fake-orders" title="Risk & Security" subtitle="Review AI-flagged suspicious orders." icon="shield-virus" highlight="border-red-200 bg-red-50/20" iconColor="text-red-500" />
+         <AdminBentoLink to="#" onClick={handleComingSoon} title="Risk & Security" subtitle="Review AI-flagged suspicious orders." icon="shield-virus" highlight="border-red-200/50 bg-red-50/20 hover:border-red-300 dark:border-red-900/30 dark:bg-red-900/10 dark:hover:border-red-800 font-bold" iconColor="text-red-500" />
          <AdminBentoLink to="notifications" title="Push Messaging" subtitle="Send targeted alerts to users." icon="comment-dots" />
          <AdminBentoLink to="banners" title="Storefront Design" subtitle="Manage homepage hero banners." icon="images" />
          <AdminBentoLink to="stories" title="Flash Stories" subtitle="Administer Instagram-style stories." icon="bolt" />
@@ -216,29 +218,29 @@ const AdminDashboard: React.FC = () => {
 };
 
 const StatCard = ({ title, value, icon, gradient, iconColor, trend }: any) => (
-  <div className="bg-white dark:bg-zinc-900 p-6 rounded-3xl border border-zinc-200 dark:border-zinc-800 shadow-sm relative overflow-hidden group hover:shadow-md transition-shadow">
-    <div className={`absolute top-0 right-0 w-32 h-32 bg-gradient-to-br ${gradient} rounded-bl-[100px] z-0 opacity-30 group-hover:opacity-60 transition-opacity duration-500 pointer-events-none`}></div>
+  <div className={`bg-white dark:bg-zinc-900 border border-zinc-200/60 dark:border-zinc-800 p-6 rounded-3xl shadow-sm relative overflow-hidden group hover:shadow-md hover:border-zinc-300 dark:hover:border-zinc-700 transition-all cursor-default`}>
+    <div className={`absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br ${gradient} rounded-full blur-2xl z-0 opacity-60 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none`}></div>
     <div className="relative z-10 flex flex-col h-full justify-between gap-4">
-       <div className={`w-12 h-12 rounded-xl bg-zinc-50 dark:bg-zinc-800 border-2 border-zinc-100 dark:border-zinc-700/50 shadow-[0_2px_10px_rgba(0,0,0,0.02)] flex items-center justify-center ${iconColor}`}>
+       <div className={`w-12 h-12 rounded-[1.2rem] bg-zinc-50 dark:bg-zinc-800 border border-zinc-100 dark:border-zinc-700 shadow-sm flex items-center justify-center ${iconColor}`}>
           <Icon name={icon as any} className="text-xl" />
        </div>
        <div>
-         <p className="text-3xl font-black text-zinc-900 dark:text-zinc-100 leading-none mb-1 tracking-tight">{value}</p>
-         <p className="text-[10px] text-zinc-400 font-bold tracking-widest uppercase mb-2">{title}</p>
-         {trend && <p className={`text-[9px] font-black tracking-widest uppercase ${trend.includes('+') ? 'text-emerald-500' : 'text-zinc-400'}`}>{trend}</p>}
+         <p className="text-3xl lg:text-4xl font-black text-zinc-900 dark:text-zinc-100 leading-none mb-2 tracking-tight">{value}</p>
+         <p className="text-xs font-semibold text-zinc-500 tracking-tight mb-2">{title}</p>
+         {trend && <p className={`text-[10px] font-bold uppercase tracking-widest ${trend.includes('+') ? 'text-emerald-500' : 'text-zinc-400'}`}>{trend}</p>}
        </div>
     </div>
   </div>
 );
 
 const AdminBentoLink = ({ to, title, subtitle, icon, highlight, iconColor, onClick }: any) => (
-  <Link to={to} onClick={onClick} className={`bg-white dark:bg-zinc-900 p-6 rounded-3xl border ${highlight ? highlight : 'border-zinc-200 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700'} shadow-sm hover:shadow-md transition-all group flex items-start space-x-4`}>
-     <div className={`w-12 h-12 rounded-xl bg-zinc-50 dark:bg-zinc-800 flex items-center justify-center border-2 border-zinc-100 dark:border-zinc-700/50 transition-colors shrink-0 shadow-[0_2px_10px_rgba(0,0,0,0.02)] ${iconColor || 'text-zinc-500 group-hover:text-black dark:text-white'}`}>
-        <Icon name={icon as any} className="text-lg transition-transform group-hover:scale-110" />
+  <Link to={to} onClick={onClick} className={`bg-white dark:bg-zinc-900 p-6 rounded-3xl border ${highlight ? highlight : 'border-zinc-200/60 dark:border-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700'} shadow-sm hover:shadow-md transition-all group flex items-start space-x-4`}>
+     <div className={`w-12 h-12 rounded-[1.2rem] bg-zinc-50 dark:bg-zinc-800 flex items-center justify-center border border-zinc-100 dark:border-zinc-700 transition-colors shrink-0 shadow-sm ${iconColor || 'text-zinc-500 group-hover:text-emerald-600 dark:group-hover:text-emerald-400'}`}>
+        <Icon name={icon as any} className="text-xl transition-transform group-hover:scale-110" />
      </div>
      <div>
-        <h4 className={`text-sm font-bold mb-1 ${iconColor ? iconColor : 'text-zinc-900 dark:text-zinc-100'}`}>{title}</h4>
-        <p className="text-[10px] text-zinc-500 font-medium leading-relaxed pr-2">{subtitle}</p>
+        <h4 className={`text-sm font-bold tracking-tight mb-1 ${iconColor ? iconColor : 'text-zinc-900 dark:text-zinc-100'}`}>{title}</h4>
+        <p className="text-xs font-medium text-zinc-500 leading-relaxed pr-2 line-clamp-2">{subtitle}</p>
      </div>
   </Link>
 );

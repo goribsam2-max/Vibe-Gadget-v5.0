@@ -564,43 +564,70 @@ const ProductDetails: React.FC = () => {
             </div>
         </div>}
 
-        <div className="mb-12">
-           <div className="flex justify-between items-center mb-6 px-1">
-              <h3 className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Customer Reviews</h3>
-              <button onClick={() => navigate(`/leave-review?productId=${product.id}`)} className="text-[10px] font-bold text-emerald-600 hover:text-emerald-800 uppercase tracking-widest transition-all">Write a Review</button>
+        <div className="mb-12 border-t border-zinc-200 dark:border-zinc-800/50 pt-12 relative">
+           <div className="absolute top-0 right-10 w-32 h-32 bg-emerald-500/5 blur-3xl pointer-events-none"></div>
+           
+           <div className="flex flex-col md:flex-row justify-between items-center bg-zinc-50 dark:bg-zinc-800/20 p-8 md:p-10 rounded-[2.5rem] border border-zinc-200/50 dark:border-zinc-800 shadow-sm mb-10 overflow-hidden relative">
+              <div className="absolute top-0 left-0 w-2 h-full bg-emerald-500"></div>
+              <div className="text-center md:text-left mb-6 md:mb-0 relative z-10 pl-2">
+                 <div className="flex items-end justify-center md:justify-start gap-2 mb-2">
+                   <h3 className="text-5xl md:text-6xl font-black tracking-tighter text-zinc-900 dark:text-zinc-100 leading-none">{product.rating}</h3>
+                   <span className="text-lg font-bold text-zinc-400 mb-1.5">/ 5</span>
+                 </div>
+                 <div className="flex text-yellow-400 text-lg my-3 justify-center md:justify-start gap-1">
+                    {[1, 2, 3, 4, 5].map(star => <div key={star} className="bg-white dark:bg-zinc-900 p-1 rounded-full shadow-sm border border-zinc-100 dark:border-zinc-800"><Icon name={star <= Math.round(product.rating || 0) ? 'star' : 'star-outline'} className="drop-shadow-sm" /></div>)}
+                 </div>
+                 <p className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 bg-white dark:bg-zinc-900 inline-block px-3 py-1 rounded-full shadow-sm border border-zinc-100 dark:border-zinc-800">Based on {product.numReviews || 0} reviews</p>
+              </div>
+              <div className="w-full md:w-auto flex justify-center md:justify-end relative z-10">
+                 <button onClick={() => navigate(`/leave-review?productId=${product.id}`)} className="px-8 py-4 bg-[#06331e] text-emerald-300 rounded-[2rem] text-xs font-black uppercase tracking-widest shadow-2xl shadow-emerald-900/30 hover:-translate-y-1 hover:shadow-emerald-900/50 hover:bg-zinc-900 active:scale-95 transition-all flex items-center space-x-3 group border border-[#06331e] dark:border-emerald-900/30">
+                    <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform"><Icon name="pen" className="text-sm text-emerald-200" /></div>
+                    <span>Write a Review</span>
+                 </button>
+              </div>
            </div>
 
-           <div className="space-y-4">
+           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
               {reviews.map(review => (
-                <div key={review.id} className="bg-zinc-50 dark:bg-zinc-800 p-5 rounded-2xl border border-zinc-100 dark:border-zinc-800 transition-all hover:bg-zinc-50 dark:bg-zinc-800 hover:border-zinc-200 dark:border-zinc-700">
-                   <div className="flex justify-between items-start mb-4">
+                <div key={review.id} className="bg-white dark:bg-zinc-900 p-8 rounded-[2.5rem] border border-zinc-200 dark:border-zinc-800 transition-all hover:-translate-y-1 hover:shadow-xl shadow-zinc-200/50 dark:shadow-none hover:border-emerald-200 dark:hover:border-zinc-700 flex flex-col relative group overflow-hidden">
+                   <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none"><Icon name="quote-right" className="text-6xl text-emerald-900 dark:text-zinc-500" /></div>
+                   <div className="flex justify-between items-start mb-6 relative z-10">
                       <div className="flex items-center space-x-4">
-                         <img src={review.userPhoto || `https://ui-avatars.com/api/?name=${review.userName}&background=000&color=fff`} className="w-10 h-10 md:w-12 md:h-12 rounded-full border-2 border-white shadow-sm" alt="" />
+                         <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-emerald-100 dark:border-emerald-900/30 p-1 shrink-0 bg-white dark:bg-zinc-800 shadow-inner">
+                            <img src={review.userPhoto || `https://ui-avatars.com/api/?name=${review.userName}&background=000&color=fff`} className="w-full h-full rounded-full object-cover" alt="" />
+                         </div>
                          <div>
-                            <p className="text-xs font-black tracking-tight text-zinc-900 dark:text-zinc-100">{review.userName}</p>
-                            <div className="flex text-[8px] text-yellow-400 mt-1">
-                               {[...Array(5)].map((_, i) => <Icon key={i} name={i < review.rating ? 'star' : 'star-outline'} solid={i < review.rating} className="mr-0.5" />)}
+                            <p className="text-sm font-black tracking-tight text-zinc-900 dark:text-zinc-100 flex items-center gap-1.5">
+                               {review.userName}
+                               <span className="w-4 h-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-full flex items-center justify-center border border-emerald-100 dark:border-emerald-900/50"><Icon name="check" className="text-[8px] text-emerald-500" /></span>
+                            </p>
+                            <div className="flex gap-0.5 mt-1.5">
+                               {[...Array(5)].map((_, i) => <Icon key={i} name={i < review.rating ? 'star' : 'star-outline'} className="text-[10px] text-yellow-400 drop-shadow-sm" />)}
                             </div>
                          </div>
                       </div>
-                      <span className="text-[9px] font-bold text-zinc-400 uppercase">{new Date(review.createdAt).toLocaleDateString()}</span>
+                      <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">{new Date(review.createdAt).toLocaleDateString()}</span>
                    </div>
-                   <p className="text-xs md:text-sm text-zinc-600 dark:text-zinc-400 font-medium leading-relaxed">"{review.comment}"</p>
+                   <p className="text-sm text-zinc-600 dark:text-zinc-300 font-medium leading-relaxed flex-1">"{review.comment}"</p>
                    {review.images && review.images.length > 0 && (
-                      <div className="flex gap-3 overflow-x-auto no-scrollbar py-2 mt-3">
+                      <div className="flex gap-3 overflow-x-auto no-scrollbar pt-4 mt-4 border-t border-zinc-100 dark:border-zinc-800/50">
                          {review.images.map((img, i) => (
-                           <img 
-                            key={i} src={img} 
-                            className="w-16 h-16 md:w-20 md:h-20 rounded-xl object-cover border-2 border-white shadow-sm cursor-zoom-in shrink-0 hover:scale-105 transition-transform" 
+                           <button 
+                            key={i}
+                            className="relative w-20 h-20 rounded-[1rem] overflow-hidden border border-zinc-200 dark:border-zinc-700 shadow-sm shrink-0 group active:scale-95 transition-transform" 
                             onClick={() => setFullScreenImg(img)}
-                            alt="" 
-                           />
+                           >
+                            <img src={img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" alt="" />
+                            <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 flex items-center justify-center transition-colors">
+                               <Icon name="search-plus" className="text-white opacity-0 group-hover:opacity-100 drop-shadow-md text-sm transition-opacity" />
+                            </div>
+                           </button>
                          ))}
                       </div>
                    )}
                 </div>
               ))}
-              {reviews.length === 0 && <div className="py-12 bg-zinc-50 dark:bg-zinc-800 rounded-2xl border border-dashed border-zinc-200 dark:border-zinc-700 text-center text-[10px] font-bold uppercase tracking-widest text-zinc-400">No reviews yet</div>}
+              {reviews.length === 0 && <div className="col-span-1 md:col-span-2 py-12 bg-white dark:bg-zinc-900 rounded-[2rem] border border-dashed border-zinc-200 dark:border-zinc-700 text-center text-[10px] font-bold uppercase tracking-widest text-zinc-400">No reviews yet</div>}
            </div>
                {createPortal(
           <div className="fixed bottom-6 left-0 right-0 w-full flex justify-center z-[100] px-4 pointer-events-none">

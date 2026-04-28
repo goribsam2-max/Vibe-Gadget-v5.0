@@ -218,6 +218,7 @@ import AdminDashboard from './pages/admin/Dashboard';
 import ManageProducts from './pages/admin/ManageProducts';
 import ManageUsers from './pages/admin/ManageUsers';
 import ManageOrders from './pages/admin/ManageOrders';
+import ManageReviews from './pages/admin/ManageReviews';
 import ManageBanners from './pages/admin/ManageBanners';
 import ManageConfig from './pages/admin/ManageConfig';
 import ManageCustomSections from './pages/admin/ManageCustomSections';
@@ -388,6 +389,7 @@ const AppContent: React.FC = () => {
                 <Route path="products" element={<PageWrapper><ManageProducts /></PageWrapper>} />
                 <Route path="users" element={<PageWrapper><ManageUsers /></PageWrapper>} />
                 <Route path="orders" element={<PageWrapper><ManageOrders /></PageWrapper>} />
+                <Route path="reviews" element={<PageWrapper><ManageReviews /></PageWrapper>} />
                 <Route path="fake-orders" element={<PageWrapper><ManageFakeOrders /></PageWrapper>} />
                 <Route path="notifications" element={<PageWrapper><AdminNotifications /></PageWrapper>} />
                 <Route path="banners" element={<PageWrapper><ManageBanners /></PageWrapper>} />

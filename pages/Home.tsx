@@ -16,6 +16,246 @@ import { useTheme } from '../components/ThemeContext';
 import { ProductSkeleton } from '../components/Skeletons';
 import { CustomSectionEmbed } from '../components/CustomSectionEmbed';
 
+const FullScreenStory = ({ stories, activeIndex, onClose, onNext, onPrev }: any) => {
+   const [progress, setProgress] = useState(0);
+   const [isPaused, setIsPaused] = useState(false);
+   const [loading, setLoading] = useState(true);
+   const videoRef = useRef<HTMLVideoElement>(null);
+   const audioRef = useRef<HTMLAudioElement>(null);
+   const timerRef = useRef<any>(null);
+   
+   const currentStory = stories[activeIndex];
+   const isVideo = currentStory.type === 'video';
+   const hasAudio = !!currentStory.audioUrl;
+   
+   // Preload audio explicitly
+   useEffect(() => {
+      setLoading(true);
+      setProgress(0);
+      
+      const prepareMedia = async () => {
+         if (hasAudio && audioRef.current) {
+            audioRef.current.load();
+            try {
+               await new Promise((resolve) => {
+                  if (!audioRef.current) return resolve(true);
+                  if (audioRef.current.readyState >= 3) resolve(true);
+                  else audioRef.current.oncanplay = () => resolve(true);
+               });
+            } catch(e) {}
+         }
+         
+         if (isVideo && videoRef.current) {
+            videoRef.current.load();
+         }
+         setLoading(false);
+      };
+      
+      prepareMedia();
+      
+      return () => {
+         if (timerRef.current) clearInterval(timerRef.current);
+      }
+   }, [activeIndex, hasAudio, isVideo]);
+   
+   useEffect(() => {
+      if (loading || isPaused) {
+         if (timerRef.current) clearInterval(timerRef.current);
+         return;
+      }
+      
+      if (!isVideo && !hasAudio) {
+         // Image only, 5 seconds
+         const duration = 5000;
+         const interval = 50;
+         timerRef.current = setInterval(() => {
+            setProgress(p => {
+               if (p >= 100) { clearInterval(timerRef.current); onNext(); return 100; }
+               return p + (interval / duration) * 100;
+            });
+         }, interval);
+      } else if (!isVideo && hasAudio) {
+         // Image with audio: let audio progress handle it
+         if (audioRef.current) {
+             audioRef.current.play().catch(()=>{});
+         }
+      }
+      
+      if (isVideo) {
+         if (videoRef.current) {
+             videoRef.current.play().catch(()=>{});
+         }
+      }
+      
+      return () => {
+         if (timerRef.current) clearInterval(timerRef.current);
+      }
+   }, [loading, isPaused, isVideo, hasAudio, activeIndex, onNext]);
+
+   const handleAudioTimeUpdate = () => {
+      if (!isVideo && hasAudio && audioRef.current && !isPaused) {
+         const p = (audioRef.current.currentTime / audioRef.current.duration) * 100;
+         setProgress(p);
+      }
+   };
+   
+   const handleVideoTimeUpdate = () => {
+      if (isVideo && videoRef.current && !isPaused) {
+         const p = (videoRef.current.currentTime / videoRef.current.duration) * 100;
+         setProgress(p);
+      }
+   };
+
+   return (
+      <motion.div 
+         initial={{ opacity: 0 }}
+         animate={{ opacity: 1 }}
+         exit={{ opacity: 0 }}
+         className="fixed inset-0 z-[200] bg-black/90 backdrop-blur-3xl flex items-center justify-center p-0 md:p-6"
+      >
+         <motion.div 
+            initial={{ scale: 0.95, y: 50, opacity: 0 }}
+            animate={{ scale: 1, y: 0, opacity: 1 }}
+            exit={{ scale: 0.95, y: 50, opacity: 0 }}
+            transition={{ type: "spring", damping: 25, stiffness: 300 }}
+            className="relative w-full h-full md:h-[90vh] max-w-lg mx-auto bg-zinc-950 md:rounded-[2.5rem] overflow-hidden flex items-center justify-center shadow-[0_0_80px_rgba(0,0,0,0.8)] md:border border-white/10"
+         >
+            {/* Progress Bars */}
+            <div className="absolute top-4 left-4 right-4 flex space-x-1.5 z-40 drop-shadow-md">
+               {stories.map((s: any, i: number) => (
+                  <div key={s.id} className="h-1 flex-1 bg-white/20 rounded-full overflow-hidden backdrop-blur-md">
+                     <div 
+                        className="h-full bg-white shadow-[0_0_10px_rgba(255,255,255,1)] rounded-full transition-all duration-100 ease-linear" 
+                        style={{ width: i === activeIndex ? `${progress}%` : i < activeIndex ? '100%' : '0%' }}
+                     />
+                  </div>
+               ))}
+            </div>
+
+            {/* Header info */}
+            <div className="absolute top-8 left-4 right-4 flex justify-between items-start z-40">
+               <div className="flex items-center space-x-3 text-white drop-shadow-md bg-black/40 backdrop-blur-xl pr-5 py-2 pl-2 rounded-full border border-white/10">
+                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-[#06331e] flex items-center justify-center font-bold text-xs border border-white/20 shadow-lg relative overflow-hidden shrink-0">
+                    <Icon name="bolt" className="text-white drop-shadow-sm relative z-10 text-sm" />
+                    <div className="absolute inset-0 bg-white/20 animate-[pulse_2s_ease-in-out_infinite]"></div>
+                  </div>
+                  <div className="flex flex-col">
+                    <span className="font-black text-sm tracking-wider uppercase drop-shadow-md">{currentStory.category}</span>
+                    <span className="text-[9px] font-bold text-white/70 uppercase tracking-[0.2em]">{currentStory.type === 'video' ? 'Video Story' : 'Image Story'}</span>
+                  </div>
+               </div>
+               <div className="flex items-center space-x-2">
+                 <button onClick={onClose} className="w-12 h-12 rounded-full bg-black/40 backdrop-blur-xl flex items-center justify-center text-white/90 hover:text-white hover:bg-black/60 border border-white/10 transition-all shadow-lg group">
+                   <Icon name="times" className="text-xl drop-shadow-md group-active:scale-95 transition-transform" />
+                 </button>
+               </div>
+            </div>
+
+            {loading && (
+               <div className="absolute inset-0 z-30 flex items-center justify-center bg-zinc-950/50 backdrop-blur-sm">
+                   <Icon name="spinner-third" className="animate-spin text-4xl text-white drop-shadow-lg" />
+               </div>
+            )}
+
+            {/* Media */}
+            <div 
+               className="w-full h-full flex items-center justify-center bg-zinc-950 relative overflow-hidden group"
+               onPointerDown={() => setIsPaused(true)}
+               onPointerUp={() => setIsPaused(false)}
+               onPointerLeave={() => setIsPaused(false)}
+               onTouchStart={() => setIsPaused(true)}
+               onTouchEnd={() => setIsPaused(false)}
+            >
+                <div className="absolute inset-0 z-10 pointer-events-none shadow-[inset_0_0_120px_40px_rgba(0,0,0,0.9)] bg-gradient-to-b from-black/40 via-transparent to-black/80"></div>
+                
+                {isVideo ? (
+                   currentStory.mediaUrl.toLowerCase().includes('.mp4') ? (
+                       <video 
+                          ref={videoRef}
+                          src={currentStory.mediaUrl}
+                          className="w-full h-full object-cover md:object-contain scale-[1.02] transform transition-transform duration-[10s] ease-linear group-hover:scale-105"
+                          onPlaying={() => {
+                             if (audioRef.current && !isPaused) audioRef.current.play().catch(()=>{});
+                          }}
+                          onWaiting={() => {
+                             if (audioRef.current) audioRef.current.pause();
+                          }}
+                          onTimeUpdate={handleVideoTimeUpdate}
+                          onEnded={onNext}
+                          playsInline
+                          loop={false}
+                          muted={hasAudio}
+                       />
+                   ) : (
+                       <div className="w-full h-full transform scale-[1.35] md:scale-[1.15] origin-center">
+                           <ReactPlayer 
+                               url={currentStory.mediaUrl} 
+                               playing={!isPaused && !loading} 
+                               controls={false}
+                               muted={hasAudio}
+                               width="100%" 
+                               height="100%" 
+                               style={{ pointerEvents: 'none', objectFit: 'contain' }}
+                               onProgress={(state: any) => {
+                                   if (!isPaused && state.playedSeconds > 0 && state.loadedSeconds > 0) {
+                                       setProgress(state.played * 100);
+                                   }
+                               }}
+                               onEnded={onNext}
+                               config={{
+                                   youtube: { playerVars: { showinfo: 0, controls: 0, rel: 0, modestbranding: 1, playsinline: 1, disablekb: 1, fs: 0 } as any },
+                                   facebook: { appId: '29c39d8a7be8404a', attributes: { 'data-hide-controls': 'true', 'data-show-captions': 'false' } }
+                               }}
+                           />
+                       </div>
+                   )
+                ) : (
+                  <img src={currentStory.mediaUrl} className="w-full h-full object-cover md:object-contain scale-[1.02] transform transition-transform duration-[10s] ease-linear group-hover:scale-110 select-none" draggable="false" alt="story" />
+                )}
+            </div>
+
+            {hasAudio && (
+              <audio 
+                 ref={audioRef}
+                 src={`${currentStory.audioUrl}#t=${currentStory.audioStart || 0}`} 
+                 playsInline 
+                 preload="auto"
+                 className="hidden"
+                 onTimeUpdate={handleAudioTimeUpdate}
+                 onEnded={!isVideo ? onNext : undefined}
+              />
+            )}
+
+            {/* Content Info (if any) */}
+            {currentStory.title && (
+               <div className="absolute bottom-28 left-4 right-4 z-40">
+                  <h3 className="text-white text-2xl font-black drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] mb-2">{currentStory.title}</h3>
+                  {currentStory.description && <p className="text-white/90 text-sm font-medium drop-shadow-md">{currentStory.description}</p>}
+               </div>
+            )}
+
+            {/* Click Areas */}
+            <div className="absolute inset-0 z-30 flex">
+               <div className="w-1/3 h-full cursor-pointer" onClick={() => { onPrev(); }}></div>
+               <div className="w-2/3 h-full cursor-pointer" onClick={() => { onNext(); }}></div>
+            </div>
+            
+            {/* CTA */}
+            {currentStory.linkUrl && (
+               <div className="absolute bottom-8 left-0 right-0 flex justify-center z-50 pointer-events-none">
+                 <button onClick={() => { window.location.href = currentStory.linkUrl; }} className="bg-white/90 backdrop-blur-xl text-emerald-950 px-10 py-5 rounded-full font-black text-sm uppercase tracking-[0.2em] shadow-[0_20px_50px_rgba(0,0,0,0.5)] hover:bg-white hover:-translate-y-2 active:scale-95 transition-all flex items-center space-x-3 group border border-white/50 pointer-events-auto">
+                    <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-white transition-colors">
+                      <Icon name="link" className="text-xs group-hover:-rotate-45 transition-transform duration-300" />
+                    </div>
+                    <span>Shop Now</span>
+                 </button>
+               </div>
+            )}
+         </motion.div>
+      </motion.div>
+   );
+};
+
 const ThinBanner = ({ banner, navigate }: { banner: any, navigate: any }) => {
    const [showAdLabel, setShowAdLabel] = useState(false);
 
@@ -86,6 +326,7 @@ const Home: React.FC = () => {
   const [recentBlogs, setRecentBlogs] = useState<any[]>([]);
   const isStoryPausedRef = useRef(false);
   const storyVideoRef = useRef<HTMLVideoElement>(null);
+  const storyAudioRef = useRef<HTMLAudioElement>(null);
 
   const setStoryPaused = (paused: boolean) => {
     setIsStoryPaused(paused);
@@ -93,6 +334,10 @@ const Home: React.FC = () => {
     if (storyVideoRef.current) {
       if (paused) storyVideoRef.current.pause();
       else storyVideoRef.current.play();
+    }
+    if (storyAudioRef.current) {
+      if (paused) storyAudioRef.current.pause();
+      else storyAudioRef.current.play();
     }
   };
 
@@ -377,40 +622,140 @@ const Home: React.FC = () => {
       <div className="blob bg-blue-200/20 w-80 h-80 rounded-full bottom-[10%] left-[10%] animation-delay-4000 z-0"></div>
 
       {/* Premium Announcement Bar */}
-      <div className="absolute top-0 left-0 w-full bg-[#06331e] text-white py-1.5 overflow-hidden z-50 flex items-center shadow-md">
+      <div className="absolute top-0 left-0 w-full bg-[#06331e] text-emerald-100 py-1.5 overflow-hidden z-50 flex items-center shadow-md">
         <div className="animate-marquee whitespace-nowrap text-[9px] font-black tracking-[0.2em] uppercase flex items-center">
-          <span className="mx-8 inline-flex items-center"><Icon name="bolt" className="w-3 h-3 text-emerald-400 mr-1.5"/> Free Shipping on orders over ৳5000</span>
-          <span className="mx-8 inline-flex items-center"><Icon name="award" className="w-3 h-3 text-yellow-400 mr-1.5"/> 100% Authentic Products</span>
-          <span className="mx-8 inline-flex items-center"><Icon name="shield-check" className="w-3 h-3 text-blue-400 mr-1.5"/> 12 Months Warranty Included</span>
-          <span className="mx-8 text-emerald-400 inline-flex items-center">Use Code: VIBE20 for 20% OFF</span>
+          <span className="mx-8 inline-flex items-center"><Icon name="bolt" className="w-3 h-3 text-emerald-400 mr-2"/> Free Shipping on orders over ৳5000</span>
+          <span className="mx-8 inline-flex items-center"><Icon name="award" className="w-3 h-3 text-yellow-400 mr-2"/> 100% Authentic Products</span>
+          <span className="mx-8 inline-flex items-center"><Icon name="shield-check" className="w-3 h-3 text-blue-400 mr-2"/> 12 Months Warranty Included</span>
+          <span className="mx-8 text-white inline-flex items-center">Use Code: VIBE20 for 20% OFF</span>
         </div>
       </div>
 
-      <motion.div initial={{ y: -10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="flex justify-between items-center mb-6 md:mb-8">
-        <div className="md:hidden">
+      <motion.div initial={{ y: -10, opacity: 0 }} animate={{ y: 0, opacity: 1 }} className="flex justify-between items-center mb-6 md:mb-10 pt-2">
+        <div className="flex-1 md:hidden">
           <Logo scale={0.8} className="origin-left" />
         </div>
-        <div className="hidden md:flex items-center space-x-2">
-           <Icon name={new Date().getHours() < 18 ? "sun" : "moon"} className="text-emerald-500 text-xl animate-pulse" />
-           <h2 className="text-xl font-black text-zinc-900 dark:text-zinc-100 tracking-tight">
-             {new Date().getHours() < 12 ? 'Good Morning' : new Date().getHours() < 18 ? 'Good Afternoon' : 'Good Evening'}, Explorer
+        <div className="hidden md:flex flex-1 items-center">
+           <h2 className="text-2xl lg:text-3xl font-black text-zinc-900 dark:text-zinc-100 tracking-tight flex items-center gap-3">
+             <Icon name={new Date().getHours() < 18 ? "sun" : "moon"} className="text-emerald-500 text-3xl animate-[spin_10s_linear_infinite]" />
+             <span>{new Date().getHours() < 12 ? 'Good Morning' : new Date().getHours() < 18 ? 'Good Afternoon' : 'Good Evening'}, <span className="text-emerald-600 dark:text-emerald-400 font-black">Explorer</span></span>
            </h2>
         </div>
-        <div className="flex items-center space-x-3">
-          <div className="hidden md:flex flex-col text-right mr-4">
-            <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-widest mb-1">Delivering to</p>
-            <button className="flex items-center justify-end font-bold text-xs hover:text-[#06331e] transition-colors whitespace-nowrap">
-              <Icon name="map-marker" className="text-emerald-500 mr-2 text-[10px]" />
-              {locationName}
+        
+        <div className="flex items-center space-x-3 md:space-x-4">
+          <div ref={searchRef} className="hidden lg:flex relative w-64 xl:w-80 transition-all duration-300 z-50">
+            <div className={`relative flex items-center bg-zinc-100 dark:bg-zinc-800/50 rounded-full border transition-all duration-300 ${isSearchFocused ? 'border-emerald-500 ring-4 ring-emerald-500/10 bg-white dark:bg-zinc-800 shadow-lg' : 'border-zinc-200 dark:border-zinc-700/50 hover:bg-white dark:hover:bg-zinc-800'}`}>
+              <Icon name="search" className={`absolute left-4 transition-colors ${isSearchFocused ? 'text-emerald-500' : 'text-zinc-400'}`} />
+              <input 
+                type="text" 
+                placeholder="Search..." 
+                className="w-full bg-transparent py-2.5 pl-11 pr-10 outline-none text-sm font-semibold text-zinc-900 dark:text-zinc-100 placeholder:text-zinc-400"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                onFocus={() => setIsSearchFocused(true)}
+                onKeyDown={(e) => {
+                  if(e.key === 'Enter') {
+                     saveSearchHistory(searchQuery);
+                     navigate('/search');
+                  }
+                }}
+              />
+              {isSearchFocused && searchQuery && (
+                <button onClick={() => setSearchQuery('')} className="absolute right-3.5 w-5 h-5 bg-zinc-200 dark:bg-zinc-700 rounded-full flex items-center justify-center text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200 transition-colors">
+                   <Icon name="times" className="text-[8px]" />
+                </button>
+              )}
+            </div>
+
+            {/* Desktop Search Dropdown */}
+            <AnimatePresence>
+              {isSearchFocused && (searchQuery.trim() !== '' || searchHistory.length > 0) && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                  animate={{ opacity: 1, y: 0, scale: 1 }}
+                  exit={{ opacity: 0, y: 10, scale: 0.98 }}
+                  transition={{ duration: 0.2 }}
+                  className="absolute top-full right-0 w-[400px] mt-3 bg-white dark:bg-zinc-900 rounded-3xl shadow-[0_20px_60px_-15px_rgba(0,0,0,0.1)] dark:shadow-[0_20px_60px_-15px_rgba(0,0,0,0.5)] border border-zinc-200/80 dark:border-zinc-800 overflow-hidden backdrop-blur-xl"
+                >
+                  {searchQuery.trim() === '' && searchHistory.length > 0 ? (
+                    <div className="p-4">
+                       <div className="flex items-center justify-between mb-2 px-2">
+                         <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Recent Searches</p>
+                         <button onClick={() => { localStorage.removeItem('f_search_history'); setSearchHistory([]); }} className="text-[9px] font-bold uppercase tracking-widest text-emerald-500 hover:text-emerald-600 transition-colors">Clear</button>
+                       </div>
+                       <div className="flex flex-wrap gap-2">
+                         {searchHistory.map((h, i) => (
+                           <button 
+                              key={i} 
+                              onClick={() => {
+                                 setSearchQuery(h);
+                                 setIsSearchFocused(false);
+                                 saveSearchHistory(h);
+                                 navigate('/search');
+                              }}
+                              className="px-4 py-2 bg-zinc-100 dark:bg-zinc-800 hover:bg-emerald-50 dark:hover:bg-emerald-900/20 hover:text-emerald-700 dark:hover:text-emerald-300 rounded-xl transition-all text-left text-xs font-semibold text-zinc-600 dark:text-zinc-300 border border-transparent hover:border-emerald-200 dark:hover:border-emerald-800"
+                           >
+                              <Icon name="history" className="mr-2 text-[10px] opacity-60" />
+                              {h}
+                           </button>
+                         ))}
+                       </div>
+                    </div>
+                  ) : searchResults.length > 0 ? (
+                    <div className="py-3">
+                      <p className="text-[9px] font-black uppercase tracking-widest text-zinc-400 px-5 mb-2">Products</p>
+                      {searchResults.map(product => (
+                        <div 
+                          key={product.id} 
+                          onClick={() => navigate(`/product/${product.id}`)}
+                          className="flex items-center space-x-4 px-5 py-3 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 cursor-pointer transition-colors group"
+                        >
+                          <div className="w-12 h-12 bg-zinc-100 dark:bg-zinc-800 rounded-xl flex items-center justify-center shrink-0 border border-zinc-200 dark:border-zinc-700 overflow-hidden transform group-hover:scale-105 transition-transform">
+                            <img src={product.image} className="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal" alt={product.name} />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="text-sm font-bold text-zinc-900 dark:text-zinc-100 truncate group-hover:text-emerald-600 dark:group-hover:text-emerald-400 transition-colors">{product.name}</p>
+                            <p className="text-xs font-semibold text-emerald-500">৳{product.isOffer && product.offerPrice ? product.offerPrice : product.price}</p>
+                          </div>
+                        </div>
+                      ))}
+                      <div className="px-5 mt-3 pt-3 border-t border-zinc-100 dark:border-zinc-800">
+                         <button onClick={() => navigate('/search')} className="w-full py-2.5 bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-emerald-50 hover:text-emerald-700 dark:hover:bg-emerald-900/30 dark:hover:text-emerald-400 transition-colors">
+                           View All Results
+                         </button>
+                      </div>
+                    </div>
+                  ) : searchQuery.trim() !== '' ? (
+                    <div className="py-12 text-center flex flex-col items-center">
+                       <div className="w-16 h-16 bg-zinc-100 dark:bg-zinc-800 rounded-full flex items-center justify-center mb-4">
+                         <Icon name="search" className="text-2xl text-zinc-300 dark:text-zinc-600" />
+                       </div>
+                       <p className="text-sm font-bold text-zinc-800 dark:text-zinc-200 mb-1">No products found</p>
+                       <p className="text-xs text-zinc-500 px-6">We couldn't find anything matching "{searchQuery}". Try different keywords.</p>
+                    </div>
+                  ) : null}
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          <div className="hidden md:flex flex-col text-right mr-2 lg:mr-0 pl-4 lg:border-l lg:border-zinc-200 lg:dark:border-zinc-700/50">
+            <p className="text-[9px] text-zinc-400 font-black uppercase tracking-widest mb-0.5">Delivery To</p>
+            <button className="flex items-center justify-end font-bold text-xs hover:text-[#06331e] dark:hover:text-emerald-400 transition-colors whitespace-nowrap text-zinc-800 dark:text-zinc-200">
+              <Icon name="map-marker" className="text-emerald-500 mr-1.5 text-[10px]" />
+              <span className="truncate max-w-[120px]">{locationName}</span>
             </button>
           </div>
-          <button onClick={toggleTheme} className="w-12 h-12 flex items-center justify-center bg-zinc-50 dark:bg-zinc-800 rounded-full cursor-pointer relative border border-zinc-100 dark:border-zinc-800 dark:border-zinc-700 active:scale-95 transition-transform hover:bg-zinc-200 dark:hover:bg-zinc-700 shadow-sm group">
-             <Icon name={isDark ? "sun" : "moon"} className="text-sm dark:text-yellow-400" />
-          </button>
-          <button onClick={() => navigate('/notifications')} className="w-12 h-12 flex items-center justify-center bg-zinc-50 dark:bg-zinc-800 rounded-full relative border border-zinc-100 dark:border-zinc-800 dark:border-zinc-700 active:scale-95 transition-transform hover:bg-zinc-900 dark:hover:bg-zinc-50 dark:bg-zinc-800 hover:text-white dark:hover:text-black dark:text-white shadow-sm group">
-            <Icon name="bell" className="text-sm" />
-            <span className="absolute top-3 right-3 w-2 h-2 bg-red-500 rounded-full border border-white group-hover:border-black dark:border-zinc-800"></span>
-          </button>
+          
+          <div className="flex bg-zinc-100 dark:bg-zinc-800/50 rounded-full p-1 border border-zinc-200 dark:border-zinc-700/50">
+             <button onClick={toggleTheme} className="w-10 h-10 flex items-center justify-center rounded-full cursor-pointer relative active:scale-95 transition-transform hover:bg-white dark:hover:bg-zinc-700 shadow-sm group text-zinc-600 dark:text-zinc-400">
+                <Icon name={isDark ? "sun" : "moon"} className="text-sm" />
+             </button>
+             <button onClick={() => navigate('/notifications')} className="w-10 h-10 flex items-center justify-center rounded-full relative active:scale-95 transition-transform hover:bg-white dark:hover:bg-zinc-700 shadow-sm group text-zinc-600 dark:text-zinc-400">
+               <Icon name="bell" className="text-sm" />
+               <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full shadow-[0_0_0_2px_#f4f4f5] dark:shadow-[0_0_0_2px_#27272a] animate-pulse"></span>
+             </button>
+          </div>
         </div>
       </motion.div>
 
@@ -448,32 +793,34 @@ const Home: React.FC = () => {
       {heroBanners.length > 0 && (
       <motion.div 
         ref={bannerContainerRef}
-        className="relative mb-14 overflow-hidden rounded-[2.5rem] shadow-2xl z-10 border-4 border-white animate-stagger-2 hover-tilt"
+        className="relative mb-14 -mx-6 md:mx-0 md:rounded-[3rem] overflow-hidden shadow-2xl z-10 border-0 md:border-4 border-white dark:border-zinc-800 animate-stagger-2 hover-tilt"
       >
         <div className="absolute inset-0 bg-mesh-pattern opacity-30 mix-blend-overlay z-0 pointer-events-none"></div>
         <div className="flex transition-transform duration-1000 ease-[cubic-bezier(0.23, 1, 0.32, 1)]" style={{ transform: `translateX(-${activeBanner * 100}%)` }}>
           {heroBanners.map((banner, i) => (
-            <div key={i} className="min-w-full bg-[#06331e] h-[160px] md:h-[200px] lg:h-[260px] relative overflow-hidden flex items-center">
+            <div key={i} className="min-w-full bg-zinc-900 border border-zinc-800/50 h-[220px] md:h-[300px] lg:h-[380px] relative overflow-hidden flex items-center">
                <motion.img 
                 src={banner.imageUrl} 
                 style={{ y: smoothY, scale: 1.2 }}
-                className="absolute inset-0 w-full h-full object-cover origin-center opacity-60 mix-blend-overlay" 
+                className="absolute inset-0 w-full h-full object-cover origin-center opacity-70 mix-blend-overlay" 
                 alt="" 
                />
-               <div className="absolute inset-0 bg-gradient-to-r from-[#06331e]/50 via-[#06331e]/20 to-transparent"></div>
-               <div className="relative z-10 p-6 md:p-14 max-w-lg">
-                  <h2 className="text-lg md:text-xl lg:text-2xl font-black tracking-tight mb-2 uppercase leading-tight text-white line-clamp-2 w-full whitespace-normal">{banner.title}</h2>
-                  <p className="text-[9px] md:text-[10px] font-bold uppercase tracking-widest opacity-80 mb-4 md:mb-6 text-emerald-100 truncate w-full">{banner.description}</p>
-                  <button onClick={() => banner.link && navigate(banner.link)} className="px-6 py-2.5 bg-zinc-50 dark:bg-zinc-100 text-[#06331e] rounded-full font-bold text-[10px] uppercase tracking-widest shadow-xl hover:bg-emerald-50 transition-colors whitespace-nowrap">
-                    Shop Now
+               <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/80 via-emerald-950/40 to-transparent"></div>
+               <div className="relative z-10 p-8 md:p-16 max-w-2xl">
+                  <span className="inline-block px-3 py-1 bg-white/10 text-emerald-200 border border-white/10 rounded-full text-[9px] font-black uppercase tracking-widest mb-4 backdrop-blur-md">Featured Offer</span>
+                  <h2 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-4 uppercase leading-[1.1] text-white line-clamp-3 w-full whitespace-normal drop-shadow-md">{banner.title}</h2>
+                  <p className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] opacity-80 mb-6 md:mb-8 text-emerald-100 truncate w-full max-w-sm">{banner.description}</p>
+                  <button onClick={() => banner.link && navigate(banner.link)} className="px-8 py-3.5 bg-white text-[#06331e] rounded-2xl font-black text-[10px] uppercase tracking-widest shadow-xl shadow-black/20 hover:-translate-y-1 hover:shadow-black/40 transition-all flex items-center gap-2 group whitespace-nowrap active:scale-95">
+                    <span>Shop Collection</span>
+                    <Icon name="arrow-right" className="group-hover:translate-x-1 transition-transform" />
                   </button>
                </div>
             </div>
           ))}
         </div>
-        <div className="absolute bottom-4 right-6 flex space-x-2 z-20">
+        <div className="absolute bottom-6 right-8 flex space-x-2 z-20">
            {heroBanners.map((_, i) => (
-             <div key={i} onClick={() => setActiveBanner(i)} className={`h-1.5 rounded-full transition-all duration-500 cursor-pointer ${i === activeBanner ? 'w-8 bg-emerald-400' : 'w-2 bg-zinc-50 dark:bg-zinc-900/30 hover:bg-zinc-50 dark:bg-zinc-900/50'}`}></div>
+             <div key={i} onClick={() => setActiveBanner(i)} className={`h-1.5 rounded-full transition-all duration-500 cursor-pointer ${i === activeBanner ? 'w-10 bg-white' : 'w-3 bg-white/30 hover:bg-white/50'}`}></div>
            ))}
         </div>
       </motion.div>
@@ -481,25 +828,25 @@ const Home: React.FC = () => {
 
       {settings?.featuredCategory && products.filter(p => p.category.toLowerCase() === settings.featuredCategory.toLowerCase()).length > 0 && (
         <div className="mb-10 md:mb-14">
-          <div className="relative w-full h-[160px] md:h-[200px] rounded-[2rem] overflow-hidden border border-zinc-100 dark:border-zinc-800 shadow-sm bg-zinc-900 group">
+          <div className="relative w-full h-[180px] md:h-[240px] lg:h-[280px] rounded-[2.5rem] overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-xl bg-white dark:bg-zinc-900 group">
             <div className="flex transition-transform duration-1000 ease-[cubic-bezier(0.23, 1, 0.32, 1)] h-full" style={{ transform: `translateX(-${activeFeatured * 100}%)` }}>
               {products.filter(p => p.category.toLowerCase() === settings.featuredCategory.toLowerCase()).map((product, i) => (
-                <div key={product.id} className="min-w-full h-full relative grid grid-cols-2 md:grid-cols-5 items-center">
-                   <div className="col-span-1 md:col-span-3 h-full relative bg-zinc-50 dark:bg-zinc-800 flex items-center justify-center p-6 overflow-hidden">
-                      <div className="absolute inset-0 bg-gradient-to-r from-zinc-200/50 to-zinc-50 mix-blend-multiply dark:mix-blend-normal"></div>
-                      <img src={product.image} className="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal group-hover:scale-[1.05] transition-transform duration-1000 relative z-10" alt={product.name} />
+                <div key={product.id} className="min-w-full h-full relative grid grid-cols-5 items-center">
+                   <div className="col-span-2 md:col-span-3 h-full relative bg-zinc-50 dark:bg-zinc-800 flex items-center justify-center p-6 overflow-hidden">
+                      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-zinc-200/50 via-zinc-100/10 to-zinc-50/0 dark:from-zinc-700/50 dark:via-zinc-800/10 dark:to-zinc-900/0 mix-blend-multiply dark:mix-blend-normal"></div>
+                      <img src={product.image} className="w-full h-[80%] object-contain mix-blend-multiply dark:mix-blend-normal group-hover:scale-[1.1] transition-transform duration-1000 relative z-10 drop-shadow-xl" alt={product.name} />
                    </div>
-                   <div className="col-span-1 md:col-span-2 p-6 md:p-8 flex flex-col justify-center h-full bg-zinc-900 dark:bg-zinc-50 dark:text-black text-white relative">
-                      <div className="absolute top-0 right-0 p-3 md:p-4">
-                        <span className="px-3 py-1 bg-[#06331e] text-white dark:bg-zinc-900/10 dark:text-black rounded-full text-[8px] font-black uppercase tracking-widest backdrop-blur-md whitespace-nowrap">Featured</span>
+                   <div className="col-span-3 md:col-span-2 p-6 md:p-10 flex flex-col justify-center h-full bg-zinc-900 dark:bg-zinc-50 dark:text-black text-white relative">
+                      <div className="absolute top-0 right-0 p-4 md:p-6">
+                        <span className="px-3 py-1.5 bg-[#06331e] text-emerald-300 dark:bg-zinc-900/10 dark:text-black rounded-full text-[9px] font-black uppercase tracking-widest backdrop-blur-md whitespace-nowrap border border-emerald-900/50 dark:border-zinc-900/20">Featured</span>
                       </div>
-                      <h4 className="text-sm md:text-xl font-black mb-1.5 md:mb-2 tracking-tight truncate w-full pr-8">{product.name}</h4>
-                      <div className="flex items-center space-x-2 mb-4 md:mb-5 truncate w-full">
-                         <p className="text-lg md:text-2xl font-black text-emerald-400">৳{product.isOffer && product.offerPrice ? product.offerPrice : product.price}</p>
-                         {product.isOffer && <p className="text-[10px] md:text-xs text-zinc-500 font-bold line-through">৳{product.price}</p>}
+                      <h4 className="text-lg md:text-2xl lg:text-3xl font-black mb-2 tracking-tight line-clamp-2 w-full pr-4">{product.name}</h4>
+                      <div className="flex flex-wrap items-center gap-2 mb-6 md:mb-8 truncate w-full">
+                         <p className="text-xl md:text-3xl font-black text-emerald-400">৳{product.isOffer && product.offerPrice ? product.offerPrice : product.price}</p>
+                         {product.isOffer && <p className="text-xs md:text-sm text-zinc-500 font-bold line-through">৳{product.price}</p>}
                       </div>
-                      <button onClick={() => navigate(`/product/${product.id}`)} className="px-5 md:px-6 py-2.5 md:py-3 bg-zinc-50 dark:bg-zinc-800 text-black dark:text-white font-black uppercase tracking-[0.2em] text-[9px] md:text-[10px] rounded-full hover:bg-zinc-200 transition-colors self-start shadow-xl active:scale-95 flex items-center whitespace-nowrap">
-                        Shop Now <Icon name="arrow-right" className="ml-2 md:ml-3 text-[9px]" />
+                      <button onClick={() => navigate(`/product/${product.id}`)} className="px-6 md:px-8 py-3 md:py-4 bg-zinc-50 dark:bg-zinc-900 text-[#06331e] dark:text-white font-black uppercase tracking-[0.2em] text-[10px] md:text-xs rounded-2xl hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors self-start shadow-xl shadow-black/10 active:scale-95 flex items-center whitespace-nowrap">
+                        Shop Now <Icon name="arrow-right" className="ml-3 text-[10px]" />
                       </button>
                    </div>
                 </div>
@@ -514,7 +861,7 @@ const Home: React.FC = () => {
         </div>
       )}
 
-      <div className="mb-10 md:mb-16">
+      <div className="mb-10 md:mb-16 lg:hidden">
         <h1 className="text-4xl md:text-4xl lg:text-3xl xl:text-2xl font-black font-outfit tracking-tight text-zinc-900 dark:text-zinc-100 leading-[1.1] mb-2 animate-fade-in">Find your perfect <br/><span className="text-gradient">vibe gadget.</span></h1>
         
         <div ref={searchRef} className="relative w-full max-w-md mt-8 z-50 hover-lift">
@@ -603,20 +950,14 @@ const Home: React.FC = () => {
       {/* Search Output above */}
 
       <div className="mb-10 w-full animate-fade-in group cursor-pointer" onClick={() => navigate('/affiliate')}>
-         <div className="bg-emerald-50 dark:bg-emerald-900/20 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between border border-emerald-200 dark:border-emerald-800/30 transition-all hover:bg-emerald-100/80 dark:hover:bg-emerald-900/40 hover:shadow-lg hover:shadow-emerald-500/10 relative overflow-hidden">
-            <div className="absolute -right-10 -top-10 text-emerald-500/5 dark:text-emerald-500/10 pointer-events-none transform rotate-12">
-               <Icon name="money-bill-wave" className="text-9xl" />
-            </div>
-            <div className="flex items-start md:items-center flex-col md:flex-row gap-5 mb-6 md:mb-0 md:mr-8 w-full z-10">
-               <div className="bg-emerald-100 dark:bg-emerald-800/60 p-4 rounded-2xl text-emerald-600 dark:text-emerald-400 shadow-sm shrink-0 self-center md:self-auto">
-                  <Icon name="hand-holding-usd" className="text-3xl" />
-               </div>
+         <div className="bg-emerald-50 dark:bg-emerald-900/10 rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-center justify-between border border-emerald-200/50 dark:border-emerald-800/30 transition-all hover:bg-emerald-100/50 dark:hover:bg-emerald-900/20 hover:border-emerald-300 dark:hover:border-emerald-700/50 relative overflow-hidden">
+            <div className="flex items-center flex-col md:flex-row gap-5 mb-6 md:mb-0 md:mr-8 w-full z-10">
                <div className="text-center md:text-left flex-1">
-                 <h3 className="text-xl font-black text-emerald-900 dark:text-emerald-50 tracking-tight mb-1">Partner & Earn Cash</h3>
-                 <p className="text-emerald-700 dark:text-emerald-200/80 text-sm font-medium">Share your referral link and earn up to <span className="font-extrabold text-emerald-800 dark:text-emerald-300">৳200 commission</span> per successful sale.</p>
+                 <h3 className="text-xl font-bold text-emerald-950 dark:text-emerald-50 tracking-tight mb-2">Partner & Earn Cash</h3>
+                 <p className="text-emerald-800 dark:text-emerald-200/80 text-sm font-medium">Share your referral link and earn up to <span className="font-bold text-emerald-900 dark:text-emerald-300">৳200 commission</span> per successful sale.</p>
                </div>
             </div>
-            <button className="w-full md:w-auto bg-emerald-600 dark:bg-emerald-500 text-white px-8 py-3.5 rounded-xl text-sm font-black transition-transform active:scale-95 whitespace-nowrap shadow-md hover:bg-emerald-700 dark:hover:bg-emerald-400 z-10 block text-center">
+            <button className="w-full md:w-auto bg-emerald-700 dark:bg-emerald-600 text-white px-8 py-3.5 rounded-xl text-sm font-bold transition-all active:scale-95 whitespace-nowrap hover:bg-emerald-800 dark:hover:bg-emerald-500 z-10 shadow-sm block text-center">
                Start Earning
             </button>
          </div>
@@ -915,130 +1256,13 @@ const Home: React.FC = () => {
       {/* Dynamic Fullscreen Story Viewer */}
       <AnimatePresence>
          {activeStoryIndex !== null && stories[activeStoryIndex] && (
-            <motion.div 
-               initial={{ opacity: 0, scale: 0.9 }}
-               animate={{ opacity: 1, scale: 1 }}
-               exit={{ opacity: 0, scale: 0.9 }}
-               className="fixed inset-0 z-[200] bg-zinc-900 dark:bg-zinc-50 dark:text-black flex items-center justify-center"
-            >
-               <div className="relative w-full h-full max-w-sm mx-auto bg-zinc-900 overflow-hidden flex items-center justify-center">
-                  {/* Progress Bars */}
-                  <div className="absolute top-4 left-4 right-4 flex space-x-1 z-30">
-                     {stories.map((s, i) => (
-                        <div key={s.id} className="h-1 flex-1 bg-white/30 rounded-full overflow-hidden backdrop-blur-sm shadow-[0_0_2px_rgba(0,0,0,0.5)]">
-                           <div 
-                              className="h-full bg-white shadow-[0_0_5px_rgba(255,255,255,0.7)]" 
-                              style={{ width: i === activeStoryIndex ? `${storyProgress}%` : i < activeStoryIndex ? '100%' : '0%' }}
-                           />
-                        </div>
-                     ))}
-                  </div>
-
-                  {/* Header info */}
-                  <div className="absolute top-8 left-4 right-4 flex justify-between items-center z-30">
-                     <div className="flex items-center space-x-2 text-white">
-                        <div className="w-8 h-8 rounded-full bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 flex items-center justify-center font-bold text-xs"><Icon name="bolt" /></div>
-                        <span className="font-bold text-xs shadow-md">{stories[activeStoryIndex].category}</span>
-                     </div>
-                     <button onClick={() => setActiveStoryIndex(null)} className="text-white hover:text-red-500"><Icon name="times" className="text-xl drop-shadow-md" /></button>
-                  </div>
-
-                  {/* Media */}
-                  {stories[activeStoryIndex].type === 'video' ? (
-                     <div 
-                        className="w-full h-full flex items-center justify-center bg-zinc-900 dark:bg-zinc-50 dark:text-black relative overflow-hidden group"
-                        onPointerDown={() => setStoryPaused(true)}
-                        onPointerUp={() => setStoryPaused(false)}
-                        onPointerLeave={() => setStoryPaused(false)}
-                     >
-                         {/* Native App Overlay Hack to perfectly hide YouTube/Facebook/TikTok iframes */}
-                         <div className="absolute inset-0 z-20 pointer-events-none shadow-[inset_0_0_80px_20px_rgba(0,0,0,1)] bg-zinc-900/5"></div>
-                         
-                         {/* Touch interaction overlay: Blocks clicks to external sites but allows tapping to pause/play */}
-                         <div className="absolute inset-0 z-10 opacity-0 cursor-pointer pointer-events-auto" onClick={(e) => {
-                             e.stopPropagation();
-                         }}></div>
-
-                         {stories[activeStoryIndex].mediaUrl.toLowerCase().includes('.mp4') ? (
-                             <video 
-                                ref={storyVideoRef}
-                                src={stories[activeStoryIndex].mediaUrl}
-                                autoPlay
-                                className="w-full h-full object-contain"
-                                onTimeUpdate={(e) => { if (!isStoryPausedRef.current) setStoryProgress((e.currentTarget.currentTime / e.currentTarget.duration) * 100); }}
-                                onEnded={() => {
-                                    if (activeStoryIndex < stories.length - 1) setActiveStoryIndex(activeStoryIndex + 1);
-                                    else setActiveStoryIndex(null);
-                                }}
-                                playsInline
-                             />
-                         ) : (
-                             <div className="w-full h-full transform scale-[1.35] md:scale-[1.15] origin-center">
-                                 <ReactPlayer 
-                                     url={stories[activeStoryIndex].mediaUrl} 
-                                     playing={!isStoryPaused} 
-                                     controls={false}
-                                     muted={false}
-                                     width="100%" 
-                                     height="100%" 
-                                     style={{ pointerEvents: 'none', objectFit: 'contain' }}
-                                     onProgress={(state: any) => {
-                                         if (!isStoryPausedRef.current && state.playedSeconds > 0 && state.loadedSeconds > 0) {
-                                             setStoryProgress(state.played * 100);
-                                         }
-                                     }}
-                                     onEnded={() => {
-                                         if (activeStoryIndex < stories.length - 1) setActiveStoryIndex(activeStoryIndex + 1);
-                                         else setActiveStoryIndex(null);
-                                     }}
-                                     config={{
-                                         youtube: { playerVars: { showinfo: 0, controls: 0, rel: 0, modestbranding: 1, playsinline: 1, disablekb: 1, fs: 0 } as any },
-                                         facebook: { appId: '29c39d8a7be8404a', attributes: { 'data-hide-controls': 'true', 'data-show-captions': 'false' } }
-                                     }}
-                                 />
-                             </div>
-                         )}
-                     </div>
-                  ) : (
-                     <div 
-                        className="w-full h-full flex items-center justify-center"
-                        onPointerDown={() => setStoryPaused(true)}
-                        onPointerUp={() => setStoryPaused(false)}
-                        onPointerLeave={() => setStoryPaused(false)}
-                     >
-                       <img src={stories[activeStoryIndex].mediaUrl} className="w-full h-full object-contain select-none" draggable="false" alt="story" />
-                     </div>
-                  )}
-
-                  {stories[activeStoryIndex].audioUrl && (
-                    <audio 
-                       src={`${stories[activeStoryIndex].audioUrl}#t=${stories[activeStoryIndex].audioStart || 0}`} 
-                       autoPlay 
-                       playsInline 
-                       className="hidden" 
-                    />
-                  )}
-
-                  {/* Click Areas */}
-                  <div className="absolute inset-0 z-20 flex">
-                     <div className="w-1/3 h-full cursor-pointer" onClick={() => {
-                        if (activeStoryIndex > 0) { setActiveStoryIndex(activeStoryIndex - 1); setStoryProgress(0); }
-                     }}></div>
-                     <div className="w-2/3 h-full cursor-pointer" onClick={() => {
-                        if (activeStoryIndex < stories.length - 1) { setActiveStoryIndex(activeStoryIndex + 1); setStoryProgress(0); }
-                        else setActiveStoryIndex(null);
-                     }}></div>
-                  </div>
-                  
-                  {/* CTA */}
-                  {stories[activeStoryIndex].linkUrl && (
-                     <button onClick={() => { window.location.href = stories[activeStoryIndex].linkUrl; }} className="absolute bottom-10 left-1/2 -translate-x-1/2 z-30 bg-zinc-50 dark:bg-zinc-800 text-black dark:text-white px-6 py-3 rounded-full font-black text-xs uppercase tracking-widest hover:scale-105 active:scale-95 transition-transform flex items-center space-x-2">
-                        <span>Learn More</span>
-                        <Icon name="chevron-right" />
-                     </button>
-                  )}
-               </div>
-            </motion.div>
+             <FullScreenStory 
+                stories={stories}
+                activeIndex={activeStoryIndex}
+                onClose={() => setActiveStoryIndex(null)}
+                onPrev={() => { if (activeStoryIndex > 0) setActiveStoryIndex(activeStoryIndex - 1); }}
+                onNext={() => { if (activeStoryIndex < stories.length - 1) setActiveStoryIndex(activeStoryIndex + 1); else setActiveStoryIndex(null); }}
+             />
          )}
       </AnimatePresence>
       <CustomSectionEmbed location="home_bottom" />

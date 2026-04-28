@@ -59,7 +59,7 @@ const SignIn: React.FC = () => {
               <input 
                 type="email" 
                 placeholder="name@example.com" 
-                className="w-full bg-zinc-50 dark:bg-[#121212] px-4 py-3.5 rounded-xl outline-none border border-zinc-200 dark:border-zinc-800 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 transition-all font-medium text-sm shadow-sm"
+                className="w-full bg-zinc-50 dark:bg-zinc-800/50 px-4 py-3.5 rounded-xl outline-none border border-zinc-200 dark:border-zinc-700 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 dark:focus:border-emerald-500 dark:focus:ring-emerald-500 transition-all font-medium text-sm shadow-sm"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -74,7 +74,7 @@ const SignIn: React.FC = () => {
                 <input 
                   type={showPassword ? 'text' : 'password'} 
                   placeholder="••••••••" 
-                  className="w-full bg-zinc-50 dark:bg-[#121212] pl-4 pr-12 py-3.5 rounded-xl outline-none border border-zinc-200 dark:border-zinc-800 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 transition-all font-medium text-sm shadow-sm"
+                  className="w-full bg-zinc-50 dark:bg-zinc-800/50 pl-4 pr-12 py-3.5 rounded-xl outline-none border border-zinc-200 dark:border-zinc-700 focus:border-zinc-900 focus:ring-1 focus:ring-zinc-900 dark:focus:border-emerald-500 dark:focus:ring-emerald-500 transition-all font-medium text-sm shadow-sm"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -89,7 +89,7 @@ const SignIn: React.FC = () => {
               </div>
             </div>
 
-            <button disabled={loading} className="w-full py-4 mt-2 bg-zinc-900 dark:bg-white text-white dark:text-black rounded-xl font-bold text-xs uppercase tracking-widest shadow-md hover:bg-black dark:hover:bg-zinc-200 transition-all active:scale-[0.98] disabled:opacity-50 flex items-center justify-center">
+            <button disabled={loading} className="w-full py-4 mt-2 bg-zinc-900 dark:bg-emerald-500 text-white rounded-2xl font-bold text-sm tracking-tight shadow-xl shadow-zinc-900/10 dark:shadow-emerald-500/10 hover:shadow-zinc-900/20 transition-all active:scale-[0.98] disabled:opacity-50 flex items-center justify-center">
               {loading ? <Icon name="spinner" className="mr-2 animate-spin" /> : null}
               {loading ? "Signing in..." : "Sign In"}
             </button>

@@ -94,16 +94,16 @@ const AuthSelector: React.FC = () => {
           Premium mobile accessories and gadgets delivered right to your doorstep in Bangladesh.
         </p>
         
-        <div className="w-full space-y-4 px-2">
+        <div className="w-full space-y-4 px-2 tracking-tight">
           <button 
             onClick={() => navigate('/signup')} 
-            className="w-full py-4 bg-[#06331e] text-white rounded-2xl font-bold text-[11px] uppercase tracking-[0.15em] shadow-xl hover:bg-emerald-950 active:scale-95 transition-all outline-none"
+            className="w-full py-4 bg-zinc-900 dark:bg-emerald-500 text-white rounded-2xl font-bold text-sm shadow-xl shadow-zinc-900/10 hover:shadow-zinc-900/20 dark:shadow-emerald-500/10 dark:hover:shadow-emerald-500/20 active:scale-95 transition-all outline-none"
           >
             Create Account
           </button>
           <button 
             onClick={() => navigate('/signin')} 
-            className="w-full py-4 border-2 border-[#06331e]/10 bg-transparent rounded-2xl font-bold text-[11px] uppercase tracking-[0.15em] text-[#06331e] dark:text-emerald-400 dark:border-emerald-400/20 shadow-none hover:bg-[#06331e]/5 dark:hover:bg-emerald-400/10 active:scale-95 transition-all outline-none"
+            className="w-full py-4 border-2 border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-800 rounded-2xl font-bold text-sm text-zinc-900 dark:text-white shadow-sm hover:bg-zinc-50 dark:hover:bg-zinc-700/50 active:scale-95 transition-all outline-none"
           >
             Sign In Account
           </button>

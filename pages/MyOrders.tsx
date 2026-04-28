@@ -15,7 +15,7 @@ const StatusIconSmall = ({ status }: { status: OrderStatus }) => {
     case OrderStatus.PROCESSING: return <div className={base + "bg-blue-50 text-blue-600"}><Icon name="sync-alt" className="animate-spin" /></div>;
     case OrderStatus.SHIPPED: return <div className={base + "bg-orange-50 text-orange-600"}><Icon name="truck-moving" /></div>;
     case OrderStatus.ON_THE_WAY: return <div className={base + "bg-purple-50 text-purple-600"}><Icon name="motorcycle" /></div>;
-    case OrderStatus.DELIVERED: return <div className={base + "bg-green-50 text-green-600"}><Icon name="check" /></div>;
+    case OrderStatus.DELIVERED: return <div className={base + "bg-green-50 text-green-600"}><Icon name="box-check" /></div>;
     case OrderStatus.CANCELLED: return <div className={base + "bg-red-50 text-red-600"}><Icon name="times" /></div>;
     default: return <div className={base + "bg-zinc-100 dark:bg-zinc-800 text-zinc-500"}><Icon name="box" /></div>;
   }

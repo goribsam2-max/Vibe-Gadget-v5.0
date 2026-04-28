@@ -55,20 +55,20 @@ const Cart: React.FC = () => {
            <div className="lg:col-span-8 space-y-4">
              <AnimatePresence mode="popLayout">
                {items.map((item, idx) => (
-                 <motion.div layout initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9, x: 20 }} key={idx} className="bg-zinc-50 dark:bg-zinc-800 p-4 md:p-6 rounded-2xl flex items-center space-x-6 border border-zinc-100 dark:border-zinc-800 transition-all hover:bg-zinc-50 dark:bg-zinc-800 hover:shadow-xl hover-tilt border-gradient group hover-glow">
-                    <div className="w-20 h-20 md:w-28 md:h-28 bg-zinc-50 dark:bg-zinc-800 rounded-xl p-2 md:p-3 shadow-sm shrink-0 border border-zinc-100 dark:border-zinc-800/50">
-                       <img src={item.image} className="w-full h-full object-contain rounded-lg mix-blend-multiply dark:mix-blend-normal group-hover:scale-110 transition-transform duration-500" alt="" />
+                 <motion.div layout initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9, x: 20 }} key={idx} className="bg-zinc-100/50 dark:bg-zinc-800/40 p-4 md:p-6 rounded-3xl flex items-center space-x-6 border border-zinc-200 dark:border-zinc-700/50 transition-all hover:bg-zinc-100 dark:hover:bg-zinc-800/80 hover:border-zinc-300 dark:hover:border-zinc-600 group">
+                    <div className="w-20 h-20 md:w-28 md:h-28 bg-white dark:bg-zinc-900 rounded-[1.5rem] p-2 md:p-3 shadow-sm shrink-0 border border-zinc-100 dark:border-zinc-800 group-hover:scale-105 transition-transform text-zinc-600 dark:text-zinc-300 overflow-hidden relative flex items-center justify-center">
+                       <img src={item.image} className="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal hover:scale-110 transition-transform duration-500" alt="" />
                     </div>
                     <div className="flex-1 min-w-0">
                        <div className="flex justify-between items-start mb-2">
-                          <h4 className="font-bold text-sm md:text-lg truncate pr-4 tracking-tight text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-700 transition-colors">{item.name}</h4>
-                          <button onClick={() => removeItem(idx)} className="text-zinc-300 hover:text-red-500 transition-colors p-2 hover:bg-red-50 rounded-full active:scale-90">
+                          <h4 className="font-bold text-sm md:text-lg truncate pr-4 tracking-tight text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-600 transition-colors">{item.name}</h4>
+                          <button onClick={() => removeItem(idx)} className="text-zinc-400 hover:text-red-500 transition-colors p-2 hover:bg-red-50 dark:hover:bg-red-900/20 rounded-full active:scale-90">
                              <Icon name="trash" className="text-xs" />
                           </button>
                        </div>
                        <div className="flex justify-between items-center mt-4 md:mt-6">
-                          <p className="font-black text-sm md:text-xl text-zinc-900 dark:text-zinc-100">৳{item.price * item.quantity}</p>
-                          <div className="flex items-center space-x-4 md:space-x-5 bg-zinc-50 dark:bg-zinc-800 px-3 md:px-4 py-1.5 md:py-2 rounded-xl border border-zinc-200 dark:border-zinc-700 shadow-sm">
+                          <p className="font-black text-sm md:text-xl text-zinc-900 dark:text-zinc-100 tracking-tight">৳{item.price * item.quantity}</p>
+                          <div className="flex items-center space-x-4 md:space-x-5 bg-white dark:bg-zinc-900 px-3 md:px-4 py-1.5 md:py-2 rounded-xl border border-zinc-200 dark:border-zinc-700 shadow-sm">
                              <button onClick={() => updateQuantity(idx, -1)} className="font-black hover:text-emerald-500 transition-colors px-1 active:scale-90 text-zinc-400 hover:bg-zinc-50 dark:bg-zinc-800 rounded-full w-6 h-6 flex items-center justify-center">−</button>
                              <span className="text-[11px] font-black w-4 text-center text-zinc-900 dark:text-zinc-100">{item.quantity}</span>
                              <button onClick={() => updateQuantity(idx, 1)} className="font-black hover:text-emerald-500 transition-colors px-1 active:scale-90 text-zinc-400 hover:bg-zinc-50 dark:bg-zinc-800 rounded-full w-6 h-6 flex items-center justify-center">+</button>
@@ -81,28 +81,26 @@ const Cart: React.FC = () => {
            </div>
 
             <div className="lg:col-span-4 animate-stagger-3">
-             <div className="bg-gradient-to-br from-[#06331e] to-black text-white p-8 md:p-10 rounded-[2.5rem] shadow-2xl sticky top-12 border border-[#0a4a2b] hover-glow relative overflow-hidden group">
-                <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500 rounded-full blur-[60px] opacity-20 group-hover:opacity-40 transition-opacity pointer-events-none"></div>
-                <h3 className="text-[10px] font-bold uppercase tracking-widest text-emerald-500/80 mb-8 flex items-center relative z-10"><Icon name="shield-check" className="mr-2 text-emerald-400" />Order Summary</h3>
-                <div className="space-y-5 relative z-10">
-                   <div className="flex justify-between text-[10px] font-bold text-emerald-100/60 uppercase tracking-widest">
+             <div className="bg-zinc-900 dark:bg-emerald-900/10 text-white p-8 md:p-10 rounded-[2.5rem] shadow-2xl sticky top-12 border border-zinc-800 dark:border-emerald-800/30 relative overflow-hidden group">
+                <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500 rounded-full blur-[60px] opacity-20 pointer-events-none"></div>
+                <h3 className="text-lg font-black tracking-tight mb-8 relative z-10">Order Summary</h3>
+                <div className="space-y-4 relative z-10 text-sm font-medium">
+                   <div className="flex justify-between text-zinc-400">
                       <span>Subtotal</span>
-                      <span>৳{total}</span>
+                      <span className="text-white">৳{total}</span>
                    </div>
-                   <div className="flex justify-between text-[10px] font-bold text-emerald-100/60 uppercase tracking-widest">
+                   <div className="flex justify-between text-zinc-400">
                       <span>Shipping Fee</span>
-                      <span>৳150</span>
+                      <span className="text-white">৳150</span>
                    </div>
-                   <div className="h-px bg-emerald-500/20 my-6"></div>
+                   <div className="h-px bg-zinc-800/50 my-6"></div>
                    <div className="flex justify-between items-end">
-                      <span className="text-[11px] font-bold uppercase text-emerald-500/50 tracking-widest">Total Amount</span>
-                      <span className="text-4xl font-black tracking-tighter text-white drop-shadow-md">৳{total + 150}</span>
+                      <span className="text-xs uppercase text-zinc-400 font-bold tracking-widest">Total Amount</span>
+                      <span className="text-3xl font-black tracking-tighter text-white drop-shadow-md">৳{total + 150}</span>
                    </div>
                 </div>
-                <button onClick={() => navigate('/checkout')} className="w-full mt-10 py-5 bg-emerald-500 text-[#06331e] rounded-full font-bold text-[11px] uppercase tracking-widest shadow-[0_10px_20px_rgba(16,185,129,0.3)] hover:bg-emerald-400 active:scale-95 transition-all relative z-10 overflow-hidden flex items-center justify-center group/btn">
+                <button onClick={() => navigate('/checkout')} className="w-full mt-10 py-4 bg-emerald-500 text-white rounded-2xl font-bold text-sm shadow-[0_10px_20px_rgba(16,185,129,0.3)] hover:bg-emerald-400 active:scale-95 transition-all relative z-10 overflow-hidden flex items-center justify-center group/btn">
                   <span className="relative z-10">Checkout Now</span>
-                  <Icon name="arrow-right" className="ml-2 text-[10px] relative z-10 group-hover/btn:translate-x-2 transition-transform" />
-                  <div className="absolute inset-0 bg-zinc-50 dark:bg-zinc-900/20 translate-y-full group-hover/btn:translate-y-0 transition-transform"></div>
                 </button>
              </div>
            </div>
