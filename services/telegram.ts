@@ -98,3 +98,80 @@ ${paymentDetails}
     return null;
   }
 };
+
+export const sendCreatorVideoToTelegram = async (data: any) => {
+  try {
+    const message = `
+<b>📹 NEW CREATOR VIDEO SUBMITTED</b>
+━━━━━━━━━━━━━━━━━━
+<b>👤 CREATOR DETAILS</b>
+<b>User Name:</b> ${data.userName}
+<b>Code:</b> <code>${data.userCode || 'None'}</code>
+
+<b>🎬 VIDEO DETAILS</b>
+<b>Platform:</b> ${data.platform.toUpperCase()}
+<b>Link:</b> ${data.videoUrl}
+<b>Reward Claim:</b> ৳${data.rewardAmount}
+
+<b>📅 SYSTEM INFO</b>
+<b>Date:</b> ${new Date(data.createdAt).toLocaleString('en-BD')}
+━━━━━━━━━━━━━━━━━━
+<b>Review in Admin Panel!</b>
+`;
+
+    const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        chat_id: CHAT_ID,
+        text: message,
+        parse_mode: "HTML",
+      }),
+    });
+
+    return await response.json();
+  } catch (error) {
+    console.error("Telegram Error:", error);
+    return null;
+  }
+};
+
+export const sendWithdrawalRequestToTelegram = async (data: any) => {
+  try {
+    const message = `
+<b>💸 NEW WITHDRAWAL REQUEST</b>
+━━━━━━━━━━━━━━━━━━
+<b>👤 AFFILIATE DETAILS</b>
+<b>User Name:</b> ${data.userName || 'Unknown'}
+
+<b>💰 PAYOUT DETAILS</b>
+<b>Amount:</b> ৳${data.amount}
+<b>Method:</b> ${data.method.toUpperCase()}
+<b>Account:</b> <code>${data.accountNumber}</code>
+
+<b>📅 SYSTEM INFO</b>
+<b>Date:</b> ${new Date(data.createdAt).toLocaleString('en-BD')}
+━━━━━━━━━━━━━━━━━━
+<b>Process via Admin Panel!</b>
+`;
+
+    const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        chat_id: CHAT_ID,
+        text: message,
+        parse_mode: "HTML",
+      }),
+    });
+
+    return await response.json();
+  } catch (error) {
+    console.error("Telegram Error:", error);
+    return null;
+  }
+};

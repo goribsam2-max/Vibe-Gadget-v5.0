@@ -5,10 +5,135 @@ import { doc, getDoc, updateDoc, collection, query, where, getDocs, orderBy, onS
 import { UserProfile, AffiliateLog } from '../types';
 import Icon from '../components/Icon';
 import { useNotify } from '../components/Notifications';
-import { sendAffiliateRequestToTelegram } from '../services/telegram';
+import { sendAffiliateRequestToTelegram, sendCreatorVideoToTelegram } from '../services/telegram';
 import { motion } from 'framer-motion';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 import { useTheme } from '../components/ThemeContext';
+
+const CreatorHub: React.FC<{ userData: UserProfile }> = ({ userData }) => {
+  const notify = useNotify();
+  const [platform, setPlatform] = useState('youtube');
+  const [videoUrl, setVideoUrl] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [history, setHistory] = useState<any[]>([]);
+
+  useEffect(() => {
+    const q = query(
+      collection(db, 'creator_videos'),
+      where('userId', '==', userData.uid),
+      orderBy('createdAt', 'desc')
+    );
+    const unsub = onSnapshot(q, (snapshot) => {
+      const v: any[] = [];
+      snapshot.forEach(d => v.push({ id: d.id, ...d.data() }));
+      setHistory(v);
+    });
+    return () => unsub();
+  }, [userData]);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!videoUrl) return notify("Please enter the video URL", "error");
+
+    setSubmitting(true);
+    let reward = 0;
+    if (platform === 'youtube') reward = 100;
+    if (platform === 'facebook') reward = 150;
+    if (platform === 'tiktok') reward = 200;
+
+    try {
+      const data = {
+        userId: userData.uid,
+        userName: userData.displayName || 'Unknown',
+        userCode: userData.affiliateCode || '',
+        platform,
+        videoUrl,
+        rewardAmount: reward,
+        status: 'pending',
+        createdAt: Date.now()
+      };
+      await addDoc(collection(db, 'creator_videos'), data);
+      
+      // Send to Telegram
+      await sendCreatorVideoToTelegram(data);
+      
+      notify("Video submitted for review successfully!", "success");
+      setVideoUrl('');
+    } catch (err) {
+      console.error(err);
+      notify("Failed to submit video", "error");
+    }
+    setSubmitting(false);
+  };
+
+  return (
+    <div className="space-y-6">
+      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 shadow-sm">
+        <h2 className="text-lg font-bold mb-4 flex items-center gap-2"><Icon name="video" className="text-emerald-500" /> Content Creator Hub</h2>
+        <div className="bg-emerald-50 dark:bg-emerald-900/10 p-4 rounded-xl border border-emerald-100 dark:border-emerald-900/30 mb-6 text-sm">
+           <h3 className="font-bold text-emerald-800 dark:text-emerald-300 mb-2">Rules & Guidelines</h3>
+           <ul className="list-disc pl-5 space-y-1 text-emerald-700/80 dark:text-emerald-200/80 font-medium">
+              <li><strong>YouTube:</strong> Minimum 1000 views to get ৳100.</li>
+              <li><strong>Facebook:</strong> Minimum 1000 views to get ৳150.</li>
+              <li><strong>TikTok:</strong> Minimum 5000 views to get ৳200.</li>
+              <li>Video must explicitly mention that <span className="font-bold text-zinc-900 dark:text-white">Vibe Gadget</span> is sponsoring the video.</li>
+              <li>Description must include our website link: <span className="font-bold text-zinc-900 dark:text-white">https://www.vibegadgets.shop</span></li>
+              <li>You must talk about Vibe Gadget products & features for at least <strong>1 minute</strong>.</li>
+              <li>No limit! You can submit an unlimited number of videos as long as they meet the target.</li>
+           </ul>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-4">
+           <div>
+              <label className="text-xs font-semibold text-zinc-700 dark:text-zinc-300 block mb-1.5">Social Media Platform</label>
+              <select 
+                 value={platform} onChange={(e) => setPlatform(e.target.value)}
+                 className="w-full bg-zinc-50 dark:bg-[#121212] px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 block text-sm font-medium outline-none"
+              >
+                 <option value="youtube">YouTube (Min 1000 views - ৳100)</option>
+                 <option value="facebook">Facebook (Min 1000 views - ৳150)</option>
+                 <option value="tiktok">TikTok (Min 5000 views - ৳200)</option>
+              </select>
+           </div>
+           <div>
+              <label className="text-xs font-semibold text-zinc-700 dark:text-zinc-300 block mb-1.5">Video URL</label>
+              <input 
+                 type="url" required
+                 placeholder="https://..."
+                 value={videoUrl} onChange={(e) => setVideoUrl(e.target.value)}
+                 className="w-full bg-zinc-50 dark:bg-[#121212] px-4 py-3 rounded-xl border border-zinc-200 dark:border-zinc-800 block text-sm font-medium outline-none"
+              />
+           </div>
+           <button disabled={submitting} type="submit" className="w-full py-3.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl font-bold text-sm shadow-md transition-all active:scale-95 disabled:opacity-50">
+              {submitting ? "Submitting..." : "Submit Video for Review"}
+           </button>
+        </form>
+      </div>
+
+      {history.length > 0 && (
+        <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-3xl p-6 shadow-sm">
+           <h3 className="text-sm font-bold mb-4">Submission History</h3>
+           <div className="space-y-3">
+              {history.map(item => (
+                 <div key={item.id} className="flex flex-col sm:flex-row sm:items-center justify-between p-3.5 bg-zinc-50 dark:bg-zinc-800/50 rounded-xl border border-zinc-100 dark:border-zinc-800 gap-3">
+                    <div className="truncate">
+                       <span className="text-[10px] uppercase font-bold text-zinc-500 tracking-wider block mb-0.5">{item.platform}</span>
+                       <a href={item.videoUrl} target="_blank" rel="noreferrer" className="text-sm font-medium text-blue-500 hover:underline truncate block">{item.videoUrl}</a>
+                    </div>
+                    <div className="flex items-center justify-between sm:justify-end gap-4 shrink-0">
+                       <span className="font-bold text-emerald-600 dark:text-emerald-400">৳{item.rewardAmount}</span>
+                       <span className={`px-2 py-1 rounded text-[10px] font-bold uppercase ${item.status === 'pending' ? 'bg-amber-100 text-amber-700' : item.status === 'approved' ? 'bg-emerald-100 text-emerald-700' : 'bg-red-100 text-red-700'}`}>
+                          {item.status}
+                       </span>
+                    </div>
+                 </div>
+              ))}
+           </div>
+        </div>
+      )}
+    </div>
+  );
+};
 
 const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData }) => {
   const navigate = useNavigate();
@@ -22,7 +147,8 @@ const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData })
   const [tempCode, setTempCode] = useState('');
   const [savingCode, setSavingCode] = useState(false);
   const [configs, setConfigs] = useState<any>(null);
-  
+  const [activeTab, setActiveTab] = useState<'dashboard' | 'creator_hub'>('dashboard');
+
   useEffect(() => {
     getDoc(doc(db, 'settings', 'platform')).then(snap => {
        if(snap.exists()) setConfigs(snap.data());
@@ -350,19 +476,26 @@ const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData })
                <p className="text-[9px] font-bold text-emerald-600/70 uppercase tracking-normal mt-1 pl-1">Affiliate Portal</p>
             </div>
           </div>
-
-          <div className="flex bg-zinc-100 dark:bg-zinc-800/50 rounded-full p-1 border border-zinc-200 dark:border-zinc-700/50">
-             <button onClick={toggleTheme} className="w-10 h-10 flex items-center justify-center rounded-full cursor-pointer relative active:scale-95 transition-transform hover:bg-white dark:hover:bg-zinc-700 shadow-sm group text-zinc-600 dark:text-zinc-400">
-                <Icon name={isDark ? "sun" : "moon"} className="text-sm" />
-             </button>
-             <button onClick={() => navigate('/notifications')} className="w-10 h-10 flex items-center justify-center rounded-full relative active:scale-95 transition-transform hover:bg-white dark:hover:bg-zinc-700 shadow-sm group text-zinc-600 dark:text-zinc-400">
-               <Icon name="bell" className="text-sm" />
-               <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full shadow-[0_0_0_2px_#f4f4f5] dark:shadow-[0_0_0_2px_#27272a] animate-pulse"></span>
-             </button>
-          </div>
         </div>
 
-       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
+        <div className="flex bg-zinc-100 dark:bg-zinc-800/50 p-1.5 rounded-2xl mb-8 border border-zinc-200 dark:border-zinc-800 shadow-sm">
+           <button 
+             onClick={() => setActiveTab('dashboard')} 
+             className={`flex-1 py-3 text-xs md:text-sm font-bold uppercase tracking-normal rounded-xl transition-all ${activeTab === 'dashboard' ? 'bg-white dark:bg-zinc-700 text-zinc-900 dark:text-white shadow-sm' : 'text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'}`}
+           >
+              Dashboard
+           </button>
+           <button 
+             onClick={() => setActiveTab('creator_hub')} 
+             className={`flex-1 py-3 text-xs md:text-sm font-bold uppercase tracking-normal rounded-xl transition-all ${activeTab === 'creator_hub' ? 'bg-emerald-500 text-white shadow-md' : 'text-zinc-500 hover:text-zinc-700 dark:hover:text-zinc-300'}`}
+           >
+              Creator Hub
+           </button>
+        </div>
+
+        {activeTab === 'dashboard' ? (
+           <>
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
           <div className="lg:col-span-8 bg-gradient-to-br from-[#06331e] to-emerald-900 text-white p-8 md:p-10 rounded-[2.5rem] relative overflow-hidden shadow-2xl flex flex-col justify-between group">
              <div className="absolute right-0 bottom-0 opacity-10 translate-x-1/4 translate-y-1/4 pointer-events-none group-hover:scale-110 transition-transform duration-700">
                <Icon name="chart-line" className="text-[16rem]" />
@@ -606,6 +739,10 @@ const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData })
             </div>
          </div>
        </div>
+       </>
+       ) : (
+          <CreatorHub userData={userData} />
+       )}
        <div className="h-20" />
      </div>
   );

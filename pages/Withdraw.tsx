@@ -5,6 +5,7 @@ import { doc, updateDoc, collection, addDoc, query, where, getDocs, orderBy, onS
 import { UserProfile } from '../types';
 import Icon from '../components/Icon';
 import { useNotify } from '../components/Notifications';
+import { sendWithdrawalRequestToTelegram } from '../services/telegram';
 
 const WithdrawPage: React.FC<{ userData: UserProfile | null }> = ({ userData }) => {
   const navigate = useNavigate();
@@ -61,6 +62,16 @@ const WithdrawPage: React.FC<{ userData: UserProfile | null }> = ({ userData }) 
        await updateDoc(doc(db, 'users', userData.uid), {
           walletBalance: (userData.walletBalance || 0) - amount
        });
+       
+       sendWithdrawalRequestToTelegram({
+         userId: userData.uid,
+         userName: userData.displayName || 'Unknown',
+         amount,
+         method: 'bkash',
+         accountNumber: bkashNumber,
+         createdAt: Date.now()
+       });
+
        notify("Withdraw request submitted successfully", "success");
        setWithdrawAmount('');
        setBkashNumber('');

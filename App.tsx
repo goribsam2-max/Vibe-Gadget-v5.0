@@ -239,6 +239,7 @@ import ManageStaff from './pages/admin/ManageStaff';
 import ManageStories from './pages/admin/ManageStories';
 import ManageWithdrawals from './pages/admin/ManageWithdrawals';
 import ManageAffiliateRequests from './pages/admin/ManageAffiliateRequests';
+import ManageAffiliateVideos from './pages/admin/ManageAffiliateVideos';
 
 import ManageRiders from './pages/admin/ManageRiders';
 
@@ -403,6 +404,7 @@ const AppContent: React.FC = () => {
                 <Route path="riders" element={<PageWrapper><ManageRiders /></PageWrapper>} />
                 <Route path="withdrawals" element={<PageWrapper><ManageWithdrawals /></PageWrapper>} />
                 <Route path="affiliates" element={<PageWrapper><ManageAffiliateRequests /></PageWrapper>} />
+                <Route path="creator-videos" element={<PageWrapper><ManageAffiliateVideos /></PageWrapper>} />
                 <Route path="mock/*" element={<PageWrapper><GenericAdminMock /></PageWrapper>} />
              </Routes>
           ) : <Navigate to="/" replace />} />

@@ -130,6 +130,7 @@ const customIconMapping: Record<string, keyof typeof LucideIcons> = {
   'trend-up': 'TrendingUp',
   'shield': 'Shield',
   'inbox': 'Inbox',
+  'video': 'Video',
 }
 
 const Icon: React.FC<IconProps> = ({ name, className = '', solid = false, ...props }) => {

@@ -176,6 +176,7 @@ const AdminDashboard: React.FC = () => {
          
          <AdminBentoLink to="withdrawals" title="Payouts" subtitle="Manage Affiliate payouts." icon="wallet" />
          <AdminBentoLink to="affiliates" title="Affiliates" subtitle="Review affiliate programs." icon="users-cog" />
+         <AdminBentoLink to="creator-videos" title="Creator Videos" subtitle="Review social media video content." icon="video" />
          <AdminBentoLink to="staff" title="Staff Roles" subtitle="Manage RBAC and admin permissions." icon="id-badge" />
          <AdminBentoLink to="seo" title="SEO & Ads" subtitle="Meta tags, fb pixels, indexing." icon="search" />
          <AdminBentoLink to="mock/taxes" title="Tax Configuration" subtitle="Set regional tax and VAT rates." icon="file-invoice-dollar" />
