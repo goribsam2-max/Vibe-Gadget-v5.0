@@ -84,7 +84,7 @@ const DesktopLayout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                  exit={{ opacity: 0, width: 0 }}
                  className="overflow-hidden whitespace-nowrap"
                >
-                 <h1 className="text-base lg:text-sm xl:text-xs font-black tracking-tighter text-[#06331e]">VibeGadget.</h1>
+                 <h1 className="text-base lg:text-sm xl:text-xs font-semibold tracking-tight text-[#06331e]">VibeGadget.</h1>
                </motion.div>
              )}
            </AnimatePresence>
@@ -163,7 +163,7 @@ const DesktopLayout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
               <button 
                 onClick={() => navigate('/signin')} 
                 title={!isSidebarOpen ? "Sign in" : undefined}
-                className={`flex items-center justify-center py-3.5 rounded-xl bg-[#06331e] text-white w-full font-bold text-xs uppercase tracking-widest hover:bg-zinc-900 transition-colors shadow-lg shadow-emerald-900/20 ${isSidebarOpen ? 'space-x-2 px-4' : 'px-0'}`}
+                className={`flex items-center justify-center py-3.5 rounded-xl bg-[#06331e] text-white w-full font-bold text-xs uppercase tracking-normal hover:bg-zinc-900 transition-colors shadow-lg shadow-emerald-900/20 ${isSidebarOpen ? 'space-x-2 px-4' : 'px-0'}`}
               >
                 <Icon name="lock" className="text-lg shrink-0" />
                 <AnimatePresence>
@@ -200,8 +200,8 @@ const DesktopLayout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
             className="hidden xl:flex flex-col w-80 bg-zinc-50 dark:bg-zinc-800 border-l border-zinc-200 dark:border-zinc-700 h-screen sticky top-0 shrink-0 p-6 shadow-[-4px_0_24px_rgba(0,0,0,0.02)] z-40"
           >
             <div className="mb-8 pt-4">
-               <h2 className="text-xl font-black tracking-tight text-[#06331e]">Your Cart</h2>
-               <p className="text-[10px] uppercase font-bold text-zinc-400 tracking-widest mt-1">{cartCount} items</p>
+               <h2 className="text-xl font-semibold tracking-tight text-[#06331e]">Your Cart</h2>
+               <p className="text-[10px] uppercase font-bold text-zinc-400 tracking-normal mt-1">{cartCount} items</p>
             </div>
             
             <div className="flex-1 overflow-y-auto no-scrollbar space-y-4 pr-1">
@@ -211,20 +211,20 @@ const DesktopLayout: React.FC<{ children: React.ReactNode }> = ({ children }) =>
                        <img src={item.image} className="max-w-full max-h-full object-contain mix-blend-multiply dark:mix-blend-normal" alt=""/>
                     </div>
                     <div className="flex-1 min-w-0">
-                       <h4 className="text-[11px] font-bold text-zinc-900 dark:text-zinc-100 truncate uppercase tracking-tighter" title={item.name}>{item.name}</h4>
-                       <p className="text-xs font-black text-emerald-600 mt-0.5">৳{item.price * item.quantity}</p>
+                       <h4 className="text-[11px] font-bold text-zinc-900 dark:text-zinc-100 truncate uppercase tracking-tight" title={item.name}>{item.name}</h4>
+                       <p className="text-xs font-semibold text-emerald-600 mt-0.5">৳{item.price * item.quantity}</p>
                     </div>
-                    <div className="text-[10px] font-black text-zinc-400 px-2 bg-zinc-100 dark:bg-zinc-800 rounded-md py-1">x{item.quantity}</div>
+                    <div className="text-[10px] font-semibold text-zinc-400 px-2 bg-zinc-100 dark:bg-zinc-800 rounded-md py-1">x{item.quantity}</div>
                  </div>
                ))}
             </div>
 
             <div className="mt-6 border-t border-zinc-100 dark:border-zinc-800 pt-6">
                <div className="flex justify-between items-end mb-6">
-                  <span className="text-[10px] uppercase font-bold text-zinc-400 tracking-widest mb-1.5">Grand Total</span>
-                  <span className="text-3xl font-black tracking-tighter text-[#06331e]">৳{cartTotal}</span>
+                  <span className="text-[10px] uppercase font-bold text-zinc-400 tracking-normal mb-1.5">Grand Total</span>
+                  <span className="text-xl font-semibold tracking-tight text-[#06331e]">৳{cartTotal}</span>
                </div>
-               <button onClick={() => navigate('/checkout')} className="w-full py-4 bg-[#06331e] text-white rounded-2xl font-bold text-[11px] uppercase tracking-widest shadow-lg shadow-emerald-900/20 hover:bg-zinc-900 hover:scale-[1.02] transition-all active:scale-[0.98]">
+               <button onClick={() => navigate('/checkout')} className="w-full py-4 bg-[#06331e] text-white rounded-2xl font-bold text-[11px] uppercase tracking-normal shadow-lg shadow-emerald-900/20 hover:bg-zinc-900 hover:scale-[1.02] transition-all active:scale-[0.98]">
                  Proceed to Checkout
                </button>
             </div>

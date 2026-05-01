@@ -83,8 +83,8 @@ const LeaveReview: React.FC = () => {
              <Icon name="arrow-left" className="text-sm text-zinc-600 dark:text-zinc-400 group-hover:text-black dark:group-hover:text-white transition-colors" />
           </button>
           <div className="text-center flex-1 pr-12">
-             <h1 className="text-xl md:text-2xl font-black tracking-tight text-zinc-900 dark:text-zinc-100 flex items-center justify-center gap-2"><Icon name="stars" className="text-yellow-400" /> Share Your Vibe</h1>
-             <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mt-1">Review Product</p>
+             <h1 className="text-xl md:text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 flex items-center justify-center gap-2"><Icon name="stars" className="text-yellow-400" /> Share Your Vibe</h1>
+             <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-normal mt-1">Review Product</p>
           </div>
        </div>
 
@@ -94,33 +94,33 @@ const LeaveReview: React.FC = () => {
              <img src={product.image} className="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal" alt="" />
           </div>
           <div className="flex-1 min-w-0 relative z-10">
-             <span className="inline-block px-3 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 font-black text-[8px] uppercase tracking-widest rounded-full mb-3">{product.category}</span>
-             <h4 className="font-black text-lg md:text-xl truncate tracking-tight text-zinc-900 dark:text-zinc-100 line-clamp-2 leading-tight">{product.name}</h4>
+             <span className="inline-block px-3 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 font-semibold text-[8px] uppercase tracking-normal rounded-full mb-3">{product.category}</span>
+             <h4 className="font-semibold text-lg md:text-xl truncate tracking-tight text-zinc-900 dark:text-zinc-100 truncate leading-tight">{product.name}</h4>
           </div>
        </div>
 
        <div className="text-center mb-8 bg-zinc-900 dark:bg-zinc-50 p-10 md:p-12 rounded-[2.5rem] border border-transparent shadow-[0_20px_50px_-12px_rgba(0,0,0,0.2)] dark:shadow-none relative overflow-hidden text-white dark:text-black hover-tilt">
           <div className="absolute inset-x-0 bottom-0 top-1/2 bg-gradient-to-t from-emerald-500/20 to-transparent pointer-events-none"></div>
-          <h3 className="text-2xl md:text-3xl font-black mb-3 tracking-tighter drop-shadow-md relative z-10">Rate your experience</h3>
-          <p className="text-zinc-400 dark:text-zinc-500 text-[10px] font-black uppercase tracking-[0.2em] mb-10 relative z-10">How much do you love it?</p>
+          <h3 className="text-lg md:text-xl font-semibold mb-3 tracking-tight drop-shadow-md relative z-10">Rate your experience</h3>
+          <p className="text-zinc-400 dark:text-zinc-500 text-[10px] font-semibold uppercase tracking-normal mb-10 relative z-10">How much do you love it?</p>
           <div className="flex justify-center space-x-3 md:space-x-5 relative z-10">
              {[1, 2, 3, 4, 5].map(star => (
                 <button 
                   key={star} onClick={() => setRating(star)} 
                   className={`relative w-12 h-12 md:w-14 md:h-14 rounded-full flex items-center justify-center transition-all duration-300 ${star <= rating ? 'bg-yellow-400 text-yellow-900 shadow-[0_0_30px_rgba(250,204,21,0.6)] scale-110 -translate-y-2 border-2 border-yellow-200' : 'bg-zinc-800 dark:bg-zinc-200 text-zinc-500 dark:text-zinc-400 hover:bg-zinc-700 dark:hover:bg-zinc-300 hover:-translate-y-1'}`}
                 >
-                  <Icon name={star <= rating ? 'star' : 'star-outline'} className="text-xl md:text-2xl" />
+                  <Icon name={star <= rating ? 'star' : 'star-outline'} className="text-xl md:text-lg" />
                   {star <= rating && <div className="absolute inset-0 bg-yellow-400 rounded-full animate-ping opacity-20 pointer-events-none"></div>}
                 </button>
              ))}
           </div>
-          {rating > 0 && <p className="text-xs font-black text-emerald-400 dark:text-emerald-600 uppercase tracking-widest mt-8 animate-fade-in relative z-10 bg-emerald-900/50 dark:bg-emerald-100/50 inline-block px-4 py-1.5 rounded-full backdrop-blur-md">{['Not for me', 'Could be better', 'It is alright', 'Pretty good', 'Absolutely amazing!'][rating-1]}</p>}
+          {rating > 0 && <p className="text-xs font-semibold text-emerald-400 dark:text-emerald-600 uppercase tracking-normal mt-8 animate-fade-in relative z-10 bg-emerald-900/50 dark:bg-emerald-100/50 inline-block px-4 py-1.5 rounded-full backdrop-blur-md">{['Not for me', 'Could be better', 'It is alright', 'Pretty good', 'Absolutely amazing!'][rating-1]}</p>}
        </div>
 
        <div className="flex-1 space-y-6 md:space-y-8 animate-slide-up" style={{ animationDelay: '0.1s' }}>
           <div className="bg-white dark:bg-zinc-900 p-6 md:p-8 rounded-[2.5rem] border border-zinc-200 dark:border-zinc-800 shadow-xl shadow-zinc-200/20 dark:shadow-none focus-within:border-[#06331e] dark:focus-within:border-emerald-500 transition-colors relative group">
-             <div className="absolute top-0 right-8 p-4 opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none"><Icon name="comment-alt-lines" className="text-6xl text-emerald-900 dark:text-zinc-500" /></div>
-             <label className="flex items-center text-[10px] font-black text-zinc-800 dark:text-zinc-200 uppercase tracking-[0.2em] mb-4 pl-1 relative z-10">
+             <div className="absolute top-0 right-8 p-4 opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none"><Icon name="comment-alt-lines" className="text-xl text-emerald-900 dark:text-zinc-500" /></div>
+             <label className="flex items-center text-[10px] font-semibold text-zinc-800 dark:text-zinc-200 uppercase tracking-normal mb-4 pl-1 relative z-10">
                 Detailed Review
              </label>
              <textarea 
@@ -133,10 +133,10 @@ const LeaveReview: React.FC = () => {
 
           <div className="bg-white dark:bg-zinc-900 p-6 md:p-8 rounded-[2.5rem] border border-zinc-200 dark:border-zinc-800 shadow-xl shadow-zinc-200/20 dark:shadow-none">
              <div className="flex flex-col mb-4 pl-1">
-               <label className="text-[10px] font-black text-zinc-800 dark:text-zinc-200 uppercase tracking-[0.2em] mb-1">
+               <label className="text-[10px] font-semibold text-zinc-800 dark:text-zinc-200 uppercase tracking-normal mb-1">
                   Upload Photos
                </label>
-               <p className="text-[9px] font-bold text-zinc-400 tracking-widest uppercase">Show us how it looks in real life (Optional)</p>
+               <p className="text-[9px] font-bold text-zinc-400 tracking-normal uppercase">Show us how it looks in real life (Optional)</p>
              </div>
              
              <div className="relative overflow-hidden group">
@@ -149,18 +149,18 @@ const LeaveReview: React.FC = () => {
                    {imageFiles.length > 0 ? (
                       <div className="flex flex-col items-center animate-fade-in text-center">
                          <div className="w-16 h-16 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center mb-4">
-                           <Icon name="images" className="text-2xl text-emerald-500" />
+                           <Icon name="images" className="text-lg text-emerald-500" />
                          </div>
-                         <span className="font-black text-base text-emerald-700 dark:text-emerald-400 tracking-tight mb-1">{imageFiles.length} photo(s) selected</span>
-                         <span className="text-[9px] font-bold uppercase tracking-widest text-emerald-600/70 dark:text-emerald-500/70">Tap to browse files to replace</span>
+                         <span className="font-semibold text-base text-emerald-700 dark:text-emerald-400 tracking-tight mb-1">{imageFiles.length} photo(s) selected</span>
+                         <span className="text-[9px] font-bold uppercase tracking-normal text-emerald-600/70 dark:text-emerald-500/70">Tap to browse files to replace</span>
                       </div>
                    ) : (
                       <div className="flex flex-col items-center text-center">
                          <div className="w-16 h-16 bg-white dark:bg-zinc-900 rounded-full flex items-center justify-center mb-4 shadow-sm border border-zinc-100 dark:border-zinc-800">
-                           <Icon name="camera" className="text-2xl text-zinc-300 dark:text-zinc-600 group-hover:text-[#06331e] dark:group-hover:text-emerald-400 transition-colors" />
+                           <Icon name="camera" className="text-lg text-zinc-300 dark:text-zinc-600 group-hover:text-[#06331e] dark:group-hover:text-emerald-400 transition-colors" />
                          </div>
-                         <span className="font-black text-sm text-zinc-700 dark:text-zinc-300 tracking-tight mb-1">Click or drag photos here</span>
-                         <span className="text-[9px] font-bold uppercase tracking-widest text-zinc-400">Supported formats: JPG, PNG, WEBP</span>
+                         <span className="font-semibold text-sm text-zinc-700 dark:text-zinc-300 tracking-tight mb-1">Click or drag photos here</span>
+                         <span className="text-[9px] font-bold uppercase tracking-normal text-zinc-400">Supported formats: JPG, PNG, WEBP</span>
                       </div>
                    )}
                 </div>
@@ -172,7 +172,7 @@ const LeaveReview: React.FC = () => {
           <button 
              disabled={loading}
              onClick={handleSubmit} 
-             className="w-full py-5 bg-[#06331e] text-emerald-300 rounded-full font-black text-sm uppercase tracking-widest shadow-2xl shadow-emerald-900/30 hover:-translate-y-1 hover:shadow-emerald-900/40 hover:bg-zinc-900 active:scale-95 disabled:opacity-50 disabled:hover:translate-y-0 disabled:active:scale-100 flex items-center justify-center gap-3 transition-all group border border-[#06331e] dark:border-emerald-900/30"
+             className="w-full py-5 bg-[#06331e] text-emerald-300 rounded-full font-semibold text-sm uppercase tracking-normal shadow-2xl shadow-emerald-900/30 hover:-translate-y-1 hover:shadow-emerald-900/40 hover:bg-zinc-900 active:scale-95 disabled:opacity-50 disabled:hover:translate-y-0 disabled:active:scale-100 flex items-center justify-center gap-3 transition-all group border border-[#06331e] dark:border-emerald-900/30"
            >
              {loading ? <Icon name="spinner-third" className="animate-spin text-xl text-emerald-400" /> : (
                <>

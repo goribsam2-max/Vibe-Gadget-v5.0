@@ -53,7 +53,7 @@ const TicketDetails: React.FC = () => {
     if (loading) {
         return (
             <div className="min-h-screen flex items-center justify-center bg-zinc-50 dark:bg-zinc-800/30">
-                <Icon name="spinner" className="animate-spin text-emerald-500 text-3xl" />
+                <Icon name="spinner" className="animate-spin text-emerald-500 text-xl" />
             </div>
         );
     }
@@ -67,8 +67,8 @@ const TicketDetails: React.FC = () => {
                     <Icon name="arrow-left" className="text-xs" />
                 </button>
                 <div>
-                    <h1 className="text-2xl font-black tracking-tight text-[#06331e] mb-1">Ticket Details</h1>
-                    <p className="text-zinc-400 text-[10px] font-bold tracking-widest uppercase">#{ticket.id.slice(0, 8)}</p>
+                    <h1 className="text-lg font-semibold tracking-tight text-[#06331e] mb-1">Ticket Details</h1>
+                    <p className="text-zinc-400 text-[10px] font-bold tracking-normal uppercase">#{ticket.id.slice(0, 8)}</p>
                 </div>
             </div>
 
@@ -78,9 +78,9 @@ const TicketDetails: React.FC = () => {
                     <div className="flex justify-between items-start mb-4">
                         <div>
                             <h3 className="font-bold text-sm tracking-tight text-zinc-900 dark:text-zinc-100 mb-1">{ticket.subject}</h3>
-                            <p className="text-[9px] font-bold uppercase tracking-widest text-zinc-400">{new Date(ticket.createdAt).toLocaleString()}</p>
+                            <p className="text-[9px] font-bold uppercase tracking-normal text-zinc-400">{new Date(ticket.createdAt).toLocaleString()}</p>
                         </div>
-                        <span className={`px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest ${ticket.status === 'Open' ? 'bg-orange-100 text-orange-600' : ticket.status === 'Replied' ? 'bg-blue-100 text-blue-600' : ticket.status === 'Resolved' ? 'bg-emerald-100 text-emerald-600' : 'bg-zinc-200 text-zinc-600 dark:text-zinc-400'}`}>
+                        <span className={`px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-normal ${ticket.status === 'Open' ? 'bg-orange-100 text-orange-600' : ticket.status === 'Replied' ? 'bg-blue-100 text-blue-600' : ticket.status === 'Resolved' ? 'bg-emerald-100 text-emerald-600' : 'bg-zinc-200 text-zinc-600 dark:text-zinc-400'}`}>
                             {ticket.status}
                         </span>
                     </div>
@@ -98,7 +98,7 @@ const TicketDetails: React.FC = () => {
                             </div>
                             <div>
                                 <h3 className="font-bold text-sm tracking-tight text-emerald-900">Support Team</h3>
-                                <p className="text-[9px] font-bold uppercase tracking-widest text-emerald-600/70">
+                                <p className="text-[9px] font-bold uppercase tracking-normal text-emerald-600/70">
                                     {ticket.updatedAt ? new Date(ticket.updatedAt).toLocaleString() : 'Recently'}
                                 </p>
                             </div>
@@ -109,7 +109,7 @@ const TicketDetails: React.FC = () => {
 
                         {/* Feedback Section */}
                         <div className="border-t border-emerald-200/50 pt-5">
-                            <h4 className="text-[10px] font-bold uppercase tracking-widest text-emerald-800 mb-3 text-center">HOW WAS OUR SUPPORT?</h4>
+                            <h4 className="text-[10px] font-bold uppercase tracking-normal text-emerald-800 mb-3 text-center">HOW WAS OUR SUPPORT?</h4>
                             
                             {ticket.feedback ? (
                                 <div className="text-center bg-zinc-50 dark:bg-zinc-800 py-3 rounded-xl border border-emerald-100">
@@ -121,13 +121,13 @@ const TicketDetails: React.FC = () => {
                                 <div className="flex gap-3 justify-center">
                                     <button 
                                         onClick={() => handleFeedback('Satisfied')}
-                                        className="flex-1 py-3 bg-zinc-50 dark:bg-zinc-800 text-emerald-600 border border-emerald-200 hover:bg-emerald-600 hover:text-white rounded-xl font-bold text-[10px] uppercase tracking-widest transition-colors flex items-center justify-center"
+                                        className="flex-1 py-3 bg-zinc-50 dark:bg-zinc-800 text-emerald-600 border border-emerald-200 hover:bg-emerald-600 hover:text-white rounded-xl font-bold text-[10px] uppercase tracking-normal transition-colors flex items-center justify-center"
                                     >
                                         <Icon name="smile" className="text-sm mr-2" /> Satisfied
                                     </button>
                                     <button 
                                         onClick={() => handleFeedback('Not Satisfied')}
-                                        className="flex-1 py-3 bg-zinc-50 dark:bg-zinc-800 text-red-600 border border-red-200 hover:bg-red-600 hover:text-white rounded-xl font-bold text-[10px] uppercase tracking-widest transition-colors flex items-center justify-center"
+                                        className="flex-1 py-3 bg-zinc-50 dark:bg-zinc-800 text-red-600 border border-red-200 hover:bg-red-600 hover:text-white rounded-xl font-bold text-[10px] uppercase tracking-normal transition-colors flex items-center justify-center"
                                     >
                                         <Icon name="frown" className="text-sm mr-2" /> Not Satisfied
                                     </button>
@@ -137,8 +137,8 @@ const TicketDetails: React.FC = () => {
                     </div>
                 ) : (
                     <div className="text-center py-12 px-6 bg-zinc-50 dark:bg-zinc-800 rounded-[2rem] border border-zinc-100 dark:border-zinc-800 border-dashed">
-                        <Icon name="hourglass-half" className="text-2xl text-zinc-300 mb-3" />
-                        <p className="text-xs font-bold tracking-widest uppercase text-zinc-400">Please Wait</p>
+                        <Icon name="hourglass-half" className="text-lg text-zinc-300 mb-3" />
+                        <p className="text-xs font-bold tracking-normal uppercase text-zinc-400">Please Wait</p>
                         <p className="text-[10px] mt-1 text-zinc-400 font-medium leading-relaxed max-w-[200px] mx-auto">
                             Our support team is reviewing your ticket and will reply here soon.
                         </p>

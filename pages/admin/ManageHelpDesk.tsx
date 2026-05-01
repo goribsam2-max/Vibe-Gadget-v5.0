@@ -80,23 +80,23 @@ const ManageHelpDesk: React.FC = () => {
                     <Icon name="arrow-left" className="text-xs" />
                 </button>
                 <div>
-                    <h1 className="text-2xl md:text-3xl font-black tracking-tight text-zinc-900 dark:text-zinc-100 mb-1">Help Desk</h1>
-                    <p className="text-zinc-400 text-[10px] md:text-xs font-bold tracking-widest uppercase">Support Tickets</p>
+                    <h1 className="text-lg md:text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 mb-1">Help Desk</h1>
+                    <p className="text-zinc-400 text-[10px] md:text-xs font-bold tracking-normal uppercase">Support Tickets</p>
                 </div>
             </div>
 
             <div className="bg-zinc-50 dark:bg-zinc-800 rounded-3xl border border-zinc-200 dark:border-zinc-700 shadow-sm overflow-x-auto text-sm">
                 {loading ? (
-                    <div className="py-20 text-center"><Icon name="spinner" className="animate-spin text-emerald-500 text-3xl" /></div>
+                    <div className="py-20 text-center"><Icon name="spinner" className="animate-spin text-emerald-500 text-xl" /></div>
                 ) : tickets.length > 0 ? (
                     <table className="w-full text-left border-collapse min-w-[800px]">
                         <thead className="bg-zinc-50 dark:bg-zinc-800/80 border-b border-zinc-200 dark:border-zinc-700">
                             <tr>
-                                <th className="p-5 text-[10px] uppercase tracking-widest font-bold text-zinc-500">Ticket Details</th>
-                                <th className="p-5 text-[10px] uppercase tracking-widest font-bold text-zinc-500">User Contact</th>
-                                <th className="p-5 text-[10px] uppercase tracking-widest font-bold text-zinc-500">Feedback & View</th>
-                                <th className="p-5 text-[10px] uppercase tracking-widest font-bold text-zinc-500">Status</th>
-                                <th className="p-5 text-[10px] uppercase tracking-widest font-bold text-zinc-500 text-right">Actions</th>
+                                <th className="p-5 text-[10px] uppercase tracking-normal font-bold text-zinc-500">Ticket Details</th>
+                                <th className="p-5 text-[10px] uppercase tracking-normal font-bold text-zinc-500">User Contact</th>
+                                <th className="p-5 text-[10px] uppercase tracking-normal font-bold text-zinc-500">Feedback & View</th>
+                                <th className="p-5 text-[10px] uppercase tracking-normal font-bold text-zinc-500">Status</th>
+                                <th className="p-5 text-[10px] uppercase tracking-normal font-bold text-zinc-500 text-right">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -106,10 +106,10 @@ const ManageHelpDesk: React.FC = () => {
                                         <td className="p-5 max-w-[250px]">
                                             <div className="font-mono text-xs text-zinc-400 mb-1">#{t.id.slice(0, 6)}</div>
                                             <div className="font-bold text-zinc-800 dark:text-zinc-200 text-sm mb-1 truncate">{t.subject}</div>
-                                            <div className="text-[11px] text-zinc-500 line-clamp-3 leading-relaxed whitespace-pre-wrap">{t.message}</div>
+                                            <div className="text-[11px] text-zinc-500 truncate leading-relaxed whitespace-pre-wrap">{t.message}</div>
                                             {t.adminReply && (
                                                 <div className="mt-3 p-3 bg-blue-50/50 border border-blue-100 rounded-xl">
-                                                    <div className="text-[9px] font-bold uppercase tracking-widest text-blue-400 mb-1">Your Reply</div>
+                                                    <div className="text-[9px] font-bold uppercase tracking-normal text-blue-400 mb-1">Your Reply</div>
                                                     <div className="text-xs text-zinc-700 dark:text-zinc-300 whitespace-pre-wrap leading-relaxed">{t.adminReply}</div>
                                                 </div>
                                             )}
@@ -142,7 +142,7 @@ const ManageHelpDesk: React.FC = () => {
                                             </div>
                                         </td>
                                         <td className="p-5 align-top">
-                                            <span className={`px-3 py-1.5 rounded-full text-[9px] font-bold uppercase tracking-widest ${t.status === 'Open' ? 'bg-orange-100 text-orange-600' : t.status === 'Replied' ? 'bg-blue-100 text-blue-600' : t.status === 'Resolved' ? 'bg-emerald-100 text-emerald-600' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500'}`}>
+                                            <span className={`px-3 py-1.5 rounded-full text-[9px] font-bold uppercase tracking-normal ${t.status === 'Open' ? 'bg-orange-100 text-orange-600' : t.status === 'Replied' ? 'bg-blue-100 text-blue-600' : t.status === 'Resolved' ? 'bg-emerald-100 text-emerald-600' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-500'}`}>
                                                 {t.status || 'Open'}
                                             </span>
                                         </td>
@@ -162,7 +162,7 @@ const ManageHelpDesk: React.FC = () => {
                                                 
                                                 <button 
                                                     onClick={() => { setReplyingTo(replyingTo === t.id ? null : t.id); setReplyText(''); }}
-                                                    className={`w-32 py-2 text-[10px] font-bold uppercase tracking-widest rounded-xl transition-colors border ${replyingTo === t.id ? 'bg-zinc-800 text-white border-zinc-800' : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:bg-zinc-800'}`}
+                                                    className={`w-32 py-2 text-[10px] font-bold uppercase tracking-normal rounded-xl transition-colors border ${replyingTo === t.id ? 'bg-zinc-800 text-white border-zinc-800' : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:bg-zinc-800'}`}
                                                 >
                                                     {replyingTo === t.id ? 'Cancel' : (t.adminReply ? 'Edit Reply' : 'Reply')}
                                                 </button>
@@ -173,7 +173,7 @@ const ManageHelpDesk: React.FC = () => {
                                         <tr className="bg-emerald-50/30 border-b border-emerald-100">
                                             <td colSpan={5} className="p-6">
                                                 <div className="w-full max-w-4xl">
-                                                    <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">Write Reply (Send to User)</label>
+                                                    <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-normal mb-2">Write Reply (Send to User)</label>
                                                     <textarea 
                                                         rows={4}
                                                         value={replyText}
@@ -184,7 +184,7 @@ const ManageHelpDesk: React.FC = () => {
                                                     <div className="flex justify-end">
                                                         <button 
                                                             onClick={() => handleSendReply(t)}
-                                                            className="px-8 py-3 bg-[#06331e] text-white rounded-xl font-bold text-xs uppercase tracking-widest shadow-lg hover:bg-zinc-900 transition-all"
+                                                            className="px-8 py-3 bg-[#06331e] text-white rounded-xl font-bold text-xs uppercase tracking-normal shadow-lg hover:bg-zinc-900 transition-all"
                                                         >
                                                             Send Reply 
                                                         </button>
@@ -199,8 +199,8 @@ const ManageHelpDesk: React.FC = () => {
                     </table>
                 ) : (
                     <div className="py-24 text-center text-zinc-400">
-                        <Icon name="inbox" className="text-4xl mb-4 text-zinc-300" />
-                        <p className="font-bold text-xs uppercase tracking-widest">No active tickets</p>
+                        <Icon name="inbox" className="text-lg mb-4 text-zinc-300" />
+                        <p className="font-bold text-xs uppercase tracking-normal">No active tickets</p>
                     </div>
                 )}
             </div>

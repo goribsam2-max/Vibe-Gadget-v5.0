@@ -168,8 +168,8 @@ const FullScreenStory = ({ stories, activeIndex, onClose, onNext, onPrev }: any)
                     <div className="absolute inset-0 bg-white/20 animate-[pulse_2s_ease-in-out_infinite]"></div>
                   </div>
                   <div className="flex flex-col">
-                    <span className="font-black text-sm tracking-wider uppercase drop-shadow-md">{currentStory.category}</span>
-                    <span className="text-[9px] font-bold text-white/70 uppercase tracking-[0.2em]">{currentStory.type === 'video' ? 'Video Story' : 'Image Story'}</span>
+                    <span className="font-semibold text-sm tracking-wider uppercase drop-shadow-md">{currentStory.category}</span>
+                    <span className="text-[9px] font-bold text-white/70 uppercase tracking-normal">{currentStory.type === 'video' ? 'Video Story' : 'Image Story'}</span>
                   </div>
                </div>
                <div className="flex items-center space-x-2">
@@ -184,7 +184,7 @@ const FullScreenStory = ({ stories, activeIndex, onClose, onNext, onPrev }: any)
 
             {loading && (
                <div className="absolute inset-0 z-30 flex items-center justify-center bg-zinc-950/50 backdrop-blur-sm">
-                   <Icon name="spinner-third" className="animate-spin text-4xl text-white drop-shadow-lg" />
+                   <Icon name="spinner-third" className="animate-spin text-lg text-white drop-shadow-lg" />
                </div>
             )}
 
@@ -260,7 +260,7 @@ const FullScreenStory = ({ stories, activeIndex, onClose, onNext, onPrev }: any)
             {/* Content Info (if any) */}
             {currentStory.title && (
                <div className="absolute bottom-28 left-4 right-4 z-40">
-                  <h3 className="text-white text-2xl font-black drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] mb-2">{currentStory.title}</h3>
+                  <h3 className="text-white text-lg font-semibold drop-shadow-[0_2px_10px_rgba(0,0,0,0.8)] mb-2">{currentStory.title}</h3>
                   {currentStory.description && <p className="text-white/90 text-sm font-medium drop-shadow-md">{currentStory.description}</p>}
                </div>
             )}
@@ -274,7 +274,7 @@ const FullScreenStory = ({ stories, activeIndex, onClose, onNext, onPrev }: any)
             {/* CTA */}
             {currentStory.linkUrl && (
                <div className="absolute bottom-6 left-0 right-0 flex justify-center z-50 pointer-events-none">
-                 <button onClick={() => { window.location.href = currentStory.linkUrl; }} className="bg-white/90 backdrop-blur-3xl text-emerald-950 px-10 py-5 rounded-full font-black text-sm uppercase tracking-[0.2em] shadow-[0_20px_60px_rgba(0,0,0,0.6)] hover:bg-white hover:-translate-y-2 active:scale-95 transition-all flex items-center space-x-4 group border border-white/50 pointer-events-auto overflow-hidden animate-bounce-subtle">
+                 <button onClick={() => { window.location.href = currentStory.linkUrl; }} className="bg-white/90 backdrop-blur-3xl text-emerald-950 px-10 py-5 rounded-full font-semibold text-sm uppercase tracking-normal shadow-[0_20px_60px_rgba(0,0,0,0.6)] hover:bg-white hover:-translate-y-2 active:scale-95 transition-all flex items-center space-x-4 group border border-white/50 pointer-events-auto overflow-hidden animate-bounce-subtle">
                     <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
                     <div className="w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-lg shadow-emerald-500/40">
                       <Icon name="chevron-up" className="text-lg animate-[bounce_1.5s_infinite]" />
@@ -321,7 +321,7 @@ const ThinBanner = ({ banner, navigate }: { banner: any, navigate: any }) => {
                    initial={{ opacity: 0, width: 0 }}
                    animate={{ opacity: 1, width: "auto" }}
                    exit={{ opacity: 0, width: 0 }}
-                   className="pl-3 pr-4 py-1.5 text-[10px] font-bold uppercase tracking-widest whitespace-nowrap"
+                   className="pl-3 pr-4 py-1.5 text-[10px] font-bold uppercase tracking-normal whitespace-nowrap"
                  >
                    Sponsored Ad
                  </motion.span>
@@ -655,7 +655,7 @@ const Home: React.FC = () => {
 
       {/* Premium Announcement Bar */}
       <div className="absolute top-0 left-0 w-full bg-[#06331e] text-emerald-100 py-1.5 overflow-hidden z-50 flex items-center shadow-md">
-        <div className="animate-marquee whitespace-nowrap text-[9px] font-black tracking-[0.2em] uppercase flex items-center">
+        <div className="animate-marquee whitespace-nowrap text-[9px] font-semibold tracking-normal uppercase flex items-center">
           <span className="mx-8 inline-flex items-center"><Icon name="bolt" className="w-3 h-3 text-emerald-400 mr-2"/> Free Shipping on orders over ৳5000</span>
           <span className="mx-8 inline-flex items-center"><Icon name="award" className="w-3 h-3 text-yellow-400 mr-2"/> 100% Authentic Products</span>
           <span className="mx-8 inline-flex items-center"><Icon name="shield-check" className="w-3 h-3 text-blue-400 mr-2"/> 12 Months Warranty Included</span>
@@ -668,9 +668,9 @@ const Home: React.FC = () => {
           <Logo scale={0.8} className="origin-left" />
         </div>
         <div className="hidden md:flex flex-1 items-center">
-           <h2 className="text-2xl lg:text-3xl font-black text-zinc-900 dark:text-zinc-100 tracking-tight flex items-center gap-3">
-             <Icon name={new Date().getHours() < 18 ? "sun" : "moon"} className="text-emerald-500 text-3xl animate-[spin_10s_linear_infinite]" />
-             <span>{new Date().getHours() < 12 ? 'Good Morning' : new Date().getHours() < 18 ? 'Good Afternoon' : 'Good Evening'}, <span className="text-emerald-600 dark:text-emerald-400 font-black">Explorer</span></span>
+           <h2 className="text-lg lg:text-xl font-semibold text-zinc-900 dark:text-zinc-100 tracking-tight flex items-center gap-3">
+             <Icon name={new Date().getHours() < 18 ? "sun" : "moon"} className="text-emerald-500 text-xl animate-[spin_10s_linear_infinite]" />
+             <span>{new Date().getHours() < 12 ? 'Good Morning' : new Date().getHours() < 18 ? 'Good Afternoon' : 'Good Evening'}, <span className="text-emerald-600 dark:text-emerald-400 font-semibold">Explorer</span></span>
            </h2>
         </div>
         
@@ -712,8 +712,8 @@ const Home: React.FC = () => {
                   {searchQuery.trim() === '' && searchHistory.length > 0 ? (
                     <div className="p-4">
                        <div className="flex items-center justify-between mb-2 px-2">
-                         <p className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Recent Searches</p>
-                         <button onClick={() => { localStorage.removeItem('f_search_history'); setSearchHistory([]); }} className="text-[9px] font-bold uppercase tracking-widest text-emerald-500 hover:text-emerald-600 transition-colors">Clear</button>
+                         <p className="text-[10px] font-semibold uppercase tracking-normal text-zinc-400">Recent Searches</p>
+                         <button onClick={() => { localStorage.removeItem('f_search_history'); setSearchHistory([]); }} className="text-[9px] font-bold uppercase tracking-normal text-emerald-500 hover:text-emerald-600 transition-colors">Clear</button>
                        </div>
                        <div className="flex flex-wrap gap-2">
                          {searchHistory.map((h, i) => (
@@ -735,7 +735,7 @@ const Home: React.FC = () => {
                     </div>
                   ) : searchResults.length > 0 ? (
                     <div className="py-3">
-                      <p className="text-[9px] font-black uppercase tracking-widest text-zinc-400 px-5 mb-2">Products</p>
+                      <p className="text-[9px] font-semibold uppercase tracking-normal text-zinc-400 px-5 mb-2">Products</p>
                       {searchResults.map(product => (
                         <div 
                           key={product.id} 
@@ -752,7 +752,7 @@ const Home: React.FC = () => {
                         </div>
                       ))}
                       <div className="px-5 mt-3 pt-3 border-t border-zinc-100 dark:border-zinc-800">
-                         <button onClick={() => navigate('/search')} className="w-full py-2.5 bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-emerald-50 hover:text-emerald-700 dark:hover:bg-emerald-900/30 dark:hover:text-emerald-400 transition-colors">
+                         <button onClick={() => navigate('/search')} className="w-full py-2.5 bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 rounded-xl text-xs font-bold uppercase tracking-normal hover:bg-emerald-50 hover:text-emerald-700 dark:hover:bg-emerald-900/30 dark:hover:text-emerald-400 transition-colors">
                            View All Results
                          </button>
                       </div>
@@ -760,7 +760,7 @@ const Home: React.FC = () => {
                   ) : searchQuery.trim() !== '' ? (
                     <div className="py-12 text-center flex flex-col items-center">
                        <div className="w-16 h-16 bg-zinc-100 dark:bg-zinc-800 rounded-full flex items-center justify-center mb-4">
-                         <Icon name="search" className="text-2xl text-zinc-300 dark:text-zinc-600" />
+                         <Icon name="search" className="text-lg text-zinc-300 dark:text-zinc-600" />
                        </div>
                        <p className="text-sm font-bold text-zinc-800 dark:text-zinc-200 mb-1">No products found</p>
                        <p className="text-xs text-zinc-500 px-6">We couldn't find anything matching "{searchQuery}". Try different keywords.</p>
@@ -772,7 +772,7 @@ const Home: React.FC = () => {
           </div>
 
           <div className="hidden md:flex flex-col text-right mr-2 lg:mr-0 pl-4 lg:border-l lg:border-zinc-200 lg:dark:border-zinc-700/50">
-            <p className="text-[9px] text-zinc-400 font-black uppercase tracking-widest mb-0.5">Delivery To</p>
+            <p className="text-[9px] text-zinc-400 font-semibold uppercase tracking-normal mb-0.5">Delivery To</p>
             <button className="flex items-center justify-end font-bold text-xs hover:text-[#06331e] dark:hover:text-emerald-400 transition-colors whitespace-nowrap text-zinc-800 dark:text-zinc-200">
               <Icon name="map-marker" className="text-emerald-500 mr-1.5 text-[10px]" />
               <span className="truncate max-w-[120px]">{locationName}</span>
@@ -804,7 +804,7 @@ const Home: React.FC = () => {
                      )}
                   </div>
                </div>
-               <span className={`text-[9px] md:text-[10px] font-black truncate w-full text-center transition-colors uppercase tracking-[0.1em] ${viewedStories.includes(story.id) ? 'text-zinc-500' : 'text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-700 dark:group-hover:text-emerald-400'}`}>{story.category}</span>
+               <span className={`text-[9px] md:text-[10px] font-semibold truncate w-full text-center transition-colors uppercase tracking-normal ${viewedStories.includes(story.id) ? 'text-zinc-500' : 'text-zinc-900 dark:text-zinc-100 group-hover:text-emerald-700 dark:group-hover:text-emerald-400'}`}>{story.category}</span>
             </div>
          )) : [
            { icon: 'fire', text: 'Trending', bg: 'bg-orange-100', color: 'text-orange-500' },
@@ -815,9 +815,9 @@ const Home: React.FC = () => {
          ].map((story, idx) => (
             <div key={idx} className="flex flex-col items-center gap-2 cursor-pointer group shrink-0 w-[72px] md:w-[88px]">
                <div className={`w-16 h-16 md:w-20 md:h-20 rounded-full ${story.bg} border-2 border-white ring-1 ring-zinc-200 group-hover:ring-emerald-400 group-hover:ring-2 group-hover:ring-offset-2 transition-all flex items-center justify-center shadow-sm`}>
-                  <Icon name={story.icon} className={`text-xl md:text-2xl ${story.color} transition-transform`} />
+                  <Icon name={story.icon} className={`text-xl md:text-lg ${story.color} transition-transform`} />
                </div>
-               <span className="text-[10px] font-bold uppercase tracking-widest text-zinc-600 dark:text-zinc-400 group-hover:text-black dark:text-white w-full truncate">{story.text}</span>
+               <span className="text-[10px] font-bold uppercase tracking-normal text-zinc-600 dark:text-zinc-400 group-hover:text-black dark:text-white w-full truncate">{story.text}</span>
             </div>
          ))}
       </div>
@@ -839,10 +839,10 @@ const Home: React.FC = () => {
                />
                <div className="absolute inset-0 bg-gradient-to-r from-emerald-950/80 via-emerald-950/40 to-transparent"></div>
                <div className="relative z-10 p-8 md:p-16 max-w-2xl">
-                  <span className="inline-block px-3 py-1 bg-white/10 text-emerald-200 border border-white/10 rounded-full text-[9px] font-black uppercase tracking-widest mb-4 backdrop-blur-md">Featured Offer</span>
-                  <h2 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-4 uppercase leading-[1.1] text-white line-clamp-3 w-full whitespace-normal drop-shadow-md">{banner.title}</h2>
-                  <p className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] opacity-80 mb-6 md:mb-8 text-emerald-100 truncate w-full max-w-sm">{banner.description}</p>
-                  <button onClick={() => banner.link && navigate(banner.link)} className="mt-4 px-10 py-4 bg-white/95 backdrop-blur-md text-[#06331e] rounded-2xl font-black text-xs uppercase tracking-widest shadow-[0_15px_40px_rgba(0,0,0,0.3)] hover:bg-white hover:-translate-y-1.5 hover:shadow-black/40 transition-all flex items-center gap-3 group whitespace-nowrap active:scale-95 border border-white/50">
+                  <span className="inline-block px-3 py-1 bg-white/10 text-emerald-200 border border-white/10 rounded-full text-[9px] font-semibold uppercase tracking-normal mb-4 backdrop-blur-md">Featured Offer</span>
+                  <h2 className="text-xl md:text-lg lg:text-xl font-semibold tracking-tight mb-4 uppercase leading-[1.1] text-white truncate w-full whitespace-normal drop-shadow-md">{banner.title}</h2>
+                  <p className="text-[10px] md:text-xs font-bold uppercase tracking-normal opacity-80 mb-6 md:mb-8 text-emerald-100 truncate w-full max-w-sm">{banner.description}</p>
+                  <button onClick={() => banner.link && navigate(banner.link)} className="mt-4 px-10 py-4 bg-white/95 backdrop-blur-md text-[#06331e] rounded-2xl font-semibold text-xs uppercase tracking-normal shadow-[0_15px_40px_rgba(0,0,0,0.3)] hover:bg-white hover:-translate-y-1.5 hover:shadow-black/40 transition-all flex items-center gap-3 group whitespace-nowrap active:scale-95 border border-white/50">
                     <span>Shop Now</span>
                     <div className="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">
                       <Icon name="arrow-right" className="text-[10px] group-hover:translate-x-0.5 transition-transform" />
@@ -872,14 +872,14 @@ const Home: React.FC = () => {
                    </div>
                    <div className="col-span-3 md:col-span-2 p-6 md:p-10 flex flex-col justify-center h-full bg-zinc-900 dark:bg-zinc-50 dark:text-black text-white relative">
                       <div className="absolute top-0 right-0 p-4 md:p-6">
-                        <span className="px-3 py-1.5 bg-[#06331e] text-emerald-300 dark:bg-zinc-900/10 dark:text-black rounded-full text-[9px] font-black uppercase tracking-widest backdrop-blur-md whitespace-nowrap border border-emerald-900/50 dark:border-zinc-900/20">Featured</span>
+                        <span className="px-3 py-1.5 bg-[#06331e] text-emerald-300 dark:bg-zinc-900/10 dark:text-black rounded-full text-[9px] font-semibold uppercase tracking-normal backdrop-blur-md whitespace-nowrap border border-emerald-900/50 dark:border-zinc-900/20">Featured</span>
                       </div>
-                      <h4 className="text-lg md:text-2xl lg:text-3xl font-black mb-2 tracking-tight line-clamp-2 w-full pr-4">{product.name}</h4>
+                      <h4 className="text-lg md:text-lg lg:text-xl font-semibold mb-2 tracking-tight truncate w-full pr-4">{product.name}</h4>
                       <div className="flex flex-wrap items-center gap-2 mb-6 md:mb-8 truncate w-full">
-                         <p className="text-xl md:text-3xl font-black text-emerald-400">৳{product.isOffer && product.offerPrice ? product.offerPrice : product.price}</p>
+                         <p className="text-xl md:text-xl font-semibold text-emerald-400">৳{product.isOffer && product.offerPrice ? product.offerPrice : product.price}</p>
                          {product.isOffer && <p className="text-xs md:text-sm text-zinc-500 font-bold line-through">৳{product.price}</p>}
                       </div>
-                      <button onClick={() => navigate(`/product/${product.id}`)} className="mt-2 px-6 md:px-8 py-3 md:py-4 bg-zinc-50 dark:bg-zinc-900 text-[#06331e] dark:text-white font-black uppercase tracking-[0.2em] text-[10px] md:text-xs rounded-2xl hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors self-start shadow-xl shadow-black/10 active:scale-95 flex items-center whitespace-nowrap">
+                      <button onClick={() => navigate(`/product/${product.id}`)} className="mt-2 px-6 md:px-8 py-3 md:py-4 bg-zinc-50 dark:bg-zinc-900 text-[#06331e] dark:text-white font-semibold uppercase tracking-normal text-[10px] md:text-xs rounded-2xl hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors self-start shadow-xl shadow-black/10 active:scale-95 flex items-center whitespace-nowrap">
                         Shop Now <Icon name="arrow-right" className="ml-3 text-[10px]" />
                       </button>
                    </div>
@@ -896,7 +896,7 @@ const Home: React.FC = () => {
       )}
 
       <div className="mb-10 md:mb-16 lg:hidden">
-        <h1 className="text-4xl md:text-4xl lg:text-3xl xl:text-2xl font-black font-outfit tracking-tight text-zinc-900 dark:text-zinc-100 leading-[1.1] mb-2 animate-fade-in">Find your perfect <br/><span className="text-gradient">vibe gadget.</span></h1>
+        <h1 className="text-lg md:text-lg lg:text-xl xl:text-lg font-semibold font-outfit tracking-tight text-zinc-900 dark:text-zinc-100 leading-[1.1] mb-2 animate-fade-in">Find your perfect <br/><span className="text-gradient">vibe gadget.</span></h1>
         
         <div ref={searchRef} className="relative w-full max-w-md mt-8 z-50 hover-lift">
           <div className={`relative flex items-center bg-zinc-50 dark:bg-zinc-800 rounded-2xl border transition-all ${isSearchFocused ? 'border-emerald-500 ring-2 ring-emerald-500/20 bg-zinc-50 dark:bg-zinc-800' : 'border-zinc-200 dark:border-zinc-700'}`}>
@@ -930,7 +930,7 @@ const Home: React.FC = () => {
               >
                 {searchQuery.trim() === '' && searchHistory.length > 0 ? (
                   <div className="p-2">
-                     <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 px-3 py-2">Recent Searches</p>
+                     <p className="text-[10px] font-bold uppercase tracking-normal text-zinc-400 px-3 py-2">Recent Searches</p>
                      {searchHistory.map((h, i) => (
                        <button 
                           key={i} 
@@ -960,12 +960,12 @@ const Home: React.FC = () => {
                         </div>
                         <div className="flex-1 min-w-0">
                           <h4 className="font-bold text-xs truncate text-zinc-900 dark:text-zinc-100">{product.name}</h4>
-                          <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-widest mt-1">৳{product.price}</p>
+                          <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-normal mt-1">৳{product.price}</p>
                         </div>
                       </div>
                     ))}
                     <div className="px-3 pt-2 pb-1 border-t border-zinc-50">
-                      <button onClick={() => navigate('/search')} className="w-full py-2 bg-zinc-50 dark:bg-zinc-800 hover:bg-[#06331e] hover:text-white rounded-xl text-[10px] font-bold uppercase tracking-widest text-zinc-600 dark:text-zinc-400 transition-colors">
+                      <button onClick={() => navigate('/search')} className="w-full py-2 bg-zinc-50 dark:bg-zinc-800 hover:bg-[#06331e] hover:text-white rounded-xl text-[10px] font-bold uppercase tracking-normal text-zinc-600 dark:text-zinc-400 transition-colors">
                         View All Results
                       </button>
                     </div>
@@ -1007,7 +1007,7 @@ const Home: React.FC = () => {
                         <Icon name="bolt" className="text-[10px] animate-pulse" />
                      </div>
                      <div className="flex-1 flex justify-between items-center pr-2 overflow-x-auto no-scrollbar gap-4">
-                        <h2 className="text-sm font-black tracking-tight text-red-950 uppercase shrink-0">Limited Deals</h2>
+                        <h2 className="text-sm font-semibold tracking-tight text-red-950 uppercase shrink-0">Limited Deals</h2>
                         <div className="flex items-center space-x-1.5 shrink-0 whitespace-nowrap">
                            {timeLeft.y > 0 && <span className="bg-red-500/10 text-red-600 dark:bg-red-500/20 dark:text-red-400 text-[10px] font-bold px-2 py-0.5 rounded shadow-sm">{timeLeft.y}y</span>}
                            {timeLeft.mo > 0 && <span className="bg-red-500/10 text-red-600 dark:bg-red-500/20 dark:text-red-400 text-[10px] font-bold px-2 py-0.5 rounded shadow-sm">{timeLeft.mo}mo</span>}
@@ -1038,7 +1038,7 @@ const Home: React.FC = () => {
                                  onLoad={(e) => { e.currentTarget.style.opacity = '1'; e.currentTarget.style.transition = 'opacity 0.4s ease'; }}
                                />
                                {discount > 0 && (
-                                  <div className="absolute top-2 left-2 bg-red-500 text-white text-[8px] font-black px-1.5 py-0.5 rounded shadow-sm">
+                                  <div className="absolute top-2 left-2 bg-red-500 text-white text-[8px] font-semibold px-1.5 py-0.5 rounded shadow-sm">
                                      -{discount}%
                                   </div>
                                )}
@@ -1046,7 +1046,7 @@ const Home: React.FC = () => {
                             <div className="px-1">
                                <h3 className="font-bold text-[10px] md:text-xs text-zinc-900 dark:text-zinc-100 group-hover:text-red-600 transition-colors truncate tracking-tight">{product.name}</h3>
                                <div className="flex items-center space-x-1.5 mt-1">
-                                  <p className="text-red-600 text-[11px] md:text-sm font-black uppercase tracking-tight">৳{offerPrice}</p>
+                                  <p className="text-red-600 text-[11px] md:text-sm font-semibold uppercase tracking-tight">৳{offerPrice}</p>
                                   {discount > 0 && <p className="text-[8px] md:text-[9px] font-bold text-zinc-400 line-through">৳{originalPrice}</p>}
                                </div>
                             </div>
@@ -1087,7 +1087,7 @@ const Home: React.FC = () => {
             <div className={`w-16 h-16 md:w-24 md:h-24 rounded-full flex items-center justify-center mb-4 transition-all border-4 overflow-hidden ${activeCategory === cat.name ? 'border-[#06331e] shadow-2xl pulse-ring-active' : 'border-zinc-100 dark:border-zinc-800 hover:border-emerald-200 shadow-sm hover-glow border-gradient'}`}>
               <img src={cat.image} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt={cat.name} />
             </div>
-            <span className={`text-[10px] font-bold uppercase tracking-widest transition-colors ${activeCategory === cat.name ? 'text-[#06331e]' : 'text-zinc-400 group-hover:text-emerald-500'}`}>{cat.name}</span>
+            <span className={`text-[10px] font-bold uppercase tracking-normal transition-colors ${activeCategory === cat.name ? 'text-[#06331e]' : 'text-zinc-400 group-hover:text-emerald-500'}`}>{cat.name}</span>
           </motion.button>
         ))}
       </div>
@@ -1103,10 +1103,10 @@ const Home: React.FC = () => {
                
                <div className="relative z-10 flex flex-col md:flex-row items-center justify-between w-full gap-6">
                   <div className="flex-1 flex flex-col md:flex-row items-center gap-4 text-center md:text-left">
-                     <span className="bg-emerald-500 text-black dark:text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest shrink-0">New Story</span>
+                     <span className="bg-emerald-500 text-black dark:text-white px-3 py-1 rounded-full text-[10px] font-semibold uppercase tracking-normal shrink-0">New Story</span>
                      <h3 className="font-bold text-white text-base md:text-lg lg:text-xl line-clamp-1">{recentBlogs[0].title}</h3>
                   </div>
-                  <div className="shrink-0 flex items-center bg-white/10 dark:bg-zinc-800/50 backdrop-blur-sm border border-white/10 dark:border-zinc-700 rounded-full px-6 py-3 group-hover:bg-white group-hover:text-black dark:group-hover:bg-zinc-100 dark:group-hover:text-black transition-colors text-white font-bold text-xs uppercase tracking-widest">
+                  <div className="shrink-0 flex items-center bg-white/10 dark:bg-zinc-800/50 backdrop-blur-sm border border-white/10 dark:border-zinc-700 rounded-full px-6 py-3 group-hover:bg-white group-hover:text-black dark:group-hover:bg-zinc-100 dark:group-hover:text-black transition-colors text-white font-bold text-xs uppercase tracking-normal">
                      Read Post <Icon name="arrow-right" className="ml-3 text-[10px] group-hover:translate-x-1 transition-transform" />
                   </div>
                </div>
@@ -1117,10 +1117,10 @@ const Home: React.FC = () => {
       <div className="animate-stagger-3 relative z-10">
         <div className="flex justify-between items-end mb-10 px-2">
           <div>
-            <h3 className="text-[10px] font-bold uppercase tracking-widest text-[#06331e] mb-2 px-3 py-1 bg-emerald-50 rounded-full inline-block border border-emerald-100 shadow-sm backdrop-blur-md">Our Collection</h3>
-            <h2 className="text-lg md:text-xl font-black tracking-tight text-shine mt-4">New Arrivals.</h2>
+            <h3 className="text-[10px] font-bold uppercase tracking-normal text-[#06331e] mb-2 px-3 py-1 bg-emerald-50 rounded-full inline-block border border-emerald-100 shadow-sm backdrop-blur-md">Our Collection</h3>
+            <h2 className="text-lg md:text-xl font-semibold tracking-tight text-shine mt-4">New Arrivals.</h2>
           </div>
-          <button onClick={() => navigate('/all-products')} className="text-[10px] font-bold uppercase tracking-widest bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-5 py-2.5 rounded-full hover:bg-emerald-500 dark:hover:bg-emerald-500 hover:text-white dark:hover:text-white transition-colors flex items-center shadow-lg active:scale-95 group hover-tilt">
+          <button onClick={() => navigate('/all-products')} className="text-[10px] font-bold uppercase tracking-normal bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 px-5 py-2.5 rounded-full hover:bg-emerald-500 dark:hover:bg-emerald-500 hover:text-white dark:hover:text-white transition-colors flex items-center shadow-lg active:scale-95 group hover-tilt">
             View All <Icon name="arrow-right" className="ml-2 text-[8px] group-hover:translate-x-1 transition-transform" />
           </button>
         </div>
@@ -1154,12 +1154,12 @@ const Home: React.FC = () => {
                       <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
                          <div className="bg-zinc-900/80 backdrop-blur text-white px-3 py-1.5 rounded-full border border-zinc-700 shadow-xl flex items-center space-x-1.5 animate-pulse">
                            <Icon name="clock" className="text-[8px] text-zinc-400" />
-                           <span className="text-[8px] font-black uppercase tracking-[0.2em] whitespace-nowrap">Restocking</span>
+                           <span className="text-[8px] font-semibold uppercase tracking-normal whitespace-nowrap">Restocking</span>
                          </div>
                       </div>
                     ) : (
                       <div className="absolute top-2 right-2 md:top-3 md:right-3 z-10 transition-transform duration-300 group-hover:-translate-y-0.5">
-                        <div className="bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md text-emerald-700 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/30 px-3 py-1.5 rounded-full text-[9px] font-black shadow-sm tracking-widest uppercase">
+                        <div className="bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md text-emerald-700 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/30 px-3 py-1.5 rounded-full text-[9px] font-semibold shadow-sm tracking-normal uppercase">
                           ৳ {product.price}
                         </div>
                       </div>
@@ -1175,7 +1175,7 @@ const Home: React.FC = () => {
                 </button>
                 
                 <div className="px-2 pb-2">
-                  <div className="flex items-center text-[9px] font-bold text-zinc-400 uppercase tracking-widest mb-1.5">
+                  <div className="flex items-center text-[9px] font-bold text-zinc-400 uppercase tracking-normal mb-1.5">
                     <Icon name="star" className="text-emerald-500 mr-1 text-[10px]" />{product.rating} • {product.category}
                   </div>
                   <Link to={`/product/${product.id}`}>
@@ -1239,8 +1239,8 @@ const Home: React.FC = () => {
                      <p className="text-[11px] text-zinc-500 font-medium leading-tight mb-1">
                         <span className="font-bold text-zinc-900 dark:text-zinc-100">{proofData.name}</span> from <span className="font-bold text-zinc-900 dark:text-zinc-100">{proofData.location}</span> just bought
                      </p>
-                     <p className="text-xs font-black text-emerald-600 truncate tracking-tight">{proofData.item}</p>
-                     <p className="text-[9px] text-zinc-400 mt-0.5 uppercase tracking-widest font-bold">Just now</p>
+                     <p className="text-xs font-semibold text-emerald-600 truncate tracking-tight">{proofData.item}</p>
+                     <p className="text-[9px] text-zinc-400 mt-0.5 uppercase tracking-normal font-bold">Just now</p>
                   </div>
                </div>
                <div className="border-t border-zinc-100 dark:border-zinc-800 pt-2 mt-1">
@@ -1255,7 +1255,7 @@ const Home: React.FC = () => {
                            }
                         }}
                      />
-                     <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest group-hover:text-zinc-600 dark:text-zinc-400 transition-colors">Do not show again</span>
+                     <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-normal group-hover:text-zinc-600 dark:text-zinc-400 transition-colors">Do not show again</span>
                   </label>
                </div>
             </motion.div>
@@ -1270,10 +1270,10 @@ const Home: React.FC = () => {
          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-zinc-50 dark:from-[#121212] to-transparent z-10 pointer-events-none"></div>
          <div className="animate-marquee whitespace-nowrap flex items-center shrink-0 opacity-40 grayscale hover:grayscale-0 transition-all duration-500">
             {['Apple', 'Samsung', 'Sony', 'DJI', 'Bose', 'Logitech', 'Anker', 'Xiaomi'].map((brand, idx) => (
-               <span key={idx} className="text-xl md:text-3xl font-black uppercase tracking-widest text-[#06331e] dark:text-zinc-500 px-8 md:px-16">{brand}</span>
+               <span key={idx} className="text-xl md:text-xl font-semibold uppercase tracking-normal text-[#06331e] dark:text-zinc-500 px-8 md:px-16">{brand}</span>
             ))}
             {['Apple', 'Samsung', 'Sony', 'DJI', 'Bose', 'Logitech', 'Anker', 'Xiaomi'].map((brand, idx) => (
-               <span key={idx + 10} className="text-xl md:text-3xl font-black uppercase tracking-widest text-[#06331e] dark:text-zinc-500 px-8 md:px-16">{brand}</span>
+               <span key={idx + 10} className="text-xl md:text-xl font-semibold uppercase tracking-normal text-[#06331e] dark:text-zinc-500 px-8 md:px-16">{brand}</span>
             ))}
          </div>
       </div>
@@ -1284,7 +1284,7 @@ const Home: React.FC = () => {
       {/* Floating Action Button */}
       <a href="https://wa.me/8801747708843" target="_blank" rel="noreferrer" className="fixed bottom-24 right-5 md:bottom-10 md:right-10 z-[80] w-14 h-14 bg-[#25D366] text-white rounded-full flex items-center justify-center shadow-[0_10px_30px_rgba(37,211,102,0.4)] hover:scale-110 active:scale-95 transition-transform group">
          <div className="absolute inset-0 bg-[#25D366] rounded-full animate-ping opacity-30"></div>
-         <Icon name="whatsapp" className=" text-2xl drop-shadow-md z-10" />
+         <Icon name="whatsapp" className=" text-lg drop-shadow-md z-10" />
       </a>
 
       {/* Dynamic Fullscreen Story Viewer */}

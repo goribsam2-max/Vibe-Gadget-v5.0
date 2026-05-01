@@ -49,7 +49,7 @@ const ContactUs: React.FC = () => {
           <button onClick={() => navigate(-1)} className="w-10 h-10 bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/50 flex items-center justify-center hover:bg-white dark:hover:bg-zinc-700 rounded-full transition-transform active:scale-95 shadow-sm group">
              <Icon name="arrow-left" className="text-sm text-zinc-600 dark:text-zinc-400 group-hover:text-black dark:group-hover:text-white" />
           </button>
-          <h1 className="text-2xl md:text-3xl font-black tracking-tight uppercase">Contact Us</h1>
+          <h1 className="text-lg md:text-xl font-semibold tracking-tight uppercase">Contact Us</h1>
        </div>
 
        <div className="mb-10 text-zinc-600 dark:text-zinc-400">
@@ -58,15 +58,15 @@ const ContactUs: React.FC = () => {
 
        <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-             <label className="block text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">Full Name</label>
+             <label className="block text-xs font-bold uppercase tracking-normal text-zinc-500 mb-2">Full Name</label>
              <input type="text" value={formData.name} onChange={e => setFormData({...formData, name: e.target.value})} className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-2xl p-4 font-bold outline-none focus:border-black transition-colors" placeholder="John Doe" />
           </div>
           <div>
-             <label className="block text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">Email Address</label>
+             <label className="block text-xs font-bold uppercase tracking-normal text-zinc-500 mb-2">Email Address</label>
              <input type="email" value={formData.email} onChange={e => setFormData({...formData, email: e.target.value})} className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-2xl p-4 font-bold outline-none focus:border-black transition-colors" placeholder="john@example.com" />
           </div>
           <div>
-             <label className="block text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">Message</label>
+             <label className="block text-xs font-bold uppercase tracking-normal text-zinc-500 mb-2">Message</label>
              <textarea value={formData.message} onChange={e => setFormData({...formData, message: e.target.value})} className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-2xl p-4 font-bold outline-none focus:border-black transition-colors h-40 resize-none" placeholder="How can we help you?"></textarea>
           </div>
           <button disabled={loading} type="submit" className="w-full btn-primary py-4 text-sm shadow-xl shadow-zinc-200 disabled:opacity-50 flex items-center justify-center">

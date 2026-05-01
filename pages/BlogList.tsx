@@ -48,11 +48,11 @@ const BlogList: React.FC = () => {
         <div className="absolute inset-0 bg-zinc-900/20 z-0"></div>
         <div className="relative z-10 max-w-4xl mx-auto">
           <button onClick={() => navigate(-1)} className="w-10 h-10 flex items-center justify-center bg-zinc-50 dark:bg-zinc-900/10 rounded-full mb-6 hover:bg-zinc-50 dark:bg-zinc-900/20 transition-colors"><Icon name="arrow-left" /></button>
-          <h1 className="text-3xl md:text-5xl font-black tracking-tight mb-4">Tech Insights & Hacks</h1>
+          <h1 className="text-xl md:text-lg font-semibold tracking-tight mb-4">Tech Insights & Hacks</h1>
           <p className="text-emerald-50 max-w-2xl text-sm md:text-base leading-relaxed opacity-90">Stay updated with our latest gadgets review, tips to extend your battery life, smart home tutorials, and more.</p>
           
           {isAdmin && (
-             <button onClick={() => navigate('/blog/create')} className="mt-8 bg-zinc-50 dark:bg-zinc-800 text-[#06331e] px-6 py-3 rounded-full text-xs font-bold uppercase tracking-widest hover:bg-zinc-100 dark:bg-zinc-800 transition-colors shadow-lg flex items-center space-x-2 relative z-20">
+             <button onClick={() => navigate('/blog/create')} className="mt-8 bg-zinc-50 dark:bg-zinc-800 text-[#06331e] px-6 py-3 rounded-full text-xs font-bold uppercase tracking-normal hover:bg-zinc-100 dark:bg-zinc-800 transition-colors shadow-lg flex items-center space-x-2 relative z-20">
                <Icon name="plus" /><span>Create New Blog Post</span>
              </button>
           )}
@@ -87,12 +87,12 @@ const BlogList: React.FC = () => {
                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent"></div>
                 </Link>
                 <div className="col-span-1 md:col-span-2 flex flex-col justify-center">
-                   <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-widest mb-3">{new Date(blog.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+                   <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-normal mb-3">{new Date(blog.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</p>
                    <Link to={`/blog/${blog.slug}`}>
-                     <h2 className="text-xl md:text-2xl font-black tracking-tight text-zinc-900 dark:text-zinc-100 mb-3 group-hover:text-emerald-600 transition-colors">{blog.title}</h2>
-                     <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-medium line-clamp-2 md:line-clamp-3">{blog.excerpt}</p>
+                     <h2 className="text-xl md:text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 mb-3 group-hover:text-emerald-600 transition-colors">{blog.title}</h2>
+                     <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed font-medium truncate md:truncate">{blog.excerpt}</p>
                    </Link>
-                   <Link to={`/blog/${blog.slug}`} className="mt-6 flex items-center text-[10px] uppercase font-black tracking-widest text-zinc-900 dark:text-emerald-500 group-hover:text-emerald-600 group-hover:translate-x-2 transition-all w-fit">
+                   <Link to={`/blog/${blog.slug}`} className="mt-6 flex items-center text-[10px] uppercase font-semibold tracking-normal text-zinc-900 dark:text-emerald-500 group-hover:text-emerald-600 group-hover:translate-x-2 transition-all w-fit">
                       Read Article <Icon name="arrow-right" className="ml-2" />
                    </Link>
                 </div>

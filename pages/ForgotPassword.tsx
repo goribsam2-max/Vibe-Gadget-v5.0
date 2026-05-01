@@ -42,7 +42,7 @@ const ForgotPassword: React.FC = () => {
              className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-8 rounded-3xl shadow-sm text-center"
            >
             <div className="w-16 h-16 bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400 rounded-full flex items-center justify-center mx-auto mb-6">
-              <Icon name="check" className="text-2xl" />
+              <Icon name="check" className="text-lg" />
             </div>
             <h2 className="text-xl font-bold text-zinc-900 dark:text-zinc-100 mb-2">Check your email</h2>
             <p className="text-sm text-zinc-500 mb-8 leading-relaxed">
@@ -50,7 +50,7 @@ const ForgotPassword: React.FC = () => {
             </p>
             <button 
               onClick={() => navigate('/signin')}
-              className="w-full py-4 bg-zinc-900 dark:bg-white text-white dark:text-black rounded-xl font-bold text-xs uppercase tracking-widest hover:bg-black dark:hover:bg-zinc-200 transition-colors"
+              className="w-full py-4 bg-zinc-900 dark:bg-white text-white dark:text-black rounded-xl font-bold text-xs uppercase tracking-normal hover:bg-black dark:hover:bg-zinc-200 transition-colors"
             >
               Back to Sign In
             </button>
@@ -70,7 +70,7 @@ const ForgotPassword: React.FC = () => {
         >
           <Icon name="arrow-left" className="text-xs" />
         </motion.button>
-        <h1 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">Reset Password</h1>
+        <h1 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">Reset Password</h1>
         <p className="mt-2 text-sm text-zinc-500 font-medium leading-relaxed">Enter your email address and we'll send you a secure link to reset your password.</p>
       </div>
 
@@ -89,7 +89,7 @@ const ForgotPassword: React.FC = () => {
               />
             </div>
             
-            <button disabled={resetLoading} type="submit" className="w-full py-4 mt-2 bg-zinc-900 dark:bg-white text-white dark:text-black rounded-xl font-bold text-xs uppercase tracking-widest shadow-md hover:bg-black dark:hover:bg-zinc-200 transition-all active:scale-[0.98] disabled:opacity-50 flex items-center justify-center">
+            <button disabled={resetLoading} type="submit" className="w-full py-4 mt-2 bg-zinc-900 dark:bg-white text-white dark:text-black rounded-xl font-bold text-xs uppercase tracking-normal shadow-md hover:bg-black dark:hover:bg-zinc-200 transition-all active:scale-[0.98] disabled:opacity-50 flex items-center justify-center">
               {resetLoading ? <Icon name="spinner" className="mr-2 animate-spin" /> : null}
               {resetLoading ? "Sending Link..." : "Send Reset Link"}
             </button>

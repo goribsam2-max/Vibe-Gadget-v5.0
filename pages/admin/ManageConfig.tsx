@@ -80,8 +80,8 @@ const ManageConfig: React.FC = () => {
           <Icon name="arrow-left" className="text-sm" />
         </button>
         <div>
-          <h1 className="text-2xl font-black tracking-tight">App Settings</h1>
-          <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-widest mt-1">Manage Connections and Keys</p>
+          <h1 className="text-lg font-semibold tracking-tight">App Settings</h1>
+          <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-normal mt-1">Manage Connections and Keys</p>
         </div>
       </div>
 
@@ -128,16 +128,16 @@ const ManageConfig: React.FC = () => {
            <div className="space-y-6">
               <div className="p-5 bg-zinc-50 dark:bg-zinc-800 rounded-2xl border border-zinc-100 dark:border-zinc-800">
                 <Toggle label="Store Open (Accepting Orders)" active={configs.storeOpen} onToggle={() => setConfigs({...configs, storeOpen: !configs.storeOpen})} />
-                {!configs.storeOpen && <p className="text-[10px] uppercase font-bold text-red-500 mt-4 tracking-widest px-1">Orders are currently paused</p>}
+                {!configs.storeOpen && <p className="text-[10px] uppercase font-bold text-red-500 mt-4 tracking-normal px-1">Orders are currently paused</p>}
               </div>
 
               <div className="p-5 bg-zinc-50 dark:bg-zinc-800 rounded-2xl border border-zinc-100 dark:border-zinc-800">
                 <Toggle label="Enable Mystery Box Feature" active={configs.mysteryBoxActive ?? true} onToggle={() => setConfigs({...configs, mysteryBoxActive: !(configs.mysteryBoxActive ?? true)})} />
-                <p className="text-[10px] uppercase font-bold text-zinc-500 mt-4 tracking-widest px-1">Controls Mystery Box visibility</p>
+                <p className="text-[10px] uppercase font-bold text-zinc-500 mt-4 tracking-normal px-1">Controls Mystery Box visibility</p>
               </div>
 
               <div>
-                <label className="text-[10px] font-bold text-zinc-400 uppercase mb-2 block tracking-widest">Base Delivery Charge (৳)</label>
+                <label className="text-[10px] font-bold text-zinc-400 uppercase mb-2 block tracking-normal">Base Delivery Charge (৳)</label>
                 <input 
                     type="number" 
                     value={configs.deliveryCharge || 0}
@@ -147,7 +147,7 @@ const ManageConfig: React.FC = () => {
               </div>
 
               <div>
-                <label className="text-[10px] font-bold text-zinc-400 uppercase mb-2 block tracking-widest">Global Store Notice (Optional)</label>
+                <label className="text-[10px] font-bold text-zinc-400 uppercase mb-2 block tracking-normal">Global Store Notice (Optional)</label>
                 <textarea 
                     value={configs.storeNotice || ""}
                     onChange={e => setConfigs({...configs, storeNotice: e.target.value})}
@@ -157,7 +157,7 @@ const ManageConfig: React.FC = () => {
               </div>
 
               <div>
-                <label className="text-[10px] font-bold text-zinc-400 uppercase mb-2 block tracking-widest">Flash Deal End Time</label>
+                <label className="text-[10px] font-bold text-zinc-400 uppercase mb-2 block tracking-normal">Flash Deal End Time</label>
                 <input 
                     type="datetime-local" 
                     value={configs.dealEndTime || ""}
@@ -192,24 +192,24 @@ const ManageConfig: React.FC = () => {
         >
            <div className="space-y-4">
                <div>
-                  <label className="text-[10px] font-bold text-zinc-400 uppercase mb-2 block tracking-widest">Minimum Withdrawal (৳)</label>
+                  <label className="text-[10px] font-bold text-zinc-400 uppercase mb-2 block tracking-normal">Minimum Withdrawal (৳)</label>
                   <input type="number" value={configs.affiliateMinWithdrawal ?? 50} onChange={e => setConfigs({...configs, affiliateMinWithdrawal: Number(e.target.value)})} className="w-full bg-zinc-50 dark:bg-zinc-800 p-4 rounded-xl text-sm font-medium outline-none border border-transparent focus:border-zinc-900 transition-all font-mono" />
                </div>
                <div className="grid grid-cols-2 gap-4">
-                   <div><label className="text-[10px] font-bold text-zinc-400 uppercase mb-2 block tracking-widest">T1 Target</label><input type="number" value={configs.affiliateTier1Threshold ?? 3} onChange={e => setConfigs({...configs, affiliateTier1Threshold: Number(e.target.value)})} className="w-full bg-zinc-50 dark:bg-zinc-800 p-4 rounded-xl text-sm font-mono" /></div>
-                   <div><label className="text-[10px] font-bold text-zinc-400 uppercase mb-2 block tracking-widest">T1 Commission (৳)</label><input type="number" value={configs.affiliateTier1Commission ?? 50} onChange={e => setConfigs({...configs, affiliateTier1Commission: Number(e.target.value)})} className="w-full bg-zinc-50 dark:bg-zinc-800 p-4 rounded-xl text-sm font-mono" /></div>
+                   <div><label className="text-[10px] font-bold text-zinc-400 uppercase mb-2 block tracking-normal">T1 Target</label><input type="number" value={configs.affiliateTier1Threshold ?? 3} onChange={e => setConfigs({...configs, affiliateTier1Threshold: Number(e.target.value)})} className="w-full bg-zinc-50 dark:bg-zinc-800 p-4 rounded-xl text-sm font-mono" /></div>
+                   <div><label className="text-[10px] font-bold text-zinc-400 uppercase mb-2 block tracking-normal">T1 Commission (৳)</label><input type="number" value={configs.affiliateTier1Commission ?? 50} onChange={e => setConfigs({...configs, affiliateTier1Commission: Number(e.target.value)})} className="w-full bg-zinc-50 dark:bg-zinc-800 p-4 rounded-xl text-sm font-mono" /></div>
                </div>
                <div className="grid grid-cols-2 gap-4">
-                   <div><label className="text-[10px] font-bold text-zinc-400 uppercase mb-2 block tracking-widest">T2 Target</label><input type="number" value={configs.affiliateTier2Threshold ?? 10} onChange={e => setConfigs({...configs, affiliateTier2Threshold: Number(e.target.value)})} className="w-full bg-zinc-50 dark:bg-zinc-800 p-4 rounded-xl text-sm font-mono" /></div>
-                   <div><label className="text-[10px] font-bold text-zinc-400 uppercase mb-2 block tracking-widest">T2 Commission (৳)</label><input type="number" value={configs.affiliateTier2Commission ?? 100} onChange={e => setConfigs({...configs, affiliateTier2Commission: Number(e.target.value)})} className="w-full bg-zinc-50 dark:bg-zinc-800 p-4 rounded-xl text-sm font-mono" /></div>
+                   <div><label className="text-[10px] font-bold text-zinc-400 uppercase mb-2 block tracking-normal">T2 Target</label><input type="number" value={configs.affiliateTier2Threshold ?? 10} onChange={e => setConfigs({...configs, affiliateTier2Threshold: Number(e.target.value)})} className="w-full bg-zinc-50 dark:bg-zinc-800 p-4 rounded-xl text-sm font-mono" /></div>
+                   <div><label className="text-[10px] font-bold text-zinc-400 uppercase mb-2 block tracking-normal">T2 Commission (৳)</label><input type="number" value={configs.affiliateTier2Commission ?? 100} onChange={e => setConfigs({...configs, affiliateTier2Commission: Number(e.target.value)})} className="w-full bg-zinc-50 dark:bg-zinc-800 p-4 rounded-xl text-sm font-mono" /></div>
                </div>
                <div className="grid grid-cols-2 gap-4">
-                   <div><label className="text-[10px] font-bold text-zinc-400 uppercase mb-2 block tracking-widest">T3 Target</label><input type="number" value={configs.affiliateTier3Threshold ?? 20} onChange={e => setConfigs({...configs, affiliateTier3Threshold: Number(e.target.value)})} className="w-full bg-zinc-50 dark:bg-zinc-800 p-4 rounded-xl text-sm font-mono" /></div>
-                   <div><label className="text-[10px] font-bold text-zinc-400 uppercase mb-2 block tracking-widest">T3 Commission (৳)</label><input type="number" value={configs.affiliateTier3Commission ?? 150} onChange={e => setConfigs({...configs, affiliateTier3Commission: Number(e.target.value)})} className="w-full bg-zinc-50 dark:bg-zinc-800 p-4 rounded-xl text-sm font-mono" /></div>
+                   <div><label className="text-[10px] font-bold text-zinc-400 uppercase mb-2 block tracking-normal">T3 Target</label><input type="number" value={configs.affiliateTier3Threshold ?? 20} onChange={e => setConfigs({...configs, affiliateTier3Threshold: Number(e.target.value)})} className="w-full bg-zinc-50 dark:bg-zinc-800 p-4 rounded-xl text-sm font-mono" /></div>
+                   <div><label className="text-[10px] font-bold text-zinc-400 uppercase mb-2 block tracking-normal">T3 Commission (৳)</label><input type="number" value={configs.affiliateTier3Commission ?? 150} onChange={e => setConfigs({...configs, affiliateTier3Commission: Number(e.target.value)})} className="w-full bg-zinc-50 dark:bg-zinc-800 p-4 rounded-xl text-sm font-mono" /></div>
                </div>
                <div className="grid grid-cols-2 gap-4">
-                   <div><label className="text-[10px] font-bold text-zinc-400 uppercase mb-2 block tracking-widest">T4 Target</label><input type="number" value={configs.affiliateTier4Threshold ?? 30} onChange={e => setConfigs({...configs, affiliateTier4Threshold: Number(e.target.value)})} className="w-full bg-zinc-50 dark:bg-zinc-800 p-4 rounded-xl text-sm font-mono" /></div>
-                   <div><label className="text-[10px] font-bold text-zinc-400 uppercase mb-2 block tracking-widest">T4 Commission (৳)</label><input type="number" value={configs.affiliateTier4Commission ?? 200} onChange={e => setConfigs({...configs, affiliateTier4Commission: Number(e.target.value)})} className="w-full bg-zinc-50 dark:bg-zinc-800 p-4 rounded-xl text-sm font-mono" /></div>
+                   <div><label className="text-[10px] font-bold text-zinc-400 uppercase mb-2 block tracking-normal">T4 Target</label><input type="number" value={configs.affiliateTier4Threshold ?? 30} onChange={e => setConfigs({...configs, affiliateTier4Threshold: Number(e.target.value)})} className="w-full bg-zinc-50 dark:bg-zinc-800 p-4 rounded-xl text-sm font-mono" /></div>
+                   <div><label className="text-[10px] font-bold text-zinc-400 uppercase mb-2 block tracking-normal">T4 Commission (৳)</label><input type="number" value={configs.affiliateTier4Commission ?? 200} onChange={e => setConfigs({...configs, affiliateTier4Commission: Number(e.target.value)})} className="w-full bg-zinc-50 dark:bg-zinc-800 p-4 rounded-xl text-sm font-mono" /></div>
                </div>
            </div>
         </AccordionSection>
@@ -241,7 +241,7 @@ const ManageConfig: React.FC = () => {
       <button 
         disabled={saving}
         onClick={handleSave}
-        className="w-full py-5 bg-zinc-900 dark:bg-zinc-50 dark:text-black text-white rounded-2xl font-bold text-sm uppercase tracking-widest transition-all disabled:opacity-50"
+        className="w-full py-5 bg-zinc-900 dark:bg-zinc-50 dark:text-black text-white rounded-2xl font-bold text-sm uppercase tracking-normal transition-all disabled:opacity-50"
       >
         {saving ? 'Saving...' : 'Save All Settings'}
       </button>
@@ -275,7 +275,7 @@ const AccordionSection = ({ title, icon, children, expanded, onToggle }: any) =>
 
 const Field = ({ label, value, onChange, placeholder }: any) => (
   <div>
-     <label className="text-[10px] font-bold text-zinc-400 uppercase mb-2 block tracking-widest">{label}</label>
+     <label className="text-[10px] font-bold text-zinc-400 uppercase mb-2 block tracking-normal">{label}</label>
      <input 
         type="text" 
         value={value || ""}

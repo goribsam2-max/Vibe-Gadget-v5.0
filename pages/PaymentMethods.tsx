@@ -32,13 +32,13 @@ const PaymentMethods: React.FC = () => {
 
        <div className="flex-1">
           <div className="mb-10">
-             <h2 className="text-[10px] font-bold text-f-gray uppercase tracking-widest mb-2">Policy Notice</h2>
+             <h2 className="text-[10px] font-bold text-f-gray uppercase tracking-normal mb-2">Policy Notice</h2>
              <p className="text-xs leading-relaxed text-gray-500 font-medium">
                 Digital payments (bKash/Nagad) help us process your order faster. Use <span className="text-black dark:text-white font-bold">01747708843</span> for any manual send-money transactions.
              </p>
           </div>
 
-          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-4">Methods</p>
+          <p className="text-[10px] font-bold text-gray-400 uppercase tracking-normal mb-4">Methods</p>
           <div className="space-y-4">
              {methods.map(m => (
                <div 
@@ -58,7 +58,7 @@ const PaymentMethods: React.FC = () => {
                      )}
                      <div className="flex flex-col">
                         <span className="font-bold text-sm">{m.id}</span>
-                        <span className="text-[8px] font-bold text-gray-400 uppercase tracking-tighter">{m.id === 'Cash on Delivery' ? 'Doorstep Pay' : '01747708843'}</span>
+                        <span className="text-[8px] font-bold text-gray-400 uppercase tracking-tight">{m.id === 'Cash on Delivery' ? 'Doorstep Pay' : '01747708843'}</span>
                      </div>
                   </div>
                   <div className={`w-6 h-6 rounded-full border-2 flex items-center justify-center transition-all ${selected === m.id ? 'border-black' : 'border-gray-200'}`}>

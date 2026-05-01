@@ -115,7 +115,7 @@ const ManageStories: React.FC = () => {
               <Icon name="arrow-left" className="text-sm" />
             </button>
             <div>
-              <h1 className="text-2xl font-black tracking-tight">Create New Story</h1>
+              <h1 className="text-lg font-semibold tracking-tight">Create New Story</h1>
             </div>
         </div>
 
@@ -140,7 +140,7 @@ const ManageStories: React.FC = () => {
                   onClick={() => fileInputRef.current?.click()}
                   className="h-48 border-2 border-dashed border-zinc-300 rounded-3xl flex flex-col items-center justify-center cursor-pointer hover:bg-zinc-50 dark:bg-zinc-800 transition-colors relative overflow-hidden group"
                 >
-                   {loading && !previewUrl ? <Icon name="spinner" className="animate-spin text-zinc-400 text-3xl" /> : previewUrl ? <img src={previewUrl} className="w-full h-full object-cover" alt="preview" /> : <div className="text-center group-hover:scale-105 transition-transform"><Icon name="cloud-upload-alt" className="text-3xl text-zinc-400 mb-3"/><p className="text-sm font-bold text-zinc-500">Tap to browse files</p></div>}
+                   {loading && !previewUrl ? <Icon name="spinner" className="animate-spin text-zinc-400 text-xl" /> : previewUrl ? <img src={previewUrl} className="w-full h-full object-cover" alt="preview" /> : <div className="text-center group-hover:scale-105 transition-transform"><Icon name="cloud-upload-alt" className="text-xl text-zinc-400 mb-3"/><p className="text-sm font-bold text-zinc-500">Tap to browse files</p></div>}
                    <input type="file" ref={fileInputRef} className="hidden" accept="image/*" onChange={handleFileChange} />
                 </div>
               </div>
@@ -154,7 +154,7 @@ const ManageStories: React.FC = () => {
            <div>
               <label className="text-xs font-bold text-zinc-600 dark:text-zinc-400 uppercase mb-2 block">Associated Link URL (Optional)</label>
               <input type="text" value={linkUrl} onChange={e => setLinkUrl(e.target.value)} placeholder="https://..." className="w-full bg-zinc-50 dark:bg-zinc-800 p-4 rounded-2xl text-sm outline-none border border-zinc-200 dark:border-zinc-700 focus:border-black transition-colors" />
-              <p className="text-[10px] uppercase font-bold tracking-widest text-zinc-400 mt-2">Where should users go when they swipe up or click?</p>
+              <p className="text-[10px] uppercase font-bold tracking-normal text-zinc-400 mt-2">Where should users go when they swipe up or click?</p>
            </div>
 
            <div className="bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 p-6 rounded-3xl space-y-5">
@@ -190,7 +190,7 @@ const ManageStories: React.FC = () => {
            </div>
 
            <div className="pt-4 pb-12">
-             <button onClick={handleSave} disabled={loading} className="w-full py-5 bg-zinc-900 dark:bg-zinc-50 dark:text-black text-white rounded-2xl font-bold uppercase tracking-widest text-sm hover:opacity-90 active:scale-[0.98] transition-all disabled:opacity-50 shadow-xl shadow-black/20">
+             <button onClick={handleSave} disabled={loading} className="w-full py-5 bg-zinc-900 dark:bg-zinc-50 dark:text-black text-white rounded-2xl font-bold uppercase tracking-normal text-sm hover:opacity-90 active:scale-[0.98] transition-all disabled:opacity-50 shadow-xl shadow-black/20">
                 {loading ? 'Saving...' : 'Publish to Feed'}
              </button>
            </div>
@@ -207,11 +207,11 @@ const ManageStories: React.FC = () => {
              <Icon name="arrow-left" className="text-sm" />
            </button>
            <div>
-             <h1 className="text-2xl font-black tracking-tight">Stories Setup</h1>
-             <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-widest mt-1">Manage active flash stories</p>
+             <h1 className="text-lg font-semibold tracking-tight">Stories Setup</h1>
+             <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-normal mt-1">Manage active flash stories</p>
            </div>
         </div>
-        <button onClick={() => setIsAdding(true)} className="bg-[#06331e] text-white px-5 py-3 rounded-xl font-bold text-xs uppercase tracking-widest shadow-lg hover:bg-zinc-900 transition-colors flex items-center space-x-2">
+        <button onClick={() => setIsAdding(true)} className="bg-[#06331e] text-white px-5 py-3 rounded-xl font-bold text-xs uppercase tracking-normal shadow-lg hover:bg-zinc-900 transition-colors flex items-center space-x-2">
            <Icon name="plus" />
            <span>Add Story</span>
         </button>
@@ -226,7 +226,7 @@ const ManageStories: React.FC = () => {
                  <img src={story.mediaUrl} className="w-full h-full object-cover" alt="" />
                )}
                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-black/20 opacity-80" />
-               <div className="absolute top-3 left-3 bg-zinc-50 dark:bg-zinc-900/20 backdrop-blur-md px-2 py-1 rounded-md text-[9px] font-bold text-white uppercase tracking-widest">
+               <div className="absolute top-3 left-3 bg-zinc-50 dark:bg-zinc-900/20 backdrop-blur-md px-2 py-1 rounded-md text-[9px] font-bold text-white uppercase tracking-normal">
                   {story.category}
                </div>
                <button onClick={() => handleDelete(story.id)} className="absolute bottom-4 right-4 w-10 h-10 bg-red-500 text-white rounded-full flex items-center justify-center opacity-0 xl:group-hover:opacity-100 lg:opacity-0 opacity-100 transition-opacity hover:scale-110 shadow-lg border border-red-400">
@@ -236,9 +236,9 @@ const ManageStories: React.FC = () => {
          ))}
          {stories.length === 0 && (
             <div className="col-span-full py-20 text-center bg-zinc-50 dark:bg-zinc-800 border border-dashed border-zinc-200 dark:border-zinc-700 rounded-3xl">
-              <Icon name="layer-group" className="text-zinc-300 text-4xl mb-4" />
-              <p className="text-xs font-bold uppercase tracking-widest text-zinc-400">No stories active</p>
-              <button onClick={() => setIsAdding(true)} className="mt-4 text-[10px] font-bold uppercase tracking-widest text-[#06331e] bg-emerald-50 px-4 py-2 rounded-lg">Create First Story</button>
+              <Icon name="layer-group" className="text-zinc-300 text-lg mb-4" />
+              <p className="text-xs font-bold uppercase tracking-normal text-zinc-400">No stories active</p>
+              <button onClick={() => setIsAdding(true)} className="mt-4 text-[10px] font-bold uppercase tracking-normal text-[#06331e] bg-emerald-50 px-4 py-2 rounded-lg">Create First Story</button>
             </div>
          )}
       </div>

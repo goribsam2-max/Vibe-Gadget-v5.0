@@ -24,10 +24,10 @@ const NotFound: React.FC = () => {
           transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
           className="w-24 h-24 mx-auto bg-zinc-100 dark:bg-zinc-900 rounded-2xl flex items-center justify-center mb-8 shadow-inner"
         >
-          <Icon name="search" className="text-4xl text-zinc-400" />
+          <Icon name="search" className="text-lg text-zinc-400" />
         </motion.div>
         
-        <h1 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 mb-3">
+        <h1 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100 mb-3">
           Page Not Found
         </h1>
         

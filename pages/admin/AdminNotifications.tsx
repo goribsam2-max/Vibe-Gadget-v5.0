@@ -75,7 +75,7 @@ const AdminNotifications: React.FC = () => {
             <button onClick={() => navigate(-1)} className="w-12 h-12 flex items-center justify-center bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-zinc-100 rounded-full shadow-sm hover:bg-[#06331e] hover:text-white transition-all active:scale-95">
                 <Icon name="chevron-left" className="text-xs" />
             </button>
-            <h1 className="text-3xl font-black tracking-tighter text-[#06331e]">Push Notifications</h1>
+            <h1 className="text-xl font-semibold tracking-tight text-[#06331e]">Push Notifications</h1>
         </div>
 
         <div className="bg-zinc-50 dark:bg-zinc-800 p-8 md:p-10 rounded-[2rem] border border-zinc-100 dark:border-zinc-800 shadow-sm max-w-2xl mx-auto">
@@ -91,7 +91,7 @@ const AdminNotifications: React.FC = () => {
 
             <form onSubmit={handleSendNotification} className="space-y-6">
                 <div>
-                    <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">Notification Title</label>
+                    <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-normal mb-2">Notification Title</label>
                     <input 
                         required 
                         value={title} 
@@ -102,7 +102,7 @@ const AdminNotifications: React.FC = () => {
                     />
                 </div>
                 <div>
-                    <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">Message Body</label>
+                    <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-normal mb-2">Message Body</label>
                     <textarea 
                         required 
                         value={message} 
@@ -113,7 +113,7 @@ const AdminNotifications: React.FC = () => {
                     ></textarea>
                 </div>
                 <div>
-                    <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">Image URL (Optional)</label>
+                    <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-normal mb-2">Image URL (Optional)</label>
                     <input 
                         value={imageUrl} 
                         onChange={(e) => setImageUrl(e.target.value)} 
@@ -128,7 +128,7 @@ const AdminNotifications: React.FC = () => {
                     )}
                 </div>
                 <div className="pt-4">
-                    <button disabled={loading} type="submit" className="w-full py-4 bg-[#06331e] text-white rounded-xl font-bold text-xs uppercase tracking-widest shadow-lg shadow-[#06331e]/20 hover:bg-[#0a4a2b] transition-all active:scale-[0.98] disabled:opacity-50 flex items-center justify-center space-x-3">
+                    <button disabled={loading} type="submit" className="w-full py-4 bg-[#06331e] text-white rounded-xl font-bold text-xs uppercase tracking-normal shadow-lg shadow-[#06331e]/20 hover:bg-[#0a4a2b] transition-all active:scale-[0.98] disabled:opacity-50 flex items-center justify-center space-x-3">
                         <Icon name="paper-plane" />
                         <span>{loading ? "Sending..." : "Send Broadcast Now"}</span>
                     </button>

@@ -42,7 +42,7 @@ const Onboarding: React.FC<{ onFinish: () => void }> = ({ onFinish }) => {
   return (
     <div className="h-screen flex flex-col p-8 bg-zinc-50 dark:bg-zinc-800 max-w-md mx-auto">
       <div className="flex justify-end mb-6">
-        <button onClick={handleFinish} className="text-xs font-bold uppercase tracking-widest text-zinc-400 hover:text-black dark:text-white transition-colors">Skip</button>
+        <button onClick={handleFinish} className="text-xs font-bold uppercase tracking-normal text-zinc-400 hover:text-black dark:text-white transition-colors">Skip</button>
       </div>
       
       <div className="flex-1 flex flex-col items-center justify-center">
@@ -59,7 +59,7 @@ const Onboarding: React.FC<{ onFinish: () => void }> = ({ onFinish }) => {
               <img src={slides[current].image} className="w-full h-full object-cover" alt="" />
             </div>
             
-            <h1 className="text-3xl font-black text-center mb-4 tracking-tighter leading-none">{slides[current].title}</h1>
+            <h1 className="text-xl font-semibold text-center mb-4 tracking-tight leading-none">{slides[current].title}</h1>
             <p className="text-zinc-500 text-sm text-center leading-relaxed mb-10 px-6 font-medium">{slides[current].desc}</p>
           </motion.div>
         </AnimatePresence>
@@ -72,12 +72,12 @@ const Onboarding: React.FC<{ onFinish: () => void }> = ({ onFinish }) => {
       </div>
 
       <div className="space-y-4 w-full">
-        <button onClick={next} className="btn-primary w-full shadow-2xl shadow-black/10 py-5 text-sm uppercase tracking-widest">
+        <button onClick={next} className="btn-primary w-full shadow-2xl shadow-black/10 py-5 text-sm uppercase tracking-normal">
           {current === slides.length - 1 ? "Start Shopping" : "Continue"}
         </button>
         
         {current === 0 && (
-          <p className="text-center text-[10px] font-bold uppercase tracking-widest text-zinc-400">
+          <p className="text-center text-[10px] font-bold uppercase tracking-normal text-zinc-400">
             Already a member? <button onClick={() => navigate('/signin')} className="text-black dark:text-white underline">Sign In</button>
           </p>
         )}

@@ -68,8 +68,8 @@ const MyOrders: React.FC = () => {
           <Icon name="arrow-left" className="text-xs" />
         </button>
         <div>
-           <h1 className="text-2xl md:text-xl lg:text-base xl:text-sm font-bold tracking-tight text-zinc-900 dark:text-zinc-100 mb-0.5">My Orders</h1>
-           <p className="text-zinc-500 text-[11px] font-medium tracking-widest uppercase">Purchase History</p>
+           <h1 className="text-lg md:text-xl lg:text-base xl:text-sm font-bold tracking-tight text-zinc-900 dark:text-zinc-100 mb-0.5">My Orders</h1>
+           <p className="text-zinc-500 text-[11px] font-medium tracking-normal uppercase">Purchase History</p>
         </div>
       </div>
 
@@ -91,10 +91,10 @@ const MyOrders: React.FC = () => {
       ) : orders.length === 0 ? (
         <div className="text-center py-40 flex flex-col items-center">
           <div className="w-20 h-20 bg-zinc-50 dark:bg-zinc-800 rounded-full border border-zinc-100 dark:border-zinc-800 flex items-center justify-center mb-6">
-             <Icon name="shopping-bag" className="text-2xl text-zinc-300" />
+             <Icon name="shopping-bag" className="text-lg text-zinc-300" />
           </div>
-          <p className="text-[11px] font-bold text-zinc-400 uppercase tracking-widest mb-8">No order history found</p>
-          <button onClick={() => navigate('/')} className="px-8 py-3.5 bg-zinc-900 dark:bg-zinc-50 dark:text-black text-white rounded-full text-[10px] font-bold uppercase tracking-widest shadow-md hover:bg-zinc-800 transition-all">Start Shopping</button>
+          <p className="text-[11px] font-bold text-zinc-400 uppercase tracking-normal mb-8">No order history found</p>
+          <button onClick={() => navigate('/')} className="px-8 py-3.5 bg-zinc-900 dark:bg-zinc-50 dark:text-black text-white rounded-full text-[10px] font-bold uppercase tracking-normal shadow-md hover:bg-zinc-800 transition-all">Start Shopping</button>
         </div>
       ) : (
         <div className="space-y-4">
@@ -109,19 +109,19 @@ const MyOrders: React.FC = () => {
                   onClick={() => navigate(`/track-order/${order.id}`)} 
                   className="bg-zinc-50 dark:bg-zinc-800 p-6 md:p-8 rounded-3xl border border-zinc-200 dark:border-zinc-700 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:border-black transition-all cursor-pointer relative group flex flex-col mb-8"
                 >
-                  <div className="absolute top-0 left-8 bg-zinc-900 dark:bg-zinc-50 dark:text-black text-white text-[9px] font-bold uppercase tracking-widest px-4 py-1.5 rounded-b-lg">
+                  <div className="absolute top-0 left-8 bg-zinc-900 dark:bg-zinc-50 dark:text-black text-white text-[9px] font-bold uppercase tracking-normal px-4 py-1.5 rounded-b-lg">
                      Latest Order
                   </div>
                   <div className="flex justify-between items-start mb-8 mt-6">
                     <div className="flex items-center space-x-4">
                       <StatusIconSmall status={order.status} />
                       <div>
-                        <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest mb-1 mt-0.5">Order Ref</p>
-                        <p className="text-sm font-mono font-black uppercase text-zinc-900 dark:text-zinc-100 border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 px-2 py-0.5 rounded leading-none">#{order.id.slice(0, 8)}</p>
+                        <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-normal mb-1 mt-0.5">Order Ref</p>
+                        <p className="text-sm font-mono font-semibold uppercase text-zinc-900 dark:text-zinc-100 border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 px-2 py-0.5 rounded leading-none">#{order.id.slice(0, 8)}</p>
                       </div>
                     </div>
                     <div className="text-right">
-                       <p className="text-[10px] font-bold text-black dark:text-white uppercase tracking-widest leading-none">{order.status}</p>
+                       <p className="text-[10px] font-bold text-black dark:text-white uppercase tracking-normal leading-none">{order.status}</p>
                        <p className="text-[10px] text-zinc-400 font-medium mt-2">{new Date(order.createdAt).toLocaleDateString()}</p>
                     </div>
                   </div>
@@ -141,14 +141,14 @@ const MyOrders: React.FC = () => {
 
                   <div className="flex justify-between items-end pt-6 border-t border-zinc-100 dark:border-zinc-800">
                     <div>
-                      <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest mb-1.5">Grand Total</p>
-                      <p className="text-2xl font-black tracking-tight text-zinc-900 dark:text-zinc-100 leading-none">৳{order.total.toLocaleString()}</p>
+                      <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-normal mb-1.5">Grand Total</p>
+                      <p className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 leading-none">৳{order.total.toLocaleString()}</p>
                     </div>
                     <div className="flex items-center space-x-3">
                         {isCancelable(order) && (
                             <button 
                               onClick={(e) => handleCancelOrder(order.id, e)}
-                              className="px-4 py-2.5 bg-red-50 text-red-500 hover:bg-red-500 hover:text-white rounded-full text-[9px] font-bold uppercase tracking-widest transition-colors"
+                              className="px-4 py-2.5 bg-red-50 text-red-500 hover:bg-red-500 hover:text-white rounded-full text-[9px] font-bold uppercase tracking-normal transition-colors"
                             >
                                Cancel Order
                             </button>
@@ -175,15 +175,15 @@ const MyOrders: React.FC = () => {
                          <img src={order.items[0]?.image} className="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal group-hover:scale-110 transition-transform" alt="" />
                       </div>
                       <div>
-                         <p className="text-xs font-black tracking-tight text-zinc-900 dark:text-zinc-100 uppercase">#{order.id.slice(0, 8)}</p>
-                         <p className="text-[9px] font-bold text-zinc-400 mt-0.5 tracking-widest uppercase">{new Date(order.createdAt).toLocaleDateString()}</p>
+                         <p className="text-xs font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 uppercase">#{order.id.slice(0, 8)}</p>
+                         <p className="text-[9px] font-bold text-zinc-400 mt-0.5 tracking-normal uppercase">{new Date(order.createdAt).toLocaleDateString()}</p>
                       </div>
                    </div>
                    
                    <div className="flex items-center space-x-6">
                       <div className="hidden sm:block text-right">
-                          <p className="text-[9px] font-bold text-zinc-400 tracking-widest uppercase mb-0.5">Status</p>
-                          <p className={`text-[10px] font-black uppercase tracking-tight ${order.status === OrderStatus.CANCELLED ? 'text-red-500' : 'text-zinc-900 dark:text-zinc-100'}`}>{order.status}</p>
+                          <p className="text-[9px] font-bold text-zinc-400 tracking-normal uppercase mb-0.5">Status</p>
+                          <p className={`text-[10px] font-semibold uppercase tracking-tight ${order.status === OrderStatus.CANCELLED ? 'text-red-500' : 'text-zinc-900 dark:text-zinc-100'}`}>{order.status}</p>
                       </div>
                       <div className="w-10 h-10 rounded-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 flex items-center justify-center text-zinc-400 group-hover:bg-zinc-900 group-hover:text-white transition-all shadow-sm">
                          <Icon name="chevron-right" className="text-xs" />

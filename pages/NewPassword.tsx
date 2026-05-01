@@ -54,7 +54,7 @@ const NewPassword: React.FC = () => {
     }
   };
 
-  if (!email) return <div className="min-h-screen flex items-center justify-center bg-zinc-50 dark:bg-zinc-800"><Icon name="spinner" className="animate-spin text-4xl text-emerald-600" /></div>;
+  if (!email) return <div className="min-h-screen flex items-center justify-center bg-zinc-50 dark:bg-zinc-800"><Icon name="spinner" className="animate-spin text-lg text-emerald-600" /></div>;
 
   return (
     <div className="p-6 md:p-12 pb-24 animate-fade-in bg-zinc-50 dark:bg-zinc-800 max-w-xl mx-auto min-h-screen font-inter">
@@ -63,7 +63,7 @@ const NewPassword: React.FC = () => {
           <button onClick={() => navigate('/signin')} className="p-3.5 bg-zinc-50 dark:bg-zinc-800 rounded-2xl hover:bg-zinc-900 hover:text-white transition-all shadow-sm">
              <Icon name="chevron-left" className="text-sm" />
           </button>
-          <h1 className="text-2xl md:text-3xl font-black tracking-tight">New Password</h1>
+          <h1 className="text-lg md:text-xl font-semibold tracking-tight">New Password</h1>
        </div>
        
        <div className="flex-1">
@@ -71,11 +71,11 @@ const NewPassword: React.FC = () => {
           
           <div className="space-y-6">
              <div>
-                <label className="block text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">New Password</label>
+                <label className="block text-xs font-bold uppercase tracking-normal text-zinc-500 mb-2">New Password</label>
                 <input type="password" value={password} onChange={e => setPassword(e.target.value)} placeholder="••••••••••••" className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-2xl p-4 font-bold outline-none focus:border-black transition-colors" />
              </div>
              <div>
-                <label className="block text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2">Confirm Password</label>
+                <label className="block text-xs font-bold uppercase tracking-normal text-zinc-500 mb-2">Confirm Password</label>
                 <input type="password" value={confirm} onChange={e => setConfirm(e.target.value)} placeholder="••••••••••••" className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-2xl p-4 font-bold outline-none focus:border-black transition-colors" />
              </div>
           </div>

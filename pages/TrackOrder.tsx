@@ -85,8 +85,8 @@ const TrackOrder: React.FC = () => {
 
   if (!order) return (
     <div className="h-screen flex flex-col items-center justify-center p-10 text-center">
-      <div className="w-20 h-20 bg-zinc-50 dark:bg-zinc-800 rounded-2xl flex items-center justify-center mb-6 text-2xl border border-zinc-100 dark:border-zinc-800">?</div>
-      <p className="font-bold text-sm uppercase tracking-widest mb-10 text-zinc-400">Order not found</p>
+      <div className="w-20 h-20 bg-zinc-50 dark:bg-zinc-800 rounded-2xl flex items-center justify-center mb-6 text-lg border border-zinc-100 dark:border-zinc-800">?</div>
+      <p className="font-bold text-sm uppercase tracking-normal mb-10 text-zinc-400">Order not found</p>
       <button onClick={() => navigate('/')} className="btn-primary w-full px-10">Return to Store</button>
     </div>
   );
@@ -97,26 +97,26 @@ const TrackOrder: React.FC = () => {
           <button onClick={() => navigate(-1)} className="p-3.5 bg-zinc-50 dark:bg-zinc-800 rounded-2xl border border-zinc-100 dark:border-zinc-800 shadow-sm active:scale-90 transition-all">
              <Icon name="arrow-left" className="text-xs" />
           </button>
-          <h1 className="text-2xl font-black tracking-tight uppercase text-zinc-900 dark:text-zinc-100">Track Order</h1>
+          <h1 className="text-lg font-semibold tracking-tight uppercase text-zinc-900 dark:text-zinc-100">Track Order</h1>
        </div>
 
        <div className="bg-zinc-50 dark:bg-zinc-800 rounded-[2.5rem] p-10 flex flex-col items-center text-center border border-zinc-100 dark:border-zinc-800 mb-12 shadow-sm relative overflow-hidden">
           {order.status === OrderStatus.ON_THE_WAY && (order.riderNumber || order.courierName) && (
-            <div className="absolute top-0 left-0 right-0 bg-emerald-500 text-white py-2 px-4 flex justify-between items-center text-[10px] font-bold uppercase tracking-widest shadow-md">
+            <div className="absolute top-0 left-0 right-0 bg-emerald-500 text-white py-2 px-4 flex justify-between items-center text-[10px] font-bold uppercase tracking-normal shadow-md">
                <span><Icon name="motorcycle" className="mr-2" />{order.courierName || 'Courier'}</span>
                {order.riderNumber && <a href={`tel:${order.riderNumber}`} className="bg-zinc-50 dark:bg-zinc-800 text-emerald-600 px-3 py-1 rounded-full"><Icon name="phone-alt" className="mr-2 hover:animate-pulse" />{order.riderNumber}</a>}
             </div>
           )}
           <div className="mb-6 mt-4"><StatusIcon status={order.status} /></div>
-          <h2 className="text-xl font-black mb-2 tracking-tight uppercase text-zinc-900 dark:text-zinc-100">{order.status}</h2>
+          <h2 className="text-xl font-semibold mb-2 tracking-tight uppercase text-zinc-900 dark:text-zinc-100">{order.status}</h2>
           <div className="flex items-center space-x-3 bg-zinc-50 dark:bg-zinc-800 px-5 py-2.5 rounded-2xl border border-zinc-100 dark:border-zinc-800 mt-4">
-             <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Tracking ID:</span>
-             <span className="text-[11px] font-mono font-black text-zinc-900 dark:text-zinc-100">{order.trackingId || 'Preparing'}</span>
+             <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-normal">Tracking ID:</span>
+             <span className="text-[11px] font-mono font-semibold text-zinc-900 dark:text-zinc-100">{order.trackingId || 'Preparing'}</span>
           </div>
        </div>
 
        <div className="space-y-6">
-          <h3 className="text-[10px] font-bold uppercase tracking-widest text-zinc-300 px-2">Delivery Progress</h3>
+          <h3 className="text-[10px] font-bold uppercase tracking-normal text-zinc-300 px-2">Delivery Progress</h3>
           <div className="bg-zinc-50 dark:bg-zinc-800 rounded-[2rem] p-8 border border-zinc-100 dark:border-zinc-800 space-y-10 shadow-sm">
              <Step label="Order Placed" sub="We received your order." active />
              <Step label="Quality Check" sub="Testing your items before packing." active={order.status !== OrderStatus.PENDING && order.status !== OrderStatus.CANCELLED} />
@@ -126,7 +126,7 @@ const TrackOrder: React.FC = () => {
           </div>
        </div>
        
-       <button onClick={() => navigate(`/e-receipt/${order.id}`)} className="w-full mt-10 py-5 bg-zinc-50 dark:bg-zinc-800 border border-zinc-100 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 rounded-2xl font-bold text-[10px] uppercase tracking-widest hover:bg-zinc-900 hover:text-white transition-all active:scale-[0.98]">
+       <button onClick={() => navigate(`/e-receipt/${order.id}`)} className="w-full mt-10 py-5 bg-zinc-50 dark:bg-zinc-800 border border-zinc-100 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 rounded-2xl font-bold text-[10px] uppercase tracking-normal hover:bg-zinc-900 hover:text-white transition-all active:scale-[0.98]">
           View Invoice
        </button>
     </div>
@@ -140,7 +140,7 @@ const Step = ({ label, sub, active }: any) => (
        <div className={`w-0.5 h-full transition-colors duration-500 ${active ? 'bg-zinc-900/10' : 'bg-zinc-50 dark:bg-zinc-800'}`}></div>
     </div>
     <div className="-translate-y-1 flex-1">
-       <h4 className={`text-[11px] font-bold uppercase tracking-widest ${active ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-300'}`}>{label}</h4>
+       <h4 className={`text-[11px] font-bold uppercase tracking-normal ${active ? 'text-zinc-900 dark:text-zinc-100' : 'text-zinc-300'}`}>{label}</h4>
        <p className="text-[10px] font-medium text-zinc-400 mt-1 leading-relaxed">{sub}</p>
     </div>
   </div>

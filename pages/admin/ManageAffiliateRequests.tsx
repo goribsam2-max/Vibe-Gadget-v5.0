@@ -87,8 +87,8 @@ const ManageAffiliateRequests: React.FC = () => {
       <div className="flex items-center space-x-6 mb-10">
         <button onClick={() => navigate('/admin')} className="w-10 h-10 flex items-center justify-center bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-full hover:bg-zinc-900 hover:text-white transition-all"><Icon name="arrow-left" /></button>
         <div>
-           <h1 className="text-2xl font-black tracking-tight mb-1">Affiliate Applications</h1>
-           <p className="text-[10px] uppercase font-bold text-zinc-400 tracking-widest">Review and approve requests</p>
+           <h1 className="text-lg font-semibold tracking-tight mb-1">Affiliate Applications</h1>
+           <p className="text-[10px] uppercase font-bold text-zinc-400 tracking-normal">Review and approve requests</p>
         </div>
       </div>
 
@@ -97,10 +97,10 @@ const ManageAffiliateRequests: React.FC = () => {
             <div key={req.id} className="bg-zinc-50 dark:bg-zinc-800 p-6 md:p-8 rounded-[2rem] border border-zinc-200 dark:border-zinc-700 shadow-sm flex flex-col md:flex-row gap-6">
                 <div className="flex-1">
                    <div className="flex items-center justify-between mb-4">
-                     <span className={`px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ${req.status === 'pending' ? 'bg-yellow-100 text-yellow-700' : req.status === 'approved' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>{req.status}</span>
+                     <span className={`px-3 py-1 rounded-full text-[10px] font-semibold uppercase tracking-normal ${req.status === 'pending' ? 'bg-yellow-100 text-yellow-700' : req.status === 'approved' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>{req.status}</span>
                      <span className="text-[10px] font-bold text-zinc-400 uppercase">{new Date(req.createdAt).toLocaleDateString()}</span>
                    </div>
-                   <h3 className="text-2xl font-black text-zinc-900 dark:text-white mb-4 tracking-tighter">{req.fullName}</h3>
+                   <h3 className="text-lg font-semibold text-zinc-900 dark:text-white mb-4 tracking-tight">{req.fullName}</h3>
                    <div className="space-y-3 mb-6 bg-white dark:bg-zinc-900 p-4 rounded-xl border border-zinc-100 dark:border-zinc-800">
                      <p className="text-[11px] font-bold text-zinc-600 dark:text-zinc-400 flex items-center gap-2"><Icon name="envelope" className="text-zinc-400"/> <span className="text-black dark:text-white">{req.email}</span></p>
                      <p className="text-[11px] font-bold text-zinc-600 dark:text-zinc-400 flex items-center gap-2"><Icon name="phone" className="text-zinc-400"/> <span className="text-black dark:text-white">{req.phone}</span></p>
@@ -112,14 +112,14 @@ const ManageAffiliateRequests: React.FC = () => {
                 
                 {req.status === 'pending' && (
                   <div className="flex flex-col gap-3 justify-center border-t md:border-t-0 md:border-l border-zinc-200 dark:border-zinc-700 pt-6 md:pt-0 md:pl-6">
-                    <button onClick={() => updateStatus(req, 'approved')} className="w-full bg-[#06331e] text-white text-[10px] font-black tracking-widest py-4 px-8 rounded-xl uppercase hover:bg-emerald-800 transition-colors shadow-lg active:scale-95">Approve</button>
-                    <button onClick={() => updateStatus(req, 'rejected')} className="w-full bg-red-50 text-red-600 text-[10px] font-black tracking-widest py-4 px-8 rounded-xl uppercase hover:bg-red-100 transition-colors active:scale-95">Reject</button>
+                    <button onClick={() => updateStatus(req, 'approved')} className="w-full bg-[#06331e] text-white text-[10px] font-semibold tracking-normal py-4 px-8 rounded-xl uppercase hover:bg-emerald-800 transition-colors shadow-lg active:scale-95">Approve</button>
+                    <button onClick={() => updateStatus(req, 'rejected')} className="w-full bg-red-50 text-red-600 text-[10px] font-semibold tracking-normal py-4 px-8 rounded-xl uppercase hover:bg-red-100 transition-colors active:scale-95">Reject</button>
                   </div>
                 )}
             </div>
          ))}
          {requests.length === 0 && (
-             <div className="col-span-full py-20 text-center text-zinc-400 font-bold uppercase tracking-widest bg-zinc-50 dark:bg-zinc-800 rounded-3xl border border-zinc-200 dark:border-zinc-700">No applications found.</div>
+             <div className="col-span-full py-20 text-center text-zinc-400 font-bold uppercase tracking-normal bg-zinc-50 dark:bg-zinc-800 rounded-3xl border border-zinc-200 dark:border-zinc-700">No applications found.</div>
          )}
       </div>
     </div>

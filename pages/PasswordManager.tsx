@@ -55,7 +55,7 @@ const PasswordManager: React.FC = () => {
 
        <form onSubmit={handleChange} className="flex-1 space-y-6">
           <div>
-            <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3">Current Password</label>
+            <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-normal mb-3">Current Password</label>
             <input 
               type="password" 
               className="w-full bg-[#f4f4f5] dark:bg-zinc-800/80 p-5 rounded-[24px] outline-none border border-transparent focus:border-black transition-all"
@@ -67,7 +67,7 @@ const PasswordManager: React.FC = () => {
 
           <div className="space-y-6 pt-4 border-t border-f-light">
              <div>
-               <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3">New Password</label>
+               <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-normal mb-3">New Password</label>
                <input 
                  type="password" 
                  className="w-full bg-[#f4f4f5] dark:bg-zinc-800/80 p-5 rounded-[24px] outline-none border border-transparent focus:border-black transition-all"
@@ -77,7 +77,7 @@ const PasswordManager: React.FC = () => {
                />
              </div>
              <div>
-               <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-3">Confirm New Password</label>
+               <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-normal mb-3">Confirm New Password</label>
                <input 
                  type="password" 
                  className="w-full bg-[#f4f4f5] dark:bg-zinc-800/80 p-5 rounded-[24px] outline-none border border-transparent focus:border-black transition-all"

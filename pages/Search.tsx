@@ -73,7 +73,7 @@ const Search: React.FC = () => {
        {searchTerm.trim() === '' ? (
          <>
            <div className="mb-10">
-              <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Trending Tech</h3>
+              <h3 className="text-xs font-bold text-gray-400 uppercase tracking-normal mb-4">Trending Tech</h3>
               <div className="flex flex-wrap gap-2">
                  {['iPhone', 'Magsafe', 'Pods', 'Smart Watch', 'Anker'].map(cat => (
                     <button key={cat} onClick={() => { setSearchTerm(cat); saveSearch(cat); }} className="px-5 py-2.5 bg-[#f4f4f5] dark:bg-zinc-800/80 rounded-2xl text-xs font-bold hover:bg-zinc-900 hover:text-white transition-all">{cat}</button>
@@ -84,8 +84,8 @@ const Search: React.FC = () => {
            {recent.length > 0 && (
              <div className="mb-10 animate-fade-in">
                 <div className="flex justify-between items-center mb-6">
-                   <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest">Recent Searches</h3>
-                   <button onClick={clearAll} className="text-[10px] font-bold text-black dark:text-white underline uppercase tracking-widest opacity-40 hover:opacity-100">Clear All</button>
+                   <h3 className="text-xs font-bold text-gray-400 uppercase tracking-normal">Recent Searches</h3>
+                   <button onClick={clearAll} className="text-[10px] font-bold text-black dark:text-white underline uppercase tracking-normal opacity-40 hover:opacity-100">Clear All</button>
                 </div>
 
                 <div className="space-y-4">
@@ -106,7 +106,7 @@ const Search: React.FC = () => {
          </>
        ) : (
          <div className="space-y-4 animate-fade-in">
-            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">Search Results ({results.length})</h3>
+            <h3 className="text-xs font-bold text-gray-400 uppercase tracking-normal mb-2">Search Results ({results.length})</h3>
             {results.map(product => (
               <div key={product.id} onClick={() => { saveSearch(searchTerm); navigate(`/product/${product.id}`); }} className="flex items-center space-x-4 p-3 bg-zinc-50 dark:bg-zinc-800 rounded-2xl border border-zinc-100 dark:border-zinc-800 overflow-hidden shadow-sm hover:shadow-md cursor-pointer active:scale-[0.98] transition-all hover:border-zinc-200 dark:border-zinc-700">
                 <div className="w-16 h-16 rounded-xl bg-zinc-50 dark:bg-zinc-800/50 flex-shrink-0 flex items-center justify-center border border-zinc-50 overflow-hidden">
@@ -114,7 +114,7 @@ const Search: React.FC = () => {
                 </div>
                 <div className="flex-1 min-w-0 pr-2">
                   <h4 className="font-bold text-sm truncate text-zinc-900 dark:text-zinc-100">{product.name}</h4>
-                  <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-widest mt-1">{product.category} • ৳{product.price}</p>
+                  <p className="text-[10px] text-zinc-400 font-bold uppercase tracking-normal mt-1">{product.category} • ৳{product.price}</p>
                 </div>
                 <div className="w-8 h-8 rounded-full bg-zinc-50 dark:bg-zinc-800 flex items-center justify-center text-zinc-400 hover:bg-zinc-900 hover:text-white transition-colors">
                   <Icon name="chevron-right" className="text-[10px]" />
@@ -123,8 +123,8 @@ const Search: React.FC = () => {
             ))}
             {results.length === 0 && (
               <div className="py-20 text-center opacity-40">
-                <Icon name="box-open" className="text-4xl mb-4" />
-                <p className="text-sm font-bold uppercase tracking-widest">No products matched</p>
+                <Icon name="box-open" className="text-lg mb-4" />
+                <p className="text-sm font-bold uppercase tracking-normal">No products matched</p>
               </div>
             )}
          </div>

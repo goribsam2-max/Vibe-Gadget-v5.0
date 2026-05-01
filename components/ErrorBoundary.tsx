@@ -29,9 +29,9 @@ class ErrorBoundary extends Component<Props, State> {
         <div className="min-h-screen bg-zinc-50 dark:bg-[#121212] flex flex-col items-center justify-center p-6 text-center">
            <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="max-w-md w-full">
               <div className="w-24 h-24 bg-red-50 dark:bg-red-500/10 text-red-500 rounded-full flex items-center justify-center mx-auto mb-8 shadow-sm">
-                 <Icon name="exclamation-triangle" className="text-4xl" />
+                 <Icon name="exclamation-triangle" className="text-lg" />
               </div>
-              <h1 className="text-3xl font-bold text-zinc-900 dark:text-white mb-4 tracking-tight">Oops! Something went wrong.</h1>
+              <h1 className="text-xl font-bold text-zinc-900 dark:text-white mb-4 tracking-tight">Oops! Something went wrong.</h1>
               <p className="text-sm text-zinc-500 dark:text-zinc-400 font-medium mb-8 leading-relaxed">
                  We've encountered an unexpected issue. Please try refreshing the page or navigating back to the home page.
               </p>

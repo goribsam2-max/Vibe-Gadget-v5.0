@@ -50,7 +50,7 @@ const AuthPage: React.FC = () => {
     <div className="min-h-screen bg-zinc-50 dark:bg-zinc-800 flex flex-col items-center justify-center px-6">
       <div className="w-full max-w-md">
         <div className="mb-10 text-center">
-          <h1 className="text-3xl font-bold text-[#1F2029] mb-2">{isLogin ? "Welcome Back!" : "Create Account"}</h1>
+          <h1 className="text-xl font-bold text-[#1F2029] mb-2">{isLogin ? "Welcome Back!" : "Create Account"}</h1>
           <p className="text-gray-400">Experience premium gadgets with Vibe</p>
         </div>
 

@@ -410,7 +410,7 @@ const ProductDetails: React.FC = () => {
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 pointer-events-none">
               <div className="bg-zinc-900/80 backdrop-blur-md text-white px-6 py-3 rounded-full border border-zinc-700 shadow-2xl flex items-center space-x-2 animate-pulse">
                 <Icon name="clock" className="text-zinc-400" />
-                <span className="text-[10px] font-black uppercase tracking-[0.2em] whitespace-nowrap">Restocking Soon</span>
+                <span className="text-[10px] font-semibold uppercase tracking-normal whitespace-nowrap">Restocking Soon</span>
               </div>
             </div>
           )}
@@ -441,16 +441,16 @@ const ProductDetails: React.FC = () => {
 
       <div className="px-6 py-10 lg:py-0 flex-1 w-full max-w-3xl mx-auto lg:mx-0 animate-stagger-2 relative z-10">
         <div className="mb-10 px-1">
-           <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-[0.2em] mb-3 bg-emerald-50 inline-block px-3 py-1 rounded-full border border-emerald-100">{product.category}</p>
-           <h1 className="text-2xl md:text-3xl font-black tracking-tight mb-4 leading-tight text-zinc-900 dark:text-zinc-100 dark:text-zinc-50">{product.name}</h1>
+           <p className="text-[10px] text-emerald-600 font-bold uppercase tracking-normal mb-3 bg-emerald-50 inline-block px-3 py-1 rounded-full border border-emerald-100">{product.category}</p>
+           <h1 className="text-lg md:text-xl font-semibold tracking-tight mb-4 leading-tight text-zinc-900 dark:text-zinc-100 dark:text-zinc-50">{product.name}</h1>
            
            {mysteryOffer && (
              <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="bg-gradient-to-r from-purple-600 to-indigo-600 p-4 rounded-2xl mb-6 text-white shadow-xl shadow-purple-500/20 border border-purple-400 border-dashed relative overflow-hidden">
                <div className="absolute -top-4 -right-4 w-12 h-12 bg-zinc-50 dark:bg-zinc-900/20 rotate-45"></div>
                <div className="flex items-center space-x-3">
-                 <Icon name="gift" className="text-2xl animate-bounce text-yellow-300 drop-shadow-md" />
+                 <Icon name="gift" className="text-lg animate-bounce text-yellow-300 drop-shadow-md" />
                  <div>
-                   <p className="text-xs font-black tracking-widest uppercase text-purple-200">Mystery Box offer active!</p>
+                   <p className="text-xs font-semibold tracking-normal uppercase text-purple-200">Mystery Box offer active!</p>
                    <p className="text-sm font-bold mt-0.5">You unlocked {mysteryOffer.discountPct}% OFF</p>
                  </div>
                </div>
@@ -461,7 +461,7 @@ const ProductDetails: React.FC = () => {
               <div className="flex items-center space-x-3">
                  <div className={`bg-gradient-to-r ${mysteryOffer ? 'from-purple-600 to-indigo-900' : 'from-[#06331e] to-black'} text-white px-6 py-3 rounded-full inline-flex items-center shadow-lg hover-glow ${mysteryOffer ? 'shadow-purple-900/40 ring-2 ring-purple-400 ring-offset-2' : 'shadow-emerald-900/20'}`}>
                     <span className="text-xs font-bold opacity-80 mr-1">৳</span>
-                    <span className="text-xl lg:text-2xl font-black tracking-tight">{(mysteryOffer ? mysteryOffer.discountPrice : (product.isOffer && product.offerPrice ? product.offerPrice : product.price)).toLocaleString()}</span>
+                    <span className="text-xl lg:text-lg font-semibold tracking-tight">{(mysteryOffer ? mysteryOffer.discountPrice : (product.isOffer && product.offerPrice ? product.offerPrice : product.price)).toLocaleString()}</span>
                  </div>
                  {((product.isOffer && product.offerPrice) || mysteryOffer) && (
                     <span className="text-zinc-400 font-bold line-through text-base md:text-lg lg:text-base xl:text-sm mt-0.5">৳{product.price.toLocaleString()}</span>
@@ -477,12 +477,12 @@ const ProductDetails: React.FC = () => {
              <div className={`mt-4 ${mysteryOffer ? 'bg-purple-50 text-purple-700 border-purple-200' : 'bg-red-50 text-red-600 border-red-100'} rounded-lg p-2 border flex items-center justify-center w-full shadow-sm`}>
                <div className="flex items-center space-x-1.5 whitespace-nowrap">
                  <Icon name="clock" className="text-[10px] animate-pulse" />
-                 <span className="font-bold text-[8px] uppercase tracking-widest">{mysteryOffer ? "Special Deal Ends In:" : "Offer Ends In:"}</span>
-                 <div className="flex space-x-0.5 font-black text-[10px]">
-                   <span>{String(timeLeft.d).padStart(2, '0')}</span><span className="text-[7px] text-zinc-500 uppercase tracking-widest opacity-80 mr-0.5">d</span>
-                   <span>{String(timeLeft.h).padStart(2, '0')}</span><span className="text-[7px] text-zinc-500 uppercase tracking-widest opacity-80 mr-0.5">h</span>
-                   <span>{String(timeLeft.m).padStart(2, '0')}</span><span className="text-[7px] text-zinc-500 uppercase tracking-widest opacity-80 mr-0.5">m</span>
-                   <span>{String(timeLeft.s).padStart(2, '0')}</span><span className="text-[7px] text-zinc-500 uppercase tracking-widest opacity-80">s</span>
+                 <span className="font-bold text-[8px] uppercase tracking-normal">{mysteryOffer ? "Special Deal Ends In:" : "Offer Ends In:"}</span>
+                 <div className="flex space-x-0.5 font-semibold text-[10px]">
+                   <span>{String(timeLeft.d).padStart(2, '0')}</span><span className="text-[7px] text-zinc-500 uppercase tracking-normal opacity-80 mr-0.5">d</span>
+                   <span>{String(timeLeft.h).padStart(2, '0')}</span><span className="text-[7px] text-zinc-500 uppercase tracking-normal opacity-80 mr-0.5">h</span>
+                   <span>{String(timeLeft.m).padStart(2, '0')}</span><span className="text-[7px] text-zinc-500 uppercase tracking-normal opacity-80 mr-0.5">m</span>
+                   <span>{String(timeLeft.s).padStart(2, '0')}</span><span className="text-[7px] text-zinc-500 uppercase tracking-normal opacity-80">s</span>
                  </div>
                </div>
              </div>
@@ -493,7 +493,7 @@ const ProductDetails: React.FC = () => {
             {affiliateCode && (
                <div className="mb-8 bg-emerald-50 dark:bg-[#06331e] border border-emerald-200 dark:border-emerald-900 rounded-[1.5rem] p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 shadow-sm">
                  <div>
-                   <h3 className="text-[10px] font-black uppercase tracking-widest text-[#06331e] dark:text-emerald-400 mb-1 flex items-center">
+                   <h3 className="text-[10px] font-semibold uppercase tracking-normal text-[#06331e] dark:text-emerald-400 mb-1 flex items-center">
                       <Icon name="gem" className="mr-1.5 text-[12px] text-emerald-500" /> Affiliate Program
                    </h3>
                    <p className="text-xs text-zinc-600 dark:text-zinc-300 font-medium">Earn <strong className="text-emerald-700 dark:text-emerald-400">৳50</strong> per successful order!</p>
@@ -508,13 +508,13 @@ const ProductDetails: React.FC = () => {
                        notify("Affiliate Link copied!", "success");
                      }
                    }}
-                   className="shrink-0 bg-[#06331e] dark:bg-emerald-500 text-white dark:text-black px-4 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center justify-center hover:bg-emerald-900 dark:hover:bg-emerald-400 transition-colors shadow-md active:scale-95"
+                   className="shrink-0 bg-[#06331e] dark:bg-emerald-500 text-white dark:text-black px-4 py-2.5 rounded-xl text-[10px] font-semibold uppercase tracking-normal flex items-center justify-center hover:bg-emerald-900 dark:hover:bg-emerald-400 transition-colors shadow-md active:scale-95"
                  >
                    Copy Link
                  </button>
                </div>
             )}
-            <h3 className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-4 px-1">Product Description</h3>
+            <h3 className="text-[10px] font-bold uppercase tracking-normal text-zinc-400 mb-4 px-1">Product Description</h3>
             <p className="text-sm md:text-base text-zinc-600 dark:text-zinc-400 dark:text-zinc-300 leading-relaxed font-medium whitespace-pre-wrap px-1">
               {product.description || "High-quality premium accessory designed for ultimate performance and style."}
             </p>
@@ -534,13 +534,13 @@ const ProductDetails: React.FC = () => {
         {bundleItems.length > 0 && <div className="mb-12 border-t border-zinc-100 dark:border-zinc-800 pt-8">
             <div className="flex justify-between items-center mb-6 px-1">
                <div>
-                 <h3 className="text-[10px] font-bold uppercase tracking-widest text-zinc-400">Bundle Offer</h3>
-                 <h2 className="text-lg font-black tracking-tight mt-1 text-zinc-900 dark:text-zinc-100">Shop the Look</h2>
+                 <h3 className="text-[10px] font-bold uppercase tracking-normal text-zinc-400">Bundle Offer</h3>
+                 <h2 className="text-lg font-semibold tracking-tight mt-1 text-zinc-900 dark:text-zinc-100">Shop the Look</h2>
                </div>
                <button 
                  onClick={handleBundleAddToCart} 
                  disabled={addingBundle}
-                 className={`px-3 py-1.5 rounded-full text-[9px] font-bold uppercase tracking-widest shadow-sm transition-all active:scale-95 flex items-center justify-center min-w-[100px] ${addingBundle ? 'bg-emerald-500 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-200'}`}
+                 className={`px-3 py-1.5 rounded-full text-[9px] font-bold uppercase tracking-normal shadow-sm transition-all active:scale-95 flex items-center justify-center min-w-[100px] ${addingBundle ? 'bg-emerald-500 text-white' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-200'}`}
                >
                   {addingBundle ? <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}><Icon name="check" className="text-[12px]" /></motion.div> : 'Add Bundle'}
                </button>
@@ -562,14 +562,14 @@ const ProductDetails: React.FC = () => {
                 </div>
                 
                 <div className="md:ml-auto text-center md:text-right border-t md:border-t-0 md:border-l border-zinc-200 dark:border-zinc-700 pt-4 md:pt-0 md:pl-6 w-full md:w-auto">
-                   <p className="text-[10px] font-bold text-emerald-600 tracking-widest uppercase mb-1">Save 15%</p>
+                   <p className="text-[10px] font-bold text-emerald-600 tracking-normal uppercase mb-1">Save 15%</p>
                    {(() => {
                       const basePrice = product.price + bundleItems.reduce((a, b) => a + b.price, 0);
                       const discountPrice = basePrice * 0.85;
                       return (
                        <>
-                         <p className="text-xl font-black text-zinc-900 dark:text-zinc-100 line-through opacity-30 text-xs mb-0.5">৳{basePrice.toLocaleString()}</p>
-                         <p className="text-xl font-black text-zinc-900 dark:text-zinc-100 tracking-tight">৳{discountPrice.toLocaleString()}</p>
+                         <p className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 line-through opacity-30 text-xs mb-0.5">৳{basePrice.toLocaleString()}</p>
+                         <p className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 tracking-tight">৳{discountPrice.toLocaleString()}</p>
                        </>
                       );
                    })()}
@@ -584,16 +584,16 @@ const ProductDetails: React.FC = () => {
               <div className="absolute top-0 left-0 w-2 h-full bg-emerald-500"></div>
               <div className="text-center md:text-left mb-6 md:mb-0 relative z-10 pl-2">
                  <div className="flex items-end justify-center md:justify-start gap-2 mb-2">
-                   <h3 className="text-5xl md:text-6xl font-black tracking-tighter text-zinc-900 dark:text-zinc-100 leading-none">{product.rating}</h3>
+                   <h3 className="text-lg md:text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 leading-none">{product.rating}</h3>
                    <span className="text-lg font-bold text-zinc-400 mb-1.5">/ 5</span>
                  </div>
                  <div className="flex text-yellow-400 text-lg my-3 justify-center md:justify-start gap-1">
                     {[1, 2, 3, 4, 5].map(star => <div key={star} className="bg-white dark:bg-zinc-900 p-1 rounded-full shadow-sm border border-zinc-100 dark:border-zinc-800"><Icon name={star <= Math.round(product.rating || 0) ? 'star' : 'star-outline'} className="drop-shadow-sm" /></div>)}
                  </div>
-                 <p className="text-[10px] font-black uppercase tracking-[0.2em] text-zinc-400 bg-white dark:bg-zinc-900 inline-block px-3 py-1 rounded-full shadow-sm border border-zinc-100 dark:border-zinc-800">Based on {product.numReviews || 0} reviews</p>
+                 <p className="text-[10px] font-semibold uppercase tracking-normal text-zinc-400 bg-white dark:bg-zinc-900 inline-block px-3 py-1 rounded-full shadow-sm border border-zinc-100 dark:border-zinc-800">Based on {product.numReviews || 0} reviews</p>
               </div>
               <div className="w-full md:w-auto flex justify-center md:justify-end relative z-10">
-                 <button onClick={() => navigate(`/leave-review?productId=${product.id}`)} className="px-8 py-4 bg-[#06331e] text-emerald-300 rounded-[2rem] text-xs font-black uppercase tracking-widest shadow-2xl shadow-emerald-900/30 hover:-translate-y-1 hover:shadow-emerald-900/50 hover:bg-zinc-900 active:scale-95 transition-all flex items-center space-x-3 group border border-[#06331e] dark:border-emerald-900/30">
+                 <button onClick={() => navigate(`/leave-review?productId=${product.id}`)} className="px-8 py-4 bg-[#06331e] text-emerald-300 rounded-[2rem] text-xs font-semibold uppercase tracking-normal shadow-2xl shadow-emerald-900/30 hover:-translate-y-1 hover:shadow-emerald-900/50 hover:bg-zinc-900 active:scale-95 transition-all flex items-center space-x-3 group border border-[#06331e] dark:border-emerald-900/30">
                     <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform"><Icon name="pen" className="text-sm text-emerald-200" /></div>
                     <span>Write a Review</span>
                  </button>
@@ -603,14 +603,14 @@ const ProductDetails: React.FC = () => {
            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 relative z-10">
               {reviews.map(review => (
                 <div key={review.id} className="bg-white dark:bg-zinc-900 p-8 rounded-[2.5rem] border border-zinc-200 dark:border-zinc-800 transition-all hover:-translate-y-1 hover:shadow-xl shadow-zinc-200/50 dark:shadow-none hover:border-emerald-200 dark:hover:border-zinc-700 flex flex-col relative group overflow-hidden">
-                   <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none"><Icon name="quote-right" className="text-6xl text-emerald-900 dark:text-zinc-500" /></div>
+                   <div className="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none"><Icon name="quote-right" className="text-xl text-emerald-900 dark:text-zinc-500" /></div>
                    <div className="flex justify-between items-start mb-6 relative z-10">
                       <div className="flex items-center space-x-4">
                          <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-emerald-100 dark:border-emerald-900/30 p-1 shrink-0 bg-white dark:bg-zinc-800 shadow-inner">
                             <img src={review.userPhoto || `https://ui-avatars.com/api/?name=${review.userName}&background=000&color=fff`} className="w-full h-full rounded-full object-cover" alt="" />
                          </div>
                          <div>
-                            <p className="text-sm font-black tracking-tight text-zinc-900 dark:text-zinc-100 flex items-center gap-1.5">
+                            <p className="text-sm font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 flex items-center gap-1.5">
                                {review.userName}
                                <span className="w-4 h-4 bg-emerald-50 dark:bg-emerald-900/20 rounded-full flex items-center justify-center border border-emerald-100 dark:border-emerald-900/50"><Icon name="check" className="text-[8px] text-emerald-500" /></span>
                             </p>
@@ -619,7 +619,7 @@ const ProductDetails: React.FC = () => {
                             </div>
                          </div>
                       </div>
-                      <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest">{new Date(review.createdAt).toLocaleDateString()}</span>
+                      <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-normal">{new Date(review.createdAt).toLocaleDateString()}</span>
                    </div>
                    <p className="text-sm text-zinc-600 dark:text-zinc-300 font-medium leading-relaxed flex-1">"{review.comment}"</p>
                    {review.images && review.images.length > 0 && (
@@ -640,7 +640,7 @@ const ProductDetails: React.FC = () => {
                    )}
                 </div>
               ))}
-              {reviews.length === 0 && <div className="col-span-1 md:col-span-2 py-12 bg-white dark:bg-zinc-900 rounded-[2rem] border border-dashed border-zinc-200 dark:border-zinc-700 text-center text-[10px] font-bold uppercase tracking-widest text-zinc-400">No reviews yet</div>}
+              {reviews.length === 0 && <div className="col-span-1 md:col-span-2 py-12 bg-white dark:bg-zinc-900 rounded-[2rem] border border-dashed border-zinc-200 dark:border-zinc-700 text-center text-[10px] font-bold uppercase tracking-normal text-zinc-400">No reviews yet</div>}
            </div>
                {createPortal(
           <div className="fixed bottom-6 left-0 right-0 w-full flex justify-center z-[100] px-4 pointer-events-none">
@@ -649,7 +649,7 @@ const ProductDetails: React.FC = () => {
                {product.stock <= 0 ? (
                  <button 
                    onClick={handleNotifyMe} 
-                   className="flex-1 py-3.5 bg-[#06331e] text-white rounded-[1.5rem] flex items-center justify-center space-x-2 text-[10px] md:text-[9px] font-bold uppercase tracking-widest hover:bg-zinc-900 transition-all active:scale-95 shadow-lg shadow-emerald-900/20 whitespace-nowrap"
+                   className="flex-1 py-3.5 bg-[#06331e] text-white rounded-[1.5rem] flex items-center justify-center space-x-2 text-[10px] md:text-[9px] font-bold uppercase tracking-normal hover:bg-zinc-900 transition-all active:scale-95 shadow-lg shadow-emerald-900/20 whitespace-nowrap"
                  >
                     <span>Notify Me</span>
                     <Icon name="bell" className={`text-yellow-400 text-[12px] ml-1 ${notifying ? 'animate-bounce' : ''}`} />
@@ -659,7 +659,7 @@ const ProductDetails: React.FC = () => {
                    <button 
                      onClick={() => addToCart(false)} 
                      disabled={addingToCart}
-                     className={`flex-[1.2] py-3.5 border border-transparent rounded-[1.5rem] flex items-center justify-center space-x-2 text-[10px] md:text-[9px] font-bold uppercase tracking-widest transition-all whitespace-nowrap ${addingToCart ? 'bg-emerald-500 text-white scale-95 origin-center' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-200 active:scale-95'}`}
+                     className={`flex-[1.2] py-3.5 border border-transparent rounded-[1.5rem] flex items-center justify-center space-x-2 text-[10px] md:text-[9px] font-bold uppercase tracking-normal transition-all whitespace-nowrap ${addingToCart ? 'bg-emerald-500 text-white scale-95 origin-center' : 'bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 hover:bg-zinc-200 active:scale-95'}`}
                    >
                       {addingToCart ? (
                         <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="flex items-center justify-center">
@@ -674,7 +674,7 @@ const ProductDetails: React.FC = () => {
                    </button>
                    <button 
                      onClick={() => addToCart(true)} 
-                     className="flex-[2] py-3.5 bg-[#06331e] text-white rounded-[1.5rem] flex items-center justify-center space-x-2 text-[10px] md:text-[9px] font-bold uppercase tracking-widest hover:bg-zinc-900 transition-all active:scale-95 shadow-lg shadow-emerald-900/20 whitespace-nowrap"
+                     className="flex-[2] py-3.5 bg-[#06331e] text-white rounded-[1.5rem] flex items-center justify-center space-x-2 text-[10px] md:text-[9px] font-bold uppercase tracking-normal hover:bg-zinc-900 transition-all active:scale-95 shadow-lg shadow-emerald-900/20 whitespace-nowrap"
                    >
                       <span>Buy Now</span>
                       <Icon name="bolt" className="text-yellow-400 text-[10px] ml-1" />
@@ -721,7 +721,7 @@ const ProductDetails: React.FC = () => {
               whileHover={{ scale: 1.1 }}
               className="absolute top-10 right-10 text-white p-4 md:p-5 bg-black/50 hover:bg-black/70 rounded-full transition-all z-[10001] shadow-2xl backdrop-blur-md border border-white/20 hover:border-white/40"
             >
-              <Icon name="times" className="text-2xl" />
+              <Icon name="times" className="text-lg" />
             </motion.button>
             <motion.img 
               initial={{ scale: 0.8, opacity: 0, y: 50 }}

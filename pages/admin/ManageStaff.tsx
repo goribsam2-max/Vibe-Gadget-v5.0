@@ -94,32 +94,32 @@ const ManageStaff: React.FC = () => {
                         <Icon name="arrow-left" className="text-xs" />
                     </button>
                     <div>
-                        <h1 className="text-2xl md:text-3xl font-black tracking-tight text-zinc-900 dark:text-zinc-100 mb-1">Staff Roles</h1>
-                        <p className="text-zinc-400 text-[10px] md:text-xs font-bold tracking-widest uppercase">RBAC & Permissions</p>
+                        <h1 className="text-lg md:text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 mb-1">Staff Roles</h1>
+                        <p className="text-zinc-400 text-[10px] md:text-xs font-bold tracking-normal uppercase">RBAC & Permissions</p>
                     </div>
                 </div>
-                <button onClick={() => setShowAdd(!showAdd)} className="bg-[#06331e] text-white px-6 py-3 rounded-full text-[10px] font-bold tracking-[0.2em] uppercase hover:bg-emerald-900 transition-colors shadow-lg">
+                <button onClick={() => setShowAdd(!showAdd)} className="bg-[#06331e] text-white px-6 py-3 rounded-full text-[10px] font-bold tracking-normal uppercase hover:bg-emerald-900 transition-colors shadow-lg">
                     <Icon name={showAdd ? 'times' : 'plus'} className="mr-2" /> {showAdd ? 'Cancel' : 'Add Staff'}
                 </button>
             </div>
 
             {showAdd && (
                 <motion.div initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} className="bg-zinc-50 dark:bg-zinc-800 p-8 rounded-3xl shadow-sm border border-zinc-200 dark:border-zinc-700 mb-8 max-w-2xl">
-                   <h3 className="font-bold text-zinc-900 dark:text-zinc-100 mb-6 uppercase tracking-widest text-xs">Configure Staff Access</h3>
+                   <h3 className="font-bold text-zinc-900 dark:text-zinc-100 mb-6 uppercase tracking-normal text-xs">Configure Staff Access</h3>
                    <form onSubmit={handleAddStaff}>
                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
                            <div>
-                              <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-2">Staff Email</label>
+                              <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-normal mb-2">Staff Email</label>
                               <input type="email" value={form.email} onChange={e => setForm({...form, email: e.target.value})} placeholder="agent@vibe.shop" className="w-full p-4 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm font-bold" required />
                            </div>
                            <div>
-                              <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-2">Role Title</label>
+                              <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-normal mb-2">Role Title</label>
                               <input type="text" value={form.roleName} onChange={e => setForm({...form, roleName: e.target.value})} placeholder="e.g. Content Manager" className="w-full p-4 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl text-sm font-bold" required />
                            </div>
                        </div>
                        
                        <div className="mb-8">
-                          <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-4">Module Permissions</label>
+                          <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-normal mb-4">Module Permissions</label>
                           <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
                              {ALL_MODULES.map(mod => (
                                 <div 
@@ -138,7 +138,7 @@ const ManageStaff: React.FC = () => {
                        </div>
 
                        <div className="flex justify-end">
-                           <button type="submit" disabled={form.permissions.length === 0} className="px-8 py-3 bg-emerald-500 text-white rounded-full font-bold uppercase tracking-widest text-xs hover:bg-emerald-600 transition-colors shadow-lg shadow-emerald-500/20 disabled:opacity-50">
+                           <button type="submit" disabled={form.permissions.length === 0} className="px-8 py-3 bg-emerald-500 text-white rounded-full font-bold uppercase tracking-normal text-xs hover:bg-emerald-600 transition-colors shadow-lg shadow-emerald-500/20 disabled:opacity-50">
                                Confirm & Add User
                            </button>
                        </div>
@@ -156,12 +156,12 @@ const ManageStaff: React.FC = () => {
                               <Icon name="crown" className="text-emerald-400 text-sm" />
                            </div>
                            <div>
-                              <h3 className="font-black text-lg tracking-tight">Super Admin</h3>
-                              <p className="text-[10px] text-emerald-200 uppercase tracking-widest font-bold">admin@vibe.shop</p>
+                              <h3 className="font-semibold text-lg tracking-tight">Super Admin</h3>
+                              <p className="text-[10px] text-emerald-200 uppercase tracking-normal font-bold">admin@vibe.shop</p>
                            </div>
                         </div>
                         <div className="flex flex-wrap gap-2">
-                           <span className="px-3 py-1.5 bg-emerald-500/20 text-emerald-300 rounded-md text-[9px] font-bold uppercase tracking-widest border border-emerald-500/30">All Access</span>
+                           <span className="px-3 py-1.5 bg-emerald-500/20 text-emerald-300 rounded-md text-[9px] font-bold uppercase tracking-normal border border-emerald-500/30">All Access</span>
                         </div>
                     </div>
                 </div>
@@ -186,10 +186,10 @@ const ManageStaff: React.FC = () => {
                           </div>
                           
                           <div className="mt-4 border-t border-zinc-100 dark:border-zinc-800 pt-4">
-                              <p className="text-[9px] font-bold uppercase tracking-widest text-zinc-400 mb-3">Permissions</p>
+                              <p className="text-[9px] font-bold uppercase tracking-normal text-zinc-400 mb-3">Permissions</p>
                               <div className="flex flex-wrap gap-2">
                                   {member.permissions?.map((p: string) => (
-                                     <span key={p} className="px-2 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded text-[9px] font-bold uppercase tracking-widest border border-zinc-200 dark:border-zinc-700">
+                                     <span key={p} className="px-2 py-1 bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded text-[9px] font-bold uppercase tracking-normal border border-zinc-200 dark:border-zinc-700">
                                          {ALL_MODULES.find(m => m.id === p)?.name || p}
                                      </span>
                                   ))}

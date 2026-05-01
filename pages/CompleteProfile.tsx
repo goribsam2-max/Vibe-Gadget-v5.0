@@ -44,7 +44,7 @@ const CompleteProfile: React.FC = () => {
       </button>
 
       <div className="text-center mb-10">
-        <h1 className="text-2xl font-bold mb-4">Complete Your Profile</h1>
+        <h1 className="text-lg font-bold mb-4">Complete Your Profile</h1>
         <p className="text-f-gray text-sm">Don't worry, only you can see your personal data. No one else will be able to see it.</p>
       </div>
 

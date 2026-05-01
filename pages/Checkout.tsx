@@ -297,9 +297,9 @@ const CheckoutPage: React.FC = () => {
       return (
           <div className="min-h-screen flex items-center justify-center bg-zinc-50 dark:bg-zinc-800 p-6">
               <div className="text-center bg-zinc-50 dark:bg-zinc-800 p-10 rounded-3xl max-w-md border border-zinc-100 dark:border-zinc-800">
-                  <div className="w-16 h-16 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-6 text-2xl"><Icon name="store-slash" /></div>
-                  <h2 className="text-xl font-black tracking-tight mb-2">Store is Currently Closed</h2>
-                  <button onClick={() => navigate('/')} className="px-8 py-3 bg-zinc-900 dark:bg-zinc-50 dark:text-black text-white rounded-full text-[10px] font-bold uppercase tracking-widest mt-6">Return Home</button>
+                  <div className="w-16 h-16 bg-red-50 text-red-500 rounded-full flex items-center justify-center mx-auto mb-6 text-lg"><Icon name="store-slash" /></div>
+                  <h2 className="text-xl font-semibold tracking-tight mb-2">Store is Currently Closed</h2>
+                  <button onClick={() => navigate('/')} className="px-8 py-3 bg-zinc-900 dark:bg-zinc-50 dark:text-black text-white rounded-full text-[10px] font-bold uppercase tracking-normal mt-6">Return Home</button>
               </div>
           </div>
       );
@@ -313,8 +313,8 @@ const CheckoutPage: React.FC = () => {
                <Icon name="arrow-left" className="text-xs group-hover:-translate-x-1 transition-transform" />
             </button>
             <div>
-               <h1 className="text-2xl md:text-xl lg:text-base xl:text-sm font-black tracking-tighter uppercase text-shine">Checkout.</h1>
-               <p className="text-[9px] font-bold text-emerald-600/70 uppercase tracking-[0.4em] mt-1 pl-1">Secure Drop</p>
+               <h1 className="text-lg md:text-xl lg:text-base xl:text-sm font-semibold tracking-tight uppercase text-shine">Checkout.</h1>
+               <p className="text-[9px] font-bold text-emerald-600/70 uppercase tracking-normal mt-1 pl-1">Secure Drop</p>
             </div>
           </div>
 
@@ -347,8 +347,8 @@ const CheckoutPage: React.FC = () => {
                      <Icon name="map-marker-alt" className="text-lg" />
                   </div>
                   <div>
-                    <h2 className="text-lg font-black tracking-tight text-zinc-900 dark:text-zinc-100">Delivery Address</h2>
-                    <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Where should we secure your drop?</p>
+                    <h2 className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">Delivery Address</h2>
+                    <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-normal">Where should we secure your drop?</p>
                   </div>
                 </div>
                 
@@ -365,8 +365,8 @@ const CheckoutPage: React.FC = () => {
                             </div>
                             <div className="flex-1">
                                <div className="flex items-center justify-between mb-1.5">
-                                 <p className="font-black text-base text-zinc-900 dark:text-zinc-100 tracking-tight">{addr.name}</p>
-                                 {selectedAddressId === addr.id && <span className="bg-[#06331e] text-emerald-300 dark:bg-emerald-500/20 dark:text-emerald-400 text-[8px] font-black uppercase tracking-widest px-2.5 py-1 rounded-full">Selected</span>}
+                                 <p className="font-semibold text-base text-zinc-900 dark:text-zinc-100 tracking-tight">{addr.name}</p>
+                                 {selectedAddressId === addr.id && <span className="bg-[#06331e] text-emerald-300 dark:bg-emerald-500/20 dark:text-emerald-400 text-[8px] font-semibold uppercase tracking-normal px-2.5 py-1 rounded-full">Selected</span>}
                                </div>
                                <p className="text-xs text-zinc-500 font-semibold mb-3 flex items-center gap-2">
                                   <Icon name="phone" className="text-[10px]" />
@@ -376,7 +376,7 @@ const CheckoutPage: React.FC = () => {
                             </div>
                          </div>
                       ))}
-                      <button onClick={() => setIsAddingNewAddress(true)} className="w-full py-5 border-2 border-dashed border-zinc-200 dark:border-zinc-700/50 rounded-[2rem] text-[10px] font-black text-zinc-500 uppercase tracking-widest hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:border-[#06331e] transition-all flex items-center justify-center gap-2 group">
+                      <button onClick={() => setIsAddingNewAddress(true)} className="w-full py-5 border-2 border-dashed border-zinc-200 dark:border-zinc-700/50 rounded-[2rem] text-[10px] font-semibold text-zinc-500 uppercase tracking-normal hover:bg-zinc-50 dark:hover:bg-zinc-800 hover:border-[#06331e] transition-all flex items-center justify-center gap-2 group">
                          <Icon name="plus" className="group-hover:rotate-90 transition-transform" />
                          <span>Add New Address</span>
                       </button>
@@ -386,7 +386,7 @@ const CheckoutPage: React.FC = () => {
                 {isAddingNewAddress && (
                    <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="bg-zinc-50 dark:bg-zinc-800 p-6 md:p-8 rounded-[2rem] border border-zinc-100 dark:border-zinc-700 shadow-inner space-y-6 relative z-10">
                       <div className="flex justify-between items-center bg-white dark:bg-zinc-900 px-5 py-3 rounded-2xl border border-zinc-200 dark:border-zinc-700">
-                        <h3 className="text-[10px] font-black uppercase tracking-widest text-[#06331e] dark:text-emerald-400 flex items-center gap-2"><Icon name="layer-plus" /> New Address</h3>
+                        <h3 className="text-[10px] font-semibold uppercase tracking-normal text-[#06331e] dark:text-emerald-400 flex items-center gap-2"><Icon name="layer-plus" /> New Address</h3>
                         {savedAddresses.length > 0 && (
                           <button onClick={() => setIsAddingNewAddress(false)} className="w-8 h-8 flex items-center justify-center rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-500 hover:bg-red-50 hover:text-red-500 transition-colors">
                             <Icon name="times" className="text-xs" />
@@ -395,15 +395,15 @@ const CheckoutPage: React.FC = () => {
                       </div>
                       
                       <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                         <div className="space-y-1.5"><label className="text-[9px] font-black text-zinc-400 uppercase tracking-widest pl-2">Full Name</label><Input placeholder="E.g. Tanvir Ahmed" value={newAddress.name} onChange={(v: string) => setNewAddress({...newAddress, name: v})} /></div>
-                         <div className="space-y-1.5"><label className="text-[9px] font-black text-zinc-400 uppercase tracking-widest pl-2">Primary Phone <span className="text-red-400">*</span></label><Input placeholder="01XXXXXXXXX" value={newAddress.phone} onChange={(v: string) => setNewAddress({...newAddress, phone: v})} /></div>
-                         <div className="space-y-1.5"><label className="text-[9px] font-black text-zinc-400 uppercase tracking-widest pl-2">Alternate Phone</label><Input placeholder="01XXXXXXXXX (Optional)" value={newAddress.altPhone} onChange={(v: string) => setNewAddress({...newAddress, altPhone: v})} /></div>
+                         <div className="space-y-1.5"><label className="text-[9px] font-semibold text-zinc-400 uppercase tracking-normal pl-2">Full Name</label><Input placeholder="E.g. Tanvir Ahmed" value={newAddress.name} onChange={(v: string) => setNewAddress({...newAddress, name: v})} /></div>
+                         <div className="space-y-1.5"><label className="text-[9px] font-semibold text-zinc-400 uppercase tracking-normal pl-2">Primary Phone <span className="text-red-400">*</span></label><Input placeholder="01XXXXXXXXX" value={newAddress.phone} onChange={(v: string) => setNewAddress({...newAddress, phone: v})} /></div>
+                         <div className="space-y-1.5"><label className="text-[9px] font-semibold text-zinc-400 uppercase tracking-normal pl-2">Alternate Phone</label><Input placeholder="01XXXXXXXXX (Optional)" value={newAddress.altPhone} onChange={(v: string) => setNewAddress({...newAddress, altPhone: v})} /></div>
                       </div>
                       <div className="space-y-1.5">
-                         <label className="text-[9px] font-black text-zinc-400 uppercase tracking-widest pl-2">Detailed Address <span className="text-red-400">*</span></label>
+                         <label className="text-[9px] font-semibold text-zinc-400 uppercase tracking-normal pl-2">Detailed Address <span className="text-red-400">*</span></label>
                          <textarea placeholder="House, Road, Block, Sector, Area, Courier Name..." className="w-full bg-white dark:bg-zinc-900 px-5 py-4 rounded-2xl text-sm font-medium h-32 outline-none border border-zinc-200 dark:border-zinc-700 focus:border-[#06331e] dark:focus:border-emerald-500 transition-all shadow-inner resize-none" value={newAddress.address} onChange={e => setNewAddress({...newAddress, address: e.target.value})} />
                       </div>
-                      <button onClick={handleSaveAddress} className="w-full py-4 bg-[#06331e] text-white rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-zinc-900 hover:-translate-y-0.5 transition-all shadow-xl shadow-emerald-900/20 active:scale-95 flex items-center justify-center gap-2">
+                      <button onClick={handleSaveAddress} className="w-full py-4 bg-[#06331e] text-white rounded-2xl text-[10px] font-semibold uppercase tracking-normal hover:bg-zinc-900 hover:-translate-y-0.5 transition-all shadow-xl shadow-emerald-900/20 active:scale-95 flex items-center justify-center gap-2">
                         <Icon name="save" /> Save Address to Account
                       </button>
                    </motion.div>
@@ -417,8 +417,8 @@ const CheckoutPage: React.FC = () => {
                       <Icon name="percent" className="text-lg" />
                    </div>
                    <div>
-                     <h2 className="text-lg font-black tracking-tight text-zinc-900 dark:text-zinc-100">Promo & Discounts</h2>
-                     <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Apply code for extra savings</p>
+                     <h2 className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">Promo & Discounts</h2>
+                     <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-normal">Apply code for extra savings</p>
                    </div>
                  </div>
                  
@@ -427,8 +427,8 @@ const CheckoutPage: React.FC = () => {
                        <div className="flex items-center gap-3">
                          <div className="w-10 h-10 bg-white dark:bg-zinc-900 rounded-xl flex items-center justify-center text-emerald-500 shadow-sm"><Icon name="check" /></div>
                          <div>
-                           <span className="font-black text-emerald-800 dark:text-emerald-400 block tracking-wider uppercase">{appliedCoupon.code}</span>
-                           <span className="text-[9px] text-emerald-600 dark:text-emerald-500 font-bold uppercase tracking-widest mt-0.5 block">Applied Successfully</span>
+                           <span className="font-semibold text-emerald-800 dark:text-emerald-400 block tracking-wider uppercase">{appliedCoupon.code}</span>
+                           <span className="text-[9px] text-emerald-600 dark:text-emerald-500 font-bold uppercase tracking-normal mt-0.5 block">Applied Successfully</span>
                          </div>
                        </div>
                        <button onClick={() => {setAppliedCoupon(null); setCouponCode('');}} className="w-10 h-10 bg-white/50 dark:bg-black/20 hover:bg-white text-zinc-500 hover:text-red-500 rounded-xl transition-all shadow-sm flex items-center justify-center"><Icon name="trash" className="text-sm" /></button>
@@ -437,12 +437,12 @@ const CheckoutPage: React.FC = () => {
                     <div className="flex flex-col sm:flex-row w-full gap-3 relative z-10">
                        <div className="flex-1 relative">
                          <Icon name="tag" className="absolute left-4 top-1/2 -translate-y-1/2 text-zinc-400" />
-                         <input type="text" value={couponCode} onChange={e=>setCouponCode(e.target.value.toUpperCase())} placeholder="ENTER PROMO CODE" className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 pl-11 pr-4 py-4 rounded-2xl uppercase text-sm font-black tracking-widest outline-none focus:border-[#06331e] dark:focus:border-emerald-500 transition-colors shadow-inner" />
+                         <input type="text" value={couponCode} onChange={e=>setCouponCode(e.target.value.toUpperCase())} placeholder="ENTER PROMO CODE" className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 pl-11 pr-4 py-4 rounded-2xl uppercase text-sm font-semibold tracking-normal outline-none focus:border-[#06331e] dark:focus:border-emerald-500 transition-colors shadow-inner" />
                        </div>
-                       <button onClick={applyCoupon} className="px-8 py-4 bg-[#06331e] text-white font-black text-[10px] uppercase tracking-widest rounded-2xl hover:bg-zinc-900 shadow-xl shadow-emerald-900/20 active:scale-95 transition-all whitespace-nowrap">Apply Code</button>
+                       <button onClick={applyCoupon} className="px-8 py-4 bg-[#06331e] text-white font-semibold text-[10px] uppercase tracking-normal rounded-2xl hover:bg-zinc-900 shadow-xl shadow-emerald-900/20 active:scale-95 transition-all whitespace-nowrap">Apply Code</button>
                     </div>
                  )}
-                 {couponError && <p className="text-red-500 text-[10px] mt-3 font-black uppercase tracking-widest pl-2 flex items-center gap-1.5"><Icon name="exclamation-circle" /> {couponError}</p>}
+                 {couponError && <p className="text-red-500 text-[10px] mt-3 font-semibold uppercase tracking-normal pl-2 flex items-center gap-1.5"><Icon name="exclamation-circle" /> {couponError}</p>}
              </div>
 
              <div className="bg-gradient-to-br from-pink-50 to-pink-100/50 dark:from-pink-900/10 dark:to-pink-900/5 border border-pink-200 dark:border-pink-900/30 p-6 md:p-8 rounded-[2.5rem] relative overflow-hidden transition-all">
@@ -452,8 +452,8 @@ const CheckoutPage: React.FC = () => {
                         <Icon name="gift" className="text-lg" />
                      </div>
                      <div>
-                       <h2 className="text-sm font-black tracking-tight text-pink-900 dark:text-pink-300">Send as a Gift</h2>
-                       <p className="text-[10px] font-bold text-pink-600/70 uppercase tracking-widest">Surprise someone special</p>
+                       <h2 className="text-sm font-semibold tracking-tight text-pink-900 dark:text-pink-300">Send as a Gift</h2>
+                       <p className="text-[10px] font-bold text-pink-600/70 uppercase tracking-normal">Surprise someone special</p>
                      </div>
                    </div>
                    
@@ -470,7 +470,7 @@ const CheckoutPage: React.FC = () => {
                             <p className="text-pink-800 dark:text-pink-300 text-xs font-semibold leading-relaxed">The printed invoice will hide all product prices. <br/><span className="underline font-bold text-pink-900 dark:text-pink-200">Cash on Delivery (COD) is strictly disabled for gifted orders.</span></p>
                           </div>
                           <div>
-                            <label className="text-[10px] font-black text-pink-700 uppercase mb-2 block tracking-widest pl-1">Custom Note Card <span className="text-pink-400">(Optional)</span></label>
+                            <label className="text-[10px] font-semibold text-pink-700 uppercase mb-2 block tracking-normal pl-1">Custom Note Card <span className="text-pink-400">(Optional)</span></label>
                             <textarea value={giftNote} onChange={e => setGiftNote(e.target.value)} placeholder="E.g. Happy Birthday! Love, Sakib..." className="w-full bg-white dark:bg-zinc-900 px-5 py-4 rounded-2xl border border-pink-200 dark:border-zinc-800 outline-none text-sm font-medium focus:border-pink-500 focus:ring-2 focus:ring-pink-500/20 h-28 transition-all shadow-inner resize-none placeholder:text-zinc-400" />
                           </div>
                        </motion.div>
@@ -479,7 +479,7 @@ const CheckoutPage: React.FC = () => {
              </div>
 
              <div className="pt-2">
-                <button onClick={handleNextStep1} disabled={!selectedAddressId && !isAddingNewAddress} className="w-full py-5 bg-[#06331e] text-emerald-300 rounded-[2rem] font-black text-sm uppercase tracking-widest hover:bg-zinc-900 hover:-translate-y-1 transition-all shadow-2xl shadow-emerald-900/30 active:scale-95 flex items-center justify-center gap-3 disabled:opacity-50 disabled:hover:translate-y-0 disabled:shadow-none group">
+                <button onClick={handleNextStep1} disabled={!selectedAddressId && !isAddingNewAddress} className="w-full py-5 bg-[#06331e] text-emerald-300 rounded-[2rem] font-semibold text-sm uppercase tracking-normal hover:bg-zinc-900 hover:-translate-y-1 transition-all shadow-2xl shadow-emerald-900/30 active:scale-95 flex items-center justify-center gap-3 disabled:opacity-50 disabled:hover:translate-y-0 disabled:shadow-none group">
                   <span>Continue to Payment</span>
                   <Icon name="arrow-right" className="group-hover:translate-x-1 transition-transform" />
                 </button>
@@ -496,8 +496,8 @@ const CheckoutPage: React.FC = () => {
                   <div className="w-12 h-12 bg-emerald-50 dark:bg-emerald-900/10 rounded-full flex items-center justify-center text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/30 mb-4 shadow-sm">
                      <Icon name="credit-card" className="text-xl" />
                   </div>
-                  <h2 className="text-xl md:text-2xl font-black tracking-tight text-zinc-900 dark:text-zinc-100 mb-1">Payment Method</h2>
-                  <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">How would you like to pay?</p>
+                  <h2 className="text-xl md:text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 mb-1">Payment Method</h2>
+                  <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-normal">How would you like to pay?</p>
                 </div>
 
                 <div className="flex flex-col md:flex-row gap-4 justify-center relative z-10">
@@ -507,10 +507,10 @@ const CheckoutPage: React.FC = () => {
                      className={`flex-1 p-6 md:p-8 rounded-[2rem] border-2 transition-all flex flex-col items-center justify-center gap-4 ${paymentType === 'cod' ? 'border-[#06331e] bg-[#06331e] dark:border-emerald-500 dark:bg-emerald-900/10 shadow-xl shadow-emerald-900/20' : 'border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700'}`}
                    >
                       <div className={`w-14 h-14 rounded-full flex items-center justify-center border-2 transition-colors ${paymentType === 'cod' ? 'border-emerald-300 bg-white/10 text-emerald-300 dark:border-emerald-500 dark:text-emerald-400' : 'border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-400'}`}>
-                        <Icon name="truck" className="text-2xl" />
+                        <Icon name="truck" className="text-lg" />
                       </div>
                       <div>
-                        <h3 className={`text-base font-black tracking-tight mb-1 ${paymentType === 'cod' ? 'text-white' : 'text-zinc-900 dark:text-zinc-100'}`}>Cash on Delivery</h3>
+                        <h3 className={`text-base font-semibold tracking-tight mb-1 ${paymentType === 'cod' ? 'text-white' : 'text-zinc-900 dark:text-zinc-100'}`}>Cash on Delivery</h3>
                         <p className={`text-[10px] font-bold tracking-wide uppercase px-2 ${paymentType === 'cod' ? 'text-emerald-200 flex items-center justify-center gap-1' : 'text-zinc-400'}`}>{paymentType === 'cod' && <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span>} Pay upon receipt</p>
                       </div>
                    </button>
@@ -521,10 +521,10 @@ const CheckoutPage: React.FC = () => {
                      className={`flex-1 p-6 md:p-8 rounded-[2rem] border-2 transition-all flex flex-col items-center justify-center gap-4 ${paymentType === 'advance' ? 'border-[#06331e] bg-[#06331e] dark:border-emerald-500 dark:bg-emerald-900/10 shadow-xl shadow-emerald-900/20' : 'border-zinc-100 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-800 hover:border-zinc-300 dark:hover:border-zinc-700'}`}
                    >
                       <div className={`w-14 h-14 rounded-full flex items-center justify-center border-2 transition-colors ${paymentType === 'advance' ? 'border-emerald-300 bg-white/10 text-emerald-300 dark:border-emerald-500 dark:text-emerald-400' : 'border-zinc-200 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-400'}`}>
-                        <Icon name="credit-card-front" className="text-2xl" />
+                        <Icon name="credit-card-front" className="text-lg" />
                       </div>
                       <div>
-                        <h3 className={`text-base font-black tracking-tight mb-1 ${paymentType === 'advance' ? 'text-white' : 'text-zinc-900 dark:text-zinc-100'}`}>Mobile Banking</h3>
+                        <h3 className={`text-base font-semibold tracking-tight mb-1 ${paymentType === 'advance' ? 'text-white' : 'text-zinc-900 dark:text-zinc-100'}`}>Mobile Banking</h3>
                         <p className={`text-[10px] font-bold tracking-wide uppercase px-2 ${paymentType === 'advance' ? 'text-emerald-200 flex items-center justify-center gap-1' : 'text-zinc-400'}`}>{paymentType === 'advance' && <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-pulse"></span>} bKash / Nagad</p>
                       </div>
                    </button>
@@ -532,7 +532,7 @@ const CheckoutPage: React.FC = () => {
              </div>
              
              <div className="pt-2">
-               <button onClick={handleNextStep2} disabled={loading} className="w-full py-5 bg-[#06331e] text-emerald-300 rounded-[2rem] font-black text-sm uppercase tracking-widest hover:bg-zinc-900 hover:-translate-y-1 transition-all shadow-2xl shadow-emerald-900/30 active:scale-95 flex items-center justify-center gap-3 disabled:opacity-50 disabled:hover:translate-y-0 disabled:shadow-none group">
+               <button onClick={handleNextStep2} disabled={loading} className="w-full py-5 bg-[#06331e] text-emerald-300 rounded-[2rem] font-semibold text-sm uppercase tracking-normal hover:bg-zinc-900 hover:-translate-y-1 transition-all shadow-2xl shadow-emerald-900/30 active:scale-95 flex items-center justify-center gap-3 disabled:opacity-50 disabled:hover:translate-y-0 disabled:shadow-none group">
                  {loading ? <Icon name="spinner-third" className="animate-spin text-lg text-emerald-400" /> : (
                    <>
                      <span>{paymentType === 'cod' ? 'Confirm Order' : 'Continue to Payment'}</span>
@@ -553,8 +553,8 @@ const CheckoutPage: React.FC = () => {
                   <div className="w-12 h-12 bg-emerald-50 dark:bg-emerald-900/10 rounded-full flex items-center justify-center text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/30 mb-4 shadow-sm">
                      <Icon name="coins" className="text-xl" />
                   </div>
-                  <h2 className="text-xl md:text-2xl font-black tracking-tight text-zinc-900 dark:text-zinc-100 mb-1">Advance Amount</h2>
-                  <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest">Select your payment type</p>
+                  <h2 className="text-xl md:text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 mb-1">Advance Amount</h2>
+                  <p className="text-[10px] font-bold text-zinc-500 uppercase tracking-normal">Select your payment type</p>
                 </div>
 
                 <div className="flex flex-col gap-4 max-w-lg mx-auto relative z-10">
@@ -567,13 +567,13 @@ const CheckoutPage: React.FC = () => {
                             {advanceType === 'delivery' && <div className="w-3 h-3 bg-emerald-300 rounded-full"></div>}
                          </div>
                          <div>
-                            <p className={`font-black text-xs mb-0.5 tracking-tight ${advanceType === 'delivery' ? 'text-white' : 'text-zinc-900 dark:text-zinc-100'}`}>Delivery Fee Only</p>
-                            <p className={`text-[8px] font-bold uppercase tracking-widest ${advanceType === 'delivery' ? 'text-emerald-300/80' : 'text-zinc-500'}`}>Pay delivery now, rest on arrival</p>
+                            <p className={`font-semibold text-xs mb-0.5 tracking-tight ${advanceType === 'delivery' ? 'text-white' : 'text-zinc-900 dark:text-zinc-100'}`}>Delivery Fee Only</p>
+                            <p className={`text-[8px] font-bold uppercase tracking-normal ${advanceType === 'delivery' ? 'text-emerald-300/80' : 'text-zinc-500'}`}>Pay delivery now, rest on arrival</p>
                          </div>
                       </div>
                       <div className={`px-4 py-2.5 rounded-2xl border flex items-center gap-1 ${advanceType === 'delivery' ? 'bg-white/10 border-white/20' : 'bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-700 shadow-sm'}`}>
                          <span className={`text-[10px] uppercase font-bold tracking-wider ${advanceType === 'delivery' ? 'text-emerald-200' : 'text-zinc-400'}`}>bdt</span>
-                         <span className={`font-black tracking-tight ${advanceType === 'delivery' ? 'text-white text-lg' : 'text-emerald-600 dark:text-emerald-400 text-base'}`}>{deliveryFee}</span>
+                         <span className={`font-semibold tracking-tight ${advanceType === 'delivery' ? 'text-white text-lg' : 'text-emerald-600 dark:text-emerald-400 text-base'}`}>{deliveryFee}</span>
                       </div>
                    </button>
 
@@ -586,20 +586,20 @@ const CheckoutPage: React.FC = () => {
                             {advanceType === 'full' && <div className="w-3 h-3 bg-emerald-300 rounded-full"></div>}
                          </div>
                          <div>
-                            <p className={`font-black text-[11px] mb-0.5 tracking-tight flex items-center gap-2 ${advanceType === 'full' ? 'text-white' : 'text-zinc-900 dark:text-zinc-100'}`}>Full Payment <span className={`text-[6.5px] uppercase tracking-[0.1em] px-2 py-0.5 rounded-full border leading-tight ${advanceType === 'full' ? 'border-emerald-300/30 bg-emerald-500/20 text-emerald-100' : 'border-zinc-200 bg-white text-emerald-600 dark:border-zinc-700 dark:bg-zinc-900'}`}>Recommended</span></p>
-                            <p className={`text-[8.5px] font-bold uppercase tracking-widest ${advanceType === 'full' ? 'text-emerald-300/80' : 'text-zinc-500'}`}>Secure entire order</p>
+                            <p className={`font-semibold text-[11px] mb-0.5 tracking-tight flex items-center gap-2 ${advanceType === 'full' ? 'text-white' : 'text-zinc-900 dark:text-zinc-100'}`}>Full Payment <span className={`text-[6.5px] uppercase tracking-normal px-2 py-0.5 rounded-full border leading-tight ${advanceType === 'full' ? 'border-emerald-300/30 bg-emerald-500/20 text-emerald-100' : 'border-zinc-200 bg-white text-emerald-600 dark:border-zinc-700 dark:bg-zinc-900'}`}>Recommended</span></p>
+                            <p className={`text-[8.5px] font-bold uppercase tracking-normal ${advanceType === 'full' ? 'text-emerald-300/80' : 'text-zinc-500'}`}>Secure entire order</p>
                          </div>
                       </div>
                       <div className={`px-4 py-2.5 rounded-2xl border flex items-center gap-1 ${advanceType === 'full' ? 'bg-white/10 border-white/20' : 'bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-700 shadow-sm'}`}>
                          <span className={`text-[10px] uppercase font-bold tracking-wider ${advanceType === 'full' ? 'text-emerald-200' : 'text-zinc-400'}`}>bdt</span>
-                         <span className={`font-black tracking-tight ${advanceType === 'full' ? 'text-white text-lg' : 'text-emerald-600 dark:text-emerald-400 text-base'}`}>{totalAmount}</span>
+                         <span className={`font-semibold tracking-tight ${advanceType === 'full' ? 'text-white text-lg' : 'text-emerald-600 dark:text-emerald-400 text-base'}`}>{totalAmount}</span>
                       </div>
                    </button>
                 </div>
              </div>
              
              <div className="pt-2">
-               <button onClick={handleNextStep3} className="w-full py-5 bg-[#06331e] text-emerald-300 rounded-[2rem] font-black text-sm uppercase tracking-widest hover:bg-zinc-900 hover:-translate-y-1 transition-all shadow-2xl shadow-emerald-900/30 active:scale-95 flex items-center justify-center gap-3">
+               <button onClick={handleNextStep3} className="w-full py-5 bg-[#06331e] text-emerald-300 rounded-[2rem] font-semibold text-sm uppercase tracking-normal hover:bg-zinc-900 hover:-translate-y-1 transition-all shadow-2xl shadow-emerald-900/30 active:scale-95 flex items-center justify-center gap-3">
                  <span>Continue to MFS</span>
                  <Icon name="arrow-right" className="group-hover:translate-x-1 transition-transform" />
                </button>
@@ -610,14 +610,14 @@ const CheckoutPage: React.FC = () => {
         {step === 4 && paymentType === 'advance' && (
           <motion.div key="step4" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-8">
              <div className="bg-zinc-50 dark:bg-zinc-800 p-6 md:p-8 rounded-[2rem] border border-zinc-200 dark:border-zinc-700 shadow-sm text-center">
-                <h2 className="text-[10px] font-bold uppercase tracking-widest text-[#06331e] mb-8 bg-emerald-50 inline-block px-4 py-1.5 rounded-full border border-emerald-100">Make Payment</h2>
+                <h2 className="text-[10px] font-bold uppercase tracking-normal text-[#06331e] mb-8 bg-emerald-50 inline-block px-4 py-1.5 rounded-full border border-emerald-100">Make Payment</h2>
                 
                 <div className="flex flex-col sm:flex-row justify-center gap-3 mb-8">
-                   <button onClick={() => setBankingMethod('bkash')} className={`flex-1 px-6 py-4 rounded-full border-2 transition-all font-black uppercase tracking-widest text-[11px] flex items-center justify-center gap-2 ${bankingMethod === 'bkash' ? 'border-pink-500 bg-pink-50 text-pink-600 shadow-md shadow-pink-500/10' : 'border-zinc-200 dark:border-zinc-700 text-zinc-400 hover:border-pink-300'}`}>
+                   <button onClick={() => setBankingMethod('bkash')} className={`flex-1 px-6 py-4 rounded-full border-2 transition-all font-semibold uppercase tracking-normal text-[11px] flex items-center justify-center gap-2 ${bankingMethod === 'bkash' ? 'border-pink-500 bg-pink-50 text-pink-600 shadow-md shadow-pink-500/10' : 'border-zinc-200 dark:border-zinc-700 text-zinc-400 hover:border-pink-300'}`}>
                       <img src={settings?.bkashIcon || "https://i.ibb.co.com/8m5LntYV/b-Kash-app-logo.png"} alt="bKash" className="w-5 h-5 object-contain" />
                       bKash
                    </button>
-                   <button onClick={() => setBankingMethod('nagad')} className={`flex-1 px-6 py-4 rounded-full border-2 transition-all font-black uppercase tracking-widest text-[11px] flex items-center justify-center gap-2 ${bankingMethod === 'nagad' ? 'border-orange-500 bg-orange-50 text-orange-600 shadow-md shadow-orange-500/10' : 'border-zinc-200 dark:border-zinc-700 text-zinc-400 hover:border-orange-300'}`}>
+                   <button onClick={() => setBankingMethod('nagad')} className={`flex-1 px-6 py-4 rounded-full border-2 transition-all font-semibold uppercase tracking-normal text-[11px] flex items-center justify-center gap-2 ${bankingMethod === 'nagad' ? 'border-orange-500 bg-orange-50 text-orange-600 shadow-md shadow-orange-500/10' : 'border-zinc-200 dark:border-zinc-700 text-zinc-400 hover:border-orange-300'}`}>
                       <img src={settings?.nagadIcon || "https://i.ibb.co.com/RkG7cbs0/Nagad-Logo-wine.png"} alt="Nagad" className="w-5 h-5 object-contain" />
                       Nagad
                    </button>
@@ -627,10 +627,10 @@ const CheckoutPage: React.FC = () => {
                    <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="bg-zinc-50 dark:bg-zinc-800 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-700 text-left space-y-6">
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between bg-white dark:bg-zinc-900 p-4 rounded-2xl border border-zinc-200 dark:border-zinc-700 shadow-sm gap-4">
                          <div className="flex-1">
-                            <p className="text-[9px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest mb-1 flex items-center"><Icon name="mobile" className="mr-1.5" /> {bankingMethod} Personal Number</p>
-                            <p className="font-black text-xl md:text-2xl tracking-[0.1em] md:tracking-[0.2em] text-[#06331e] dark:text-emerald-400">{getWalletNumber()}</p>
+                            <p className="text-[9px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-normal mb-1 flex items-center"><Icon name="mobile" className="mr-1.5" /> {bankingMethod} Personal Number</p>
+                            <p className="font-semibold text-xl md:text-lg tracking-normal md:tracking-normal text-[#06331e] dark:text-emerald-400">{getWalletNumber()}</p>
                          </div>
-                         <button onClick={() => { navigator.clipboard.writeText(getWalletNumber()); notify("Number copied!", "success"); }} className="w-full sm:w-auto px-5 py-3 shrink-0 flex items-center justify-center gap-2 bg-[#06331e] text-white rounded-xl hover:bg-emerald-900 active:scale-95 transition-all font-bold text-[10px] uppercase tracking-widest shadow-md">
+                         <button onClick={() => { navigator.clipboard.writeText(getWalletNumber()); notify("Number copied!", "success"); }} className="w-full sm:w-auto px-5 py-3 shrink-0 flex items-center justify-center gap-2 bg-[#06331e] text-white rounded-xl hover:bg-emerald-900 active:scale-95 transition-all font-bold text-[10px] uppercase tracking-normal shadow-md">
                            <Icon name="copy" /> Copy
                          </button>
                       </div>
@@ -648,7 +648,7 @@ const CheckoutPage: React.FC = () => {
                 )}
              </div>
              
-             <button disabled={loading || !bankingMethod} onClick={handleNextStep4} className="w-full py-5 bg-[#06331e] text-white rounded-full font-bold text-[11px] uppercase tracking-widest hover:bg-zinc-900 transition-all shadow-xl shadow-emerald-900/20 active:scale-95 disabled:opacity-50 flex items-center justify-center">
+             <button disabled={loading || !bankingMethod} onClick={handleNextStep4} className="w-full py-5 bg-[#06331e] text-white rounded-full font-bold text-[11px] uppercase tracking-normal hover:bg-zinc-900 transition-all shadow-xl shadow-emerald-900/20 active:scale-95 disabled:opacity-50 flex items-center justify-center">
                {loading ? <Icon name="spinner-third" className="animate-spin text-lg" /> : <>Verify & Complete Order <Icon name="check-circle" className="ml-2" /></>}
              </button>
           </motion.div>
@@ -661,7 +661,7 @@ const CheckoutPage: React.FC = () => {
 
 const Input = ({ label, value, onChange, placeholder }: any) => (
   <div className="w-full text-left">
-    <label className="text-[9px] font-bold uppercase mb-2 block px-1 tracking-widest text-zinc-500">{label}</label>
+    <label className="text-[9px] font-bold uppercase mb-2 block px-1 tracking-normal text-zinc-500">{label}</label>
     <input type="text" placeholder={placeholder} className="w-full bg-zinc-50 dark:bg-zinc-800 hover:bg-zinc-50 dark:bg-zinc-800 px-5 py-4 rounded-xl text-sm font-medium outline-none border transition-all shadow-sm border-zinc-200 dark:border-zinc-700 focus:border-black focus:ring-4 focus:ring-black/5" value={value || ""} onChange={e => onChange(e.target.value)} />
   </div>
 );

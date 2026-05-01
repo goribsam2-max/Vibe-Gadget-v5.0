@@ -47,7 +47,7 @@ const SignIn: React.FC = () => {
         >
           <Icon name="arrow-left" className="text-xs" />
         </motion.button>
-        <h1 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">Sign in</h1>
+        <h1 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">Sign in</h1>
         <p className="mt-2 text-sm text-zinc-500 font-medium">Welcome back! Please enter your details.</p>
       </div>
 

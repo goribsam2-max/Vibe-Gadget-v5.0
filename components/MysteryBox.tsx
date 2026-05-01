@@ -93,9 +93,9 @@ const MysteryBox: React.FC<{ products: any[] }> = ({ products }) => {
             transition={{ duration: 0.5, repeat: isShaking ? Infinity : 0 }}
           >
              <div className="absolute inset-0 bg-zinc-50 dark:bg-zinc-900/20 rounded-full animate-ping opacity-50"></div>
-             <Icon name="gift" className="text-2xl text-white drop-shadow-md z-10" />
+             <Icon name="gift" className="text-lg text-white drop-shadow-md z-10" />
           </motion.div>
-          <span className="mt-1.5 bg-zinc-50 dark:bg-zinc-900/90 backdrop-blur-md px-2.5 py-0.5 rounded text-[9px] font-black uppercase tracking-widest text-purple-900 shadow-sm border border-purple-100">Mystery Box</span>
+          <span className="mt-1.5 bg-zinc-50 dark:bg-zinc-900/90 backdrop-blur-md px-2.5 py-0.5 rounded text-[9px] font-semibold uppercase tracking-normal text-purple-900 shadow-sm border border-purple-100">Mystery Box</span>
       </motion.div>
 
       <AnimatePresence>
@@ -124,22 +124,22 @@ const MysteryBox: React.FC<{ products: any[] }> = ({ products }) => {
 
               {result === 'win' && revealedProduct ? (
                 <>
-                  <div className="inline-block px-3 py-1 bg-purple-100 text-purple-600 rounded-full text-[9px] font-black uppercase tracking-widest mb-6">
+                  <div className="inline-block px-3 py-1 bg-purple-100 text-purple-600 rounded-full text-[9px] font-semibold uppercase tracking-normal mb-6">
                     You Unlocked a Deal!
                   </div>
 
                   <div className="relative w-40 h-40 mx-auto mb-6 bg-zinc-50 dark:bg-zinc-800 rounded-[2rem] p-4 border border-zinc-100 dark:border-zinc-800 shadow-inner group">
                     <img src={revealedProduct.image} alt={revealedProduct.name} className="w-full h-full object-contain mix-blend-multiply dark:mix-blend-normal group-hover:scale-110 transition-transform duration-500" />
-                    <div className="absolute -bottom-3 -right-3 bg-red-500 text-white w-12 h-12 rounded-full flex flex-col items-center justify-center font-black animate-bounce shadow-lg border-2 border-white rotate-12">
+                    <div className="absolute -bottom-3 -right-3 bg-red-500 text-white w-12 h-12 rounded-full flex flex-col items-center justify-center font-semibold animate-bounce shadow-lg border-2 border-white rotate-12">
                       <span className="text-[10px] leading-none">EXTRA</span>
                       <span className="text-xs leading-none">{discount}%</span>
                     </div>
                   </div>
 
-                  <h3 className="font-black text-lg text-zinc-900 dark:text-zinc-100 mb-2 leading-tight tracking-tight px-4">{revealedProduct.name}</h3>
+                  <h3 className="font-semibold text-lg text-zinc-900 dark:text-zinc-100 mb-2 leading-tight tracking-tight px-4">{revealedProduct.name}</h3>
                   
                   <div className="flex justify-center items-center space-x-2 mb-8">
-                    <span className="text-2xl font-black text-purple-600">৳{Math.floor(revealedProduct.price * (1 - discount/100))}</span>
+                    <span className="text-lg font-semibold text-purple-600">৳{Math.floor(revealedProduct.price * (1 - discount/100))}</span>
                     <span className="text-xs font-bold text-zinc-400 line-through">৳{revealedProduct.price}</span>
                   </div>
 
@@ -148,22 +148,22 @@ const MysteryBox: React.FC<{ products: any[] }> = ({ products }) => {
                       handleClose();
                       navigate(`/product/${revealedProduct.id}`);
                     }}
-                    className="w-full py-4 bg-purple-600 text-white rounded-2xl font-black uppercase tracking-widest text-[11px] shadow-lg shadow-purple-600/30 hover:bg-purple-700 active:scale-95 transition-all"
+                    className="w-full py-4 bg-purple-600 text-white rounded-2xl font-semibold uppercase tracking-normal text-[11px] shadow-lg shadow-purple-600/30 hover:bg-purple-700 active:scale-95 transition-all"
                   >
                     Claim Offer Now
                   </button>
-                  <p className="text-[8px] font-bold text-zinc-400 uppercase tracking-widest mt-4">Offer valid for 1 hour only</p>
+                  <p className="text-[8px] font-bold text-zinc-400 uppercase tracking-normal mt-4">Offer valid for 1 hour only</p>
                 </>
               ) : (
                 <div className="py-8">
                   <div className="w-24 h-24 mx-auto bg-zinc-100 dark:bg-zinc-800 rounded-full flex items-center justify-center mb-6">
-                    <Icon name="frown" className="text-4xl text-zinc-400" />
+                    <Icon name="frown" className="text-lg text-zinc-400" />
                   </div>
-                  <h3 className="font-black text-xl text-zinc-900 dark:text-zinc-100 mb-2 tracking-tight">Better Luck Next Time</h3>
+                  <h3 className="font-semibold text-xl text-zinc-900 dark:text-zinc-100 mb-2 tracking-tight">Better Luck Next Time</h3>
                   <p className="text-xs font-medium text-zinc-500 mb-8">You didn't win an offer today. Check back tomorrow for another chance!</p>
                   <button 
                     onClick={handleClose}
-                    className="w-full py-4 bg-zinc-900 text-white rounded-2xl font-black uppercase tracking-widest text-[11px] shadow-lg hover:bg-zinc-900 active:scale-95 transition-all"
+                    className="w-full py-4 bg-zinc-900 text-white rounded-2xl font-semibold uppercase tracking-normal text-[11px] shadow-lg hover:bg-zinc-900 active:scale-95 transition-all"
                   >
                     Got It
                   </button>

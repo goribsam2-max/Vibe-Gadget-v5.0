@@ -21,16 +21,16 @@ export const MobileGuard: React.FC<{ children: React.ReactNode }> = ({ children 
                  <div className="absolute top-[-50%] right-[-10%] w-[300px] h-[300px] bg-emerald-500/10 rounded-full blur-[80px] pointer-events-none"></div>
                  
                  <div className="w-24 h-24 bg-black rounded-full flex items-center justify-center mx-auto mb-8 shadow-2xl shadow-emerald-500/10 border border-white/5">
-                    <Icon name="mobile-alt" className="text-4xl text-emerald-400 animate-bounce" />
+                    <Icon name="mobile-alt" className="text-lg text-emerald-400 animate-bounce" />
                  </div>
                  
-                 <h1 className="text-3xl font-black tracking-tight bg-gradient-to-br from-white to-zinc-500 bg-clip-text text-transparent">Mobile Only</h1>
+                 <h1 className="text-xl font-semibold tracking-tight bg-gradient-to-br from-white to-zinc-500 bg-clip-text text-transparent">Mobile Only</h1>
                  <p className="text-zinc-400 text-sm leading-relaxed px-4">
                    This platform is exclusively designed for mobile devices to ensure the best shopping experience.
                  </p>
                  
                  <div className="pt-8 mt-8 border-t border-white/5 relative z-10">
-                    <div className="inline-flex items-center space-x-2 text-[10px] font-bold uppercase tracking-widest text-zinc-500 bg-black/50 px-4 py-2 border border-white/5 rounded-full">
+                    <div className="inline-flex items-center space-x-2 text-[10px] font-bold uppercase tracking-normal text-zinc-500 bg-black/50 px-4 py-2 border border-white/5 rounded-full">
                        <Icon name="ban" className="text-red-500 text-xs" />
                        <span className="mt-0.5">Desktop Access Disabled</span>
                     </div>

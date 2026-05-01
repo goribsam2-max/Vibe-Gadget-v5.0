@@ -69,8 +69,8 @@ const NotificationsPage: React.FC = () => {
           <Icon name="arrow-left" className="text-sm text-zinc-600 dark:text-zinc-400 group-hover:text-black dark:group-hover:text-white" />
         </button>
         <div>
-           <h1 className="text-xl md:text-2xl font-black tracking-tight text-[#06331e] dark:text-emerald-400 mb-0.5 uppercase">System Alerts</h1>
-           <p className="text-zinc-400 text-[10px] font-bold tracking-widest uppercase">Admin Broadcasts & Updates</p>
+           <h1 className="text-xl md:text-lg font-semibold tracking-tight text-[#06331e] dark:text-emerald-400 mb-0.5 uppercase">System Alerts</h1>
+           <p className="text-zinc-400 text-[10px] font-bold tracking-normal uppercase">Admin Broadcasts & Updates</p>
         </div>
       </div>
 
@@ -81,7 +81,7 @@ const NotificationsPage: React.FC = () => {
           <div className="w-16 h-16 bg-zinc-50 dark:bg-zinc-800 border border-zinc-100 dark:border-zinc-800 rounded-full flex items-center justify-center mb-6">
              <Icon name="bell-slash" className="text-xl text-zinc-300" />
           </div>
-          <p className="text-xs font-bold tracking-widest uppercase text-zinc-400">No Alerts for You</p>
+          <p className="text-xs font-bold tracking-normal uppercase text-zinc-400">No Alerts for You</p>
           <p className="text-[10px] mt-2 font-medium text-zinc-400">New alerts will appear here after they are sent.</p>
         </div>
       ) : (
@@ -105,13 +105,13 @@ const NotificationsPage: React.FC = () => {
                         {!notif.isRead && <span className="w-2 h-2 rounded-full bg-emerald-500"></span>}
                       </div>
                       <p className="text-[11px] text-zinc-500 font-medium">{notif.message}</p>
-                      <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest mt-2">
+                      <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-normal mt-2">
                          {new Date(notif.createdAt).toLocaleString()}
                       </p>
                     </div>
                   </div>
                   {notif.link && (
-                    <button className="sm:w-auto w-full px-6 py-2.5 bg-zinc-900 hover:bg-zinc-900 text-white text-[10px] uppercase font-bold tracking-widest rounded-full transition-colors whitespace-nowrap">
+                    <button className="sm:w-auto w-full px-6 py-2.5 bg-zinc-900 hover:bg-zinc-900 text-white text-[10px] uppercase font-bold tracking-normal rounded-full transition-colors whitespace-nowrap">
                       Open Ticket
                     </button>
                   )}
@@ -127,11 +127,11 @@ const NotificationsPage: React.FC = () => {
                   <div className="flex-1 flex flex-col justify-center">
                     <div className="flex justify-between items-start mb-3">
                       <h3 className="font-bold text-sm tracking-tight text-zinc-900 dark:text-zinc-100 pr-2">{notif.title}</h3>
-                      <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest shrink-0 bg-zinc-50 dark:bg-zinc-800 border border-zinc-100 dark:border-zinc-800 px-3 py-1 rounded-full">{new Date(notif.createdAt).toLocaleDateString()}</span>
+                      <span className="text-[9px] font-bold text-zinc-400 uppercase tracking-normal shrink-0 bg-zinc-50 dark:bg-zinc-800 border border-zinc-100 dark:border-zinc-800 px-3 py-1 rounded-full">{new Date(notif.createdAt).toLocaleDateString()}</span>
                     </div>
                     <p className="text-xs text-zinc-500 leading-relaxed font-medium">{notif.message}</p>
                     {notif.link && (
-                       <button className="mt-4 px-6 py-2 bg-zinc-900 hover:bg-zinc-900 text-white text-[10px] uppercase font-bold tracking-widest rounded-full transition-colors w-fit">
+                       <button className="mt-4 px-6 py-2 bg-zinc-900 hover:bg-zinc-900 text-white text-[10px] uppercase font-bold tracking-normal rounded-full transition-colors w-fit">
                          View Details
                        </button>
                     )}
@@ -142,7 +142,7 @@ const NotificationsPage: React.FC = () => {
           ))}
         </div>
       )}
-      <p className="mt-16 text-[9px] text-center text-zinc-300 font-bold uppercase tracking-[0.3em]">Vibegadget all rights reserved</p>
+      <p className="mt-16 text-[9px] text-center text-zinc-300 font-bold uppercase tracking-normal">Vibegadget all rights reserved</p>
     </div>
   );
 };

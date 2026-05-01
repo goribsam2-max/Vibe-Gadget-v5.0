@@ -21,7 +21,7 @@ const AddCard: React.FC = () => {
              <span className="font-bold italic">VISA</span>
           </div>
           <div className="z-10">
-             <p className="text-xl font-mono tracking-widest mb-6">4716 9627 1635 8047</p>
+             <p className="text-xl font-mono tracking-normal mb-6">4716 9627 1635 8047</p>
              <div className="flex justify-between">
                 <div>
                    <p className="text-[8px] opacity-60 uppercase">Card Holder Name</p>

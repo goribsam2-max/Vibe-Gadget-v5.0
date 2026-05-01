@@ -59,10 +59,10 @@ const BlogDetails: React.FC = () => {
   if (!blog) {
     return (
       <div className="min-h-[80vh] flex flex-col items-center justify-center text-center px-6 dark:bg-zinc-800">
-         <Icon name="newspaper" className="text-6xl text-zinc-200 dark:text-zinc-800 dark:text-zinc-200 mb-6" />
-         <h2 className="text-2xl font-black text-zinc-900 dark:text-zinc-100 dark:text-zinc-50 mb-2">Article Not Found</h2>
+         <Icon name="newspaper" className="text-xl text-zinc-200 dark:text-zinc-800 dark:text-zinc-200 mb-6" />
+         <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100 dark:text-zinc-50 mb-2">Article Not Found</h2>
          <p className="text-sm text-zinc-500 mb-8 max-w-sm">The article you are looking for does not exist or has been removed.</p>
-         <button onClick={() => navigate('/blog')} className="px-6 py-3 bg-zinc-900 dark:bg-zinc-50 dark:text-black text-white rounded-xl text-xs font-bold uppercase tracking-widest shadow-lg hover:bg-zinc-800 transition-colors">Back to Blog</button>
+         <button onClick={() => navigate('/blog')} className="px-6 py-3 bg-zinc-900 dark:bg-zinc-50 dark:text-black text-white rounded-xl text-xs font-bold uppercase tracking-normal shadow-lg hover:bg-zinc-800 transition-colors">Back to Blog</button>
       </div>
     );
   }
@@ -91,8 +91,8 @@ const BlogDetails: React.FC = () => {
           
           <div className="relative z-10 p-6 md:p-12 md:pb-16 max-w-4xl w-full mx-auto">
              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
-               <p className="text-[10px] text-white font-bold uppercase tracking-widest mb-4 inline-block px-3 py-1 bg-black/40 backdrop-blur-sm rounded-full border border-white/20">{new Date(blog.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-               <h1 className="text-3xl md:text-5xl lg:text-6xl font-black text-white tracking-tighter leading-[1.1] drop-shadow-lg">{blog.title}</h1>
+               <p className="text-[10px] text-white font-bold uppercase tracking-normal mb-4 inline-block px-3 py-1 bg-black/40 backdrop-blur-sm rounded-full border border-white/20">{new Date(blog.createdAt).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+               <h1 className="text-xl md:text-lg lg:text-xl font-semibold text-white tracking-tight leading-[1.1] drop-shadow-lg">{blog.title}</h1>
              </motion.div>
           </div>
        </div>
@@ -112,9 +112,9 @@ const BlogDetails: React.FC = () => {
                              <Link to={`/product/${pid}`} className="not-prose flex items-center gap-4 p-4 bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-3xl hover:border-emerald-500 transition-colors shadow-sm my-6 cursor-pointer group no-underline">
                                 <div className="w-20 h-20 bg-zinc-50 dark:bg-zinc-800 rounded-2xl p-2 shrink-0 border border-zinc-100 dark:border-zinc-800 group-hover:scale-105 transition-transform"><img src={p.image} className="w-full h-full object-contain" /></div>
                                 <div className="flex-1 min-w-0">
-                                  <h4 className="text-sm font-black text-zinc-900 dark:text-zinc-100 dark:text-zinc-50 truncate">{p.name}</h4>
-                                  <p className="text-[10px] uppercase font-bold text-emerald-600 tracking-widest mb-1">{p.category}</p>
-                                  <p className="text-lg font-black text-zinc-800 dark:text-zinc-200">৳{p.isOffer ? p.offerPrice : p.price}</p>
+                                  <h4 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100 dark:text-zinc-50 truncate">{p.name}</h4>
+                                  <p className="text-[10px] uppercase font-bold text-emerald-600 tracking-normal mb-1">{p.category}</p>
+                                  <p className="text-lg font-semibold text-zinc-800 dark:text-zinc-200">৳{p.isOffer ? p.offerPrice : p.price}</p>
                                 </div>
                                 <div className="hidden md:flex w-10 h-10 rounded-full bg-emerald-50 dark:bg-emerald-900/40 text-emerald-600 dark:text-emerald-400 items-center justify-center -translate-x-4 opacity-0 group-hover:translate-x-0 group-hover:opacity-100 transition-all shrink-0">
                                    <Icon name="arrow-right" />
@@ -136,7 +136,7 @@ const BlogDetails: React.FC = () => {
              
              <div className="mt-16 pt-8 border-t border-zinc-200 dark:border-zinc-700 dark:border-zinc-800 flex items-center justify-between">
                 <div>
-                   <h4 className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-1">Share this article</h4>
+                   <h4 className="text-[10px] font-bold text-zinc-400 uppercase tracking-normal mb-1">Share this article</h4>
                    <div className="flex space-x-2">
                        <button onClick={() => { navigator.clipboard.writeText(window.location.href); notify("Link copied to clipboard!", "success"); }} className="w-10 h-10 flex items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 transition-colors"><Icon name="link" /></button>
                        <a href={`https://twitter.com/intent/tweet?text=${encodeURIComponent(blog.title)}&url=${encodeURIComponent(window.location.href)}`} target="_blank" rel="noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-200 transition-colors"><Icon name="twitter" /></a>
@@ -146,15 +146,15 @@ const BlogDetails: React.FC = () => {
           </article>
           
           <aside>
-             <h3 className="text-xs font-black uppercase tracking-widest text-zinc-400 mb-6 border-b border-zinc-200 dark:border-zinc-700 dark:border-zinc-800 pb-2">Recent Posts</h3>
+             <h3 className="text-xs font-semibold uppercase tracking-normal text-zinc-400 mb-6 border-b border-zinc-200 dark:border-zinc-700 dark:border-zinc-800 pb-2">Recent Posts</h3>
              <div className="space-y-6">
                 {recentBlogs.map(rb => (
                    <Link to={`/blog/${rb.slug}`} key={rb.id} className="group block">
                       <div className="aspect-video bg-zinc-100 dark:bg-zinc-800 rounded-2xl overflow-hidden mb-3">
                          <img src={rb.image} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt={rb.title} />
                       </div>
-                      <h4 className="text-sm font-black text-zinc-900 dark:text-zinc-100 leading-tight group-hover:text-emerald-600 transition-colors">{rb.title}</h4>
-                      <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-widest mt-2">{new Date(rb.createdAt).toLocaleDateString()}</p>
+                      <h4 className="text-sm font-semibold text-zinc-900 dark:text-zinc-100 leading-tight group-hover:text-emerald-600 transition-colors">{rb.title}</h4>
+                      <p className="text-[10px] text-zinc-500 font-bold uppercase tracking-normal mt-2">{new Date(rb.createdAt).toLocaleDateString()}</p>
                    </Link>
                 ))}
              </div>

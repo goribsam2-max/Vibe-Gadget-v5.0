@@ -113,7 +113,7 @@ const AuthSelector: React.FC = () => {
       <div className="w-full pb-8">
          <div className="flex items-center space-x-4 mb-8 px-6">
             <div className="flex-1 h-px bg-zinc-200"></div>
-            <span className="text-[10px] text-zinc-400 font-bold uppercase tracking-widest">Or social login</span>
+            <span className="text-[10px] text-zinc-400 font-bold uppercase tracking-normal">Or social login</span>
             <div className="flex-1 h-px bg-zinc-200"></div>
          </div>
          <div className="flex justify-center space-x-6">

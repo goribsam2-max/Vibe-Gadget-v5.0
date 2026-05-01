@@ -118,8 +118,8 @@ const WelcomePopup: React.FC<{ banners: Banner[] }> = ({ banners }) => {
                  />
                </AnimatePresence>
                <div className="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
-                  <h3 className="text-white font-black text-xl tracking-tight leading-none mb-1 shadow-sm">{banners[currentIndex].title}</h3>
-                  <p className="text-zinc-200 text-[10px] font-bold uppercase tracking-widest leading-loose">{banners[currentIndex].description}</p>
+                  <h3 className="text-white font-semibold text-xl tracking-tight leading-none mb-1 shadow-sm">{banners[currentIndex].title}</h3>
+                  <p className="text-zinc-200 text-[10px] font-bold uppercase tracking-normal leading-loose">{banners[currentIndex].description}</p>
                </div>
             </div>
 
@@ -142,7 +142,7 @@ const WelcomePopup: React.FC<{ banners: Banner[] }> = ({ banners }) => {
                      checked={doNotShow}
                      onChange={(e) => setDoNotShow(e.target.checked)}
                   />
-                  <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-widest group-hover:text-black dark:text-white transition-colors">Do not show again</span>
+                  <span className="text-[10px] font-bold text-zinc-500 uppercase tracking-normal group-hover:text-black dark:text-white transition-colors">Do not show again</span>
                </label>
             </div>
           </motion.div>

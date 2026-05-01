@@ -110,8 +110,8 @@ const Profile: React.FC<{ userData: UserProfile | null }> = ({ userData: initial
               <Icon name="chevron-left" className="text-xs group-hover:-translate-x-1 transition-transform" />
             </button>
             <div className="flex flex-col">
-               <h1 className="text-2xl md:text-xl lg:text-base xl:text-sm font-black tracking-tighter uppercase text-shine">Account.</h1>
-               <p className="text-[9px] font-bold text-emerald-600/70 uppercase tracking-[0.4em] mt-1 pl-1">Personal Portal</p>
+               <h1 className="text-lg md:text-xl lg:text-base xl:text-sm font-semibold tracking-tight uppercase text-shine">Account.</h1>
+               <p className="text-[9px] font-bold text-emerald-600/70 uppercase tracking-normal mt-1 pl-1">Personal Portal</p>
             </div>
           </div>
 
@@ -139,9 +139,9 @@ const Profile: React.FC<{ userData: UserProfile | null }> = ({ userData: initial
                   </motion.div>
                   
                   <div>
-                     <h2 className="text-xl md:text-2xl font-black tracking-tight text-zinc-900 dark:text-zinc-100 mb-1">{localUserData?.displayName}</h2>
+                     <h2 className="text-xl md:text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 mb-1">{localUserData?.displayName}</h2>
                      <p className="text-zinc-500 text-xs font-medium mb-3">{localUserData?.email}</p>
-                     <span className="px-3 py-1 bg-emerald-50 dark:bg-emerald-900/10 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/30 rounded-lg text-[10px] font-bold uppercase tracking-widest leading-none flex w-max">{isAdmin ? 'Admin' : 'Member'}</span>
+                     <span className="px-3 py-1 bg-emerald-50 dark:bg-emerald-900/10 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-900/30 rounded-lg text-[10px] font-bold uppercase tracking-normal leading-none flex w-max">{isAdmin ? 'Admin' : 'Member'}</span>
                   </div>
                </div>
                
@@ -155,8 +155,8 @@ const Profile: React.FC<{ userData: UserProfile | null }> = ({ userData: initial
                   <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500 blur-[80px] opacity-20 rounded-full transition-transform group-hover:scale-150 duration-700"></div>
                   <div className="flex items-center justify-between mb-4 relative z-10">
                      <div>
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-[#4ade80]">Affiliate Program</p>
-                        <h3 className="text-xl font-black tracking-tight flex items-center gap-2">Your Earnings</h3>
+                        <p className="text-[10px] font-bold uppercase tracking-normal text-[#4ade80]">Affiliate Program</p>
+                        <h3 className="text-xl font-semibold tracking-tight flex items-center gap-2">Your Earnings</h3>
                      </div>
                      <div className="w-12 h-12 bg-zinc-50 dark:bg-zinc-900/10 border border-white/20 rounded-full flex items-center justify-center backdrop-blur-md shadow-inner">
                         <Icon name="wallet" className="text-emerald-400 text-lg" />
@@ -165,17 +165,17 @@ const Profile: React.FC<{ userData: UserProfile | null }> = ({ userData: initial
                   
                   <div className="relative z-10 mb-5 flex justify-between items-end">
                      <div>
-                       <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-1">Wallet Balance</p>
-                       <p className="text-3xl font-black text-white">৳{localUserData?.walletBalance || 0}</p>
+                       <p className="text-[10px] font-bold uppercase tracking-normal text-zinc-400 mb-1">Wallet Balance</p>
+                       <p className="text-xl font-semibold text-white">৳{localUserData?.walletBalance || 0}</p>
                      </div>
                      <div className="text-right">
-                       <p className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-1">Total Earned</p>
-                       <p className="text-xl font-black text-zinc-300">৳{localUserData?.totalEarned || 0}</p>
+                       <p className="text-[10px] font-bold uppercase tracking-normal text-zinc-400 mb-1">Total Earned</p>
+                       <p className="text-xl font-semibold text-zinc-300">৳{localUserData?.totalEarned || 0}</p>
                      </div>
                   </div>
                   
                   <div className="relative z-10 flex gap-3">
-                     <button onClick={() => navigate('/affiliate')} className="flex-1 bg-zinc-50 dark:bg-zinc-800 text-black dark:text-white py-3 rounded-xl text-[10px] font-black uppercase tracking-widest hover:bg-zinc-200 transition-colors shadow-lg active:scale-95 text-center block">
+                     <button onClick={() => navigate('/affiliate')} className="flex-1 bg-zinc-50 dark:bg-zinc-800 text-black dark:text-white py-3 rounded-xl text-[10px] font-semibold uppercase tracking-normal hover:bg-zinc-200 transition-colors shadow-lg active:scale-95 text-center block">
                         Manage Affiliate
                      </button>
                   </div>
@@ -185,7 +185,7 @@ const Profile: React.FC<{ userData: UserProfile | null }> = ({ userData: initial
             {/* Vibe Rewards Section Removed */}
 
             <div className="space-y-3">
-                <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 mb-4 ml-4">Dashboard</h3>
+                <h3 className="text-[10px] font-bold uppercase tracking-normal text-zinc-400 mb-4 ml-4">Dashboard</h3>
                {isAdmin && (
                  <Link to="/admin" className="flex items-center justify-between p-5 px-6 bg-emerald-900 dark:bg-emerald-800 rounded-[2rem] hover:bg-emerald-950 dark:hover:bg-emerald-700 shadow-xl shadow-emerald-900/10 transition-all group overflow-hidden mb-6 relative hover-tilt">
                     <div className="absolute right-[-10%] top-[-20%] text-emerald-500/20 group-hover:scale-110 transition-transform pointer-events-none">
@@ -196,8 +196,8 @@ const Profile: React.FC<{ userData: UserProfile | null }> = ({ userData: initial
                            <Icon name="shield-alt" className="text-lg drop-shadow-sm" />
                        </div>
                        <div>
-                           <div className="font-black tracking-tight text-lg text-white">Admin Portal</div>
-                           <div className="text-[10px] font-bold text-emerald-300 uppercase tracking-widest mt-0.5">Manage Configuration</div>
+                           <div className="font-semibold tracking-tight text-lg text-white">Admin Portal</div>
+                           <div className="text-[10px] font-bold text-emerald-300 uppercase tracking-normal mt-0.5">Manage Configuration</div>
                        </div>
                     </div>
                     <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white z-10 group-hover:bg-white transition-colors group-hover:text-emerald-900">
@@ -208,7 +208,7 @@ const Profile: React.FC<{ userData: UserProfile | null }> = ({ userData: initial
                
                <div className="h-px w-full bg-zinc-200 dark:bg-zinc-800 my-8"></div>
                
-               <h3 className="text-[10px] font-bold uppercase tracking-[0.2em] text-zinc-400 mb-4 ml-4">Your Account</h3>
+               <h3 className="text-[10px] font-bold uppercase tracking-normal text-zinc-400 mb-4 ml-4">Your Account</h3>
                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                {menuItems.map((item, idx) => (
                  <Link key={idx} to={item.path} className="flex items-center justify-between p-5 px-6 bg-zinc-100/50 dark:bg-zinc-800/40 border border-zinc-200 dark:border-zinc-700/50 hover:bg-zinc-100 hover:border-zinc-300 dark:hover:bg-zinc-800/80 dark:hover:border-zinc-600 rounded-3xl transition-all group">
@@ -227,7 +227,7 @@ const Profile: React.FC<{ userData: UserProfile | null }> = ({ userData: initial
                </div>
 
                 <div className="pt-8">
-                   <button onClick={handleLogout} className="w-full flex items-center justify-center py-5 bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30 text-red-600 dark:text-red-400 rounded-2xl hover:bg-red-100 dark:hover:bg-red-900/20 transition-colors font-bold text-xs uppercase tracking-widest active:scale-95 space-x-2 shadow-sm">
+                   <button onClick={handleLogout} className="w-full flex items-center justify-center py-5 bg-red-50 dark:bg-red-900/10 border border-red-100 dark:border-red-900/30 text-red-600 dark:text-red-400 rounded-2xl hover:bg-red-100 dark:hover:bg-red-900/20 transition-colors font-bold text-xs uppercase tracking-normal active:scale-95 space-x-2 shadow-sm">
                       <Icon name="sign-out-alt" className="text-sm" />
                       <span>Log Out Securely</span>
                    </button>
@@ -237,11 +237,11 @@ const Profile: React.FC<{ userData: UserProfile | null }> = ({ userData: initial
        ) : (
           <div className="flex flex-col items-center justify-center text-center py-40 animate-fade-in">
              <div className="w-24 h-24 bg-zinc-50 dark:bg-zinc-800 rounded-full flex items-center justify-center mb-8 shadow-inner border border-zinc-100 dark:border-zinc-800">
-               <Icon name="user" className="text-3xl text-zinc-300" />
+               <Icon name="user" className="text-xl text-zinc-300" />
              </div>
-             <h2 className="text-3xl font-black mb-4 tracking-tight text-zinc-900 dark:text-zinc-100">Sign In to Continue</h2>
+             <h2 className="text-xl font-semibold mb-4 tracking-tight text-zinc-900 dark:text-zinc-100">Sign In to Continue</h2>
              <p className="text-sm font-medium text-zinc-500 mb-10 max-w-xs leading-relaxed">Log in to view your profile, track orders, and manage wishlist.</p>
-             <button onClick={() => navigate('/auth-selector')} className="px-10 py-4 bg-zinc-900 dark:bg-zinc-50 dark:text-black text-white rounded-full font-bold text-[11px] uppercase tracking-widest shadow-xl hover:bg-zinc-800 hover:scale-105 active:scale-95 transition-all flex items-center space-x-3">
+             <button onClick={() => navigate('/auth-selector')} className="px-10 py-4 bg-zinc-900 dark:bg-zinc-50 dark:text-black text-white rounded-full font-bold text-[11px] uppercase tracking-normal shadow-xl hover:bg-zinc-800 hover:scale-105 active:scale-95 transition-all flex items-center space-x-3">
                <span>Sign In</span>
                <Icon name="arrow-right" />
              </button>
@@ -261,18 +261,18 @@ const Profile: React.FC<{ userData: UserProfile | null }> = ({ userData: initial
                {spinResult !== null ? (
                  <div className="py-6 animate-fade-in">
                     <div className="w-20 h-20 bg-emerald-100 text-emerald-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                       <Icon name="coins" className="text-4xl" />
+                       <Icon name="coins" className="text-lg" />
                     </div>
-                    <h2 className="text-2xl font-black text-zinc-900 dark:text-zinc-100 mb-2 tracking-tight">You Won!</h2>
-                    <p className="text-5xl font-black text-emerald-500 mb-4">+{spinResult} <span className="text-lg">pts</span></p>
+                    <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-2 tracking-tight">You Won!</h2>
+                    <p className="text-lg font-semibold text-emerald-500 mb-4">+{spinResult} <span className="text-lg">pts</span></p>
                     <p className="text-zinc-500 font-medium text-sm mb-8">Come back tomorrow for another spin.</p>
-                    <button onClick={() => { setShowSpinModal(false); setSpinResult(null); }} className="w-full py-4 bg-[#06331e] text-white rounded-xl font-bold uppercase tracking-widest text-[11px] shadow-lg">
+                    <button onClick={() => { setShowSpinModal(false); setSpinResult(null); }} className="w-full py-4 bg-[#06331e] text-white rounded-xl font-bold uppercase tracking-normal text-[11px] shadow-lg">
                        Awesome
                     </button>
                  </div>
                ) : (
                  <div className="py-4">
-                    <h2 className="text-2xl font-black text-zinc-900 dark:text-zinc-100 mb-2 tracking-tight">Daily Free Spin</h2>
+                    <h2 className="text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-2 tracking-tight">Daily Free Spin</h2>
                     <p className="text-zinc-500 font-medium text-sm mb-8 px-4">Test your luck and win daily reward points!</p>
                     
                     <div className="relative w-48 h-48 mx-auto mb-8">
@@ -282,15 +282,15 @@ const Profile: React.FC<{ userData: UserProfile | null }> = ({ userData: initial
                           className="w-full h-full rounded-full border-[12px] border-emerald-50 border-r-emerald-500 border-b-yellow-400 border-l-blue-400 shadow-inner"
                        />
                        <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                          <Icon name="gem" className="text-3xl text-zinc-300" />
+                          <Icon name="gem" className="text-xl text-zinc-300" />
                        </div>
                     </div>
                     
                     <div className="flex gap-3">
-                       <button onClick={() => setShowSpinModal(false)} disabled={spinning} className="flex-[1] py-4 bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-xl font-bold uppercase tracking-widest text-[11px]">
+                       <button onClick={() => setShowSpinModal(false)} disabled={spinning} className="flex-[1] py-4 bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-xl font-bold uppercase tracking-normal text-[11px]">
                           Close
                        </button>
-                       <button onClick={handleSpin} disabled={spinning} className="flex-[2] py-4 bg-emerald-500 text-white rounded-xl font-bold uppercase tracking-widest text-[11px] shadow-lg flex justify-center items-center">
+                       <button onClick={handleSpin} disabled={spinning} className="flex-[2] py-4 bg-emerald-500 text-white rounded-xl font-bold uppercase tracking-normal text-[11px] shadow-lg flex justify-center items-center">
                           {spinning ? <Icon name="circle-notch" className="animate-spin" /> : 'Spin Now'}
                        </button>
                     </div>

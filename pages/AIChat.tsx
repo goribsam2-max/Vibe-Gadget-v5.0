@@ -197,8 +197,8 @@ const AIChat: React.FC = () => {
             <Icon name="chevron-left" className="text-xs" />
           </motion.button>
           <div className="flex flex-col">
-            <h2 className="font-black text-xs uppercase tracking-widest">Vibe AI Assistant</h2>
-            <div className="flex items-center text-[8px] font-bold text-green-500 uppercase tracking-widest mt-1">
+            <h2 className="font-semibold text-xs uppercase tracking-normal">Vibe AI Assistant</h2>
+            <div className="flex items-center text-[8px] font-bold text-green-500 uppercase tracking-normal mt-1">
                 <span className="w-1.5 h-1.5 bg-green-500 rounded-full mr-2 animate-pulse"></span>
                 Online
             </div>
@@ -207,7 +207,7 @@ const AIChat: React.FC = () => {
         <div className="flex bg-zinc-50 dark:bg-zinc-800 p-1 rounded-2xl border border-zinc-100 dark:border-zinc-800">
           <button 
             onClick={() => setUseThinking(!useThinking)}
-            className={`px-4 py-2 rounded-xl text-[9px] font-black uppercase tracking-widest transition-all ${useThinking ? 'bg-zinc-900 text-white shadow-md' : 'text-zinc-400'}`}
+            className={`px-4 py-2 rounded-xl text-[9px] font-semibold uppercase tracking-normal transition-all ${useThinking ? 'bg-zinc-900 text-white shadow-md' : 'text-zinc-400'}`}
           >
             AI Expert Mode
           </button>
@@ -227,10 +227,10 @@ const AIChat: React.FC = () => {
                 transition={{ repeat: Infinity, duration: 4 }}
                 className="w-48 h-48 rounded-[60px] border border-white/10 flex items-center justify-center glass-dark shadow-2xl"
             >
-                <Icon name="microphone" className="text-4xl text-white" />
+                <Icon name="microphone" className="text-lg text-white" />
             </motion.div>
-            <h3 className="text-white text-xs font-black mt-12 uppercase tracking-widest animate-pulse">I am listening...</h3>
-            <button onClick={stopLiveSession} className="mt-16 px-12 py-4 bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 rounded-full font-black text-[10px] tracking-widest uppercase shadow-2xl">End Voice Call</button>
+            <h3 className="text-white text-xs font-semibold mt-12 uppercase tracking-normal animate-pulse">I am listening...</h3>
+            <button onClick={stopLiveSession} className="mt-16 px-12 py-4 bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 rounded-full font-semibold text-[10px] tracking-normal uppercase shadow-2xl">End Voice Call</button>
           </motion.div>
         )}
       </AnimatePresence>
@@ -247,7 +247,7 @@ const AIChat: React.FC = () => {
               >
                 <div className={`max-w-[85%] px-6 py-4 rounded-[2rem] text-sm font-medium shadow-sm leading-relaxed ${msg.role === 'user' ? 'bg-zinc-900 text-white rounded-tr-none' : 'glass text-zinc-900 dark:text-zinc-100 rounded-tl-none border border-zinc-100 dark:border-zinc-800'}`}>
                   {msg.isThinking && msg.role === 'bot' && (
-                    <div className="flex items-center space-x-2 mb-2 opacity-40 text-[8px] font-black uppercase tracking-widest">
+                    <div className="flex items-center space-x-2 mb-2 opacity-40 text-[8px] font-semibold uppercase tracking-normal">
                       <Icon name="lightbulb" />
                       <span>AI Reasoning</span>
                     </div>
@@ -261,7 +261,7 @@ const AIChat: React.FC = () => {
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              className="px-6 py-3 rounded-[1.5rem] bg-zinc-100 dark:bg-zinc-800 w-fit text-[9px] font-black uppercase tracking-widest text-zinc-400"
+              className="px-6 py-3 rounded-[1.5rem] bg-zinc-100 dark:bg-zinc-800 w-fit text-[9px] font-semibold uppercase tracking-normal text-zinc-400"
             >
               AI is typing...
             </motion.div>

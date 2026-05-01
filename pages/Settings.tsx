@@ -77,8 +77,8 @@ const Settings: React.FC = () => {
              <Icon name="chevron-left" className="text-xs" />
           </button>
           <div>
-            <h1 className="text-xl md:text-2xl font-black tracking-tight text-[#06331e] mb-1.5">Settings</h1>
-            <p className="text-zinc-400 text-[10px] md:text-xs font-bold tracking-widest uppercase">App & Account</p>
+            <h1 className="text-xl md:text-lg font-semibold tracking-tight text-[#06331e] mb-1.5">Settings</h1>
+            <p className="text-zinc-400 text-[10px] md:text-xs font-bold tracking-normal uppercase">App & Account</p>
           </div>
        </div>
 
@@ -87,8 +87,8 @@ const Settings: React.FC = () => {
              <div className="flex items-center space-x-4">
                 <Icon name="bell" className="w-5 text-center text-zinc-400" />
                 <div className="flex flex-col">
-                  <span className="font-bold text-sm uppercase tracking-widest text-[#06331e]">Push Notifications</span>
-                  <span className="text-[9px] text-zinc-400 font-bold uppercase tracking-widest">{pushEnabled ? 'Enabled' : 'Disabled'}</span>
+                  <span className="font-bold text-sm uppercase tracking-normal text-[#06331e]">Push Notifications</span>
+                  <span className="text-[9px] text-zinc-400 font-bold uppercase tracking-normal">{pushEnabled ? 'Enabled' : 'Disabled'}</span>
                 </div>
              </div>
              <button 
@@ -107,7 +107,7 @@ const Settings: React.FC = () => {
             >
                <div className="flex items-center space-x-4">
                   <Icon name={opt.icon} className={`w-5 text-center transition-colors ${opt.danger ? 'text-red-400 group-hover:text-red-500' : 'text-zinc-400 group-hover:text-[#06331e]'}`} />
-                  <span className={`font-bold text-sm uppercase tracking-widest transition-colors ${opt.danger ? 'group-hover:text-red-600' : 'group-hover:text-[#06331e]'}`}>{opt.label}</span>
+                  <span className={`font-bold text-sm uppercase tracking-normal transition-colors ${opt.danger ? 'group-hover:text-red-600' : 'group-hover:text-[#06331e]'}`}>{opt.label}</span>
                </div>
                <Icon name="chevron-right" className={`text-[10px] transition-colors ${opt.danger ? 'text-red-300 group-hover:text-red-500' : 'text-zinc-300 group-hover:text-[#06331e]'}`} />
             </button>
@@ -118,7 +118,7 @@ const Settings: React.FC = () => {
           <div className="fixed inset-0 bg-[#06331e]/60 backdrop-blur-sm z-[1000] flex items-center justify-center p-8 animate-fade-in">
              <div className="bg-zinc-50 dark:bg-zinc-800 rounded-[40px] p-8 w-full shadow-2xl border border-white/20">
                 <div className="w-16 h-16 bg-red-50 text-red-500 rounded-3xl flex items-center justify-center mx-auto mb-6">
-                   <Icon name="exclamation-triangle" className="text-2xl" />
+                   <Icon name="exclamation-triangle" className="text-lg" />
                 </div>
                 <h3 className="text-xl font-bold text-center mb-2">Wait, are you sure?</h3>
                 <p className="text-xs text-f-gray text-center font-medium leading-relaxed mb-8 px-4">
@@ -128,13 +128,13 @@ const Settings: React.FC = () => {
                    <button 
                       disabled={isDeleting}
                       onClick={handleDeleteAccount}
-                      className="w-full py-4 bg-red-500 text-white rounded-2xl font-bold text-xs uppercase tracking-widest active:scale-[0.98] transition-all disabled:opacity-50"
+                      className="w-full py-4 bg-red-500 text-white rounded-2xl font-bold text-xs uppercase tracking-normal active:scale-[0.98] transition-all disabled:opacity-50"
                    >
                       {isDeleting ? 'Deleting...' : 'Permanently Delete'}
                    </button>
                    <button 
                       onClick={() => setShowDeleteModal(false)}
-                      className="w-full py-4 bg-[#f4f4f5] dark:bg-zinc-800/80 text-[#06331e] rounded-2xl font-bold text-xs uppercase tracking-widest active:scale-[0.98]"
+                      className="w-full py-4 bg-[#f4f4f5] dark:bg-zinc-800/80 text-[#06331e] rounded-2xl font-bold text-xs uppercase tracking-normal active:scale-[0.98]"
                    >
                       Keep Account
                    </button>

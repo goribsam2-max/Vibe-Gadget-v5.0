@@ -35,8 +35,8 @@ const ManageWithdrawals: React.FC = () => {
       <div className="flex items-center space-x-6 mb-10">
         <button onClick={() => navigate('/admin')} className="w-10 h-10 flex items-center justify-center bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-full hover:bg-zinc-900 hover:text-white transition-all"><Icon name="arrow-left" /></button>
         <div>
-           <h1 className="text-2xl font-black tracking-tight mb-1">Manage Withdrawals</h1>
-           <p className="text-[10px] uppercase font-bold text-zinc-400 tracking-widest">Affiliate payout requests</p>
+           <h1 className="text-lg font-semibold tracking-tight mb-1">Manage Withdrawals</h1>
+           <p className="text-[10px] uppercase font-bold text-zinc-400 tracking-normal">Affiliate payout requests</p>
         </div>
       </div>
 
@@ -47,7 +47,7 @@ const ManageWithdrawals: React.FC = () => {
                  <span className={`px-2 py-1 rounded-md text-[10px] font-bold uppercase ${req.status === 'Pending' ? 'bg-yellow-100 text-yellow-700' : req.status === 'Completed' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>{req.status}</span>
                  <span className="text-[10px] font-bold text-zinc-400 uppercase">{new Date(req.createdAt).toLocaleDateString()}</span>
                </div>
-               <h3 className="text-3xl font-black text-emerald-600 mb-4">৳{req.amount}</h3>
+               <h3 className="text-xl font-semibold text-emerald-600 mb-4">৳{req.amount}</h3>
                <div className="space-y-1 mb-6">
                  <p className="text-xs font-bold text-zinc-600 dark:text-zinc-400">Name: <span className="text-black dark:text-white">{req.accountName}</span></p>
                  <p className="text-xs font-bold text-zinc-600 dark:text-zinc-400">bKash: <span className="text-black dark:text-white">{req.bkashNumber}</span></p>

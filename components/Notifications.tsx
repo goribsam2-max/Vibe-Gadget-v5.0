@@ -79,13 +79,13 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
           <div className="fixed inset-0 z-[10000] flex items-center justify-center p-6">
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="absolute inset-0 bg-zinc-900/40 backdrop-blur-sm" onClick={() => setConfirmModal(null)} />
             <motion.div initial={{ opacity: 0, scale: 0.9, y: 10 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.9 }} className="bg-zinc-50 dark:bg-zinc-800 rounded-[2rem] p-8 w-full max-w-sm shadow-2xl relative z-10 text-center border border-zinc-100 dark:border-zinc-800">
-              <h3 className="text-xl font-black mb-2 tracking-tight">{confirmModal.title}</h3>
+              <h3 className="text-xl font-semibold mb-2 tracking-tight">{confirmModal.title}</h3>
               <p className="text-xs text-zinc-500 font-medium mb-8 leading-relaxed">{confirmModal.message}</p>
               <div className="flex flex-col gap-2">
-                <button onClick={() => { confirmModal.onConfirm(); setConfirmModal(null); }} className="w-full py-4 bg-zinc-900 dark:bg-zinc-50 dark:text-black text-white rounded-2xl font-bold text-xs uppercase tracking-widest shadow-lg">
+                <button onClick={() => { confirmModal.onConfirm(); setConfirmModal(null); }} className="w-full py-4 bg-zinc-900 dark:bg-zinc-50 dark:text-black text-white rounded-2xl font-bold text-xs uppercase tracking-normal shadow-lg">
                   {confirmModal.confirmText || 'Confirm'}
                 </button>
-                <button onClick={() => setConfirmModal(null)} className="w-full py-4 text-zinc-400 font-bold text-[10px] uppercase tracking-widest">
+                <button onClick={() => setConfirmModal(null)} className="w-full py-4 text-zinc-400 font-bold text-[10px] uppercase tracking-normal">
                   Cancel
                 </button>
               </div>

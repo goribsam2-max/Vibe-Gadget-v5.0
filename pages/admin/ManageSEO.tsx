@@ -73,7 +73,7 @@ const ManageSEO: React.FC = () => {
     if (loading) {
         return (
             <div className="min-h-screen bg-zinc-50 dark:bg-zinc-800 flex items-center justify-center">
-                <Icon name="spinner" className="animate-spin text-emerald-500 text-3xl" />
+                <Icon name="spinner" className="animate-spin text-emerald-500 text-xl" />
             </div>
         );
     }
@@ -85,8 +85,8 @@ const ManageSEO: React.FC = () => {
                     <Icon name="arrow-left" className="text-xs" />
                 </button>
                 <div>
-                    <h1 className="text-2xl md:text-3xl font-black tracking-tight text-zinc-900 dark:text-zinc-100 mb-1">SEO & Ads</h1>
-                    <p className="text-zinc-400 text-[10px] md:text-xs font-bold tracking-widest uppercase">Meta Tags, Indexing & Facebook Ads</p>
+                    <h1 className="text-lg md:text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 mb-1">SEO & Ads</h1>
+                    <p className="text-zinc-400 text-[10px] md:text-xs font-bold tracking-normal uppercase">Meta Tags, Indexing & Facebook Ads</p>
                 </div>
             </div>
 
@@ -99,8 +99,8 @@ const ManageSEO: React.FC = () => {
                             <Icon name="facebook" className="text-xl" />
                         </div>
                         <div>
-                            <h2 className="font-black text-lg text-zinc-900 dark:text-zinc-100">Facebook Pixel & Conversion Tracking</h2>
-                            <p className="text-[10px] text-zinc-500 font-bold tracking-widest uppercase mt-0.5">Pay only for actual sales</p>
+                            <h2 className="font-semibold text-lg text-zinc-900 dark:text-zinc-100">Facebook Pixel & Conversion Tracking</h2>
+                            <p className="text-[10px] text-zinc-500 font-bold tracking-normal uppercase mt-0.5">Pay only for actual sales</p>
                         </div>
                     </div>
                     <div className="relative z-10 space-y-5">
@@ -111,7 +111,7 @@ const ManageSEO: React.FC = () => {
                             </p>
                         </div>
                         <div>
-                            <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">Meta Pixel ID (Required for tracking)</label>
+                            <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-normal mb-2">Meta Pixel ID (Required for tracking)</label>
                             <input 
                                 type="text"
                                 value={seoData.fbPixelId}
@@ -121,7 +121,7 @@ const ManageSEO: React.FC = () => {
                             />
                         </div>
                         <div>
-                            <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">Conversions API Token (Optional for accuracy)</label>
+                            <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-normal mb-2">Conversions API Token (Optional for accuracy)</label>
                             <input 
                                 type="text"
                                 value={seoData.fbConversionToken}
@@ -140,13 +140,13 @@ const ManageSEO: React.FC = () => {
                             <Icon name="image" className="text-xl" />
                         </div>
                         <div>
-                            <h2 className="font-black text-lg text-zinc-900 dark:text-zinc-100">Branding & PWA</h2>
-                            <p className="text-[10px] text-zinc-500 font-bold tracking-widest uppercase mt-0.5">Favicon & Add to Home Screen Icons</p>
+                            <h2 className="font-semibold text-lg text-zinc-900 dark:text-zinc-100">Branding & PWA</h2>
+                            <p className="text-[10px] text-zinc-500 font-bold tracking-normal uppercase mt-0.5">Favicon & Add to Home Screen Icons</p>
                         </div>
                     </div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <div>
-                            <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">Favicon (Browser Tab Icon)</label>
+                            <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-normal mb-2">Favicon (Browser Tab Icon)</label>
                             <div className="flex items-center space-x-4">
                                 {seoData.faviconUrl ? (
                                     <div className="relative group w-12 h-12 shrink-0">
@@ -167,7 +167,7 @@ const ManageSEO: React.FC = () => {
                         </div>
 
                         <div>
-                            <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">App Icon (Add to Home Screen)</label>
+                            <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-normal mb-2">App Icon (Add to Home Screen)</label>
                             <div className="flex items-center space-x-4">
                                 {seoData.appIconUrl ? (
                                     <div className="relative group w-16 h-16 shrink-0">
@@ -197,14 +197,14 @@ const ManageSEO: React.FC = () => {
                             <Icon name="search" className="text-xl" />
                         </div>
                         <div>
-                            <h2 className="font-black text-lg text-zinc-900 dark:text-zinc-100">Search Engine Tags</h2>
-                            <p className="text-[10px] text-zinc-500 font-bold tracking-widest uppercase mt-0.5">Control how Google sees your site</p>
+                            <h2 className="font-semibold text-lg text-zinc-900 dark:text-zinc-100">Search Engine Tags</h2>
+                            <p className="text-[10px] text-zinc-500 font-bold tracking-normal uppercase mt-0.5">Control how Google sees your site</p>
                         </div>
                     </div>
 
                     <div className="space-y-5">
                         <div>
-                            <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">Global Meta Title (Fallback)</label>
+                            <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-normal mb-2">Global Meta Title (Fallback)</label>
                             <input 
                                 type="text"
                                 value={seoData.metaTitle}
@@ -214,7 +214,7 @@ const ManageSEO: React.FC = () => {
                             />
                         </div>
                         <div>
-                            <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">Meta Description</label>
+                            <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-normal mb-2">Meta Description</label>
                             <textarea 
                                 rows={3}
                                 value={seoData.metaDescription}
@@ -224,7 +224,7 @@ const ManageSEO: React.FC = () => {
                             />
                         </div>
                         <div>
-                            <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">Meta Image (Link Preview)</label>
+                            <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-normal mb-2">Meta Image (Link Preview)</label>
                             <div className="flex items-center space-x-4">
                                 {seoData.metaImage ? (
                                     <div className="relative group w-32 h-16 shrink-0">
@@ -238,14 +238,14 @@ const ManageSEO: React.FC = () => {
                                        <Icon name="image" className="text-zinc-300" />
                                     </div>
                                 )}
-                                <label className="flex-1 cursor-pointer bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 py-3 rounded-lg text-[10px] font-bold uppercase tracking-widest hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors text-center block">
+                                <label className="flex-1 cursor-pointer bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 py-3 rounded-lg text-[10px] font-bold uppercase tracking-normal hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors text-center block">
                                     <input type="file" accept="image/*" className="hidden" onChange={(e) => handleImageUpload(e, 'metaImage')} />
                                     Upload Banner
                                 </label>
                             </div>
                         </div>
                         <div>
-                            <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">Keywords (Comma separated)</label>
+                            <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-normal mb-2">Keywords (Comma separated)</label>
                             <input 
                                 type="text"
                                 value={seoData.metaKeywords}
@@ -256,7 +256,7 @@ const ManageSEO: React.FC = () => {
                         </div>
                         
                         <div>
-                            <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">Search Engine Visibility (Robots)</label>
+                            <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-normal mb-2">Search Engine Visibility (Robots)</label>
                             <select
                                 value={seoData.robots}
                                 onChange={e => setSeoData({...seoData, robots: e.target.value})}
@@ -269,7 +269,7 @@ const ManageSEO: React.FC = () => {
                         
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                              <div>
-                                <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">Site Language</label>
+                                <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-normal mb-2">Site Language</label>
                                 <input 
                                     type="text"
                                     value={seoData.siteLanguage}
@@ -279,7 +279,7 @@ const ManageSEO: React.FC = () => {
                                 />
                              </div>
                              <div>
-                                <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">Site Author / Brand</label>
+                                <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-normal mb-2">Site Author / Brand</label>
                                 <input 
                                     type="text"
                                     value={seoData.siteAuthor}
@@ -291,7 +291,7 @@ const ManageSEO: React.FC = () => {
                         </div>
                         
                         <div>
-                            <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">Advanced: JSON-LD Structured Data Schema</label>
+                            <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-normal mb-2">Advanced: JSON-LD Structured Data Schema</label>
                             <textarea 
                                 rows={4}
                                 value={seoData.jsonLd}
@@ -299,7 +299,7 @@ const ManageSEO: React.FC = () => {
                                 placeholder='{"@context": "https://schema.org", "@type": "WebSite", "name": "VibeGadget"}'
                                 className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 text-xs font-mono text-zinc-800 dark:text-zinc-200 focus:border-emerald-500 transition-colors resize-none"
                             />
-                            <p className="text-[9px] text-emerald-600 mt-1 uppercase tracking-widest font-bold">Helps Google understand your e-commerce structure.</p>
+                            <p className="text-[9px] text-emerald-600 mt-1 uppercase tracking-normal font-bold">Helps Google understand your e-commerce structure.</p>
                         </div>
                     </div>
                 </div>
@@ -308,7 +308,7 @@ const ManageSEO: React.FC = () => {
                     <button 
                         type="submit" 
                         disabled={saving}
-                        className="px-8 py-4 bg-[#06331e] text-white rounded-xl font-black uppercase tracking-widest text-xs shadow-lg shadow-[#06331e]/30 hover:bg-zinc-900 transition-all disabled:opacity-50 flex items-center"
+                        className="px-8 py-4 bg-[#06331e] text-white rounded-xl font-semibold uppercase tracking-normal text-xs shadow-lg shadow-[#06331e]/30 hover:bg-zinc-900 transition-all disabled:opacity-50 flex items-center"
                     >
                         {saving ? <Icon name="spinner" className="animate-spin mr-2" /> : <Icon name="save" className="mr-2" />}
                         {saving ? 'Saving...' : 'Save Settings'}

@@ -44,10 +44,10 @@ const AdminDashboard: React.FC = () => {
         <div className="flex items-center space-x-6">
           <button onClick={() => navigate('/')} className="w-12 h-12 flex items-center justify-center bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-[#06331e] rounded-full shadow-sm hover:bg-[#06331e] hover:text-white transition-all active:scale-95"><Icon name="arrow-left" className="text-xs" /></button>
           <div>
-           <h1 className="text-xl md:text-2xl font-black tracking-tight text-zinc-900 dark:text-zinc-100 mb-1">
+           <h1 className="text-xl md:text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 mb-1">
                {new Date().getHours() < 12 ? 'Good Morning' : new Date().getHours() < 18 ? 'Good Afternoon' : 'Good Evening'}, Admin
             </h1>
-            <p className="text-zinc-500 text-[10px] md:text-xs font-bold tracking-widest uppercase flex items-center">
+            <p className="text-zinc-500 text-[10px] md:text-xs font-bold tracking-normal uppercase flex items-center">
                <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse mr-2"></span>
                System Online &bull; {new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}
             </p>
@@ -82,10 +82,10 @@ const AdminDashboard: React.FC = () => {
               <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-50 rounded-full blur-[80px] opacity-0 group-hover:opacity-100 transition-opacity duration-1000 pointer-events-none"></div>
               <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4 relative z-10">
                  <div>
-                    <h3 className="font-black text-xl text-zinc-900 dark:text-zinc-100 tracking-tight">Revenue Analytics</h3>
-                    <p className="text-[10px] uppercase tracking-widest font-bold text-zinc-400 mt-1">Live Demo Data</p>
+                    <h3 className="font-semibold text-xl text-zinc-900 dark:text-zinc-100 tracking-tight">Revenue Analytics</h3>
+                    <p className="text-[10px] uppercase tracking-normal font-bold text-zinc-400 mt-1">Live Demo Data</p>
                  </div>
-                 <div className="bg-zinc-50 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 px-4 py-2.5 rounded-xl text-[10px] font-black uppercase tracking-widest flex items-center gap-2 shadow-inner">
+                 <div className="bg-zinc-50 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 px-4 py-2.5 rounded-xl text-[10px] font-semibold uppercase tracking-normal flex items-center gap-2 shadow-inner">
                     <span className="text-emerald-500"><Icon name="trend-up" className="text-sm" /></span> +24.5% vs Last Week
                  </div>
               </div>
@@ -125,19 +125,19 @@ const AdminDashboard: React.FC = () => {
          {/* System Health Widget */}
          <div className="bg-zinc-900 rounded-[2rem] p-6 md:p-8 shadow-2xl relative overflow-hidden h-[55%] min-h-[200px]">
             <div className="absolute top-0 right-0 w-48 h-48 bg-emerald-500 rounded-full blur-[80px] opacity-20 pointer-events-none"></div>
-            <h3 className="font-black text-white mb-6 uppercase tracking-widest text-[10px] md:text-xs">Live System Health</h3>
+            <h3 className="font-semibold text-white mb-6 uppercase tracking-normal text-[10px] md:text-xs">Live System Health</h3>
             
             <div className="space-y-5 relative z-10">
                <div>
-                  <div className="flex justify-between text-[9px] md:text-[10px] text-zinc-400 font-bold mb-2 uppercase tracking-widest"><span>Database Load</span> <span className="text-emerald-400">12%</span></div>
+                  <div className="flex justify-between text-[9px] md:text-[10px] text-zinc-400 font-bold mb-2 uppercase tracking-normal"><span>Database Load</span> <span className="text-emerald-400">12%</span></div>
                   <div className="h-2 bg-zinc-800 rounded-full overflow-hidden"><div className="h-full bg-emerald-500 w-[12%]"></div></div>
                </div>
                <div>
-                  <div className="flex justify-between text-[9px] md:text-[10px] text-zinc-400 font-bold mb-2 uppercase tracking-widest"><span>Storage Capacity</span> <span className="text-blue-400">45%</span></div>
+                  <div className="flex justify-between text-[9px] md:text-[10px] text-zinc-400 font-bold mb-2 uppercase tracking-normal"><span>Storage Capacity</span> <span className="text-blue-400">45%</span></div>
                   <div className="h-2 bg-zinc-800 rounded-full overflow-hidden"><div className="h-full bg-blue-500 w-[45%]"></div></div>
                </div>
                <div>
-                  <div className="flex justify-between text-[9px] md:text-[10px] text-zinc-400 font-bold mb-2 uppercase tracking-widest"><span>API Bandwidth</span> <span className="text-orange-400">89%</span></div>
+                  <div className="flex justify-between text-[9px] md:text-[10px] text-zinc-400 font-bold mb-2 uppercase tracking-normal"><span>API Bandwidth</span> <span className="text-orange-400">89%</span></div>
                   <div className="h-2 bg-zinc-800 rounded-full overflow-hidden"><div className="h-full bg-orange-500 w-[89%] animate-pulse"></div></div>
                </div>
             </div>
@@ -148,14 +148,14 @@ const AdminDashboard: React.FC = () => {
              <div className="absolute top-[-20%] right-[-10%] w-32 h-32 bg-blue-100/50 rounded-full blur-2xl group-hover:bg-blue-200/50 transition-colors"></div>
              <div className="relative z-10 w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center text-blue-600 border border-blue-100"><Icon name="shield-check" className="text-xl" /></div>
              <div className="relative z-10 mt-2">
-                <h4 className="font-black text-sm text-zinc-900 dark:text-zinc-100 mb-1">Security Scan OK</h4>
+                <h4 className="font-semibold text-sm text-zinc-900 dark:text-zinc-100 mb-1">Security Scan OK</h4>
                 <p className="text-[10px] text-zinc-500 font-medium leading-relaxed">All firewalls and SSL certificates are active. No anomalies detected.</p>
              </div>
          </div>
       </div>
       </div>
 
-      <h3 className="text-xs font-bold text-zinc-500 uppercase tracking-widest mb-4 px-1 relative z-10">Management Modules</h3>
+      <h3 className="text-xs font-bold text-zinc-500 uppercase tracking-normal mb-4 px-1 relative z-10">Management Modules</h3>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-16 relative z-10">
          <AdminBentoLink to="products" title="Inventory Catalog" subtitle="Add, edit, or remove store products." icon="cubes" />
          <AdminBentoLink to="users" title="Customer Database" subtitle="Manage registered users and accounts." icon="users-cog" />
@@ -184,8 +184,8 @@ const AdminDashboard: React.FC = () => {
 
       <div>
          <div className="flex items-center justify-between mb-6 px-1">
-            <h3 className="text-[11px] font-bold text-zinc-400 uppercase tracking-widest">Recent Activity</h3>
-            <Link to="orders" className="text-[10px] font-bold text-[#06331e] uppercase tracking-widest hover:text-emerald-600 transition-colors flex items-center">
+            <h3 className="text-[11px] font-bold text-zinc-400 uppercase tracking-normal">Recent Activity</h3>
+            <Link to="orders" className="text-[10px] font-bold text-[#06331e] uppercase tracking-normal hover:text-emerald-600 transition-colors flex items-center">
                View All <Icon name="arrow-right" className="ml-1.5 text-[8px]" />
             </Link>
          </div>
@@ -195,20 +195,20 @@ const AdminDashboard: React.FC = () => {
                   <div className="flex items-center space-x-5">
                      <div className="w-12 h-12 rounded-2xl bg-zinc-50 dark:bg-zinc-800 flex items-center justify-center border border-zinc-100 dark:border-zinc-800 group-hover:bg-zinc-50 dark:bg-zinc-800 group-hover:border-zinc-200 dark:border-zinc-700 shadow-sm transition-colors group-hover:shadow-md"><Icon name="shopping-bag" className="text-zinc-500 text-sm" /></div>
                      <div>
-                       <p className="text-sm font-black text-zinc-900 dark:text-zinc-100 mb-0.5 tracking-tight group-hover:text-[#06331e] transition-colors">{order.customerName}</p>
-                       <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Order #{order.id.slice(0,8)}</p>
+                       <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-100 mb-0.5 tracking-tight group-hover:text-[#06331e] transition-colors">{order.customerName}</p>
+                       <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-normal">Order #{order.id.slice(0,8)}</p>
                      </div>
                   </div>
                   <div className="text-right">
-                     <p className="text-sm md:text-base font-black text-black dark:text-white">৳{order.total}</p>
-                     <p className={`text-[9px] md:text-[10px] font-bold tracking-widest uppercase mt-0.5 ${order.status === 'Delivered' ? 'text-emerald-500' : order.status === 'Cancelled' ? 'text-red-500' : 'text-blue-500'}`}>{order.status}</p>
+                     <p className="text-sm md:text-base font-semibold text-black dark:text-white">৳{order.total}</p>
+                     <p className={`text-[9px] md:text-[10px] font-bold tracking-normal uppercase mt-0.5 ${order.status === 'Delivered' ? 'text-emerald-500' : order.status === 'Cancelled' ? 'text-red-500' : 'text-blue-500'}`}>{order.status}</p>
                   </div>
                </div>
             ))}
             {recentOrders.length === 0 && (
                <div className="p-12 text-center flex flex-col items-center justify-center text-zinc-400">
                    <div className="w-16 h-16 rounded-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-100 dark:border-zinc-800 flex items-center justify-center mb-4"><Icon name="inbox" className="text-xl text-zinc-300" /></div>
-                   <div className="font-bold text-xs uppercase tracking-widest">No recent orders</div>
+                   <div className="font-bold text-xs uppercase tracking-normal">No recent orders</div>
                </div>
             )}
          </div>
@@ -225,9 +225,9 @@ const StatCard = ({ title, value, icon, gradient, iconColor, trend }: any) => (
           <Icon name={icon as any} className="text-xl" />
        </div>
        <div>
-         <p className="text-3xl lg:text-4xl font-black text-zinc-900 dark:text-zinc-100 leading-none mb-2 tracking-tight">{value}</p>
+         <p className="text-xl lg:text-lg font-semibold text-zinc-900 dark:text-zinc-100 leading-none mb-2 tracking-tight">{value}</p>
          <p className="text-xs font-semibold text-zinc-500 tracking-tight mb-2">{title}</p>
-         {trend && <p className={`text-[10px] font-bold uppercase tracking-widest ${trend.includes('+') ? 'text-emerald-500' : 'text-zinc-400'}`}>{trend}</p>}
+         {trend && <p className={`text-[10px] font-bold uppercase tracking-normal ${trend.includes('+') ? 'text-emerald-500' : 'text-zinc-400'}`}>{trend}</p>}
        </div>
     </div>
   </div>
@@ -240,7 +240,7 @@ const AdminBentoLink = ({ to, title, subtitle, icon, highlight, iconColor, onCli
      </div>
      <div>
         <h4 className={`text-sm font-bold tracking-tight mb-1 ${iconColor ? iconColor : 'text-zinc-900 dark:text-zinc-100'}`}>{title}</h4>
-        <p className="text-xs font-medium text-zinc-500 leading-relaxed pr-2 line-clamp-2">{subtitle}</p>
+        <p className="text-xs font-medium text-zinc-500 leading-relaxed pr-2 truncate">{subtitle}</p>
      </div>
   </Link>
 );

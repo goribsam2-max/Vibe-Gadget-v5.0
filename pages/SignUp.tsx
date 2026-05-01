@@ -61,7 +61,7 @@ const SignUp: React.FC = () => {
         >
           <Icon name="arrow-left" className="text-xs" />
         </motion.button>
-        <h1 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">Create an account</h1>
+        <h1 className="text-xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">Create an account</h1>
         <p className="mt-2 text-sm text-zinc-500 font-medium">Start exploring premium gadgets today.</p>
       </div>
 

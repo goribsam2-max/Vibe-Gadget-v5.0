@@ -57,7 +57,7 @@ const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData })
   }, [userData, navigate]);
 
   if (loading || !userData) {
-    return <div className="min-h-screen flex items-center justify-center"><Icon name="spinner-third" className="animate-spin text-4xl text-zinc-900" /></div>;
+    return <div className="min-h-screen flex items-center justify-center"><Icon name="spinner-third" className="animate-spin text-lg text-zinc-900" /></div>;
   }
 
   const handleApplyAffiliate = async (e: React.FormEvent) => {
@@ -98,7 +98,7 @@ const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData })
         <div className="min-h-screen bg-zinc-50 dark:bg-[#121212] p-6 flex flex-col items-center justify-center text-center">
             <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-8 rounded-3xl shadow-sm max-w-sm w-full mx-auto">
                <div className="w-16 h-16 bg-amber-50 dark:bg-amber-500/10 text-amber-500 rounded-full flex items-center justify-center mx-auto mb-6">
-                  <Icon name="clock" className="text-2xl" />
+                  <Icon name="clock" className="text-lg" />
                </div>
                <h1 className="text-xl font-bold text-zinc-900 dark:text-white mb-2 tracking-tight">Application Reviewing</h1>
                <p className="text-sm text-zinc-500 dark:text-zinc-400 font-medium mb-8">We are reviewing your affiliate application. This usually takes 24-48 hours. We'll update you soon.</p>
@@ -118,7 +118,7 @@ const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData })
                <button onClick={() => navigate('/profile')} className="w-10 h-10 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center hover:bg-zinc-50 dark:hover:bg-zinc-800 rounded-full transition-colors">
                  <Icon name="arrow-left" className="text-xs" />
                </button>
-               <h1 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">Partner Program</h1>
+               <h1 className="text-lg font-bold tracking-tight text-zinc-900 dark:text-white">Partner Program</h1>
              </div>
              
              <div className="flex bg-zinc-100 dark:bg-zinc-800/50 rounded-full p-1 border border-zinc-200 dark:border-zinc-700/50">
@@ -133,7 +133,7 @@ const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData })
           </div>
 
           <div className="mb-10 text-center md:text-left">
-            <h2 className="text-3xl font-black text-zinc-900 dark:text-white tracking-tight mb-2">Partner & Earn</h2>
+            <h2 className="text-xl font-semibold text-zinc-900 dark:text-white tracking-tight mb-2">Partner & Earn</h2>
             <p className="text-zinc-500 dark:text-zinc-400 text-sm font-medium leading-relaxed max-w-xl">Join our exclusive network. Share your custom promo code to give your audience 5% OFF, and earn up to <span className="font-bold text-emerald-600 dark:text-emerald-400">৳200 commission</span> for every successful sale directly to your wallet based on your tier!</p>
           </div>
           
@@ -346,8 +346,8 @@ const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData })
               <Icon name="chevron-left" className="text-xs group-hover:-translate-x-1 transition-transform" />
             </button>
             <div className="flex flex-col">
-               <h1 className="text-2xl md:text-xl lg:text-base xl:text-sm font-black tracking-tighter uppercase text-shine">Partners.</h1>
-               <p className="text-[9px] font-bold text-emerald-600/70 uppercase tracking-[0.4em] mt-1 pl-1">Affiliate Portal</p>
+               <h1 className="text-lg md:text-xl lg:text-base xl:text-sm font-semibold tracking-tight uppercase text-shine">Partners.</h1>
+               <p className="text-[9px] font-bold text-emerald-600/70 uppercase tracking-normal mt-1 pl-1">Affiliate Portal</p>
             </div>
           </div>
 
@@ -372,15 +372,15 @@ const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData })
                <div>
                  <div className="flex items-center space-x-2 text-emerald-300 mb-3 bg-white/10 w-max px-3 py-1.5 rounded-full border border-white/10 backdrop-blur-md">
                    <Icon name="wallet" className="text-sm" />
-                   <p className="text-[10px] font-bold uppercase tracking-widest">Available Balance</p>
+                   <p className="text-[10px] font-bold uppercase tracking-normal">Available Balance</p>
                  </div>
-                 <h2 className="text-5xl md:text-7xl font-black tracking-tighter truncate drop-shadow-lg">৳{userData.walletBalance || 0}</h2>
+                 <h2 className="text-lg md:text-7xl font-semibold tracking-tight truncate drop-shadow-lg">৳{userData.walletBalance || 0}</h2>
                </div>
                
                <div className="flex flex-col gap-2 shrink-0">
                   <div className="text-right">
-                     <p className="text-[10px] uppercase font-bold text-emerald-300/80 tracking-widest mb-1">Total Lifetime</p>
-                     <p className="text-xl font-black">৳{(userData.walletBalance || 0) + (logs.reduce((acc: any, log: any) => acc + (log.commission || 0), 0) || 0)}</p>
+                     <p className="text-[10px] uppercase font-bold text-emerald-300/80 tracking-normal mb-1">Total Lifetime</p>
+                     <p className="text-xl font-semibold">৳{(userData.walletBalance || 0) + (logs.reduce((acc: any, log: any) => acc + (log.commission || 0), 0) || 0)}</p>
                   </div>
                </div>
              </div>
@@ -388,15 +388,15 @@ const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData })
              <div className="flex flex-col sm:flex-row gap-4 relative z-10 w-full">
                 <button 
                   onClick={() => navigate('/withdraw')} 
-                  className="bg-white text-[#06331e] px-8 py-4 rounded-2xl font-black uppercase tracking-widest hover:bg-zinc-100 transition-all shadow-xl shadow-black/20 flex-1 flex items-center justify-center space-x-2 text-xs hover:-translate-y-1 active:scale-95"
+                  className="bg-white text-[#06331e] px-8 py-4 rounded-2xl font-semibold uppercase tracking-normal hover:bg-zinc-100 transition-all shadow-xl shadow-black/20 flex-1 flex items-center justify-center space-x-2 text-xs hover:-translate-y-1 active:scale-95"
                 >
                   <Icon name="money-bill" className="text-sm" />
                   <span>Withdraw Funds</span>
                 </button>
                 <div className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 flex-1 flex items-center justify-between">
                    <div>
-                     <p className="text-[10px] uppercase font-bold text-emerald-200 tracking-widest mb-1">Current Tier</p>
-                     <p className="font-black text-sm uppercase">Level {currentTier}</p>
+                     <p className="text-[10px] uppercase font-bold text-emerald-200 tracking-normal mb-1">Current Tier</p>
+                     <p className="font-semibold text-sm uppercase">Level {currentTier}</p>
                    </div>
                    <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
                      <Icon name="medal" className="text-xl text-yellow-400 drop-shadow-md" />
@@ -409,13 +409,13 @@ const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData })
             <div className="bg-white dark:bg-zinc-900 p-8 rounded-[2.5rem] border border-zinc-200 dark:border-zinc-800 shadow-sm flex flex-col justify-between h-full relative overflow-hidden group">
                <div className="z-10 relative">
                   <div className="flex items-center justify-between mb-4">
-                     <h2 className="text-[10px] font-black uppercase tracking-widest text-zinc-400">Next Goal</h2>
-                     <span className="bg-emerald-50 dark:bg-emerald-900/10 text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/30 px-3 py-1.5 rounded-full text-[10px] font-black uppercase tracking-widest">+ {nextCommission}৳ / Sale</span>
+                     <h2 className="text-[10px] font-semibold uppercase tracking-normal text-zinc-400">Next Goal</h2>
+                     <span className="bg-emerald-50 dark:bg-emerald-900/10 text-emerald-600 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/30 px-3 py-1.5 rounded-full text-[10px] font-semibold uppercase tracking-normal">+ {nextCommission}৳ / Sale</span>
                   </div>
                   
                   <div className="flex items-end gap-2 mb-4">
-                     <h3 className="text-4xl font-black tracking-tighter text-zinc-900 dark:text-zinc-100">{salesCount}</h3>
-                     <p className="text-[10px] uppercase font-bold text-zinc-500 tracking-widest mb-2">/ {currentTarget} Sales</p>
+                     <h3 className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">{salesCount}</h3>
+                     <p className="text-[10px] uppercase font-bold text-zinc-500 tracking-normal mb-2">/ {currentTarget} Sales</p>
                   </div>
 
                   <div className="h-4 w-full bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden relative border border-black/5 dark:border-white/5 mb-4 shadow-inner">
@@ -423,12 +423,12 @@ const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData })
                   </div>
                   
                   {currentTier === 4 && salesCount >= t4Limit ? (
-                     <p className="text-[10px] font-black text-emerald-500 flex items-center bg-emerald-50 dark:bg-emerald-900/10 px-3 py-1.5 rounded-full w-max border border-emerald-100 dark:border-emerald-900/30">
+                     <p className="text-[10px] font-semibold text-emerald-500 flex items-center bg-emerald-50 dark:bg-emerald-900/10 px-3 py-1.5 rounded-full w-max border border-emerald-100 dark:border-emerald-900/30">
                         <Icon name="check-circle" className="mr-2 text-sm" /> MAX TIER ACTIVE
                      </p>
                   ) : (
                      <p className="text-[10px] uppercase font-bold text-zinc-500 leading-relaxed">
-                        <span className="text-zinc-900 dark:text-zinc-100 font-black">{currentTarget - salesCount} more sales</span> needed to activate Level {currentTier + 1} commission.
+                        <span className="text-zinc-900 dark:text-zinc-100 font-semibold">{currentTarget - salesCount} more sales</span> needed to activate Level {currentTier + 1} commission.
                      </p>
                   )}
                </div>
@@ -441,8 +441,8 @@ const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData })
 
        <div className="bg-white dark:bg-zinc-900 p-8 rounded-[2.5rem] border border-zinc-200 dark:border-zinc-800 shadow-sm mb-8 overflow-hidden relative hidden md:block">
           <div className="flex justify-between items-center mb-6 z-10 relative">
-             <h2 className="text-lg font-black tracking-tight text-zinc-900 dark:text-zinc-100">Performance Over Time</h2>
-             <div className="flex items-center gap-4 text-[10px] font-bold uppercase tracking-widest text-zinc-400">
+             <h2 className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">Performance Over Time</h2>
+             <div className="flex items-center gap-4 text-[10px] font-bold uppercase tracking-normal text-zinc-400">
                 <div className="flex items-center gap-1.5"><span className="w-2 h-2 rounded-full bg-emerald-500"></span> Sales</div>
              </div>
           </div>
@@ -474,25 +474,25 @@ const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData })
           
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-8 relative z-10">
              <div>
-               <h2 className="text-xl font-black tracking-tight text-zinc-900 dark:text-zinc-100 mb-2">Your Promotion Hub</h2>
+               <h2 className="text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 mb-2">Your Promotion Hub</h2>
                <p className="text-xs text-zinc-500 font-medium max-w-md leading-relaxed">Share your code everywhere. Customers get <span className="font-bold text-emerald-600 dark:text-emerald-400">5% OFF</span> instantly, and you earn <span className="font-bold text-emerald-600 dark:text-emerald-400">{currentCommission}৳</span> immediately upon delivery.</p>
              </div>
              
              <div className="bg-emerald-50 dark:bg-emerald-900/10 border border-emerald-100 dark:border-emerald-900/30 px-4 py-2 rounded-2xl flex items-center space-x-3 w-full md:w-auto">
                 <div className="w-10 h-10 bg-emerald-100 dark:bg-emerald-800/50 rounded-xl flex items-center justify-center text-emerald-600 dark:text-emerald-400"><Icon name="tag" /></div>
                 <div>
-                   <p className="text-[9px] uppercase font-bold text-emerald-600/70 dark:text-emerald-400/70 tracking-widest mb-0.5">Your Rate</p>
-                   <p className="text-sm font-black text-emerald-700 dark:text-emerald-300">{currentCommission}৳ / Sale</p>
+                   <p className="text-[9px] uppercase font-bold text-emerald-600/70 dark:text-emerald-400/70 tracking-normal mb-0.5">Your Rate</p>
+                   <p className="text-sm font-semibold text-emerald-700 dark:text-emerald-300">{currentCommission}৳ / Sale</p>
                 </div>
              </div>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 relative z-10">
              <div className="bg-zinc-50 dark:bg-zinc-800/50 p-6 rounded-[2rem] border border-zinc-200 dark:border-zinc-700/50">
-               <label className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-3 block">Custom Promo Code</label>
+               <label className="text-[10px] font-bold uppercase tracking-normal text-zinc-400 mb-3 block">Custom Promo Code</label>
                {isEditingCode ? (
                   <div className="flex bg-white dark:bg-zinc-900 border-2 border-emerald-500 p-1.5 rounded-2xl transition-all h-14 shadow-sm">
-                    <input type="text" value={tempCode} onChange={e => setTempCode(e.target.value.toUpperCase())} className="flex-1 bg-transparent px-4 text-sm font-black text-zinc-800 dark:text-zinc-200 outline-none uppercase tracking-widest min-w-0" placeholder="e.g. VIBEGADGET" />
+                    <input type="text" value={tempCode} onChange={e => setTempCode(e.target.value.toUpperCase())} className="flex-1 bg-transparent px-4 text-sm font-semibold text-zinc-800 dark:text-zinc-200 outline-none uppercase tracking-normal min-w-0" placeholder="e.g. VIBEGADGET" />
                     <div className="flex gap-1.5 shrink-0">
                       <button onClick={handleSaveCode} disabled={savingCode} className="h-full w-12 flex items-center justify-center bg-[#06331e] text-white rounded-xl shadow-md hover:bg-zinc-900 transition-colors">
                         {savingCode ? <Icon name="spinner-third" className="animate-spin text-sm" /> : <Icon name="check" className="text-sm" />}
@@ -504,12 +504,12 @@ const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData })
                   </div>
                ) : (
                   <div className="flex bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 p-1.5 rounded-2xl transition-all h-14 shadow-sm group">
-                    <input type="text" readOnly value={affiliateCode} className="flex-1 bg-transparent px-4 text-base font-black text-emerald-600 dark:text-emerald-400 outline-none uppercase tracking-[0.15em] min-w-0" />
+                    <input type="text" readOnly value={affiliateCode} className="flex-1 bg-transparent px-4 text-base font-semibold text-emerald-600 dark:text-emerald-400 outline-none uppercase tracking-normal min-w-0" />
                     <div className="flex gap-1.5 shrink-0">
-                      <button onClick={() => setIsEditingCode(true)} className="h-full px-4 flex items-center justify-center bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 rounded-xl hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors text-[10px] font-bold uppercase tracking-widest">
+                      <button onClick={() => setIsEditingCode(true)} className="h-full px-4 flex items-center justify-center bg-zinc-100 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-300 rounded-xl hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors text-[10px] font-bold uppercase tracking-normal">
                         Edit
                       </button>
-                      <button onClick={() => copyToClipboard(affiliateCode)} className="h-full px-5 flex items-center justify-center bg-[#06331e] text-white rounded-xl hover:bg-zinc-900 transition-colors text-[10px] font-bold uppercase tracking-widest shadow-md">
+                      <button onClick={() => copyToClipboard(affiliateCode)} className="h-full px-5 flex items-center justify-center bg-[#06331e] text-white rounded-xl hover:bg-zinc-900 transition-colors text-[10px] font-bold uppercase tracking-normal shadow-md">
                         {isCopying ? 'Copied!' : 'Copy Code'}
                       </button>
                     </div>
@@ -518,13 +518,13 @@ const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData })
              </div>
 
              <div className="bg-zinc-50 dark:bg-zinc-800/50 p-6 rounded-[2rem] border border-zinc-200 dark:border-zinc-700/50">
-               <label className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-3 block transform-gpu">Direct Referral Link</label>
+               <label className="text-[10px] font-bold uppercase tracking-normal text-zinc-400 mb-3 block transform-gpu">Direct Referral Link</label>
                <div className="flex bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 p-1.5 rounded-2xl transition-all h-14 shadow-sm group">
                  <div className="flex items-center justify-center w-10 text-zinc-300 dark:text-zinc-600">
                     <Icon name="link" />
                  </div>
                  <input type="text" readOnly value={shareLink} className="flex-1 bg-transparent pr-4 text-xs font-semibold text-zinc-500 dark:text-zinc-400 outline-none min-w-0 truncate" />
-                 <button onClick={() => copyToClipboard(shareLink)} className="h-full px-5 flex items-center justify-center bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 rounded-xl hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors text-[10px] font-bold uppercase tracking-widest">
+                 <button onClick={() => copyToClipboard(shareLink)} className="h-full px-5 flex items-center justify-center bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 border border-zinc-200 dark:border-zinc-700 rounded-xl hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors text-[10px] font-bold uppercase tracking-normal">
                    {isCopying ? <Icon name="check" /> : 'Copy'}
                  </button>
                </div>
@@ -535,14 +535,14 @@ const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData })
        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
          <div className="lg:col-span-2">
            <div className="flex items-center justify-between mb-6 px-2">
-             <h3 className="text-lg font-black tracking-tight text-zinc-900 dark:text-zinc-100">Transaction History</h3>
-             <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest bg-zinc-100 dark:bg-zinc-800 px-3 py-1.5 rounded-full">{logs.length} Sales</span>
+             <h3 className="text-lg font-semibold tracking-tight text-zinc-900 dark:text-zinc-100">Transaction History</h3>
+             <span className="text-[10px] font-bold text-zinc-400 uppercase tracking-normal bg-zinc-100 dark:bg-zinc-800 px-3 py-1.5 rounded-full">{logs.length} Sales</span>
            </div>
            
            {logs.length === 0 ? (
               <div className="text-center py-20 bg-white dark:bg-zinc-900 rounded-[2.5rem] border border-dashed border-zinc-200 dark:border-zinc-800 shadow-sm">
                  <div className="w-20 h-20 bg-zinc-50 dark:bg-zinc-800 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <Icon name="receipt" className="text-3xl text-zinc-300 dark:text-zinc-600" />
+                    <Icon name="receipt" className="text-xl text-zinc-300 dark:text-zinc-600" />
                  </div>
                  <h4 className="text-sm font-bold text-zinc-900 dark:text-zinc-100 mb-1">No transactions yet</h4>
                  <p className="text-[11px] font-medium text-zinc-500 max-w-xs mx-auto leading-relaxed">Your earnings will appear here once customers receive their orders using your code.</p>
@@ -556,7 +556,7 @@ const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData })
                              <Icon name="arrow-down-left" className="text-sm" />
                           </div>
                           <div className="truncate">
-                             <p className="text-sm font-black text-zinc-900 dark:text-zinc-100 truncate mb-1">Sale Commission</p>
+                             <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-100 truncate mb-1">Sale Commission</p>
                              <p className="text-[10px] font-bold text-zinc-500 flex items-center gap-2">
                                <span>{new Date(log.createdAt).toLocaleDateString()}</span>
                                <span className="w-1 h-1 rounded-full bg-zinc-300 dark:bg-zinc-700"></span>
@@ -565,8 +565,8 @@ const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData })
                           </div>
                        </div>
                        <div className="shrink-0 text-right">
-                          <p className="font-black text-emerald-600 dark:text-emerald-400 text-lg">+৳{log.commission}</p>
-                          <p className="text-[9px] font-bold text-emerald-600/50 uppercase tracking-widest mt-0.5">Added to Wallet</p>
+                          <p className="font-semibold text-emerald-600 dark:text-emerald-400 text-lg">+৳{log.commission}</p>
+                          <p className="text-[9px] font-bold text-emerald-600/50 uppercase tracking-normal mt-0.5">Added to Wallet</p>
                        </div>
                     </div>
                  ))}
@@ -581,7 +581,7 @@ const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData })
                   <div className="w-12 h-12 bg-white/10 dark:bg-black/5 rounded-2xl flex items-center justify-center mb-6 backdrop-blur-md">
                      <Icon name="bullhorn" className="text-xl" />
                   </div>
-                  <h3 className="text-xl font-black tracking-tight mb-3">Marketing Tips</h3>
+                  <h3 className="text-xl font-semibold tracking-tight mb-3">Marketing Tips</h3>
                   <ul className="space-y-5 mb-4">
                      <li className="flex items-start gap-4">
                         <div className="w-6 h-6 rounded-full bg-emerald-500/10 dark:bg-emerald-500/20 flex items-center justify-center shrink-0 border border-emerald-500/20 mt-0.5 shadow-sm">

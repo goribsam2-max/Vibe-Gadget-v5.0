@@ -72,8 +72,8 @@ const EditProfile: React.FC = () => {
                 <Icon name="chevron-left" className="text-sm" />
             </button>
             <div className="flex flex-col">
-                <h1 className="text-3xl font-black tracking-tight text-[#06331e] uppercase">Edit Profile</h1>
-                <p className="text-[10px] font-bold text-emerald-600/70 uppercase tracking-[0.3em] mt-1 pr-2">Update your information</p>
+                <h1 className="text-xl font-semibold tracking-tight text-[#06331e] uppercase">Edit Profile</h1>
+                <p className="text-[10px] font-bold text-emerald-600/70 uppercase tracking-normal mt-1 pr-2">Update your information</p>
             </div>
         </div>
 
@@ -96,7 +96,7 @@ const EditProfile: React.FC = () => {
 
             <form onSubmit={handleUpdate} className="space-y-6">
                 <div>
-                    <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">Full Name</label>
+                    <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-normal mb-2">Full Name</label>
                     <input 
                         required 
                         value={name} 
@@ -106,7 +106,7 @@ const EditProfile: React.FC = () => {
                     />
                 </div>
                 <div>
-                    <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-widest mb-2">Phone Number</label>
+                    <label className="block text-[10px] font-bold text-zinc-500 uppercase tracking-normal mb-2">Phone Number</label>
                     <input 
                         value={phone} 
                         onChange={(e) => setPhone(e.target.value)} 
@@ -116,7 +116,7 @@ const EditProfile: React.FC = () => {
                     />
                 </div>
                 <div className="pt-4">
-                    <button disabled={updating} type="submit" className="w-full py-4 bg-[#06331e] text-white rounded-full font-bold text-xs uppercase tracking-widest shadow-lg shadow-[#06331e]/20 hover:bg-[#0a4a2b] transition-all active:scale-[0.98] disabled:opacity-50">
+                    <button disabled={updating} type="submit" className="w-full py-4 bg-[#06331e] text-white rounded-full font-bold text-xs uppercase tracking-normal shadow-lg shadow-[#06331e]/20 hover:bg-[#0a4a2b] transition-all active:scale-[0.98] disabled:opacity-50">
                         {updating ? 'Saving Changes...' : 'Save Profile Details'}
                     </button>
                 </div>

@@ -40,8 +40,8 @@ const Cart: React.FC = () => {
                <Icon name="chevron-left" className="text-xs group-hover:-translate-x-1 transition-transform" />
             </button>
             <div className="flex flex-col">
-              <h1 className="text-2xl md:text-xl lg:text-base xl:text-sm font-black tracking-tighter uppercase text-shine">Shopping Cart.</h1>
-              <p className="text-[9px] font-bold text-emerald-600/70 uppercase tracking-[0.4em] mt-1 pl-1">Review Items</p>
+              <h1 className="text-lg md:text-xl lg:text-base xl:text-sm font-semibold tracking-tight uppercase text-shine">Shopping Cart.</h1>
+              <p className="text-[9px] font-bold text-emerald-600/70 uppercase tracking-normal mt-1 pl-1">Review Items</p>
             </div>
           </div>
 
@@ -59,10 +59,10 @@ const Cart: React.FC = () => {
        {items.length === 0 ? (
          <div className="flex flex-col items-center justify-center py-32 text-center relative z-10 animate-stagger-2">
             <div className="w-24 h-24 bg-zinc-50 dark:bg-zinc-800 rounded-[2.5rem] flex items-center justify-center mb-8 border border-zinc-100 dark:border-zinc-800 pulse-ring-active shadow-sm">
-                <Icon name="shopping-cart" className="text-3xl text-zinc-300" />
+                <Icon name="shopping-cart" className="text-xl text-zinc-300" />
             </div>
-            <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-widest">Your cart is empty</p>
-            <button onClick={() => navigate('/')} className="mt-10 btn-primary px-12 text-[10px] uppercase tracking-widest shadow-xl shadow-zinc-200 hover-tilt">Start Shopping</button>
+            <p className="text-[10px] font-bold text-zinc-400 uppercase tracking-normal">Your cart is empty</p>
+            <button onClick={() => navigate('/')} className="mt-10 btn-primary px-12 text-[10px] uppercase tracking-normal shadow-xl shadow-zinc-200 hover-tilt">Start Shopping</button>
          </div>
        ) : (
          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 relative z-10 animate-stagger-2">
@@ -81,11 +81,11 @@ const Cart: React.FC = () => {
                           </button>
                        </div>
                        <div className="flex justify-between items-center mt-4 md:mt-6">
-                          <p className="font-black text-sm md:text-xl text-zinc-900 dark:text-zinc-100 tracking-tight">৳{item.price * item.quantity}</p>
+                          <p className="font-semibold text-sm md:text-xl text-zinc-900 dark:text-zinc-100 tracking-tight">৳{item.price * item.quantity}</p>
                           <div className="flex items-center space-x-4 md:space-x-5 bg-white dark:bg-zinc-900 px-3 md:px-4 py-1.5 md:py-2 rounded-xl border border-zinc-200 dark:border-zinc-700 shadow-sm">
-                             <button onClick={() => updateQuantity(idx, -1)} className="font-black hover:text-emerald-500 transition-colors px-1 active:scale-90 text-zinc-400 hover:bg-zinc-50 dark:bg-zinc-800 rounded-full w-6 h-6 flex items-center justify-center">−</button>
-                             <span className="text-[11px] font-black w-4 text-center text-zinc-900 dark:text-zinc-100">{item.quantity}</span>
-                             <button onClick={() => updateQuantity(idx, 1)} className="font-black hover:text-emerald-500 transition-colors px-1 active:scale-90 text-zinc-400 hover:bg-zinc-50 dark:bg-zinc-800 rounded-full w-6 h-6 flex items-center justify-center">+</button>
+                             <button onClick={() => updateQuantity(idx, -1)} className="font-semibold hover:text-emerald-500 transition-colors px-1 active:scale-90 text-zinc-400 hover:bg-zinc-50 dark:bg-zinc-800 rounded-full w-6 h-6 flex items-center justify-center">−</button>
+                             <span className="text-[11px] font-semibold w-4 text-center text-zinc-900 dark:text-zinc-100">{item.quantity}</span>
+                             <button onClick={() => updateQuantity(idx, 1)} className="font-semibold hover:text-emerald-500 transition-colors px-1 active:scale-90 text-zinc-400 hover:bg-zinc-50 dark:bg-zinc-800 rounded-full w-6 h-6 flex items-center justify-center">+</button>
                           </div>
                        </div>
                     </div>
@@ -97,7 +97,7 @@ const Cart: React.FC = () => {
             <div className="lg:col-span-4 animate-stagger-3">
              <div className="bg-zinc-900 dark:bg-emerald-900/10 text-white p-8 md:p-10 rounded-[2.5rem] shadow-2xl sticky top-12 border border-zinc-800 dark:border-emerald-800/30 relative overflow-hidden group">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500 rounded-full blur-[60px] opacity-20 pointer-events-none"></div>
-                <h3 className="text-lg font-black tracking-tight mb-8 relative z-10">Order Summary</h3>
+                <h3 className="text-lg font-semibold tracking-tight mb-8 relative z-10">Order Summary</h3>
                 <div className="space-y-4 relative z-10 text-sm font-medium">
                    <div className="flex justify-between text-zinc-400">
                       <span>Subtotal</span>
@@ -109,8 +109,8 @@ const Cart: React.FC = () => {
                    </div>
                    <div className="h-px bg-zinc-800/50 my-6"></div>
                    <div className="flex justify-between items-end">
-                      <span className="text-xs uppercase text-zinc-400 font-bold tracking-widest">Total Amount</span>
-                      <span className="text-3xl font-black tracking-tighter text-white drop-shadow-md">৳{total + 150}</span>
+                      <span className="text-xs uppercase text-zinc-400 font-bold tracking-normal">Total Amount</span>
+                      <span className="text-xl font-semibold tracking-tight text-white drop-shadow-md">৳{total + 150}</span>
                    </div>
                 </div>
                 <button onClick={() => navigate('/checkout')} className="w-full mt-10 py-4 bg-emerald-500 text-white rounded-2xl font-bold text-sm shadow-[0_10px_20px_rgba(16,185,129,0.3)] hover:bg-emerald-400 active:scale-95 transition-all relative z-10 overflow-hidden flex items-center justify-center group/btn">

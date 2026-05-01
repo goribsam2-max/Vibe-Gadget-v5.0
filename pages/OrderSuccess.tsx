@@ -41,7 +41,7 @@ const OrderSuccess: React.FC = () => {
             transition={{ delay: 0.5, type: "spring" }} 
             className="w-24 h-24 bg-[#06331e] rounded-full flex items-center justify-center text-emerald-400 shadow-[0_0_40px_rgba(6,51,30,0.4)]"
           >
-            <Icon name="check-circle" className="text-4xl" />
+            <Icon name="check-circle" className="text-lg" />
           </motion.div>
         </motion.div>
 
@@ -49,7 +49,7 @@ const OrderSuccess: React.FC = () => {
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.8 }}
-          className="text-3xl font-black mb-3 tracking-tight text-zinc-900 dark:text-zinc-100"
+          className="text-xl font-semibold mb-3 tracking-tight text-zinc-900 dark:text-zinc-100"
         >
           Success!
         </motion.h1>
@@ -73,10 +73,10 @@ const OrderSuccess: React.FC = () => {
               animate={{ y: 0, opacity: 1 }}
               className="space-y-4 w-full"
             >
-              <Link to={`/e-receipt/${orderId}`} className="block w-full py-4 bg-[#06331e] text-white rounded-full font-bold shadow-xl shadow-emerald-900/20 text-[11px] uppercase tracking-widest hover:bg-zinc-900 transition-all active:scale-95">
+              <Link to={`/e-receipt/${orderId}`} className="block w-full py-4 bg-[#06331e] text-white rounded-full font-bold shadow-xl shadow-emerald-900/20 text-[11px] uppercase tracking-normal hover:bg-zinc-900 transition-all active:scale-95">
                 View Digital Receipt
               </Link>
-              <Link to="/" className="block w-full py-4 border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-full font-bold text-[11px] uppercase tracking-widest hover:border-zinc-300 hover:text-black dark:text-white transition-all active:scale-95 shadow-sm">
+              <Link to="/" className="block w-full py-4 border border-zinc-200 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400 rounded-full font-bold text-[11px] uppercase tracking-normal hover:border-zinc-300 hover:text-black dark:text-white transition-all active:scale-95 shadow-sm">
                 Continue Exploring
               </Link>
             </motion.div>

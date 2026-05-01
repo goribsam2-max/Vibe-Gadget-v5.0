@@ -153,17 +153,17 @@ const CreateBlog: React.FC = () => {
         <button onClick={() => navigate(-1)} className="p-3 bg-zinc-50 dark:bg-zinc-800 rounded-xl border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-900 hover:text-white transition-colors">
           <Icon name="arrow-left" />
         </button>
-        <h1 className="text-2xl font-black tracking-tight uppercase">{slug ? 'Edit Blog Post' : 'Create Blog Post'}</h1>
+        <h1 className="text-lg font-semibold tracking-tight uppercase">{slug ? 'Edit Blog Post' : 'Create Blog Post'}</h1>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
          <div className="lg:col-span-2 space-y-6">
             <div>
-               <label className="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2 block">Blog Title</label>
+               <label className="text-xs font-bold uppercase tracking-normal text-zinc-500 mb-2 block">Blog Title</label>
                <input type="text" value={title} onChange={e=>setTitle(e.target.value)} className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 font-bold outline-none text-zinc-900 dark:text-zinc-100" placeholder="e.g. Top 5 smartwatches in 2024" />
             </div>
             <div>
-               <label className="text-xs font-bold uppercase tracking-widest text-zinc-500 mb-2 block">Short Excerpt</label>
+               <label className="text-xs font-bold uppercase tracking-normal text-zinc-500 mb-2 block">Short Excerpt</label>
                <textarea value={excerpt} onChange={e=>setExcerpt(e.target.value)} rows={3} className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-xl p-4 font-medium outline-none text-zinc-900 dark:text-zinc-100 resize-none" placeholder="A short description for the blog list card..."></textarea>
             </div>
             
@@ -208,7 +208,7 @@ const CreateBlog: React.FC = () => {
 
          <div className="lg:col-span-1 space-y-6">
             <div className="bg-zinc-50 dark:bg-zinc-800 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-700">
-               <h3 className="text-xs font-bold uppercase tracking-widest text-zinc-800 dark:text-zinc-200 mb-4">Featured Image</h3>
+               <h3 className="text-xs font-bold uppercase tracking-normal text-zinc-800 dark:text-zinc-200 mb-4">Featured Image</h3>
                <div 
                  onClick={()=>fileInputRef.current?.click()}
                  className="w-full aspect-video border-2 border-dashed border-zinc-300 rounded-xl flex items-center justify-center cursor-pointer hover:bg-zinc-100 dark:bg-zinc-800 transition-colors overflow-hidden"
@@ -219,8 +219,8 @@ const CreateBlog: React.FC = () => {
                     <img src={existingImage} className="w-full h-full object-cover" />
                  ) : (
                     <div className="text-center text-zinc-400">
-                      <Icon name="cloud-upload" className="text-2xl mb-2" />
-                      <p className="text-[10px] uppercase font-bold tracking-widest">Upload Cover</p>
+                      <Icon name="cloud-upload" className="text-lg mb-2" />
+                      <p className="text-[10px] uppercase font-bold tracking-normal">Upload Cover</p>
                     </div>
                  )}
                </div>
@@ -228,7 +228,7 @@ const CreateBlog: React.FC = () => {
             </div>
 
             <div className="bg-zinc-50 dark:bg-zinc-800 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-700 space-y-4">
-               <h3 className="text-xs font-bold uppercase tracking-widest text-[#06331e] flex items-center gap-2"><Icon name="google" className="text-blue-500" /> SEO Settings</h3>
+               <h3 className="text-xs font-bold uppercase tracking-normal text-[#06331e] flex items-center gap-2"><Icon name="google" className="text-blue-500" /> SEO Settings</h3>
                <p className="text-[10px] text-zinc-500 font-medium">Meta data for Google indexing & Social Media shares.</p>
                <div>
                  <label className="text-[10px] font-bold uppercase tracking-wide text-zinc-500 block mb-1">SEO Title</label>
@@ -239,7 +239,7 @@ const CreateBlog: React.FC = () => {
                  <textarea value={seoDesc} onChange={e=>setSeoDesc(e.target.value)} className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-lg p-3 text-xs outline-none resize-none" rows={3} placeholder="Default uses Excerpt"></textarea>
                </div>
                
-               <button onClick={handleSave} disabled={saving} className="w-full py-4 mt-4 bg-zinc-900 dark:bg-zinc-50 dark:text-black text-white rounded-xl text-xs font-bold uppercase tracking-widest hover:bg-zinc-800 transition-colors shadow-lg active:scale-95">
+               <button onClick={handleSave} disabled={saving} className="w-full py-4 mt-4 bg-zinc-900 dark:bg-zinc-50 dark:text-black text-white rounded-xl text-xs font-bold uppercase tracking-normal hover:bg-zinc-800 transition-colors shadow-lg active:scale-95">
                   {saving ? 'Publishing...' : slug ? 'Update Blog' : 'Publish Blog'}
                </button>
             </div>

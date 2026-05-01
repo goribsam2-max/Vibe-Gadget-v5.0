@@ -37,8 +37,8 @@ const AllProducts: React.FC = () => {
              <Icon name="chevron-left" className="text-sm group-hover:-translate-x-1 transition-transform" />
           </button>
           <div className="flex flex-col">
-            <h1 className="text-2xl md:text-xl lg:text-base xl:text-sm font-black tracking-tight uppercase leading-none text-shine">Catalog.</h1>
-            <p className="text-[9px] font-bold text-emerald-600/70 uppercase tracking-[0.4em] mt-1 pl-1">Full Stock Access</p>
+            <h1 className="text-lg md:text-xl lg:text-base xl:text-sm font-semibold tracking-tight uppercase leading-none text-shine">Catalog.</h1>
+            <p className="text-[9px] font-bold text-emerald-600/70 uppercase tracking-normal mt-1 pl-1">Full Stock Access</p>
           </div>
        </div>
 
@@ -47,7 +47,7 @@ const AllProducts: React.FC = () => {
             <button 
               key={tab} 
               onClick={() => setActiveTab(tab)}
-              className={`px-8 py-3.5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-widest border transition-all shrink-0 ${activeTab === tab ? 'bg-[#06331e] text-white border-[#06331e] shadow-lg scale-105' : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-400 border-zinc-100 dark:border-zinc-800 hover:border-[#06331e] hover:text-[#06331e]'}`}
+              className={`px-8 py-3.5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-normal border transition-all shrink-0 ${activeTab === tab ? 'bg-[#06331e] text-white border-[#06331e] shadow-lg scale-105' : 'bg-zinc-50 dark:bg-zinc-800 text-zinc-400 border-zinc-100 dark:border-zinc-800 hover:border-[#06331e] hover:text-[#06331e]'}`}
             >
               {tab}
             </button>
@@ -74,12 +74,12 @@ const AllProducts: React.FC = () => {
                     <div className="absolute inset-0 z-20 flex items-center justify-center pointer-events-none">
                        <div className="bg-zinc-900/80 backdrop-blur text-white px-3 py-1.5 rounded-full border border-zinc-700 shadow-xl flex items-center space-x-1.5 animate-pulse">
                          <Icon name="clock" className="text-[8px] text-zinc-400" />
-                         <span className="text-[8px] font-black uppercase tracking-[0.2em] whitespace-nowrap">Restocking</span>
+                         <span className="text-[8px] font-semibold uppercase tracking-normal whitespace-nowrap">Restocking</span>
                        </div>
                     </div>
                   ) : (
                     <div className="absolute top-2 right-2 md:top-3 md:right-3 z-10 transition-transform duration-300 group-hover:-translate-y-0.5">
-                      <div className="bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md text-emerald-700 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/30 px-3 py-1.5 rounded-full text-[9px] font-black shadow-sm tracking-widest uppercase">
+                      <div className="bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md text-emerald-700 dark:text-emerald-400 border border-emerald-100 dark:border-emerald-900/30 px-3 py-1.5 rounded-full text-[9px] font-semibold shadow-sm tracking-normal uppercase">
                         ৳ {product.price}
                       </div>
                     </div>
@@ -94,7 +94,7 @@ const AllProducts: React.FC = () => {
                 </button>
 
                 <div className="px-2 pb-2" onClick={() => navigate(`/product/${product.id}`)}>
-                  <div className="flex items-center text-[9px] font-bold text-zinc-400 uppercase tracking-widest mb-1.5">
+                  <div className="flex items-center text-[9px] font-bold text-zinc-400 uppercase tracking-normal mb-1.5">
                     <Icon name="star" className="text-emerald-500 mr-1 text-[10px]" />{product.rating || 5.0} • {product.category}
                   </div>
                   <h4 className="font-bold text-xs md:text-sm truncate mb-0.5 tracking-tight group-hover:text-emerald-700 dark:group-hover:text-emerald-400 transition-colors">{product.name}</h4>
@@ -107,8 +107,8 @@ const AllProducts: React.FC = () => {
 
        {products.length > 0 && products.filter(p => activeTab === 'All' || p.category === activeTab).length === 0 && (
          <div className="py-40 text-center opacity-30 flex flex-col items-center">
-            <Icon name="box-open" className="text-6xl mb-8" />
-            <p className="text-[12px] font-black uppercase tracking-[0.5em]">No Data in this sector</p>
+            <Icon name="box-open" className="text-xl mb-8" />
+            <p className="text-[12px] font-semibold uppercase tracking-normal">No Data in this sector</p>
          </div>
        )}
 

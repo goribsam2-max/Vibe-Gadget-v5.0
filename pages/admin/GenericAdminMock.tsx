@@ -105,8 +105,8 @@ const GenericAdminMock: React.FC = () => {
                     <Icon name="arrow-left" className="text-xs" />
                 </button>
                 <div>
-                    <h1 className="text-2xl md:text-3xl font-black tracking-tight text-zinc-900 dark:text-zinc-100 mb-1">{pageTitle}</h1>
-                    <p className="text-zinc-400 text-[10px] md:text-xs font-bold tracking-widest uppercase">Functional Data Module</p>
+                    <h1 className="text-lg md:text-xl font-semibold tracking-tight text-zinc-900 dark:text-zinc-100 mb-1">{pageTitle}</h1>
+                    <p className="text-zinc-400 text-[10px] md:text-xs font-bold tracking-normal uppercase">Functional Data Module</p>
                 </div>
             </div>
 
@@ -115,11 +115,11 @@ const GenericAdminMock: React.FC = () => {
                     <h3 className="font-bold text-zinc-900 dark:text-zinc-100">Database Records: {data.length}</h3>
                     <div className="flex space-x-3">
                        {['seo', 'taxes', 'bulk'].includes(pathBase) ? (
-                          <button onClick={handleExportConfig} className="bg-[#06331e] text-white px-6 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase hover:bg-emerald-900 transition-colors shadow-md">
+                          <button onClick={handleExportConfig} className="bg-[#06331e] text-white px-6 py-2.5 rounded-full text-xs font-bold tracking-normal uppercase hover:bg-emerald-900 transition-colors shadow-md">
                              {pathBase === 'bulk' ? 'Export CSV' : 'Update Config'}
                           </button>
                        ) : (
-                          <button onClick={handleCreateDummy} className="bg-[#06331e] text-white px-6 py-2.5 rounded-full text-xs font-bold tracking-widest uppercase hover:bg-emerald-900 transition-colors shadow-md">
+                          <button onClick={handleCreateDummy} className="bg-[#06331e] text-white px-6 py-2.5 rounded-full text-xs font-bold tracking-normal uppercase hover:bg-emerald-900 transition-colors shadow-md">
                              <Icon name="plus" className="mr-2" /> Add Record
                           </button>
                        )}
@@ -127,7 +127,7 @@ const GenericAdminMock: React.FC = () => {
                 </div>
                 
                 {loading ? (
-                    <div className="py-20 text-center"><Icon name="spinner" className="animate-spin text-emerald-500 text-2xl" /></div>
+                    <div className="py-20 text-center"><Icon name="spinner" className="animate-spin text-emerald-500 text-lg" /></div>
                 ) : (
                    <div className="overflow-x-auto">
                       {data.length > 0 ? (
@@ -135,7 +135,7 @@ const GenericAdminMock: React.FC = () => {
                             <thead>
                                <tr className="bg-zinc-50 dark:bg-zinc-800/50">
                                    {Object.keys(data[0] || {}).slice(0, 5).map((key) => (
-                                     <th key={key} className="py-4 px-5 text-[10px] font-bold uppercase tracking-widest text-zinc-500">{key}</th>
+                                     <th key={key} className="py-4 px-5 text-[10px] font-bold uppercase tracking-normal text-zinc-500">{key}</th>
                                    ))}
                                </tr>
                             </thead>
@@ -153,8 +153,8 @@ const GenericAdminMock: React.FC = () => {
                          </table>
                       ) : (
                          <div className="py-16 text-center text-zinc-400">
-                            <Icon name="database" className="text-4xl mb-4 text-zinc-200" />
-                            <p className="font-bold text-xs uppercase tracking-widest">No data entries found.</p>
+                            <Icon name="database" className="text-lg mb-4 text-zinc-200" />
+                            <p className="font-bold text-xs uppercase tracking-normal">No data entries found.</p>
                          </div>
                       )}
                    </div>

@@ -14,17 +14,17 @@ const PrivacyPolicy: React.FC = () => {
           <button onClick={() => navigate(-1)} className="w-10 h-10 bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/50 flex items-center justify-center hover:bg-white dark:hover:bg-zinc-700 rounded-full transition-transform active:scale-95 shadow-sm group">
              <Icon name="arrow-left" className="text-sm text-zinc-600 dark:text-zinc-400 group-hover:text-black dark:group-hover:text-white" />
           </button>
-          <h1 className="text-2xl md:text-3xl font-black tracking-tight uppercase">Privacy Policy</h1>
+          <h1 className="text-lg md:text-xl font-semibold tracking-tight uppercase">Privacy Policy</h1>
        </div>
 
        <div className="space-y-8 text-sm md:text-base leading-relaxed text-zinc-600 dark:text-zinc-400">
           <section>
-             <h2 className="text-black dark:text-white font-black text-xl mb-4">A Highly Trusted & Secure Platform</h2>
+             <h2 className="text-black dark:text-white font-semibold text-xl mb-4">A Highly Trusted & Secure Platform</h2>
              <p>At VibeGadget, your privacy and data security are our absolute highest priorities. We are a trusted, verified business that follows strict global data compliance standards. Google regularly indexes and verifies our pages to ensure we provide a safe, reliable, and risk-free browsing and shopping experience.</p>
           </section>
 
           <section>
-             <h2 className="text-black dark:text-white font-black text-xl mb-4">Authentication & Login Security</h2>
+             <h2 className="text-black dark:text-white font-semibold text-xl mb-4">Authentication & Login Security</h2>
              <p>We offer secure authentication via Google Login and Manual Registration. 
              <br /><br />
              <strong>Google Login:</strong> This is a globally recognized, highly secure authentication method. By logging in with Google, we only receive your basic profile information (Name, Email, and Avatar) required to set up your account. We never have access to your Google password or any other sensitive data. It ensures a fast, risk-free experience.
@@ -33,12 +33,12 @@ const PrivacyPolicy: React.FC = () => {
           </section>
 
           <section>
-             <h2 className="text-black dark:text-white font-black text-xl mb-4">Data Collection & Usage</h2>
+             <h2 className="text-black dark:text-white font-semibold text-xl mb-4">Data Collection & Usage</h2>
              <p>We only collect data that is strictly necessary for order fulfillment, fraud prevention, and enhancing your user experience. We never sell your personal information to third parties. We are fully committed to maintaining the highest standard of data integrity, which is why we are considered a trusted site by Google and our users.</p>
           </section>
           
           <section>
-             <h2 className="text-black dark:text-white font-black text-xl mb-4">Purchases & Returns Privacy</h2>
+             <h2 className="text-black dark:text-white font-semibold text-xl mb-4">Purchases & Returns Privacy</h2>
              <p>Please note that as per our strictly enforced policy, we do not accept returns or offer refunds/money-back. Warranty is only applicable on specific products where explicitly stated. All order records are kept secure and confidential to protect your purchase history.</p>
           </section>
        </div>

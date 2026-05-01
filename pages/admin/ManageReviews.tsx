@@ -87,18 +87,18 @@ const ManageReviews = () => {
         <button onClick={() => navigate('/admin')} className="w-10 h-10 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center hover:bg-zinc-50 dark:hover:bg-zinc-800 rounded-full transition-colors">
           <Icon name="arrow-left" className="text-xs" />
         </button>
-        <h1 className="text-3xl font-black tracking-tight text-zinc-900 dark:text-white">Manage Reviews</h1>
+        <h1 className="text-xl font-semibold tracking-tight text-zinc-900 dark:text-white">Manage Reviews</h1>
       </div>
 
       <div className="bg-white dark:bg-zinc-900 rounded-[2.5rem] border border-zinc-200 dark:border-zinc-800 p-8 shadow-sm">
         {loading ? (
            <div className="flex justify-center items-center h-40">
-              <Icon name="spinner-third" className="animate-spin text-3xl text-emerald-500" />
+              <Icon name="spinner-third" className="animate-spin text-xl text-emerald-500" />
            </div>
         ) : reviews.length === 0 ? (
            <div className="text-center py-20 text-zinc-500">
-              <Icon name="comment-slash" className="text-5xl mb-4 opacity-50" />
-              <p className="font-bold uppercase tracking-widest text-xs">No reviews found</p>
+              <Icon name="comment-slash" className="text-lg mb-4 opacity-50" />
+              <p className="font-bold uppercase tracking-normal text-xs">No reviews found</p>
            </div>
         ) : (
            <div className="space-y-4">
@@ -118,7 +118,7 @@ const ManageReviews = () => {
                              </div>
                              <div>
                                 <p className="font-bold text-sm text-zinc-900 dark:text-zinc-100">{review.userName}</p>
-                                <div className="flex items-center space-x-2 text-[10px] uppercase font-bold text-zinc-400 tracking-widest">
+                                <div className="flex items-center space-x-2 text-[10px] uppercase font-bold text-zinc-400 tracking-normal">
                                    <span className="flex text-yellow-400">
                                       {[...Array(5)].map((_, i) => <Icon key={i} name={i < review.rating ? 'star' : 'star-outline'} className="mr-0.5" />)}
                                    </span>
@@ -138,11 +138,11 @@ const ManageReviews = () => {
                              </div>
                           )}
                           <div className="ml-12 mt-3">
-                            <span className="text-[9px] uppercase font-bold tracking-widest text-emerald-500 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-1 rounded-md">Product ID: {review.productId}</span>
+                            <span className="text-[9px] uppercase font-bold tracking-normal text-emerald-500 bg-emerald-50 dark:bg-emerald-900/30 px-2 py-1 rounded-md">Product ID: {review.productId}</span>
                           </div>
                        </div>
                        
-                       <button onClick={() => handleDelete(review)} className="px-5 py-3 h-max shrink-0 bg-red-50 hover:bg-red-100 dark:bg-red-900/10 dark:hover:bg-red-900/30 text-red-600 rounded-xl font-bold text-[10px] uppercase tracking-widest transition-colors flex items-center justify-center gap-2">
+                       <button onClick={() => handleDelete(review)} className="px-5 py-3 h-max shrink-0 bg-red-50 hover:bg-red-100 dark:bg-red-900/10 dark:hover:bg-red-900/30 text-red-600 rounded-xl font-bold text-[10px] uppercase tracking-normal transition-colors flex items-center justify-center gap-2">
                           <Icon name="trash" />
                           <span>Delete</span>
                        </button>

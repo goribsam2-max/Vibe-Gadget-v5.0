@@ -13,7 +13,7 @@ const VerifyCode: React.FC = () => {
        </button>
        
        <div className="text-center flex-1">
-          <h1 className="text-2xl font-bold mb-4">Verify Code</h1>
+          <h1 className="text-lg font-bold mb-4">Verify Code</h1>
           <p className="text-f-gray text-sm mb-10">Please enter the code we just sent to email <span className="text-black dark:text-white font-bold">example@mail.com</span></p>
           
           <div className="flex justify-center space-x-4 mb-10">

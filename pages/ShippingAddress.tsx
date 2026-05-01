@@ -43,7 +43,7 @@ const ShippingAddress: React.FC = () => {
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center py-20 text-center opacity-40">
-              <Icon name="map-marker" className="text-4xl mb-4 text-emerald-500" />
+              <Icon name="map-marker" className="text-lg mb-4 text-emerald-500" />
               <p className="text-sm font-bold tracking-tight">No address saved.</p>
           </div>
         )}
@@ -57,12 +57,12 @@ const ShippingAddress: React.FC = () => {
                 onChange={(e) => setNewAddr(e.target.value)}
              />
              <div className="flex space-x-3">
-                <button onClick={handleAdd} className="flex-1 bg-zinc-900 dark:bg-zinc-50 dark:text-black text-white py-4 rounded-2xl text-xs font-bold uppercase tracking-widest">Save Address</button>
-                <button onClick={() => setIsAdding(false)} className="px-6 py-4 rounded-2xl text-xs font-bold uppercase tracking-widest text-f-gray">Cancel</button>
+                <button onClick={handleAdd} className="flex-1 bg-zinc-900 dark:bg-zinc-50 dark:text-black text-white py-4 rounded-2xl text-xs font-bold uppercase tracking-normal">Save Address</button>
+                <button onClick={() => setIsAdding(false)} className="px-6 py-4 rounded-2xl text-xs font-bold uppercase tracking-normal text-f-gray">Cancel</button>
              </div>
           </div>
         ) : (
-          <button onClick={() => setIsAdding(true)} className="w-full py-5 bg-zinc-50 dark:bg-zinc-800 text-black dark:text-white rounded-[28px] font-bold text-xs uppercase tracking-widest border-2 border-dashed border-gray-200 hover:border-black hover:bg-f-gray transition-all">
+          <button onClick={() => setIsAdding(true)} className="w-full py-5 bg-zinc-50 dark:bg-zinc-800 text-black dark:text-white rounded-[28px] font-bold text-xs uppercase tracking-normal border-2 border-dashed border-gray-200 hover:border-black hover:bg-f-gray transition-all">
             + Add Delivery Address
           </button>
         )}

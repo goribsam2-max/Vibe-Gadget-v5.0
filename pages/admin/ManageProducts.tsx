@@ -125,13 +125,13 @@ const ManageProducts: React.FC = () => {
         <div className="flex items-center space-x-6">
           <button onClick={() => navigate('/admin')} className="w-12 h-12 flex items-center justify-center bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-[#06331e] rounded-full shadow-sm hover:bg-[#06331e] hover:text-white transition-all active:scale-95 group hover-tilt"><Icon name="chevron-left" className="text-xs group-hover:-translate-x-1 transition-transform" /></button>
           <div>
-             <h1 className="text-xl md:text-2xl font-black tracking-tight text-[#06331e] mb-1.5 text-shine">Products Inventory</h1>
-             <p className="text-zinc-400 text-[10px] md:text-xs font-bold tracking-widest uppercase">Catalog Management</p>
+             <h1 className="text-xl md:text-lg font-semibold tracking-tight text-[#06331e] mb-1.5 text-shine">Products Inventory</h1>
+             <p className="text-zinc-400 text-[10px] md:text-xs font-bold tracking-normal uppercase">Catalog Management</p>
           </div>
         </div>
         <button 
           onClick={() => { setIsAdding(!isAdding); setEditingId(null); setFormData({ name: '', price: 0, description: '', category: 'Mobile', stock: 10, imageFiles: [], isOffer: false, offerPrice: 0, modelUrl: '' }); }}
-          className={`px-6 py-3 rounded-full font-bold uppercase text-[10px] tracking-widest shadow-lg transition-all active:scale-95 border hover-tilt hover-glow ${isAdding ? 'bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:bg-zinc-800' : 'bg-zinc-900 text-white border-zinc-900 hover:bg-emerald-500'}`}
+          className={`px-6 py-3 rounded-full font-bold uppercase text-[10px] tracking-normal shadow-lg transition-all active:scale-95 border hover-tilt hover-glow ${isAdding ? 'bg-zinc-50 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 border-zinc-200 dark:border-zinc-700 hover:bg-zinc-50 dark:bg-zinc-800' : 'bg-zinc-900 text-white border-zinc-900 hover:bg-emerald-500'}`}
         >
           {isAdding ? "Cancel" : "Add Product"}
         </button>
@@ -148,7 +148,7 @@ const ManageProducts: React.FC = () => {
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div>
-                <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-3 px-1">Product Name</label>
+                <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-normal mb-3 px-1">Product Name</label>
                 <input 
                   type="text" className="w-full p-4 bg-zinc-50 dark:bg-zinc-800 rounded-xl outline-none border border-zinc-200 dark:border-zinc-700 focus:border-[#06331e] focus:ring-4 focus:ring-emerald-500/10 transition-all font-medium text-sm hover:border-zinc-300" required
                   value={formData.name}
@@ -156,7 +156,7 @@ const ManageProducts: React.FC = () => {
                 />
               </div>
               <div>
-                <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-3 px-1">Category</label>
+                <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-normal mb-3 px-1">Category</label>
                 <select 
                   className="w-full p-4 bg-zinc-50 dark:bg-zinc-800 rounded-xl outline-none border border-zinc-200 dark:border-zinc-700 focus:border-[#06331e] focus:ring-4 focus:ring-emerald-500/10 transition-all font-medium text-sm cursor-pointer hover:border-zinc-300"
                   value={formData.category}
@@ -172,7 +172,7 @@ const ManageProducts: React.FC = () => {
             
             <div className="grid grid-cols-2 gap-8">
               <div>
-                <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-3 px-1">Price (৳)</label>
+                <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-normal mb-3 px-1">Price (৳)</label>
                 <input 
                   type="number" className="w-full p-4 bg-zinc-50 dark:bg-zinc-800 rounded-xl outline-none border border-zinc-200 dark:border-zinc-700 focus:border-[#06331e] focus:ring-4 focus:ring-emerald-500/10 transition-all font-medium text-sm hover:border-zinc-300" required
                   value={formData.price}
@@ -180,7 +180,7 @@ const ManageProducts: React.FC = () => {
                 />
               </div>
               <div>
-                <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-3 px-1">Stock Amount</label>
+                <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-normal mb-3 px-1">Stock Amount</label>
                 <input 
                   type="number" className="w-full p-4 bg-zinc-50 dark:bg-zinc-800 rounded-xl outline-none border border-zinc-200 dark:border-zinc-700 focus:border-[#06331e] focus:ring-4 focus:ring-emerald-500/10 transition-all font-medium text-sm hover:border-zinc-300" required
                   value={formData.stock}
@@ -190,7 +190,7 @@ const ManageProducts: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-3 px-1">Upload Images (One or More)</label>
+              <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-normal mb-3 px-1">Upload Images (One or More)</label>
               <input 
                 type="file" className="w-full p-5 bg-zinc-50 dark:bg-zinc-800 rounded-xl outline-none text-[11px] font-bold shadow-sm border border-dashed border-zinc-300 cursor-pointer text-zinc-500 transition-all hover:bg-zinc-100 dark:bg-zinc-800 hover:border-[#06331e] focus:ring-4 focus:ring-emerald-500/10 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-semibold file:bg-zinc-50 dark:bg-zinc-800 file:text-[#06331e] file:border file:border-zinc-200 dark:border-zinc-700 file:shadow-sm" accept="image/*" multiple
                 onChange={e => { if (e.target.files) setFormData({...formData, imageFiles: Array.from(e.target.files)}); }}
@@ -199,7 +199,7 @@ const ManageProducts: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-3 px-1">3D Model URL (GLB file link)</label>
+              <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-normal mb-3 px-1">3D Model URL (GLB file link)</label>
               <input 
                 type="url" className="w-full p-4 bg-zinc-50 dark:bg-zinc-800 rounded-xl outline-none border border-zinc-200 dark:border-zinc-700 focus:border-[#06331e] focus:ring-4 focus:ring-emerald-500/10 transition-all font-medium text-sm hover:border-zinc-300" placeholder="https://example.com/model.glb"
                 value={formData.modelUrl || ""}
@@ -208,7 +208,7 @@ const ManageProducts: React.FC = () => {
             </div>
             
             <div>
-              <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-3 px-1">Video Review URL (YouTube/TikTok)</label>
+              <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-normal mb-3 px-1">Video Review URL (YouTube/TikTok)</label>
               <input 
                 type="url" className="w-full p-4 bg-zinc-50 dark:bg-zinc-800 rounded-xl outline-none border border-zinc-200 dark:border-zinc-700 focus:border-[#06331e] focus:ring-4 focus:ring-emerald-500/10 transition-all font-medium text-sm hover:border-zinc-300" placeholder="https://youtube.com/watch?v=..."
                 value={formData.videoUrl || ""}
@@ -225,13 +225,13 @@ const ManageProducts: React.FC = () => {
                     checked={formData.isOffer || false}
                     onChange={e => setFormData({...formData, isOffer: e.target.checked})}
                   />
-                  <label htmlFor="isOfferCheckbox" className="ml-2.5 text-[10px] font-bold text-red-600 dark:text-red-400 uppercase tracking-widest cursor-pointer mt-0.5">Special Offer Product</label>
+                  <label htmlFor="isOfferCheckbox" className="ml-2.5 text-[10px] font-bold text-red-600 dark:text-red-400 uppercase tracking-normal cursor-pointer mt-0.5">Special Offer Product</label>
                </div>
                
                <AnimatePresence>
                  {formData.isOffer && (
                    <motion.div initial={{ height: 0, opacity: 0 }} animate={{ height: 'auto', opacity: 1 }} exit={{ height: 0, opacity: 0 }} className="overflow-hidden">
-                     <label className="block text-[10px] font-medium text-red-400 uppercase tracking-widest mb-2">Offer Price (৳)</label>
+                     <label className="block text-[10px] font-medium text-red-400 uppercase tracking-normal mb-2">Offer Price (৳)</label>
                      <input 
                        type="number" className="w-full p-3 bg-transparent rounded-lg outline-none border border-red-200 dark:border-red-800 focus:border-red-400 transition-all font-medium text-xs text-red-600 dark:text-red-400" required={formData.isOffer}
                        value={formData.offerPrice || ""}
@@ -243,7 +243,7 @@ const ManageProducts: React.FC = () => {
             </div>
 
             <div>
-              <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-widest mb-3 px-1">Product Description</label>
+              <label className="block text-[10px] font-bold text-zinc-400 uppercase tracking-normal mb-3 px-1">Product Description</label>
               <textarea 
                 className="w-full p-5 bg-zinc-50 dark:bg-zinc-800 rounded-xl h-40 outline-none border border-zinc-200 dark:border-zinc-700 focus:border-[#06331e] focus:ring-4 focus:ring-emerald-500/10 transition-all leading-relaxed text-sm font-medium hover:border-zinc-300"
                 value={formData.description}
@@ -253,7 +253,7 @@ const ManageProducts: React.FC = () => {
 
             <button 
               disabled={loading}
-              className="w-full py-5 bg-gradient-to-r from-[#06331e] to-black text-white rounded-xl font-bold uppercase tracking-widest text-[11px] shadow-lg disabled:opacity-50 transition-all hover:shadow-xl active:scale-95 group relative overflow-hidden"
+              className="w-full py-5 bg-gradient-to-r from-[#06331e] to-black text-white rounded-xl font-bold uppercase tracking-normal text-[11px] shadow-lg disabled:opacity-50 transition-all hover:shadow-xl active:scale-95 group relative overflow-hidden"
             >
               <span className="relative z-10">{loading ? "Processing..." : (editingId ? "Update Product" : "Save Product")}</span>
               <div className="absolute inset-0 bg-zinc-50 dark:bg-zinc-900/20 translate-y-full group-hover:translate-y-0 transition-transform"></div>
@@ -277,10 +277,10 @@ const ManageProducts: React.FC = () => {
                <div className="flex flex-col justify-center">
                   <h4 className="font-bold text-[13px] text-zinc-900 dark:text-zinc-100 tracking-tight max-w-[200px] md:max-w-xs truncate group-hover:text-emerald-700 transition-colors">{p.name}</h4>
                   <div className="flex items-center space-x-3 mt-1">
-                     <p className="text-xs font-black text-emerald-600">৳{p.isOffer && p.offerPrice ? p.offerPrice : p.price}</p>
-                     <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest"><span className="text-zinc-500">{p.stock}</span> in stock</p>
-                     <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest flex items-center"><Icon name="eye" className="mr-1 text-emerald-300" /> {p.views || 0}</p>
-                     {p.isOffer && <span className="px-2 py-0.5 bg-red-100 text-red-600 rounded text-[8px] font-black uppercase tracking-widest shadow-sm">Offer</span>}
+                     <p className="text-xs font-semibold text-emerald-600">৳{p.isOffer && p.offerPrice ? p.offerPrice : p.price}</p>
+                     <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-normal"><span className="text-zinc-500">{p.stock}</span> in stock</p>
+                     <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-normal flex items-center"><Icon name="eye" className="mr-1 text-emerald-300" /> {p.views || 0}</p>
+                     {p.isOffer && <span className="px-2 py-0.5 bg-red-100 text-red-600 rounded text-[8px] font-semibold uppercase tracking-normal shadow-sm">Offer</span>}
                   </div>
                </div>
              </div>
@@ -297,8 +297,8 @@ const ManageProducts: React.FC = () => {
         ))}
         {products.length === 0 && (
            <div className="py-32 text-center flex flex-col items-center bg-zinc-50 dark:bg-zinc-800 rounded-3xl border border-zinc-100 dark:border-zinc-800 shadow-sm">
-             <Icon name="box-open" className="text-4xl text-zinc-200 mb-4" />
-             <p className="text-zinc-400 font-bold uppercase tracking-[0.2em] text-[11px]">Inventory is empty</p>
+             <Icon name="box-open" className="text-lg text-zinc-200 mb-4" />
+             <p className="text-zinc-400 font-bold uppercase tracking-normal text-[11px]">Inventory is empty</p>
            </div>
         )}
       </div>

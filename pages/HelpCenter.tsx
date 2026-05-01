@@ -65,8 +65,8 @@ const HelpCenter: React.FC = () => {
              <Icon name="chevron-left" className="text-xs" />
           </button>
           <div>
-            <h1 className="text-xl md:text-2xl font-black tracking-tight text-[#06331e] mb-1.5">{ticketMode ? 'Submit Ticket' : 'Support Desk'}</h1>
-            <p className="text-zinc-400 text-[10px] md:text-xs font-bold tracking-widest uppercase">{ticketMode ? 'Describe your issue' : 'Help & Contact'}</p>
+            <h1 className="text-xl md:text-lg font-semibold tracking-tight text-[#06331e] mb-1.5">{ticketMode ? 'Submit Ticket' : 'Support Desk'}</h1>
+            <p className="text-zinc-400 text-[10px] md:text-xs font-bold tracking-normal uppercase">{ticketMode ? 'Describe your issue' : 'Help & Contact'}</p>
           </div>
        </div>
 
@@ -78,7 +78,7 @@ const HelpCenter: React.FC = () => {
                      <button 
                         key={tab} 
                         onClick={() => setActiveTab(tab)}
-                        className={`flex-1 py-3 text-[10px] uppercase tracking-widest font-bold rounded-full transition-all ${activeTab === tab ? 'bg-[#06331e] text-white shadow-md' : 'text-zinc-400 hover:text-zinc-600 dark:text-zinc-400'}`}
+                        className={`flex-1 py-3 text-[10px] uppercase tracking-normal font-bold rounded-full transition-all ${activeTab === tab ? 'bg-[#06331e] text-white shadow-md' : 'text-zinc-400 hover:text-zinc-600 dark:text-zinc-400'}`}
                      >
                         {tab}
                      </button>
@@ -109,7 +109,7 @@ const HelpCenter: React.FC = () => {
                        >
                           <div className="flex items-center space-x-4">
                              <Icon name={opt.icon} className="w-6 text-center text-zinc-400 group-hover:text-emerald-500 transition-colors" />
-                             <span className="font-bold text-sm uppercase tracking-widest text-zinc-700 dark:text-zinc-300 group-hover:text-[#06331e] transition-colors">{opt.label}</span>
+                             <span className="font-bold text-sm uppercase tracking-normal text-zinc-700 dark:text-zinc-300 group-hover:text-[#06331e] transition-colors">{opt.label}</span>
                           </div>
                           <Icon name="chevron-right" className="text-[10px] text-zinc-300 group-hover:text-[#06331e] transition-colors" />
                        </button>
@@ -117,9 +117,9 @@ const HelpCenter: React.FC = () => {
                     <div className="h-4"></div>
                     <button 
                        onClick={() => setTicketMode(true)}
-                       className="w-full p-6 bg-[#06331e] rounded-3xl text-white font-bold uppercase tracking-widest text-xs flex flex-col items-center justify-center hover:bg-emerald-900 transition-colors shadow-lg shadow-[#06331e]/20"
+                       className="w-full p-6 bg-[#06331e] rounded-3xl text-white font-bold uppercase tracking-normal text-xs flex flex-col items-center justify-center hover:bg-emerald-900 transition-colors shadow-lg shadow-[#06331e]/20"
                     >
-                       <Icon name="ticket-alt" className="text-2xl mb-3 text-emerald-400" />
+                       <Icon name="ticket-alt" className="text-lg mb-3 text-emerald-400" />
                        Open Support Ticket
                        <span className="text-[9px] font-normal opacity-70 mt-1 capitalize tracking-normal">Our team will respond within 24 hours</span>
                     </button>
@@ -130,7 +130,7 @@ const HelpCenter: React.FC = () => {
            <motion.div key="ticket" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }}>
                <form onSubmit={submitTicket} className="space-y-6">
                    <div>
-                      <label className="block text-[10px] uppercase font-bold text-zinc-400 tracking-widest mb-3">Issue Subject</label>
+                      <label className="block text-[10px] uppercase font-bold text-zinc-400 tracking-normal mb-3">Issue Subject</label>
                       <input 
                          type="text" 
                          required
@@ -141,7 +141,7 @@ const HelpCenter: React.FC = () => {
                       />
                    </div>
                    <div>
-                      <label className="block text-[10px] uppercase font-bold text-zinc-400 tracking-widest mb-3">Message</label>
+                      <label className="block text-[10px] uppercase font-bold text-zinc-400 tracking-normal mb-3">Message</label>
                       <textarea 
                          required
                          value={ticketForm.message}
@@ -151,10 +151,10 @@ const HelpCenter: React.FC = () => {
                       />
                    </div>
                    <div className="flex gap-4 pt-4">
-                      <button type="button" onClick={() => setTicketMode(false)} className="flex-1 p-5 rounded-full border border-zinc-200 dark:border-zinc-700 text-zinc-500 font-bold uppercase text-[10px] tracking-widest hover:bg-zinc-50 dark:bg-zinc-800 transition-colors">
+                      <button type="button" onClick={() => setTicketMode(false)} className="flex-1 p-5 rounded-full border border-zinc-200 dark:border-zinc-700 text-zinc-500 font-bold uppercase text-[10px] tracking-normal hover:bg-zinc-50 dark:bg-zinc-800 transition-colors">
                          Cancel
                       </button>
-                      <button type="submit" className="flex-[2] p-5 rounded-full bg-[#06331e] text-white font-bold uppercase text-[10px] tracking-widest shadow-xl hover:bg-emerald-900 transition-colors">
+                      <button type="submit" className="flex-[2] p-5 rounded-full bg-[#06331e] text-white font-bold uppercase text-[10px] tracking-normal shadow-xl hover:bg-emerald-900 transition-colors">
                          Submit Ticket
                       </button>
                    </div>

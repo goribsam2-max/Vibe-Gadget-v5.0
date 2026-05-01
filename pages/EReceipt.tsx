@@ -77,7 +77,7 @@ const EReceipt: React.FC = () => {
           <button onClick={() => navigate(-1)} className="p-3 bg-zinc-50 dark:bg-zinc-800 rounded-2xl active:scale-90 transition-transform border border-zinc-100 dark:border-zinc-800 shadow-sm">
              <Icon name="arrow-left" className="text-sm" />
           </button>
-          <h1 className="text-xl font-black tracking-tight">E-Receipt</h1>
+          <h1 className="text-xl font-semibold tracking-tight">E-Receipt</h1>
        </div>
 
        <div id="receipt-area" className="bg-zinc-50 dark:bg-zinc-800 rounded-[3rem] border border-zinc-100 dark:border-zinc-800 p-8 shadow-sm flex flex-col relative overflow-hidden print:border-0 print:bg-zinc-50 dark:bg-zinc-800 print:shadow-none print:rounded-none">
@@ -85,31 +85,31 @@ const EReceipt: React.FC = () => {
              <div className="w-14 h-14 bg-zinc-900 dark:bg-zinc-50 dark:text-black rounded-2xl flex items-center justify-center mb-6 shadow-xl">
                 <Icon name="shopping-bag" className="text-white text-xl" />
              </div>
-             <h2 className="text-2xl font-black tracking-tight mb-1 text-zinc-900 dark:text-zinc-100">VibeGadget</h2>
-             <p className="text-[9px] text-zinc-400 font-bold tracking-[0.2em] uppercase">Official Invoice</p>
+             <h2 className="text-lg font-semibold tracking-tight mb-1 text-zinc-900 dark:text-zinc-100">VibeGadget</h2>
+             <p className="text-[9px] text-zinc-400 font-bold tracking-normal uppercase">Official Invoice</p>
           </div>
 
           <div className="w-full space-y-6 mb-8 border-b border-zinc-200 dark:border-zinc-700 pb-8">
              <div className="grid grid-cols-2 gap-4">
                 <div className="space-y-1">
-                   <p className="text-[9px] text-zinc-300 font-bold uppercase tracking-widest">Customer</p>
+                   <p className="text-[9px] text-zinc-300 font-bold uppercase tracking-normal">Customer</p>
                    <p className="text-xs font-bold text-zinc-900 dark:text-zinc-100">{order.customerName}</p>
                    <p className="text-[10px] text-zinc-500 font-bold mt-1">{order.contactNumber}</p>
                 </div>
                 <div className="text-right space-y-1">
-                   <p className="text-[9px] text-zinc-300 font-bold uppercase tracking-widest">Order ID</p>
-                   <p className="text-[10px] font-mono font-black uppercase bg-zinc-50 dark:bg-zinc-800 border border-zinc-100 dark:border-zinc-800 px-2 py-1 rounded">#{order.id.slice(0, 8).toUpperCase()}</p>
+                   <p className="text-[9px] text-zinc-300 font-bold uppercase tracking-normal">Order ID</p>
+                   <p className="text-[10px] font-mono font-semibold uppercase bg-zinc-50 dark:bg-zinc-800 border border-zinc-100 dark:border-zinc-800 px-2 py-1 rounded">#{order.id.slice(0, 8).toUpperCase()}</p>
                    <p className="text-[10px] text-zinc-500 font-bold mt-1">{new Date(order.createdAt).toLocaleDateString()}</p>
                 </div>
              </div>
              <div>
-                <p className="text-[9px] text-zinc-300 font-bold uppercase tracking-widest mb-1">Shipping To</p>
+                <p className="text-[9px] text-zinc-300 font-bold uppercase tracking-normal mb-1">Shipping To</p>
                 <p className="text-[10px] text-zinc-500 font-medium leading-relaxed">{order.shippingAddress}</p>
              </div>
           </div>
 
           <div className="w-full space-y-4 mb-8">
-             <p className="text-[9px] text-zinc-300 font-bold uppercase tracking-widest mb-1">Order Summary</p>
+             <p className="text-[9px] text-zinc-300 font-bold uppercase tracking-normal mb-1">Order Summary</p>
              {order.items.map((item, idx) => (
                 <div key={idx} className="flex items-center space-x-4 bg-zinc-50 dark:bg-zinc-800 p-4 rounded-2xl border border-zinc-100 dark:border-zinc-800 shadow-sm">
                    <div className="w-10 h-10 bg-zinc-50 dark:bg-zinc-800 rounded-xl overflow-hidden p-1 shrink-0">
@@ -119,13 +119,13 @@ const EReceipt: React.FC = () => {
                       <h4 className="font-bold text-[11px] truncate">{item.name}</h4>
                       <p className="text-[9px] text-zinc-400 font-bold">Qty: {item.quantity} {order.isGift ? '' : `× ৳${item.priceAtPurchase}`}</p>
                    </div>
-                   <p className="font-black text-xs shrink-0">{order.isGift ? 'Gift' : `৳${item.priceAtPurchase * item.quantity}`}</p>
+                   <p className="font-semibold text-xs shrink-0">{order.isGift ? 'Gift' : `৳${item.priceAtPurchase * item.quantity}`}</p>
                 </div>
              ))}
           </div>
 
           <div className="w-full bg-zinc-50 dark:bg-zinc-800 p-5 rounded-2xl border border-zinc-100 dark:border-zinc-800 mb-8 shadow-sm">
-             <p className="text-[9px] text-zinc-300 font-bold uppercase tracking-widest mb-3">Payment Info</p>
+             <p className="text-[9px] text-zinc-300 font-bold uppercase tracking-normal mb-3">Payment Info</p>
              <div className="space-y-2">
                 <div className="flex justify-between items-center text-[10px]">
                    <span className="font-bold text-zinc-400">Method</span>
@@ -141,9 +141,9 @@ const EReceipt: React.FC = () => {
           <div className="w-full space-y-3 mb-6 border-t border-zinc-200 dark:border-zinc-700 pt-6">
              {order.isGift ? (
                 <div className="text-center bg-pink-50 p-4 rounded-2xl border border-pink-100">
-                   <p className="text-[10px] font-black tracking-widest uppercase text-pink-600 mb-1">A Special Gift</p>
+                   <p className="text-[10px] font-semibold tracking-normal uppercase text-pink-600 mb-1">A Special Gift</p>
                    <p className="text-xs font-bold text-pink-900 mt-2 italic">{order.giftNote || "Enjoy!"}</p>
-                   <p className="text-[8px] mt-4 font-bold tracking-widest opacity-50 uppercase">PAID IN ADVANCE</p>
+                   <p className="text-[8px] mt-4 font-bold tracking-normal opacity-50 uppercase">PAID IN ADVANCE</p>
                 </div>
              ) : (
                 <>
@@ -161,7 +161,7 @@ const EReceipt: React.FC = () => {
                     <span>Delivery Charge</span>
                     <span className="text-zinc-900 dark:text-zinc-100">৳{order.total - ((order.subTotal || subTotal) - (order.discount || 0))}</span>
                  </div>
-                 <div className="flex justify-between text-3xl font-black pt-4 border-t border-zinc-100 dark:border-zinc-800 tracking-tighter text-zinc-900 dark:text-zinc-100">
+                 <div className="flex justify-between text-xl font-semibold pt-4 border-t border-zinc-100 dark:border-zinc-800 tracking-tight text-zinc-900 dark:text-zinc-100">
                     <span>Total</span>
                     <span>৳{order.total}</span>
                  </div>
@@ -170,14 +170,14 @@ const EReceipt: React.FC = () => {
           </div>
 
           <div className="w-full text-center">
-             <p className="text-[8px] font-black uppercase tracking-[0.3em] text-zinc-300">Thank you for shopping at VibeGadget</p>
+             <p className="text-[8px] font-semibold uppercase tracking-normal text-zinc-300">Thank you for shopping at VibeGadget</p>
           </div>
        </div>
 
        <button 
           onClick={handleDownload}
           disabled={downloading}
-          className="w-full mt-10 py-5 bg-zinc-900 dark:bg-zinc-50 dark:text-black text-white rounded-2xl flex items-center justify-center space-x-3 text-[10px] font-black uppercase tracking-widest print:hidden shadow-lg active:scale-[0.98] transition-all disabled:opacity-50"
+          className="w-full mt-10 py-5 bg-zinc-900 dark:bg-zinc-50 dark:text-black text-white rounded-2xl flex items-center justify-center space-x-3 text-[10px] font-semibold uppercase tracking-normal print:hidden shadow-lg active:scale-[0.98] transition-all disabled:opacity-50"
        >
           {downloading ? (
             <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>

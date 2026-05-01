@@ -122,8 +122,8 @@ const ManageBanners: React.FC = () => {
         <div className="flex items-center space-x-6">
           <button onClick={() => navigate('/admin')} className="w-12 h-12 flex items-center justify-center bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-[#06331e] rounded-full shadow-sm hover:bg-[#06331e] hover:text-white transition-all active:scale-95"><Icon name="chevron-left" className="text-xs" /></button>
           <div>
-             <h1 className="text-xl md:text-2xl font-black tracking-tight text-[#06331e] mb-1.5">Store Banners</h1>
-             <p className="text-zinc-400 text-[10px] md:text-xs font-bold tracking-widest uppercase">Homepage Visuals</p>
+             <h1 className="text-xl md:text-lg font-semibold tracking-tight text-[#06331e] mb-1.5">Store Banners</h1>
+             <p className="text-zinc-400 text-[10px] md:text-xs font-bold tracking-normal uppercase">Homepage Visuals</p>
           </div>
         </div>
       </div>
@@ -131,7 +131,7 @@ const ManageBanners: React.FC = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
         <div className="lg:col-span-1">
           <form onSubmit={handleAdd} className="bg-zinc-50 dark:bg-zinc-800 p-10 rounded-[2.5rem] border border-zinc-100 dark:border-zinc-800 space-y-8 shadow-sm sticky top-10">
-            <h2 className="text-xs font-black uppercase tracking-widest text-zinc-400 mb-4">{editingId ? 'Edit' : 'Create New'} Banner</h2>
+            <h2 className="text-xs font-semibold uppercase tracking-normal text-zinc-400 mb-4">{editingId ? 'Edit' : 'Create New'} Banner</h2>
             
             <div>
               <label className="block text-[10px] font-bold text-zinc-400 uppercase mb-3 px-1">Main Title</label>
@@ -192,14 +192,14 @@ const ManageBanners: React.FC = () => {
 
             <button 
                 disabled={uploading}
-                className="w-full bg-zinc-900 border border-zinc-900 text-white shadow-sm disabled:opacity-50 text-[10px] font-bold uppercase tracking-widest py-4 rounded-full transition-all hover:bg-zinc-900"
+                className="w-full bg-zinc-900 border border-zinc-900 text-white shadow-sm disabled:opacity-50 text-[10px] font-bold uppercase tracking-normal py-4 rounded-full transition-all hover:bg-zinc-900"
             >
               {uploading ? "Uploading..." : (editingId ? "Update Banner" : "Create Banner")}
             </button>
             {editingId && (
               <button 
                 onClick={() => { setEditingId(null); setFormData({title: '', description: '', link: '', imageFile: null}); }} 
-                className="w-full text-[10px] font-black uppercase text-zinc-400 tracking-widest mt-2 hover:text-black dark:text-white transition-colors"
+                className="w-full text-[10px] font-semibold uppercase text-zinc-400 tracking-normal mt-2 hover:text-black dark:text-white transition-colors"
               >
                 Cancel Editing
               </button>
@@ -207,13 +207,13 @@ const ManageBanners: React.FC = () => {
           </form>
 
           <div className="bg-zinc-50 dark:bg-zinc-800 p-10 rounded-[2.5rem] border border-zinc-100 dark:border-zinc-800 mt-8 shadow-sm">
-             <h2 className="text-xs font-black uppercase tracking-widest text-zinc-400 mb-6">Home Slider Category</h2>
+             <h2 className="text-xs font-semibold uppercase tracking-normal text-zinc-400 mb-6">Home Slider Category</h2>
              <p className="text-[10px] font-bold text-zinc-500 mb-6 leading-relaxed">Select a category to display in the auto-slider below the header search bar on the homepage.</p>
              <div className="flex flex-col space-y-4">
                 <select 
                   value={featuredCategory} 
                   onChange={e => setFeaturedCategory(e.target.value)}
-                  className="w-full bg-zinc-50 dark:bg-zinc-800 p-5 rounded-2xl outline-none focus:ring-1 focus:ring-black transition-all font-bold shadow-inner uppercase tracking-widest text-xs"
+                  className="w-full bg-zinc-50 dark:bg-zinc-800 p-5 rounded-2xl outline-none focus:ring-1 focus:ring-black transition-all font-bold shadow-inner uppercase tracking-normal text-xs"
                 >
                    <option value="">-- No Slider --</option>
                    <option value="Mobile">Mobile</option>
@@ -224,7 +224,7 @@ const ManageBanners: React.FC = () => {
                 <button 
                   onClick={saveSettings} 
                   disabled={savingSettings}
-                  className="w-full bg-[#06331e] text-white shadow-sm disabled:opacity-50 text-[10px] font-bold uppercase tracking-widest py-4 rounded-full transition-all hover:bg-emerald-900"
+                  className="w-full bg-[#06331e] text-white shadow-sm disabled:opacity-50 text-[10px] font-bold uppercase tracking-normal py-4 rounded-full transition-all hover:bg-emerald-900"
                 >
                   {savingSettings ? "Saving..." : "Update Category"}
                 </button>
@@ -244,16 +244,16 @@ const ManageBanners: React.FC = () => {
                   </div>
                 </div>
                 <div className="p-8 relative">
-                   <span className="absolute top-0 right-8 -translate-y-1/2 bg-zinc-900 dark:bg-zinc-50 dark:text-black text-white text-[8px] font-black uppercase tracking-widest px-3 py-1 rounded-full shadow-lg">
+                   <span className="absolute top-0 right-8 -translate-y-1/2 bg-zinc-900 dark:bg-zinc-50 dark:text-black text-white text-[8px] font-semibold uppercase tracking-normal px-3 py-1 rounded-full shadow-lg">
                      {banner.bannerType === 'popup' ? 'Welcome Popup' : banner.bannerType === 'gif' ? 'GIF Banner' : 'Hero Slider'}
                    </span>
-                   <h3 className="font-black text-lg tracking-tight mb-2 mt-2">{banner.title}</h3>
-                   <p className="text-xs text-zinc-400 font-bold uppercase tracking-widest mb-4">{banner.description}</p>
+                   <h3 className="font-semibold text-lg tracking-tight mb-2 mt-2">{banner.title}</h3>
+                   <p className="text-xs text-zinc-400 font-bold uppercase tracking-normal mb-4">{banner.description}</p>
                    {banner.link && <p className="text-[10px] font-mono text-zinc-300">Link: {banner.link}</p>}
                 </div>
               </div>
             ))}
-            {banners.length === 0 && <div className="col-span-full py-32 text-center text-zinc-300 font-black uppercase tracking-widest">No banners active</div>}
+            {banners.length === 0 && <div className="col-span-full py-32 text-center text-zinc-300 font-semibold uppercase tracking-normal">No banners active</div>}
           </div>
         </div>
       </div>
