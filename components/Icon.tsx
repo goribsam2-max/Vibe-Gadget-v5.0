@@ -1,5 +1,5 @@
 import React from 'react';
-import { SVG_ICONS } from './svg-icons';
+import * as LucideIcons from 'lucide-react';
 
 export type IconName = string;
 
@@ -9,36 +9,152 @@ interface IconProps extends React.HTMLAttributes<HTMLSpanElement> {
   solid?: boolean;
 }
 
+const formatNameToPascal = (str: string) => {
+  return str.split('-').map(part => part.charAt(0).toUpperCase() + part.slice(1)).join('');
+}
+
+const customIconMapping: Record<string, keyof typeof LucideIcons> = {
+  'times': 'X',
+  'spinner-third': 'Loader2',
+  'spinner': 'Loader',
+  'circle-notch': 'Loader2',
+  'sync-alt': 'RefreshCw',
+  'money-bill': 'Banknote',
+  'money-bill-wave': 'Banknote',
+  'coins': 'Coins',
+  'wallet': 'Wallet',
+  'receipt': 'Receipt',
+  'credit-card': 'CreditCard',
+  'credit-card-front': 'CreditCard',
+  'bullhorn': 'Megaphone',
+  'chart-line': 'LineChart',
+  'rocket': 'Rocket',
+  'tag': 'Tag',
+  'check': 'Check',
+  'check-circle': 'CheckCircle',
+  'times-circle': 'XCircle',
+  'exclamation-circle': 'AlertCircle',
+  'exclamation-triangle': 'AlertTriangle',
+  'info-circle': 'Info',
+  'arrow-left': 'ArrowLeft',
+  'arrow-right': 'ArrowRight',
+  'arrow-up': 'ArrowUp',
+  'arrow-down': 'ArrowDown',
+  'arrow-down-left': 'ArrowDownLeft',
+  'chevron-left': 'ChevronLeft',
+  'chevron-right': 'ChevronRight',
+  'chevron-up': 'ChevronUp',
+  'chevron-down': 'ChevronDown',
+  'microphone': 'Mic',
+  'lightbulb': 'Lightbulb',
+  'phone-alt': 'Phone',
+  'phone': 'Phone',
+  'bell': 'Bell',
+  'bell-slash': 'BellOff',
+  'medal': 'Medal',
+  'award': 'Award',
+  'crown': 'Crown',
+  'link': 'Link',
+  'expand-alt': 'Maximize2',
+  'star': 'Star',
+  'stars': 'Sparkles',
+  'box': 'Package',
+  'box-open': 'PackageOpen',
+  'box-check': 'PackageCheck',
+  'newspaper': 'Newspaper',
+  'twitter': 'Twitter',
+  'google': 'Chrome',
+  'whatsapp': 'MessageCircle', // Fallback
+  'plus': 'Plus',
+  'layer-plus': 'Layers',
+  'edit': 'Edit2',
+  'pen': 'Pen',
+  'trash': 'Trash2',
+  'trash-alt': 'Trash2',
+  'shopping-cart': 'ShoppingCart',
+  'shopping-bag': 'ShoppingBag',
+  'store-slash': 'Store',
+  'map-marker': 'MapPin',
+  'map-marker-alt': 'MapPin',
+  'save': 'Save',
+  'percent': 'Percent',
+  'gift': 'Gift',
+  'truck': 'Truck',
+  'truck-fast': 'Truck',
+  'truck-moving': 'Truck',
+  'motorcycle': 'Bike',
+  'mobile': 'Smartphone',
+  'mobile-alt': 'Smartphone',
+  'copy': 'Copy',
+  'user': 'User',
+  'list-ol': 'ListOrdered',
+  'image': 'Image',
+  'images': 'Images',
+  'cloud-upload': 'CloudUpload',
+  'print': 'Printer',
+  'camera': 'Camera',
+  'ticket-alt': 'Ticket',
+  'bolt': 'Zap',
+  'share-alt': 'Share2',
+  'shield-check': 'ShieldCheck',
+  'shield-alt': 'Shield',
+  'search': 'Search',
+  'search-plus': 'ZoomIn',
+  'history': 'History',
+  'headset': 'Headphones',
+  'comment-alt-lines': 'MessageSquare',
+  'paper-plane': 'Send',
+  'pause': 'Pause',
+  'gem': 'Gem',
+  'quote-right': 'Quote',
+  'heart': 'Heart',
+  'cog': 'Settings',
+  'sign-out-alt': 'LogOut',
+  'lock': 'Lock',
+  'unlock': 'Unlock',
+  'smile': 'Smile',
+  'frown': 'Frown',
+  'hourglass-half': 'Hourglass',
+  'ban': 'Ban',
+  'cubes': 'Boxes',
+  'boxes': 'Boxes',
+  'users-cog': 'Users',
+  'users': 'Users',
+  'comment-dots': 'MessageSquare',
+  'sliders-h': 'Sliders',
+  'ticket': 'Ticket',
+  'undo': 'Undo',
+  'id-badge': 'Contact',
+  'file-invoice-dollar': 'Receipt',
+  'file-csv': 'FileSpreadsheet',
+  'trend-up': 'TrendingUp',
+  'shield': 'Shield',
+  'inbox': 'Inbox',
+}
+
 const Icon: React.FC<IconProps> = ({ name, className = '', solid = false, ...props }) => {
-  let svgString = SVG_ICONS[name] || SVG_ICONS['default'] || '';
-  
-  if (!svgString) return null;
+  const pascalName = (customIconMapping[name] || formatNameToPascal(name)) as keyof typeof LucideIcons;
+  const LucideIcon = LucideIcons[pascalName] as React.FC<any> | undefined;
 
-  // Strip hardcoded width and height to make responsive
-  svgString = svgString.replace(/width="[^"]+"/, '').replace(/height="[^"]+"/, '');
-
-  if (svgString.includes('fill="currentColor"')) {
-    svgString = svgString.replace(/<svg /, '<svg width="100%" height="100%" stroke="none" ');
-  } else {
-    svgString = svgString.replace(/<svg /, '<svg width="100%" height="100%" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" ');
-  }
-
-  // Define default sizing if no w- or h- or text- classes are passed
   const hasSize = /\b(w-\d+|w-\[.*?\]|w-auto|w-full|w-screen|w-min|w-max|w-fit|size-\d+|size-\[.*?\]|h-\d+|h-\[.*?\]|h-auto|h-full|h-screen|h-min|h-max|h-fit|text-(xs|sm|base|lg|[2-9]xl|\[.*?\]))\b/.test(className);
   
-  // If no size class exists at all, fallback to w-5 h-5
   const finalClass = hasSize ? className : `${className} w-5 h-5`.trim();
-
-  // Determine if we need to inject the [1em] sizing. We only inject it if there are NO specific width/height/size classes in finalClass.
-  // We should match actual w- classes, not things like 'yellow-500'
   const hasWidthClass = /\b(w-\d+|w-\[.*?\]|w-auto|w-full|w-screen|w-min|w-max|w-fit|size-\d+|size-\[.*?\])\b/.test(finalClass);
+
+  if (!LucideIcon) {
+    if (name !== 'default') {
+      console.warn(`Icon ${name} not found in Lucide (pascal: ${pascalName})`);
+    }
+    return null;
+  }
 
   return (
     <span 
       className={`inline-flex shrink-0 items-center justify-center [&>svg]:w-full [&>svg]:h-full ${hasWidthClass ? '' : 'w-[1em] h-[1em]'} ${finalClass}`}
-      dangerouslySetInnerHTML={{ __html: svgString }}
       {...props}
-    />
+    >
+      <LucideIcon strokeWidth={solid ? 3 : 2} fill={solid ? "currentColor" : "none"} />
+    </span>
   );
 };
 

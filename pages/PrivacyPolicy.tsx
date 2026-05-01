@@ -11,10 +11,10 @@ const PrivacyPolicy: React.FC = () => {
     <div className="p-6 md:p-12 pb-24 animate-fade-in bg-zinc-50 dark:bg-zinc-800 max-w-4xl mx-auto min-h-screen">
        <SEO title="Privacy Policy" description="Read our privacy policy and learn how we protect your data at VibeGadget." />
        <div className="flex items-center space-x-6 mb-12">
-          <button onClick={() => navigate(-1)} className="p-3.5 bg-zinc-50 dark:bg-zinc-800 rounded-2xl hover:bg-zinc-900 hover:text-white transition-all shadow-sm">
-             <Icon name="chevron-left" className="text-sm" />
+          <button onClick={() => navigate(-1)} className="w-10 h-10 bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/50 flex items-center justify-center hover:bg-white dark:hover:bg-zinc-700 rounded-full transition-transform active:scale-95 shadow-sm group">
+             <Icon name="arrow-left" className="text-sm text-zinc-600 dark:text-zinc-400 group-hover:text-black dark:group-hover:text-white" />
           </button>
-          <h1 className="text-2xl md:text-4xl font-black tracking-tight">Privacy Policy</h1>
+          <h1 className="text-2xl md:text-3xl font-black tracking-tight uppercase">Privacy Policy</h1>
        </div>
 
        <div className="space-y-8 text-sm md:text-base leading-relaxed text-zinc-600 dark:text-zinc-400">

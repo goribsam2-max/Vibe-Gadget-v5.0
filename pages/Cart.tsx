@@ -4,10 +4,12 @@ import { useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import Icon from '../components/Icon';
 import { CustomSectionEmbed } from '../components/CustomSectionEmbed';
+import { useTheme } from '../components/ThemeContext';
 
 const Cart: React.FC = () => {
   const [items, setItems] = useState<any[]>([]);
   const navigate = useNavigate();
+  const { isDark, toggleTheme } = useTheme();
 
   useEffect(() => {
     const cart = JSON.parse(localStorage.getItem('f_cart') || '[]');
@@ -32,13 +34,25 @@ const Cart: React.FC = () => {
   return (
     <div className="p-6 md:p-12 pb-24 animate-fade-in bg-zinc-50 dark:bg-zinc-800 max-w-7xl mx-auto min-h-screen relative overflow-hidden">
         <div className="absolute top-[-50%] right-[-10%] w-[800px] h-[800px] bg-emerald-500/5 rounded-full blur-[100px] pointer-events-none z-0"></div>
-        <div className="flex items-center space-x-6 mb-16 relative z-10 animate-stagger-1">
-          <button onClick={() => navigate(-1)} className="p-3.5 bg-zinc-50 dark:bg-zinc-800 rounded-2xl border border-zinc-100 dark:border-zinc-800 shadow-sm hover:bg-zinc-900 hover:text-white transition-all active:scale-90 group hover-tilt">
-             <Icon name="chevron-left" className="text-xs group-hover:-translate-x-1 transition-transform" />
-          </button>
-          <div className="flex flex-col">
-            <h1 className="text-2xl md:text-xl lg:text-base xl:text-sm font-black tracking-tighter uppercase text-shine">Shopping Cart.</h1>
-            <p className="text-[9px] font-bold text-emerald-600/70 uppercase tracking-[0.4em] mt-1 pl-1">Review Items</p>
+        <div className="flex items-center justify-between mb-16 relative z-10 animate-stagger-1">
+          <div className="flex items-center space-x-6">
+            <button onClick={() => navigate(-1)} className="p-3.5 bg-zinc-50 dark:bg-zinc-800 rounded-2xl border border-zinc-100 dark:border-zinc-800 shadow-sm hover:bg-zinc-900 hover:text-white transition-all active:scale-90 group hover-tilt">
+               <Icon name="chevron-left" className="text-xs group-hover:-translate-x-1 transition-transform" />
+            </button>
+            <div className="flex flex-col">
+              <h1 className="text-2xl md:text-xl lg:text-base xl:text-sm font-black tracking-tighter uppercase text-shine">Shopping Cart.</h1>
+              <p className="text-[9px] font-bold text-emerald-600/70 uppercase tracking-[0.4em] mt-1 pl-1">Review Items</p>
+            </div>
+          </div>
+
+          <div className="flex bg-zinc-100 dark:bg-zinc-800/50 rounded-full p-1 border border-zinc-200 dark:border-zinc-700/50">
+             <button onClick={toggleTheme} className="w-10 h-10 flex items-center justify-center rounded-full cursor-pointer relative active:scale-95 transition-transform hover:bg-white dark:hover:bg-zinc-700 shadow-sm group text-zinc-600 dark:text-zinc-400">
+                <Icon name={isDark ? "sun" : "moon"} className="text-sm" />
+             </button>
+             <button onClick={() => navigate('/notifications')} className="w-10 h-10 flex items-center justify-center rounded-full relative active:scale-95 transition-transform hover:bg-white dark:hover:bg-zinc-700 shadow-sm group text-zinc-600 dark:text-zinc-400">
+               <Icon name="bell" className="text-sm" />
+               <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full shadow-[0_0_0_2px_#f4f4f5] dark:shadow-[0_0_0_2px_#27272a] animate-pulse"></span>
+             </button>
           </div>
        </div>
 

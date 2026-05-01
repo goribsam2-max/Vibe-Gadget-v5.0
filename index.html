@@ -68,17 +68,23 @@
         }
       }
     </script>
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.15.4/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="manifest" href="/manifest.json">
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
       window.OneSignalDeferred = window.OneSignalDeferred || [];
       OneSignalDeferred.push(async function(OneSignal) {
-        await OneSignal.init({
-          appId: "29c39d8a-7be8-404a-8a33-5616086735fa",
-          safari_web_id: "web.onesignal.auto.18f55e14-9585-4855-a0ee-ea6515e10e22",
-          notifyButton: { enable: false },
-        });
+        // Only initialize OneSignal if on the authorized domain to prevent errors in development/preview
+        const authorizedDomains = ['vibe-gadget.vercel.app', 'www.vibegadgets.shop', 'vibegadgets.shop'];
+        if (authorizedDomains.includes(window.location.hostname)) {
+          await OneSignal.init({
+            appId: "29c39d8a-7be8-404a-8a33-5616086735fa",
+            safari_web_id: "web.onesignal.auto.18f55e14-9585-4855-a0ee-ea6515e10e22",
+            notifyButton: { enable: false },
+          });
+        } else {
+          console.log('OneSignal initialization skipped on this domain.');
+        }
       });
     </script>
     <!-- META_TAGS_PLACEHOLDER -->

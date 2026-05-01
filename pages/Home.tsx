@@ -6,6 +6,7 @@ import { db } from '../firebase';
 import { Product } from '../types';
 import ReactPlayer from 'react-player';
 import { getReadableAddress } from '../services/location';
+import { useNotify } from '../components/Notifications';
 import { motion, AnimatePresence, useScroll, useTransform, useSpring } from 'framer-motion';
 import Logo from '../components/Logo';
 import Icon from '../components/Icon';
@@ -17,6 +18,7 @@ import { ProductSkeleton } from '../components/Skeletons';
 import { CustomSectionEmbed } from '../components/CustomSectionEmbed';
 
 const FullScreenStory = ({ stories, activeIndex, onClose, onNext, onPrev }: any) => {
+   const notify = useNotify();
    const [progress, setProgress] = useState(0);
    const [isPaused, setIsPaused] = useState(false);
    const [loading, setLoading] = useState(true);
@@ -27,6 +29,27 @@ const FullScreenStory = ({ stories, activeIndex, onClose, onNext, onPrev }: any)
    const currentStory = stories[activeIndex];
    const isVideo = currentStory.type === 'video';
    const hasAudio = !!currentStory.audioUrl;
+
+   const handleShare = async (e: React.MouseEvent) => {
+      e.stopPropagation();
+         const shareData = {
+            title: currentStory.title || 'Check out this story',
+            text: currentStory.description || 'Amazing products on Gadget Galaxy',
+            url: window.location.href
+         };
+
+         if (navigator.share) {
+            try {
+               await navigator.share(shareData);
+            } catch (err) {
+               await navigator.clipboard.writeText(window.location.href);
+               notify('Link copied to clipboard!', 'success');
+            }
+         } else {
+            await navigator.clipboard.writeText(window.location.href);
+            notify('Link copied to clipboard!', 'success');
+         }
+   };
    
    // Preload audio explicitly
    useEffect(() => {
@@ -67,13 +90,18 @@ const FullScreenStory = ({ stories, activeIndex, onClose, onNext, onPrev }: any)
       if (!isVideo && !hasAudio) {
          // Image only, 5 seconds
          const duration = 5000;
-         const interval = 50;
+         const startTime = Date.now() - (progress / 100) * duration;
          timerRef.current = setInterval(() => {
-            setProgress(p => {
-               if (p >= 100) { clearInterval(timerRef.current); onNext(); return 100; }
-               return p + (interval / duration) * 100;
-            });
-         }, interval);
+            const elapsed = Date.now() - startTime;
+            const newProgress = (elapsed / duration) * 100;
+            if (newProgress >= 100) {
+               clearInterval(timerRef.current);
+               setProgress(100);
+               onNext();
+            } else {
+               setProgress(newProgress);
+            }
+         }, 16);
       } else if (!isVideo && hasAudio) {
          // Image with audio: let audio progress handle it
          if (audioRef.current) {
@@ -145,6 +173,9 @@ const FullScreenStory = ({ stories, activeIndex, onClose, onNext, onPrev }: any)
                   </div>
                </div>
                <div className="flex items-center space-x-2">
+                 <button onClick={handleShare} className="w-12 h-12 rounded-full bg-black/40 backdrop-blur-xl flex items-center justify-center text-white/90 hover:text-white hover:bg-black/60 border border-white/10 transition-all shadow-lg group">
+                   <Icon name="share-alt" className="text-lg drop-shadow-md group-active:scale-95 transition-transform" />
+                 </button>
                  <button onClick={onClose} className="w-12 h-12 rounded-full bg-black/40 backdrop-blur-xl flex items-center justify-center text-white/90 hover:text-white hover:bg-black/60 border border-white/10 transition-all shadow-lg group">
                    <Icon name="times" className="text-xl drop-shadow-md group-active:scale-95 transition-transform" />
                  </button>
@@ -170,13 +201,13 @@ const FullScreenStory = ({ stories, activeIndex, onClose, onNext, onPrev }: any)
                 
                 {isVideo ? (
                    currentStory.mediaUrl.toLowerCase().includes('.mp4') ? (
-                       <video 
-                          ref={videoRef}
-                          src={currentStory.mediaUrl}
-                          className="w-full h-full object-cover md:object-contain scale-[1.02] transform transition-transform duration-[10s] ease-linear group-hover:scale-105"
-                          onPlaying={() => {
-                             if (audioRef.current && !isPaused) audioRef.current.play().catch(()=>{});
-                          }}
+                     <video 
+                        ref={videoRef}
+                        src={currentStory.mediaUrl}
+                        className="w-full h-full object-contain transform transition-transform duration-[10s] ease-linear group-hover:scale-105"
+                        onPlaying={() => {
+                           if (audioRef.current && !isPaused) audioRef.current.play().catch(()=>{});
+                        }}
                           onWaiting={() => {
                              if (audioRef.current) audioRef.current.pause();
                           }}
@@ -187,7 +218,7 @@ const FullScreenStory = ({ stories, activeIndex, onClose, onNext, onPrev }: any)
                           muted={hasAudio}
                        />
                    ) : (
-                       <div className="w-full h-full transform scale-[1.35] md:scale-[1.15] origin-center">
+                       <div className="w-full h-full">
                            <ReactPlayer 
                                url={currentStory.mediaUrl} 
                                playing={!isPaused && !loading} 
@@ -210,7 +241,7 @@ const FullScreenStory = ({ stories, activeIndex, onClose, onNext, onPrev }: any)
                        </div>
                    )
                 ) : (
-                  <img src={currentStory.mediaUrl} className="w-full h-full object-cover md:object-contain scale-[1.02] transform transition-transform duration-[10s] ease-linear group-hover:scale-110 select-none" draggable="false" alt="story" />
+                  <img src={currentStory.mediaUrl} className="w-full h-full object-contain transform transition-transform duration-[10s] ease-linear group-hover:scale-105 select-none" draggable="false" alt="story" />
                 )}
             </div>
 
@@ -242,12 +273,13 @@ const FullScreenStory = ({ stories, activeIndex, onClose, onNext, onPrev }: any)
             
             {/* CTA */}
             {currentStory.linkUrl && (
-               <div className="absolute bottom-8 left-0 right-0 flex justify-center z-50 pointer-events-none">
-                 <button onClick={() => { window.location.href = currentStory.linkUrl; }} className="bg-white/90 backdrop-blur-xl text-emerald-950 px-10 py-5 rounded-full font-black text-sm uppercase tracking-[0.2em] shadow-[0_20px_50px_rgba(0,0,0,0.5)] hover:bg-white hover:-translate-y-2 active:scale-95 transition-all flex items-center space-x-3 group border border-white/50 pointer-events-auto">
-                    <div className="w-8 h-8 rounded-full bg-emerald-100 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-white transition-colors">
-                      <Icon name="link" className="text-xs group-hover:-rotate-45 transition-transform duration-300" />
+               <div className="absolute bottom-6 left-0 right-0 flex justify-center z-50 pointer-events-none">
+                 <button onClick={() => { window.location.href = currentStory.linkUrl; }} className="bg-white/90 backdrop-blur-3xl text-emerald-950 px-10 py-5 rounded-full font-black text-sm uppercase tracking-[0.2em] shadow-[0_20px_60px_rgba(0,0,0,0.6)] hover:bg-white hover:-translate-y-2 active:scale-95 transition-all flex items-center space-x-4 group border border-white/50 pointer-events-auto overflow-hidden animate-bounce-subtle">
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
+                    <div className="w-10 h-10 rounded-full bg-emerald-500 text-white flex items-center justify-center shadow-lg shadow-emerald-500/40">
+                      <Icon name="chevron-up" className="text-lg animate-[bounce_1.5s_infinite]" />
                     </div>
-                    <span>Shop Now</span>
+                    <span className="relative z-10 text-[#06331e]">Swipe up to shop</span>
                  </button>
                </div>
             )}
@@ -810,9 +842,11 @@ const Home: React.FC = () => {
                   <span className="inline-block px-3 py-1 bg-white/10 text-emerald-200 border border-white/10 rounded-full text-[9px] font-black uppercase tracking-widest mb-4 backdrop-blur-md">Featured Offer</span>
                   <h2 className="text-3xl md:text-5xl lg:text-6xl font-black tracking-tighter mb-4 uppercase leading-[1.1] text-white line-clamp-3 w-full whitespace-normal drop-shadow-md">{banner.title}</h2>
                   <p className="text-[10px] md:text-xs font-bold uppercase tracking-[0.2em] opacity-80 mb-6 md:mb-8 text-emerald-100 truncate w-full max-w-sm">{banner.description}</p>
-                  <button onClick={() => banner.link && navigate(banner.link)} className="px-8 py-3.5 bg-white text-[#06331e] rounded-2xl font-black text-[10px] uppercase tracking-widest shadow-xl shadow-black/20 hover:-translate-y-1 hover:shadow-black/40 transition-all flex items-center gap-2 group whitespace-nowrap active:scale-95">
-                    <span>Shop Collection</span>
-                    <Icon name="arrow-right" className="group-hover:translate-x-1 transition-transform" />
+                  <button onClick={() => banner.link && navigate(banner.link)} className="mt-4 px-10 py-4 bg-white/95 backdrop-blur-md text-[#06331e] rounded-2xl font-black text-xs uppercase tracking-widest shadow-[0_15px_40px_rgba(0,0,0,0.3)] hover:bg-white hover:-translate-y-1.5 hover:shadow-black/40 transition-all flex items-center gap-3 group whitespace-nowrap active:scale-95 border border-white/50">
+                    <span>Shop Now</span>
+                    <div className="w-6 h-6 rounded-full bg-emerald-100 flex items-center justify-center group-hover:bg-emerald-500 group-hover:text-white transition-all duration-300">
+                      <Icon name="arrow-right" className="text-[10px] group-hover:translate-x-0.5 transition-transform" />
+                    </div>
                   </button>
                </div>
             </div>
@@ -828,7 +862,7 @@ const Home: React.FC = () => {
 
       {settings?.featuredCategory && products.filter(p => p.category.toLowerCase() === settings.featuredCategory.toLowerCase()).length > 0 && (
         <div className="mb-10 md:mb-14">
-          <div className="relative w-full h-[180px] md:h-[240px] lg:h-[280px] rounded-[2.5rem] overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-xl bg-white dark:bg-zinc-900 group">
+          <div className="relative w-full h-[280px] sm:h-[300px] md:h-[340px] lg:h-[380px] rounded-[2.5rem] overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-xl bg-white dark:bg-zinc-900 group">
             <div className="flex transition-transform duration-1000 ease-[cubic-bezier(0.23, 1, 0.32, 1)] h-full" style={{ transform: `translateX(-${activeFeatured * 100}%)` }}>
               {products.filter(p => p.category.toLowerCase() === settings.featuredCategory.toLowerCase()).map((product, i) => (
                 <div key={product.id} className="min-w-full h-full relative grid grid-cols-5 items-center">
@@ -845,7 +879,7 @@ const Home: React.FC = () => {
                          <p className="text-xl md:text-3xl font-black text-emerald-400">৳{product.isOffer && product.offerPrice ? product.offerPrice : product.price}</p>
                          {product.isOffer && <p className="text-xs md:text-sm text-zinc-500 font-bold line-through">৳{product.price}</p>}
                       </div>
-                      <button onClick={() => navigate(`/product/${product.id}`)} className="px-6 md:px-8 py-3 md:py-4 bg-zinc-50 dark:bg-zinc-900 text-[#06331e] dark:text-white font-black uppercase tracking-[0.2em] text-[10px] md:text-xs rounded-2xl hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors self-start shadow-xl shadow-black/10 active:scale-95 flex items-center whitespace-nowrap">
+                      <button onClick={() => navigate(`/product/${product.id}`)} className="mt-2 px-6 md:px-8 py-3 md:py-4 bg-zinc-50 dark:bg-zinc-900 text-[#06331e] dark:text-white font-black uppercase tracking-[0.2em] text-[10px] md:text-xs rounded-2xl hover:bg-zinc-200 dark:hover:bg-zinc-800 transition-colors self-start shadow-xl shadow-black/10 active:scale-95 flex items-center whitespace-nowrap">
                         Shop Now <Icon name="arrow-right" className="ml-3 text-[10px]" />
                       </button>
                    </div>

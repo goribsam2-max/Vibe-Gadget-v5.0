@@ -64,13 +64,13 @@ const NotificationsPage: React.FC = () => {
 
   return (
     <div className="max-w-3xl mx-auto px-6 py-10 pb-32 min-h-screen bg-zinc-50 dark:bg-zinc-800 font-inter">
-      <div className="flex items-center space-x-6 mb-12">
-        <button onClick={() => navigate(-1)} className="w-12 h-12 flex items-center justify-center bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-[#06331e] rounded-full shadow-sm hover:bg-[#06331e] hover:text-white transition-all active:scale-95">
-          <Icon name="chevron-left" className="text-xs" />
+      <div className="flex items-center space-x-5 mb-12">
+        <button onClick={() => navigate(-1)} className="w-10 h-10 bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/50 flex items-center justify-center hover:bg-white dark:hover:bg-zinc-700 rounded-full transition-transform active:scale-95 shadow-sm group">
+          <Icon name="arrow-left" className="text-sm text-zinc-600 dark:text-zinc-400 group-hover:text-black dark:group-hover:text-white" />
         </button>
         <div>
-           <h1 className="text-xl md:text-2xl font-black tracking-tight text-[#06331e] mb-1.5">System Alerts</h1>
-           <p className="text-zinc-400 text-[10px] md:text-xs font-bold tracking-widest uppercase">Admin Broadcasts & Updates</p>
+           <h1 className="text-xl md:text-2xl font-black tracking-tight text-[#06331e] dark:text-emerald-400 mb-0.5 uppercase">System Alerts</h1>
+           <p className="text-zinc-400 text-[10px] font-bold tracking-widest uppercase">Admin Broadcasts & Updates</p>
         </div>
       </div>
 

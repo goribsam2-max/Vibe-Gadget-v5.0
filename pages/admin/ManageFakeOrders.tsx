@@ -14,18 +14,22 @@ const ManageFakeOrders: React.FC = () => {
   const notify = useNotify();
 
   useEffect(() => {
-    // Only fetch orders flagged as suspicious, and pending/processing
+    // Only fetch orders flagged as suspicious
     const q = query(
         collection(db, 'orders'), 
-        where('isSuspicious', '==', true),
-        orderBy('createdAt', 'desc')
+        where('isSuspicious', '==', true)
     );
     
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() } as Order));
-      // Sort by creation desc
+      // Sort by creation desc locally to avoid requiring composite index
+      data.sort((a, b) => b.createdAt - a.createdAt);
       setOrders(data);
       setLoading(false);
+    }, (error) => {
+      console.error("ManageFakeOrders onSnapshot error:", error);
+      setLoading(false);
+      notify("Error loading suspicious orders", "error");
     });
     
     return () => unsubscribe();

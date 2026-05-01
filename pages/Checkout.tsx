@@ -8,6 +8,7 @@ import { sendOrderToTelegram } from '../services/telegram';
 import { motion, AnimatePresence } from 'framer-motion';
 import Icon from '../components/Icon';
 import { CustomSectionEmbed } from '../components/CustomSectionEmbed';
+import { useTheme } from '../components/ThemeContext';
 
 interface Address {
   id: string;
@@ -49,6 +50,7 @@ const CheckoutPage: React.FC = () => {
 
   const navigate = useNavigate();
   const notify = useNotify();
+  const { isDark, toggleTheme } = useTheme();
 
   const getWalletNumber = () => {
     if (bankingMethod === 'bkash') return settings?.bkashNumber || "01778953114";
@@ -304,23 +306,34 @@ const CheckoutPage: React.FC = () => {
   }
 
   return (
-    <div className="max-w-4xl mx-auto px-6 py-10 pb-24 bg-zinc-50 dark:bg-zinc-800 min-h-screen font-inter animate-fade-in relative">
+    <div className="max-w-4xl mx-auto px-6 py-10 pb-24 bg-zinc-50 dark:bg-zinc-800 min-h-screen font-inter animate-fade-in relative z-10 transition-colors">
       <div className="flex items-center justify-between mb-8">
           <div className="flex items-center space-x-6">
             <button onClick={() => step > 1 ? setStep(step - 1) : navigate(-1)} className="p-3 bg-zinc-50 dark:bg-zinc-800 rounded-xl border border-zinc-100 dark:border-zinc-800 hover:bg-[#06331e] hover:text-white transition-all active:scale-95 group">
                <Icon name="arrow-left" className="text-xs group-hover:-translate-x-1 transition-transform" />
             </button>
             <div>
-              <h1 className="text-xl md:text-2xl font-black tracking-tight uppercase">Checkout</h1>
-              <p className="text-[9px] font-bold text-zinc-400 uppercase tracking-widest mt-1">Step {step} of {paymentType === 'cod' ? '2' : '4'}</p>
+               <h1 className="text-2xl md:text-xl lg:text-base xl:text-sm font-black tracking-tighter uppercase text-shine">Checkout.</h1>
+               <p className="text-[9px] font-bold text-emerald-600/70 uppercase tracking-[0.4em] mt-1 pl-1">Secure Drop</p>
             </div>
           </div>
-          {/* Progress bar */}
-          <div className="hidden sm:flex items-center space-x-2">
-             {[1, 2, 3, 4].map(s => (
-               <div key={s} className={`w-8 h-1.5 rounded-full ${s <= step ? 'bg-[#06331e]' : 'bg-zinc-100 dark:bg-zinc-800'} transition-colors duration-500`}></div>
-             ))}
+
+          <div className="flex bg-zinc-100 dark:bg-zinc-800/50 rounded-full p-1 border border-zinc-200 dark:border-zinc-700/50">
+             <button onClick={toggleTheme} className="w-10 h-10 flex items-center justify-center rounded-full cursor-pointer relative active:scale-95 transition-transform hover:bg-white dark:hover:bg-zinc-700 shadow-sm group text-zinc-600 dark:text-zinc-400">
+                <Icon name={isDark ? "sun" : "moon"} className="text-sm" />
+             </button>
+             <button onClick={() => navigate('/notifications')} className="w-10 h-10 flex items-center justify-center rounded-full relative active:scale-95 transition-transform hover:bg-white dark:hover:bg-zinc-700 shadow-sm group text-zinc-600 dark:text-zinc-400">
+               <Icon name="bell" className="text-sm" />
+               <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full shadow-[0_0_0_2px_#f4f4f5] dark:shadow-[0_0_0_2px_#27272a] animate-pulse"></span>
+             </button>
           </div>
+      </div>
+
+      {/* Progress bar */}
+      <div className="hidden sm:flex items-center justify-center space-x-2 mb-10">
+         {[1, 2, 3, 4].map(s => (
+            <div key={s} className={`w-12 h-1.5 rounded-full ${s <= step ? 'bg-[#06331e] dark:bg-emerald-500 shadow-sm shadow-emerald-500/20' : 'bg-zinc-200 dark:bg-zinc-800'} transition-all duration-500`}></div>
+         ))}
       </div>
 
       <AnimatePresence mode="wait">
@@ -554,8 +567,8 @@ const CheckoutPage: React.FC = () => {
                             {advanceType === 'delivery' && <div className="w-3 h-3 bg-emerald-300 rounded-full"></div>}
                          </div>
                          <div>
-                            <p className={`font-black text-sm mb-0.5 tracking-tight ${advanceType === 'delivery' ? 'text-white' : 'text-zinc-900 dark:text-zinc-100'}`}>Delivery Fee Only</p>
-                            <p className={`text-[9px] font-bold uppercase tracking-widest ${advanceType === 'delivery' ? 'text-emerald-300/80' : 'text-zinc-500'}`}>Pay delivery now, rest on arrival</p>
+                            <p className={`font-black text-xs mb-0.5 tracking-tight ${advanceType === 'delivery' ? 'text-white' : 'text-zinc-900 dark:text-zinc-100'}`}>Delivery Fee Only</p>
+                            <p className={`text-[8px] font-bold uppercase tracking-widest ${advanceType === 'delivery' ? 'text-emerald-300/80' : 'text-zinc-500'}`}>Pay delivery now, rest on arrival</p>
                          </div>
                       </div>
                       <div className={`px-4 py-2.5 rounded-2xl border flex items-center gap-1 ${advanceType === 'delivery' ? 'bg-white/10 border-white/20' : 'bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-700 shadow-sm'}`}>
@@ -573,8 +586,8 @@ const CheckoutPage: React.FC = () => {
                             {advanceType === 'full' && <div className="w-3 h-3 bg-emerald-300 rounded-full"></div>}
                          </div>
                          <div>
-                            <p className={`font-black text-sm mb-0.5 tracking-tight flex items-center gap-2 ${advanceType === 'full' ? 'text-white' : 'text-zinc-900 dark:text-zinc-100'}`}>Full Payment <span className={`text-[8px] uppercase tracking-widest px-2 py-0.5 rounded-full border ${advanceType === 'full' ? 'border-emerald-300/30 bg-emerald-500/20 text-emerald-200' : 'border-zinc-200 bg-white text-emerald-600 dark:border-zinc-700 dark:bg-zinc-900'}`}>Recommended</span></p>
-                            <p className={`text-[9px] font-bold uppercase tracking-widest ${advanceType === 'full' ? 'text-emerald-300/80' : 'text-zinc-500'}`}>Secure entire order</p>
+                            <p className={`font-black text-[11px] mb-0.5 tracking-tight flex items-center gap-2 ${advanceType === 'full' ? 'text-white' : 'text-zinc-900 dark:text-zinc-100'}`}>Full Payment <span className={`text-[6.5px] uppercase tracking-[0.1em] px-2 py-0.5 rounded-full border leading-tight ${advanceType === 'full' ? 'border-emerald-300/30 bg-emerald-500/20 text-emerald-100' : 'border-zinc-200 bg-white text-emerald-600 dark:border-zinc-700 dark:bg-zinc-900'}`}>Recommended</span></p>
+                            <p className={`text-[8.5px] font-bold uppercase tracking-widest ${advanceType === 'full' ? 'text-emerald-300/80' : 'text-zinc-500'}`}>Secure entire order</p>
                          </div>
                       </div>
                       <div className={`px-4 py-2.5 rounded-2xl border flex items-center gap-1 ${advanceType === 'full' ? 'bg-white/10 border-white/20' : 'bg-white dark:bg-zinc-900 border-zinc-200 dark:border-zinc-700 shadow-sm'}`}>

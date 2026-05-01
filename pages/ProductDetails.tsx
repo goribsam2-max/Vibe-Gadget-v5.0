@@ -10,9 +10,11 @@ import { motion, AnimatePresence, useScroll, useMotionValueEvent } from 'framer-
 import Icon from '../components/Icon';
 import SEO from '../components/SEO';
 import { CustomSectionEmbed } from '../components/CustomSectionEmbed';
+import { useTheme } from '../components/ThemeContext';
 
 const ProductDetails: React.FC = () => {
   const { id, slug } = useParams();
+  const { isDark, toggleTheme } = useTheme();
   const [product, setProduct] = useState<Product | null>(null);
   const [resolvedId, setResolvedId] = useState<string | null>(id || null);
   const [reviews, setReviews] = useState<Review[]>([]);
@@ -368,9 +370,20 @@ const ProductDetails: React.FC = () => {
       
       <div className="w-full lg:w-[45%] lg:max-w-[450px] xl:max-w-[500px] lg:sticky lg:top-12 animate-stagger-1 relative z-10">
         <div className="relative aspect-square md:aspect-video lg:aspect-square bg-zinc-50 dark:bg-zinc-800 dark:bg-zinc-800 rounded-b-[2.5rem] lg:rounded-[2.5rem] overflow-hidden flex items-center justify-center border border-zinc-100 dark:border-zinc-800 group shadow-lg hover-glow transition-all">
-          <button onClick={() => navigate(-1)} className="absolute top-4 left-4 lg:hidden z-10 w-10 h-10 flex items-center justify-center bg-zinc-50 dark:bg-zinc-900/90 backdrop-blur-md rounded-full text-zinc-600 dark:text-zinc-400 shadow-sm border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-900 hover:text-white transition-all active:scale-95 group/btn">
-            <Icon name="arrow-left" className="text-xs group-hover/btn:-translate-x-1 transition-transform" />
-          </button>
+          <div className="absolute top-4 left-4 right-4 z-10 flex items-center justify-between pointer-events-none lg:hidden">
+            <button onClick={() => navigate(-1)} className="w-10 h-10 flex items-center justify-center bg-zinc-50 dark:bg-zinc-900/90 backdrop-blur-md rounded-full text-zinc-600 dark:text-zinc-400 shadow-sm border border-zinc-200 dark:border-zinc-700 hover:bg-zinc-900 hover:text-white transition-all active:scale-95 group/btn pointer-events-auto">
+              <Icon name="arrow-left" className="text-xs group-hover/btn:-translate-x-1 transition-transform" />
+            </button>
+            <div className="flex bg-zinc-100/90 dark:bg-zinc-800/90 backdrop-blur-md rounded-full p-1 border border-zinc-200 dark:border-zinc-700/50 pointer-events-auto shadow-lg">
+               <button onClick={toggleTheme} className="w-9 h-9 flex items-center justify-center rounded-full cursor-pointer relative active:scale-95 transition-transform hover:bg-white dark:hover:bg-zinc-700 shadow-sm group text-zinc-600 dark:text-zinc-400">
+                  <Icon name={isDark ? "sun" : "moon"} className="text-[10px]" />
+               </button>
+               <button onClick={() => navigate('/notifications')} className="w-9 h-9 flex items-center justify-center rounded-full relative active:scale-95 transition-transform hover:bg-white dark:hover:bg-zinc-700 shadow-sm group text-zinc-600 dark:text-zinc-400">
+                 <Icon name="bell" className="text-[10px]" />
+                 <span className="absolute top-2.5 right-2.5 w-1.5 h-1.5 bg-red-500 rounded-full shadow-[0_0_0_2px_#f4f4f5] dark:shadow-[0_0_0_2px_#27272a] animate-pulse"></span>
+               </button>
+            </div>
+          </div>
           
           <AnimatePresence initial={false} custom={direction}>
             <motion.img 

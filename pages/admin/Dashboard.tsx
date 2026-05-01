@@ -160,7 +160,7 @@ const AdminDashboard: React.FC = () => {
          <AdminBentoLink to="products" title="Inventory Catalog" subtitle="Add, edit, or remove store products." icon="cubes" />
          <AdminBentoLink to="users" title="Customer Database" subtitle="Manage registered users and accounts." icon="users-cog" />
          <AdminBentoLink to="orders" title="Order Fulfillment" subtitle="Process and updates active orders." icon="truck-fast" />
-         <AdminBentoLink to="#" onClick={handleComingSoon} title="Risk & Security" subtitle="Review AI-flagged suspicious orders." icon="shield-virus" highlight="border-red-200/50 bg-red-50/20 hover:border-red-300 dark:border-red-900/30 dark:bg-red-900/10 dark:hover:border-red-800 font-bold" iconColor="text-red-500" />
+         <AdminBentoLink to="fake-orders" title="Risk & Security" subtitle="Review AI-flagged suspicious orders." icon="shield" highlight="border-red-200/50 bg-red-50/20 hover:border-red-300 dark:border-red-900/30 dark:bg-red-900/10 dark:hover:border-red-800 font-bold" iconColor="text-red-500" />
          <AdminBentoLink to="notifications" title="Push Messaging" subtitle="Send targeted alerts to users." icon="comment-dots" />
          <AdminBentoLink to="banners" title="Storefront Design" subtitle="Manage homepage hero banners." icon="images" />
          <AdminBentoLink to="stories" title="Flash Stories" subtitle="Administer Instagram-style stories." icon="bolt" />

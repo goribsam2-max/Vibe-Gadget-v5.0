@@ -104,9 +104,31 @@ const Profile: React.FC<{ userData: UserProfile | null }> = ({ userData: initial
 
   return (
     <div className="p-6 md:p-12 pb-24 bg-zinc-50 dark:bg-zinc-800 max-w-2xl mx-auto min-h-screen">
+       <div className="flex items-center justify-between mb-12 relative z-10">
+          <div className="flex items-center space-x-6">
+            <button onClick={() => navigate(-1)} className="p-3.5 bg-zinc-50 dark:bg-zinc-800 rounded-2xl border border-zinc-100 dark:border-zinc-800 shadow-sm hover:bg-zinc-900 hover:text-white transition-all active:scale-90 group hover-tilt">
+              <Icon name="chevron-left" className="text-xs group-hover:-translate-x-1 transition-transform" />
+            </button>
+            <div className="flex flex-col">
+               <h1 className="text-2xl md:text-xl lg:text-base xl:text-sm font-black tracking-tighter uppercase text-shine">Account.</h1>
+               <p className="text-[9px] font-bold text-emerald-600/70 uppercase tracking-[0.4em] mt-1 pl-1">Personal Portal</p>
+            </div>
+          </div>
+
+          <div className="flex bg-zinc-100 dark:bg-zinc-800/50 rounded-full p-1 border border-zinc-200 dark:border-zinc-700/50">
+             <button onClick={toggleTheme} className="w-10 h-10 flex items-center justify-center rounded-full cursor-pointer relative active:scale-95 transition-transform hover:bg-white dark:hover:bg-zinc-700 shadow-sm group text-zinc-600 dark:text-zinc-400">
+                <Icon name={isDark ? "sun" : "moon"} className="text-sm" />
+             </button>
+             <button onClick={() => navigate('/notifications')} className="w-10 h-10 flex items-center justify-center rounded-full relative active:scale-95 transition-transform hover:bg-white dark:hover:bg-zinc-700 shadow-sm group text-zinc-600 dark:text-zinc-400">
+               <Icon name="bell" className="text-sm" />
+               <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full shadow-[0_0_0_2px_#f4f4f5] dark:shadow-[0_0_0_2px_#27272a] animate-pulse"></span>
+             </button>
+          </div>
+       </div>
+
        {localUserData ? (
           <div className="animate-fade-in">
-            <div className="flex items-center justify-between mb-16 mt-6 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-6 rounded-3xl shadow-sm">
+            <div className="flex items-center justify-between mb-10 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 p-6 rounded-3xl shadow-sm">
                <div className="flex items-center space-x-6">
                   <motion.div 
                     initial={{ opacity: 0, scale: 0.95 }}
@@ -123,8 +145,8 @@ const Profile: React.FC<{ userData: UserProfile | null }> = ({ userData: initial
                   </div>
                </div>
                
-               <button onClick={() => navigate('/profile/edit')} className="w-12 h-12 flex items-center justify-center bg-zinc-50 dark:bg-zinc-800 border-2 border-zinc-200 dark:border-zinc-700 text-zinc-600 dark:text-zinc-400 rounded-xl shadow-sm hover:bg-zinc-900 hover:text-white hover:border-black transition-all active:scale-95 group shrink-0">
-                   <Icon name="edit" className="text-sm" />
+               <button onClick={() => navigate('/profile/edit')} className="w-10 h-10 bg-zinc-100 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/50 flex items-center justify-center hover:bg-white dark:hover:bg-zinc-700 rounded-full transition-transform active:scale-95 shadow-sm group shrink-0">
+                   <Icon name="edit" className="text-sm text-zinc-600 dark:text-zinc-400 group-hover:text-black dark:group-hover:text-white" />
                </button>
             </div>
 

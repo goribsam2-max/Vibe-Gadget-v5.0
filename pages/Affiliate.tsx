@@ -8,10 +8,12 @@ import { useNotify } from '../components/Notifications';
 import { sendAffiliateRequestToTelegram } from '../services/telegram';
 import { motion } from 'framer-motion';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import { useTheme } from '../components/ThemeContext';
 
 const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData }) => {
   const navigate = useNavigate();
   const notify = useNotify();
+  const { isDark, toggleTheme } = useTheme();
   const [logs, setLogs] = useState<AffiliateLog[]>([]);
   const [loading, setLoading] = useState(true);
   const [isCopying, setIsCopying] = useState(false);
@@ -111,11 +113,23 @@ const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData })
     return (
       <div className="min-h-screen bg-zinc-50 dark:bg-[#121212] p-6 lg:p-12 pb-32 flex flex-col items-center justify-center">
         <div className="max-w-md w-full">
-          <div className="flex items-center space-x-4 mb-8">
-            <button onClick={() => navigate('/profile')} className="w-10 h-10 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center hover:bg-zinc-50 dark:hover:bg-zinc-800 rounded-full transition-colors">
-              <Icon name="arrow-left" className="text-xs" />
-            </button>
-            <h1 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">Partner Program</h1>
+          <div className="flex items-center justify-between mb-8 px-1">
+             <div className="flex items-center space-x-4">
+               <button onClick={() => navigate('/profile')} className="w-10 h-10 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center hover:bg-zinc-50 dark:hover:bg-zinc-800 rounded-full transition-colors">
+                 <Icon name="arrow-left" className="text-xs" />
+               </button>
+               <h1 className="text-2xl font-bold tracking-tight text-zinc-900 dark:text-white">Partner Program</h1>
+             </div>
+             
+             <div className="flex bg-zinc-100 dark:bg-zinc-800/50 rounded-full p-1 border border-zinc-200 dark:border-zinc-700/50">
+                <button onClick={toggleTheme} className="w-10 h-10 flex items-center justify-center rounded-full cursor-pointer relative active:scale-95 transition-transform hover:bg-white dark:hover:bg-zinc-700 shadow-sm group text-zinc-600 dark:text-zinc-400">
+                   <Icon name={isDark ? "sun" : "moon"} className="text-sm" />
+                </button>
+                <button onClick={() => navigate('/notifications')} className="w-10 h-10 flex items-center justify-center rounded-full relative active:scale-95 transition-transform hover:bg-white dark:hover:bg-zinc-700 shadow-sm group text-zinc-600 dark:text-zinc-400">
+                   <Icon name="bell" className="text-sm" />
+                   <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full shadow-[0_0_0_2px_#f4f4f5] dark:shadow-[0_0_0_2px_#27272a] animate-pulse"></span>
+                </button>
+             </div>
           </div>
 
           <div className="mb-10 text-center md:text-left">
@@ -326,12 +340,27 @@ const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData })
 
   return (
      <div className="max-w-4xl mx-auto px-6 py-10 min-h-screen font-inter pb-32">
-       <div className="flex items-center space-x-4 mb-8">
-         <button onClick={() => navigate('/profile')} className="w-10 h-10 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center hover:bg-zinc-50 dark:hover:bg-zinc-800 rounded-full transition-colors shadow-sm">
-           <Icon name="arrow-left" className="text-xs" />
-         </button>
-         <h1 className="text-2xl font-black tracking-tight uppercase text-zinc-900 dark:text-zinc-100">Affiliate Portal</h1>
-       </div>
+        <div className="flex items-center justify-between mb-10 relative z-10">
+          <div className="flex items-center space-x-6">
+            <button onClick={() => navigate('/profile')} className="p-3.5 bg-zinc-50 dark:bg-zinc-800 rounded-2xl border border-zinc-100 dark:border-zinc-800 shadow-sm hover:bg-zinc-900 hover:text-white transition-all active:scale-90 group hover-tilt">
+              <Icon name="chevron-left" className="text-xs group-hover:-translate-x-1 transition-transform" />
+            </button>
+            <div className="flex flex-col">
+               <h1 className="text-2xl md:text-xl lg:text-base xl:text-sm font-black tracking-tighter uppercase text-shine">Partners.</h1>
+               <p className="text-[9px] font-bold text-emerald-600/70 uppercase tracking-[0.4em] mt-1 pl-1">Affiliate Portal</p>
+            </div>
+          </div>
+
+          <div className="flex bg-zinc-100 dark:bg-zinc-800/50 rounded-full p-1 border border-zinc-200 dark:border-zinc-700/50">
+             <button onClick={toggleTheme} className="w-10 h-10 flex items-center justify-center rounded-full cursor-pointer relative active:scale-95 transition-transform hover:bg-white dark:hover:bg-zinc-700 shadow-sm group text-zinc-600 dark:text-zinc-400">
+                <Icon name={isDark ? "sun" : "moon"} className="text-sm" />
+             </button>
+             <button onClick={() => navigate('/notifications')} className="w-10 h-10 flex items-center justify-center rounded-full relative active:scale-95 transition-transform hover:bg-white dark:hover:bg-zinc-700 shadow-sm group text-zinc-600 dark:text-zinc-400">
+               <Icon name="bell" className="text-sm" />
+               <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-red-500 rounded-full shadow-[0_0_0_2px_#f4f4f5] dark:shadow-[0_0_0_2px_#27272a] animate-pulse"></span>
+             </button>
+          </div>
+        </div>
 
        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
           <div className="lg:col-span-8 bg-gradient-to-br from-[#06331e] to-emerald-900 text-white p-8 md:p-10 rounded-[2.5rem] relative overflow-hidden shadow-2xl flex flex-col justify-between group">
@@ -394,10 +423,12 @@ const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData })
                   </div>
                   
                   {currentTier === 4 && salesCount >= t4Limit ? (
-                     <p className="text-[10px] uppercase font-black text-emerald-500 flex items-center"><Icon name="check-circle" className="mr-1" /> Max Tier Reached</p>
+                     <p className="text-[10px] font-black text-emerald-500 flex items-center bg-emerald-50 dark:bg-emerald-900/10 px-3 py-1.5 rounded-full w-max border border-emerald-100 dark:border-emerald-900/30">
+                        <Icon name="check-circle" className="mr-2 text-sm" /> MAX TIER ACTIVE
+                     </p>
                   ) : (
                      <p className="text-[10px] uppercase font-bold text-zinc-500 leading-relaxed">
-                        <span className="text-zinc-900 dark:text-zinc-100">{currentTarget - salesCount} more sales</span> needed to activate Level {currentTier + 1} commission rate.
+                        <span className="text-zinc-900 dark:text-zinc-100 font-black">{currentTarget - salesCount} more sales</span> needed to activate Level {currentTier + 1} commission.
                      </p>
                   )}
                </div>
@@ -551,18 +582,24 @@ const AffiliatePage: React.FC<{ userData: UserProfile | null }> = ({ userData })
                      <Icon name="bullhorn" className="text-xl" />
                   </div>
                   <h3 className="text-xl font-black tracking-tight mb-3">Marketing Tips</h3>
-                  <ul className="space-y-4 mb-8">
-                     <li className="flex items-start gap-3">
-                        <Icon name="check-circle" className="text-emerald-400 dark:text-emerald-600 mt-0.5 text-sm shrink-0" />
-                        <p className="text-xs font-medium text-zinc-400 dark:text-zinc-600 leading-relaxed">Add your code to your Instagram & TikTok bios.</p>
+                  <ul className="space-y-5 mb-4">
+                     <li className="flex items-start gap-4">
+                        <div className="w-6 h-6 rounded-full bg-emerald-500/10 dark:bg-emerald-500/20 flex items-center justify-center shrink-0 border border-emerald-500/20 mt-0.5 shadow-sm">
+                           <Icon name="check" className="text-emerald-400 dark:text-emerald-600 text-[10px]" />
+                        </div>
+                        <p className="text-xs font-bold text-zinc-400 dark:text-zinc-600 leading-relaxed">Add your code to your Instagram & TikTok bios.</p>
                      </li>
-                     <li className="flex items-start gap-3">
-                        <Icon name="check-circle" className="text-emerald-400 dark:text-emerald-600 mt-0.5 text-sm shrink-0" />
-                        <p className="text-xs font-medium text-zinc-400 dark:text-zinc-600 leading-relaxed">Share our daily offers and mention your code gives extra 5% off.</p>
+                     <li className="flex items-start gap-4">
+                        <div className="w-6 h-6 rounded-full bg-emerald-500/10 dark:bg-emerald-500/20 flex items-center justify-center shrink-0 border border-emerald-500/20 mt-0.5 shadow-sm">
+                           <Icon name="check" className="text-emerald-400 dark:text-emerald-600 text-[10px]" />
+                        </div>
+                        <p className="text-xs font-bold text-zinc-400 dark:text-zinc-600 leading-relaxed">Share our daily offers and mention your code gives extra 5% off.</p>
                      </li>
-                     <li className="flex items-start gap-3">
-                        <Icon name="check-circle" className="text-emerald-400 dark:text-emerald-600 mt-0.5 text-sm shrink-0" />
-                        <p className="text-xs font-medium text-zinc-400 dark:text-zinc-600 leading-relaxed">Unbox products and vocally remind viewers to use your code.</p>
+                     <li className="flex items-start gap-4">
+                        <div className="w-6 h-6 rounded-full bg-emerald-500/10 dark:bg-emerald-500/20 flex items-center justify-center shrink-0 border border-emerald-500/20 mt-0.5 shadow-sm">
+                           <Icon name="check" className="text-emerald-400 dark:text-emerald-600 text-[10px]" />
+                        </div>
+                        <p className="text-xs font-bold text-zinc-400 dark:text-zinc-600 leading-relaxed">Unbox products and vocally remind viewers to use your code.</p>
                      </li>
                   </ul>
                </div>
